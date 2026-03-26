@@ -1,0 +1,5 @@
+{
+  "name": "VetCare Premium",
+  "description": "Clínica Veterinária de Excelência - Cuidado especializado e tecnologia de ponta para o seu melhor amigo.",
+  "requestFramePermissions": ["geolocation"]
+}
