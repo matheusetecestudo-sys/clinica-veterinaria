@@ -216,8 +216,8 @@ const Navbar = () => {
 const Hero = () => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -100]);
-  const opacity = useTransform(scrollY, [0, 500], [1, 0.2]); // Keep some visibility
+  const y2 = useTransform(scrollY, [0, 500], [0, -50]);
+  // Removed scroll-based opacity to ensure constant visibility
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-20">
@@ -240,7 +240,7 @@ const Hero = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
         <motion.div 
-          style={{ y: y2, opacity }}
+          style={{ y: y2 }}
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
@@ -283,13 +283,13 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6">
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary group">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary !bg-brand-400 !text-brand-950 hover:!bg-white group">
               <span className="flex items-center gap-3">
                 <WhatsAppLogo className="w-5 h-5 fill-current" /> 
                 AGENDAR CONSULTA
               </span>
             </a>
-            <a href="#services" className="btn-outline !text-white !border-white/30 hover:!bg-white hover:!text-brand-950">
+            <a href="#services" className="btn-outline !text-white !border-white/40 hover:!bg-white hover:!text-brand-950">
               CONHECER SERVIÇOS
             </a>
           </div>
@@ -527,14 +527,11 @@ const PetGallery = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="max-w-7xl mx-auto px-6 mb-8"
       >
-        <div className="max-w-3xl text-center mx-auto">
+        <div className="max-w-2xl text-center mx-auto">
           <span className="text-brand-600 font-bold uppercase tracking-widest text-[10px] mb-4 block">Legado de Sorrisos</span>
-          <h2 className="text-3xl md:text-5xl font-serif font-bold text-brand-950 leading-none mb-6">
+          <h2 className="text-3xl md:text-5xl font-serif font-bold text-brand-950 leading-none">
             HISTÓRIAS QUE <br /> <span className="text-brand-700 italic">NOS INSPIRAM.</span>
           </h2>
-          <p className="text-brand-800/60 text-sm max-w-lg mx-auto leading-relaxed mb-12 italic">
-            "Cada imagem abaixo representa um dos milhares de casos reais onde a excelência Duno devolveu a alegria a uma família."
-          </p>
         </div>
       </motion.div>
       
@@ -546,59 +543,22 @@ const PetGallery = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.05 }}
-            onClick={() => setSelectedImage(img.url)}
-            className="relative aspect-square rounded-2xl overflow-hidden group cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-700"
+            className="relative aspect-square rounded-xl overflow-hidden group cursor-default shadow-sm hover:shadow-lg transition-all duration-500"
           >
-            <div className="absolute inset-0 bg-brand-900 mix-blend-color opacity-40 group-hover:opacity-0 transition-opacity duration-700 z-10"></div>
             <img 
               src={img.url} 
-              alt="Representação de Paciente Duno" 
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-110 group-hover:scale-100 transition-all duration-1000 ease-in-out"
+              alt="Paciente Duno" 
+              className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
               referrerPolicy="no-referrer"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-950/80 via-transparent to-transparent opacity-60 group-hover:opacity-0 transition-all duration-500 z-20"></div>
-            <div className="absolute inset-0 border-[1px] border-white/10 group-hover:border-white/40 transition-all duration-500 z-30 m-3 rounded-xl"></div>
-            
-            <div className="absolute inset-0 z-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
-              <div className="w-12 h-12 bg-white/20 backdrop-blur-xl rounded-full flex items-center justify-center border border-white/30 transform scale-50 group-hover:scale-100 transition-transform duration-500">
-                <Search className="text-white w-5 h-5" />
-              </div>
-            </div>
+            <div className="absolute inset-0 bg-brand-900/20 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
           </motion.div>
         ))}
       </div>
 
       <AnimatePresence>
-        {selectedImage && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedImage(null)}
-            className="fixed inset-0 z-[100] bg-brand-950/90 backdrop-blur-xl flex items-center justify-center p-4 md:p-12 cursor-zoom-out"
-          >
-            <motion.div 
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative max-w-5xl w-full max-h-full"
-            >
-              <img 
-                src={selectedImage} 
-                alt="Enlarged Pet" 
-                className="w-full h-full object-contain rounded-3xl"
-                referrerPolicy="no-referrer"
-              />
-              <button 
-                onClick={() => setSelectedImage(null)}
-                className="absolute top-4 right-4 w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-              >
-                <X className="w-6 h-6" />
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
+        {/* Modal removido a pedido do usuário */}
       </AnimatePresence>
     </section>
   );
