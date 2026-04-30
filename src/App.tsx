@@ -253,38 +253,34 @@ const Services = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
           {services.map((service, index) => (
-            <div key={index} className="group relative aspect-[3/4] overflow-hidden cursor-pointer bg-brand-950">
-              {/* Main Image */}
+            <div key={index} className="group relative aspect-square overflow-hidden cursor-pointer bg-white">
+              {/* Main Image - Center and clear by default */}
               <img 
                 src={service.image} 
                 alt={service.title} 
-                className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110 opacity-80 group-hover:opacity-100" 
+                className="w-full h-full object-cover object-center transition-transform duration-[1500ms] group-hover:scale-110" 
               />
               
-              {/* Category Tag (Top Right) */}
+              {/* Dark Overlay (Only on hover) */}
+              <div className="absolute inset-0 bg-brand-950/0 group-hover:bg-brand-950/60 transition-all duration-500 z-10"></div>
+
+              {/* Category Tag (Top Right - Always visible but subtle) */}
               <div className="absolute top-6 right-6 z-20">
-                <span className="bg-brand-600/90 text-white text-[8px] font-bold uppercase tracking-[0.3em] px-4 py-2">
+                <span className="bg-brand-600/80 text-white text-[8px] font-bold uppercase tracking-[0.3em] px-4 py-2 opacity-80 group-hover:opacity-100 transition-opacity">
                   {index < 3 ? "CLÍNICO" : index < 6 ? "ESPECIALIZADO" : "BEM-ESTAR"}
                 </span>
               </div>
-
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-700"></div>
               
-              {/* Content */}
-              <div className="absolute inset-0 p-8 flex flex-col justify-end z-20">
-                <h3 className="text-2xl md:text-3xl font-serif font-medium text-white tracking-tight leading-tight group-hover:text-brand-400 transition-colors duration-500">
+              {/* Content (Visible on hover) */}
+              <div className="absolute inset-0 p-8 flex flex-col justify-end z-20 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                <h3 className="text-2xl md:text-3xl font-serif font-medium text-white tracking-tight leading-tight">
                   {service.title}
                 </h3>
-                
-                {/* Reveal description on hover like a premium site */}
-                <div className="max-h-0 overflow-hidden group-hover:max-h-24 transition-all duration-700 ease-in-out">
-                  <p className="text-white/60 text-xs leading-relaxed mt-4 line-clamp-2">
-                    {service.description}
-                  </p>
-                  <div className="mt-4 flex items-center gap-2 text-brand-400 text-[10px] font-bold uppercase tracking-widest">
-                    Agendar Agora <ChevronRight className="w-3 h-3" />
-                  </div>
+                <p className="text-white/80 text-xs leading-relaxed mt-4 line-clamp-2">
+                  {service.description}
+                </p>
+                <div className="mt-4 flex items-center gap-2 text-brand-400 text-[10px] font-bold uppercase tracking-widest">
+                  Agendar Agora <ChevronRight className="w-3 h-3" />
                 </div>
               </div>
             </div>
