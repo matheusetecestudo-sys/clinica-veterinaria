@@ -251,45 +251,50 @@ const Services = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
           {services.map((service, index) => (
-            <div key={index} className="group relative aspect-square overflow-hidden cursor-pointer bg-white">
-              {/* Main Image - Center and clear by default */}
+            <div key={index} className="group relative aspect-square overflow-hidden cursor-pointer bg-brand-950">
+              {/* Main Image */}
               <img 
                 src={service.image} 
                 alt={service.title} 
-                className="w-full h-full object-cover object-center transition-transform duration-[1500ms] group-hover:scale-105" 
+                className="w-full h-full object-cover object-center transition-transform duration-[2000ms] group-hover:scale-105 opacity-90 group-hover:opacity-80" 
               />
               
               {/* Editorial Numbering */}
-              <div className="absolute top-8 left-8 z-30 overflow-hidden">
-                <span className="text-[10px] font-bold text-white/40 group-hover:text-brand-400 transition-colors tracking-widest">
-                  0{index + 1}
-                </span>
+              <div className="absolute top-8 left-8 z-30">
+                <span className="text-[10px] font-bold text-white/40 tracking-[0.4em]">0{index + 1}</span>
               </div>
 
-              {/* Subtle bottom gradient for permanent title visibility */}
-              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-brand-950/60 via-brand-950/20 to-transparent z-10 opacity-80 group-hover:opacity-100 transition-opacity"></div>
+              {/* Permanent Bottom Info Area */}
+              <div className="absolute inset-x-0 bottom-0 p-8 md:p-10 z-40 bg-gradient-to-t from-brand-950 via-brand-950/80 to-transparent">
+                <h3 className="text-xl md:text-2xl font-serif font-bold text-white mb-3 uppercase tracking-tighter leading-none">
+                  {service.title}
+                </h3>
+                
+                {/* Description - Always visible on mobile, reveal on hover on desktop */}
+                <div className="max-h-24 md:max-h-0 overflow-hidden md:group-hover:max-h-24 transition-all duration-700 ease-in-out">
+                  <p className="text-white/60 text-xs leading-relaxed mb-6 line-clamp-2">
+                    {service.description}
+                  </p>
+                </div>
 
-              {/* Dark Overlay (On hover - for description) */}
-              <div className="absolute inset-0 bg-brand-950/0 group-hover:bg-brand-950/70 transition-all duration-700 z-20"></div>
-
-              {/* Content */}
-              <div className="absolute inset-0 p-10 flex flex-col justify-end z-40">
-                <div className="transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
-                  <h3 className="text-2xl font-serif font-medium text-white tracking-tight leading-tight drop-shadow-lg mb-0 group-hover:mb-4 transition-all">
-                    {service.title}
-                  </h3>
+                {/* WhatsApp Button - High Impact */}
+                <div className="flex items-center justify-between mt-2">
+                  <a 
+                    href={WHATSAPP_URL} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="flex items-center gap-3 bg-brand-400 text-brand-950 px-5 py-2.5 rounded-full text-[9px] font-bold uppercase tracking-widest hover:bg-white transition-all transform md:translate-y-4 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 duration-500"
+                  >
+                    <WhatsAppLogo className="w-4 h-4 fill-current" />
+                    AGENDAR AGORA
+                  </a>
                   
-                  {/* Description - Revealed on hover */}
-                  <div className="max-h-0 overflow-hidden group-hover:max-h-32 transition-all duration-700 ease-in-out">
-                    <p className="text-white/70 text-[13px] leading-relaxed line-clamp-3 mb-6">
-                      {service.description}
-                    </p>
-                    <div className="flex items-center gap-3 text-brand-400 text-[10px] font-bold uppercase tracking-[0.3em]">
-                      Agendar Consulta <ChevronRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
-                    </div>
-                  </div>
+                  <ChevronRight className="text-white/20 w-5 h-5 md:group-hover:translate-x-2 transition-transform" />
                 </div>
               </div>
+
+              {/* Subtle inner border */}
+              <div className="absolute inset-0 border border-white/5 pointer-events-none z-50"></div>
             </div>
           ))}
         </div>
