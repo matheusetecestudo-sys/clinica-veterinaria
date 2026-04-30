@@ -217,7 +217,7 @@ const Hero = () => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const y2 = useTransform(scrollY, [0, 500], [0, -100]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const opacity = useTransform(scrollY, [0, 500], [1, 0.2]); // Keep some visibility
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-20">
@@ -527,11 +527,14 @@ const PetGallery = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="max-w-7xl mx-auto px-6 mb-8"
       >
-        <div className="max-w-2xl text-center mx-auto">
+        <div className="max-w-3xl text-center mx-auto">
           <span className="text-brand-600 font-bold uppercase tracking-widest text-[10px] mb-4 block">Legado de Sorrisos</span>
-          <h2 className="text-3xl md:text-5xl font-serif font-bold text-brand-950 leading-none">
+          <h2 className="text-3xl md:text-5xl font-serif font-bold text-brand-950 leading-none mb-6">
             HISTÓRIAS QUE <br /> <span className="text-brand-700 italic">NOS INSPIRAM.</span>
           </h2>
+          <p className="text-brand-800/60 text-sm max-w-lg mx-auto leading-relaxed mb-12 italic">
+            "Cada imagem abaixo representa um dos milhares de casos reais onde a excelência Duno devolveu a alegria a uma família."
+          </p>
         </div>
       </motion.div>
       
@@ -544,18 +547,22 @@ const PetGallery = () => {
             viewport={{ once: true }}
             transition={{ delay: i * 0.05 }}
             onClick={() => setSelectedImage(img.url)}
-            className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer shadow-sm hover:shadow-lg transition-all duration-500"
+            className="relative aspect-square rounded-2xl overflow-hidden group cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-700"
           >
+            <div className="absolute inset-0 bg-brand-900 mix-blend-color opacity-40 group-hover:opacity-0 transition-opacity duration-700 z-10"></div>
             <img 
               src={img.url} 
-              alt="Happy Pet" 
-              className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
+              alt="Representação de Paciente Duno" 
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-110 group-hover:scale-100 transition-all duration-1000 ease-in-out"
               referrerPolicy="no-referrer"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-brand-900/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-              <div className="w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 transform scale-0 group-hover:scale-100 transition-transform duration-500">
-                <Search className="text-white w-4 h-4" />
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-950/80 via-transparent to-transparent opacity-60 group-hover:opacity-0 transition-all duration-500 z-20"></div>
+            <div className="absolute inset-0 border-[1px] border-white/10 group-hover:border-white/40 transition-all duration-500 z-30 m-3 rounded-xl"></div>
+            
+            <div className="absolute inset-0 z-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
+              <div className="w-12 h-12 bg-white/20 backdrop-blur-xl rounded-full flex items-center justify-center border border-white/30 transform scale-50 group-hover:scale-100 transition-transform duration-500">
+                <Search className="text-white w-5 h-5" />
               </div>
             </div>
           </motion.div>
