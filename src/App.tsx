@@ -168,7 +168,6 @@ const Hero = () => {
           </div>
         </motion.div>
       </div>
-      <div className="h-20"></div> {/* Spacer for stats overlap */}
     </section>
   );
 };
@@ -182,7 +181,7 @@ const Stats = () => {
   ];
 
   return (
-    <section className="relative z-20 -mt-12 px-6">
+    <section className="relative z-20 -mt-16 px-6">
       <div className="max-w-6xl mx-auto bg-white rounded-[2.5rem] shadow-2xl p-10 md:p-16 grid grid-cols-2 lg:grid-cols-4 gap-12 text-center border border-brand-100/50">
         {stats.map((stat, i) => (
           <div key={i}>
@@ -252,21 +251,43 @@ const Services = () => {
           <h2 className="text-5xl md:text-7xl font-serif font-bold text-brand-950 tracking-tighter uppercase">Nossos <span className="text-brand-600 italic">Serviços</span></h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {services.map((service, index) => (
-            <div key={index} className="group relative aspect-[4/5] rounded-[2.5rem] overflow-hidden cursor-pointer shadow-lg border border-brand-50 transition-all duration-500 hover:shadow-2xl bg-brand-50">
-              <div className="absolute inset-0 overflow-hidden flex items-center justify-center p-4">
-                <img src={service.image} alt={service.title} className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-950/20 to-transparent opacity-80"></div>
+            <div key={index} className="group relative h-[500px] rounded-[2.5rem] overflow-hidden cursor-pointer shadow-xl border border-brand-100/10 bg-brand-950 transition-all duration-700 hover:shadow-2xl hover:shadow-brand-900/20">
+              {/* Blurred Background to prevent white spaces */}
+              <div className="absolute inset-0 overflow-hidden">
+                <img 
+                  src={service.image} 
+                  alt="" 
+                  className="w-full h-full object-cover blur-2xl opacity-40 scale-110" 
+                />
               </div>
-              <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                <h3 className="text-xl font-serif font-bold text-white mb-2 uppercase leading-tight">{service.title}</h3>
-                <p className="text-white/80 text-xs leading-relaxed mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 line-clamp-3">
-                  {service.description}
-                </p>
-                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-brand-400 text-[10px] font-bold tracking-widest uppercase">
-                  Agendar <ChevronRight className="w-4 h-4" />
-                </a>
+              
+              {/* Main Image (Contain) */}
+              <div className="absolute inset-0 flex items-center justify-center p-8 pb-32">
+                <img 
+                  src={service.image} 
+                  alt={service.title} 
+                  className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110 z-10" 
+                />
+              </div>
+
+              {/* Gradient Overlay for Text Readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-950/20 to-transparent opacity-90"></div>
+              
+              {/* Content */}
+              <div className="absolute inset-0 p-10 flex flex-col justify-end z-20">
+                <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                  <h3 className="text-2xl font-serif font-bold text-white mb-3 uppercase leading-none tracking-tighter">
+                    {service.title}
+                  </h3>
+                  <p className="text-white/70 text-sm leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 line-clamp-3">
+                    {service.description}
+                  </p>
+                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 text-brand-400 text-[10px] font-bold tracking-[0.3em] uppercase group-hover:text-white transition-colors">
+                    Saber Mais <ChevronRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+                  </a>
+                </div>
               </div>
             </div>
           ))}
