@@ -117,12 +117,12 @@ const Navbar = () => {
 
 const Hero = () => {
   return (
-    <section id="home" className="relative h-screen flex flex-col justify-center overflow-hidden bg-brand-950">
+    <section id="home" className="relative min-h-screen flex flex-col justify-center bg-brand-950 py-32 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img 
           src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?q=80&w=2070&auto=format&fit=crop" 
           alt="Veterinarian with dog" 
-          className="w-full h-full object-cover opacity-60"
+          className="w-full h-full object-cover opacity-60 scale-105"
           referrerPolicy="no-referrer"
           loading="eager"
         />
@@ -130,12 +130,12 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-brand-950/80 via-transparent to-transparent"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pt-20">
+      <div className="relative z-50 max-w-7xl mx-auto px-6 md:px-12 w-full">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-3xl"
+          className="max-w-4xl"
         >
           <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-8">
             <span className="relative flex h-2 w-2">
@@ -146,23 +146,21 @@ const Hero = () => {
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-8xl font-serif font-bold text-white leading-[1.1] mb-8 tracking-tighter">
+          <h1 className="text-5xl md:text-[5.5rem] font-serif font-bold text-white leading-[1] mb-10 tracking-tighter">
             Excelência para <br /> 
             <span className="text-brand-400 italic">Vidas Extraordinárias.</span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-white/80 mb-10 leading-relaxed font-light max-w-xl">
+          <p className="text-xl md:text-2xl text-white/80 mb-12 leading-relaxed font-light max-w-2xl">
             Unindo tecnologia de ponta e o mais profundo respeito pela vida animal. Na DUNO, o cuidado sublime é a nossa única regra.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 relative z-50">
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary !bg-brand-400 !text-brand-950 hover:!bg-white">
-              <span className="flex items-center gap-3">
-                <WhatsAppLogo className="w-5 h-5 fill-current" /> 
-                AGENDAR CONSULTA
-              </span>
+          <div className="flex flex-col sm:flex-row gap-6">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bg-brand-400 text-brand-950 px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] hover:bg-white transition-all shadow-2xl shadow-brand-400/20 flex items-center justify-center gap-3">
+              <WhatsAppLogo className="w-5 h-5 fill-current" /> 
+              AGENDAR CONSULTA
             </a>
-            <a href="#services" className="btn-outline !text-white !border-white/40 hover:!bg-white hover:!text-brand-950">
+            <a href="#services" className="border border-white/30 text-white px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] hover:bg-white hover:text-brand-950 transition-all flex items-center justify-center">
               CONHECER SERVIÇOS
             </a>
           </div>
@@ -312,7 +310,8 @@ const Testimonials = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <Quote className="w-12 h-12 text-brand-400 mx-auto mb-6 opacity-50" />
-          <h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tighter uppercase">Relatos de <span className="text-brand-400 italic">Confiança.</span></h2>
+          <span className="text-brand-400 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Vidas que Transformamos</span>
+          <h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tighter uppercase">Nossos Pacientes <span className="text-brand-400 italic">Felizes.</span></h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {reviews.map((review, i) => (
@@ -372,7 +371,10 @@ const PetGallery = () => {
   return (
     <section id="gallery" className="py-32 bg-brand-50 px-6">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-5xl font-serif font-bold text-brand-950 mb-16 text-center uppercase tracking-tighter">Legado de <span className="text-brand-700 italic">Sorrisos</span></h2>
+        <div className="text-center mb-16">
+          <span className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Histórias que nos Inspiram</span>
+          <h2 className="text-5xl font-serif font-bold text-brand-950 uppercase tracking-tighter">Legado de <span className="text-brand-700 italic">Sorrisos</span></h2>
+        </div>
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
           {images.map((img, i) => (
             <div key={i} className="rounded-3xl overflow-hidden aspect-square shadow-md">
