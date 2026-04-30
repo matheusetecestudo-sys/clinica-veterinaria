@@ -220,7 +220,7 @@ const Hero = () => {
   // Removed scroll-based opacity to ensure constant visibility
 
   return (
-    <section id="home" className="relative min-h-[110vh] flex flex-col justify-center overflow-hidden pt-40 pb-52">
+    <section id="home" className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-32 pb-24">
       {/* Background Image with Parallax */}
       <motion.div 
         style={{ y: y1 }}
@@ -317,7 +317,7 @@ const Stats = () => {
   ];
 
   return (
-    <section className="relative z-20 -mt-32 px-6">
+    <section className="relative z-20 -mt-20 px-6">
       <motion.div 
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
