@@ -356,57 +356,55 @@ function ServiceCard({ service, index }: any) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ delay: index * 0.1, duration: 0.8, ease: "easeOut" }}
-      className="group relative flex flex-col h-full rounded-[2rem] overflow-hidden cursor-pointer shadow-xl border border-brand-100/30 bg-white hover:shadow-2xl transition-all duration-500"
+      className="group relative h-[480px] rounded-[2.5rem] overflow-hidden cursor-pointer shadow-2xl border border-brand-100/10"
     >
-      {/* Image Container - Showing full image */}
-      <div className="relative aspect-[4/5] bg-brand-50/50 overflow-hidden flex items-center justify-center p-4">
-        {/* Blurred Background for aesthetic depth */}
-        <img 
-          src={service.image} 
-          alt="" 
-          className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-20 scale-150"
-          aria-hidden="true"
-        />
-        
+      {/* Image with sophisticated zoom */}
+      <div className="absolute inset-0 overflow-hidden">
         <img 
           src={service.image} 
           alt={service.title} 
-          className="relative z-10 w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-110"
           referrerPolicy="no-referrer"
           loading="lazy"
         />
-        
-        {/* Index Number */}
-        <div className="absolute top-4 left-4 z-20">
-          <span className="text-brand-950/10 font-serif text-4xl font-bold italic tracking-tighter">
-            {(index + 1).toString().padStart(2, '0')}
-          </span>
-        </div>
+        {/* Dynamic Overlays */}
+        <div className="absolute inset-0 bg-brand-950/40 group-hover:bg-brand-950/20 transition-colors duration-700"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-950/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-700"></div>
       </div>
 
-      {/* Content Section */}
-      <div className="p-8 flex flex-col flex-grow bg-white border-t border-brand-50">
-        <div className="w-8 h-[2px] bg-brand-400 mb-6 group-hover:w-12 transition-all duration-500"></div>
-        
-        <h3 className="text-xl font-serif font-bold text-brand-950 mb-4 leading-tight tracking-tight uppercase">
-          {service.title}
-        </h3>
-        
-        <p className="text-brand-800/60 text-xs leading-relaxed mb-8 line-clamp-3 group-hover:text-brand-800 transition-colors">
-          {service.description}
-        </p>
+      {/* Index Number */}
+      <div className="absolute top-8 left-8 z-20">
+        <span className="text-white/20 font-serif text-5xl font-bold italic tracking-tighter group-hover:text-brand-400/40 transition-colors duration-700">
+          {(index + 1).toString().padStart(2, '0')}
+        </span>
+      </div>
 
-        <div className="mt-auto">
+      {/* Content */}
+      <div className="absolute inset-0 z-10 p-10 flex flex-col justify-end">
+        <div className="transform translate-y-8 group-hover:translate-y-0 transition-transform duration-700 ease-out">
+          <div className="w-12 h-1 w-0 group-hover:w-12 bg-brand-400 mb-6 transition-all duration-700 delay-100"></div>
+          
+          <h3 className="text-2xl font-serif font-bold text-white mb-4 leading-none tracking-tighter uppercase">
+            {service.title}
+          </h3>
+          
+          <p className="text-white/70 text-sm leading-relaxed mb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-200">
+            {service.description}
+          </p>
+
           <motion.a 
             href={WHATSAPP_URL} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="inline-flex items-center gap-2 text-brand-600 text-[9px] font-bold tracking-[0.2em] uppercase"
+            className="inline-flex items-center gap-3 text-brand-400 text-[10px] font-bold tracking-[0.3em] uppercase group-hover:text-white transition-colors"
           >
-            Ver Detalhes <ChevronRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+            Saber Mais <ChevronRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
           </motion.a>
         </div>
       </div>
+      
+      {/* Hover Border Beam */}
+      <div className="absolute inset-0 border-2 border-brand-400/0 group-hover:border-brand-400/20 rounded-[2.5rem] transition-all duration-700 pointer-events-none"></div>
     </motion.div>
   );
 }
@@ -452,6 +450,11 @@ const Services = () => {
       title: "ATENDIMENTO DOMICILIAR",
       description: "Toda a excelência e cuidado da nossa clínica no conforto do seu lar, ideal para pets que necessitam de atendimento sem estresse.",
       image: "/imagem/Atendimento domiciliar.webp"
+    },
+    {
+      title: "CHECK-UP COMPLETO",
+      description: "Avaliação preventiva integral para detectar precocemente qualquer alteração e garantir a longevidade do seu pet.",
+      image: "/imagem/Check-up veterinário completo.jpg"
     }
   ];
 
@@ -493,7 +496,7 @@ const Services = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {services.map((service, index) => (
             <ServiceCard key={index} service={service} index={index} />
           ))}
