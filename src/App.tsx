@@ -251,39 +251,40 @@ const Services = () => {
           <h2 className="text-5xl md:text-7xl font-serif font-bold text-brand-950 tracking-tighter uppercase">Nossos <span className="text-brand-600 italic">Serviços</span></h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
           {services.map((service, index) => (
-            <div key={index} className="group relative h-[550px] rounded-[2.5rem] overflow-hidden cursor-pointer shadow-xl border border-brand-100/10 bg-brand-950 transition-all duration-700 hover:shadow-2xl hover:shadow-brand-900/20">
-              {/* Blurred Background */}
-              <div className="absolute inset-0 overflow-hidden">
-                <img 
-                  src={service.image} 
-                  alt="" 
-                  className="w-full h-full object-cover blur-2xl opacity-30 scale-110" 
-                />
-              </div>
+            <div key={index} className="group relative aspect-[3/4] overflow-hidden cursor-pointer bg-brand-950">
+              {/* Main Image */}
+              <img 
+                src={service.image} 
+                alt={service.title} 
+                className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110 opacity-80 group-hover:opacity-100" 
+              />
               
-              {/* Main Image Container (70% Height) */}
-              <div className="absolute top-0 left-0 right-0 h-[70%] flex items-center justify-center p-6 z-10 overflow-hidden">
-                <img 
-                  src={service.image} 
-                  alt={service.title} 
-                  className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" 
-                />
+              {/* Category Tag (Top Right) */}
+              <div className="absolute top-6 right-6 z-20">
+                <span className="bg-brand-600/90 text-white text-[8px] font-bold uppercase tracking-[0.3em] px-4 py-2">
+                  {index < 3 ? "CLÍNICO" : index < 6 ? "ESPECIALIZADO" : "BEM-ESTAR"}
+                </span>
               </div>
 
-              {/* Text Content (30% Height area) */}
-              <div className="absolute inset-x-0 bottom-0 h-[35%] bg-gradient-to-t from-brand-950 via-brand-950 to-transparent p-10 flex flex-col justify-end z-20">
-                <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                  <h3 className="text-xl md:text-2xl font-serif font-bold text-white mb-2 uppercase leading-none tracking-tighter">
-                    {service.title}
-                  </h3>
-                  <p className="text-white/60 text-xs leading-relaxed mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 line-clamp-2">
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-700"></div>
+              
+              {/* Content */}
+              <div className="absolute inset-0 p-8 flex flex-col justify-end z-20">
+                <h3 className="text-2xl md:text-3xl font-serif font-medium text-white tracking-tight leading-tight group-hover:text-brand-400 transition-colors duration-500">
+                  {service.title}
+                </h3>
+                
+                {/* Reveal description on hover like a premium site */}
+                <div className="max-h-0 overflow-hidden group-hover:max-h-24 transition-all duration-700 ease-in-out">
+                  <p className="text-white/60 text-xs leading-relaxed mt-4 line-clamp-2">
                     {service.description}
                   </p>
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-brand-400 text-[10px] font-bold tracking-[0.2em] uppercase group-hover:text-white transition-colors">
-                    Saber Mais <ChevronRight className="w-4 h-4" />
-                  </a>
+                  <div className="mt-4 flex items-center gap-2 text-brand-400 text-[10px] font-bold uppercase tracking-widest">
+                    Agendar Agora <ChevronRight className="w-3 h-3" />
+                  </div>
                 </div>
               </div>
             </div>
