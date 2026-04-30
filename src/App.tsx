@@ -358,6 +358,35 @@ const About = () => {
   );
 };
 
+const ImpactSection = () => (
+  <section className="py-24 bg-brand-400 overflow-hidden relative">
+    <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+      <div className="relative z-10">
+        <h2 className="text-5xl md:text-7xl font-serif font-bold text-brand-950 mb-8 leading-none tracking-tighter">
+          SAÚDE É <br /> <span className="italic">FELICIDADE.</span>
+        </h2>
+        <p className="text-xl text-brand-950/80 mb-10 max-w-md font-medium leading-relaxed">
+          Garantimos que cada momento ao lado do seu melhor amigo seja repleto de vitalidade e alegria. Porque eles merecem o melhor.
+        </p>
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-block bg-brand-950 text-white px-10 py-5 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-white hover:text-brand-950 transition-all shadow-xl">
+          AGENDAR AGORA
+        </a>
+      </div>
+      <div className="relative">
+        <div className="aspect-square rounded-[3rem] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-700">
+          <img 
+            src="https://images.unsplash.com/photo-1554692998-012af5e9dbfe?q=80&w=800" 
+            alt="Cachorro preto feliz" 
+            className="w-full h-full object-cover scale-110" 
+          />
+        </div>
+        {/* Decorative elements to match the yellow theme */}
+        <div className="absolute -top-10 -right-10 w-40 h-40 bg-brand-950/5 rounded-full blur-3xl"></div>
+      </div>
+    </div>
+  </section>
+);
+
 const PetGallery = () => {
   const images = [
     "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=800",
@@ -471,6 +500,7 @@ export default function App() {
       <Services />
       <Testimonials />
       <About />
+      <ImpactSection />
       <PetGallery />
       <FAQ />
       <Contact />
