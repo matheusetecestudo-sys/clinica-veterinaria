@@ -49,23 +49,35 @@ const LoadingScreen = () => {
     <motion.div 
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.8 }}
-      className="fixed inset-0 z-[100] bg-brand-950 flex flex-col items-center justify-center"
+      transition={{ duration: 1, ease: "easeInOut" }}
+      className="fixed inset-0 z-[100] bg-brand-950 flex flex-col items-center justify-center overflow-hidden"
     >
+      <div className="grain-overlay opacity-10"></div>
       <motion.div 
-        animate={{ scale: [1, 1.2, 1], rotate: [0, 10, -10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="mb-8"
+        animate={{ 
+          scale: [1, 1.1, 1],
+          opacity: [0.5, 1, 0.5]
+        }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        className="mb-12 relative"
       >
-        <PawPrint className="w-20 h-20 text-brand-400" />
+        <PawPrint className="w-24 h-24 text-brand-400 filter blur-[1px]" />
+        <motion.div 
+          initial={{ width: 0 }}
+          animate={{ width: "100%" }}
+          transition={{ duration: 2, ease: "easeInOut" }}
+          className="absolute top-1/2 left-0 h-[1px] bg-brand-400/50 -translate-y-1/2"
+        />
       </motion.div>
-      <h2 className="text-white text-3xl font-serif font-bold tracking-widest animate-pulse-soft">DUNO</h2>
-      <div className="mt-8 w-48 h-1 bg-brand-900 rounded-full overflow-hidden">
+      <h2 className="text-white text-4xl font-serif font-bold tracking-[0.4em] mb-4">DUNO</h2>
+      <p className="text-brand-400/60 text-[10px] font-bold tracking-[0.5em] uppercase">Medicina de Alta Performance</p>
+      
+      <div className="mt-12 w-64 h-[1px] bg-white/10 relative overflow-hidden">
         <motion.div 
           initial={{ x: "-100%" }}
           animate={{ x: "100%" }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-          className="w-full h-full bg-brand-400"
+          className="w-1/2 h-full bg-brand-400"
         />
       </div>
     </motion.div>
@@ -120,35 +132,52 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "glass-morphism py-2 shadow-sm" : "bg-transparent py-4"}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? "glass-morphism py-3 shadow-lg" : "bg-transparent py-6"}`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <PawPrint className="text-brand-600 w-8 h-8" />
-          <span className="text-2xl font-serif font-bold tracking-tight text-brand-950 uppercase">DUNO</span>
-        </div>
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="flex items-center gap-3 group cursor-pointer"
+        >
+          <div className="w-10 h-10 bg-brand-900 rounded-xl flex items-center justify-center transition-transform duration-500 group-hover:rotate-12">
+            <PawPrint className="text-brand-400 w-6 h-6" />
+          </div>
+          <span className={`text-2xl font-serif font-bold tracking-tighter transition-colors duration-500 ${isScrolled ? "text-brand-950" : "text-white"}`}>DUNO</span>
+        </motion.div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a 
+        <div className="hidden md:flex items-center gap-10">
+          {navLinks.map((link, i) => (
+            <motion.a 
               key={link.name} 
               href={link.href} 
-              className="text-sm font-medium text-brand-950 hover:text-brand-600 transition-colors"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className={`text-[11px] font-bold uppercase tracking-[0.2em] transition-colors relative group ${isScrolled ? "text-brand-950/70 hover:text-brand-950" : "text-white/70 hover:text-white"}`}
             >
               {link.name}
-            </a>
+              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-current transition-all duration-300 group-hover:w-full"></span>
+            </motion.a>
           ))}
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary py-2 px-6 text-sm flex items-center gap-2">
-            <WhatsAppLogo className="w-4 h-4 fill-current" /> Fale Conosco no WhatsApp
+          <a 
+            href={WHATSAPP_URL} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="btn-primary !py-3 !px-6 !text-[9px]"
+            aria-label="Falar conosco no WhatsApp"
+          >
+            AGENDAR AGORA
           </a>
         </div>
 
         {/* Mobile Toggle */}
         <button 
-          className="md:hidden text-brand-950" 
+          className={`md:hidden p-2 rounded-lg transition-colors ${isScrolled ? "text-brand-950 hover:bg-brand-50" : "text-white hover:bg-white/10"}`} 
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
         >
-          {isMobileMenuOpen ? <X /> : <Menu />}
+          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
@@ -156,24 +185,27 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 bg-white shadow-xl p-6 md:hidden flex flex-col gap-4"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="absolute top-full left-0 right-0 bg-white shadow-2xl overflow-hidden md:hidden border-t border-brand-50"
           >
-            {navLinks.map((link) => (
-              <a 
-                key={link.name} 
-                href={link.href} 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-lg font-medium text-brand-950 border-b border-brand-100 pb-2"
-              >
-                {link.name}
+            <div className="p-8 flex flex-col gap-6">
+              {navLinks.map((link) => (
+                <a 
+                  key={link.name} 
+                  href={link.href} 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-2xl font-serif font-bold text-brand-950 hover:text-brand-600 transition-colors flex justify-between items-center group"
+                >
+                  {link.name}
+                  <ChevronRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-all -translate-x-4 group-hover:translate-x-0" />
+                </a>
+              ))}
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary w-full mt-6 text-center">
+                FALAR NO WHATSAPP
               </a>
-            ))}
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary w-full mt-4 text-center flex items-center justify-center gap-2">
-              <WhatsAppLogo className="w-4 h-4 fill-current" /> Fale Conosco no WhatsApp
-            </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -182,39 +214,96 @@ const Navbar = () => {
 };
 
 const Hero = () => {
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+  const y2 = useTransform(scrollY, [0, 500], [0, -100]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+
   return (
-    <section id="home" className="relative min-h-[85vh] flex items-center overflow-hidden pt-20">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
+    <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-20">
+      {/* Background Image with Parallax */}
+      <motion.div 
+        style={{ y: y1 }}
+        className="absolute inset-0 z-0"
+      >
         <img 
           src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?q=80&w=2070&auto=format&fit=crop" 
-          alt="Veterinarian with dog" 
-          className="w-full h-full object-cover"
+          alt="Veterinarian with dog in a premium clinical setting" 
+          className="w-full h-[120%] object-cover brightness-75"
           referrerPolicy="no-referrer"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-950/80 via-transparent to-brand-950/20"></div>
-      </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-950/90 via-brand-950/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-950/80 via-transparent to-transparent"></div>
+        <div className="grain-overlay"></div>
+      </motion.div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
         <motion.div 
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-2xl text-white"
+          style={{ y: y2, opacity }}
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="max-w-3xl"
         >
-          <span className="inline-block px-4 py-1 bg-brand-400/20 border border-brand-400/30 rounded-full text-brand-400 text-[10px] font-bold uppercase tracking-widest mb-4 backdrop-blur-sm">
-            Excelência Hospitalar Itaim Bibi
-          </span>
-          <h1 className="text-4xl md:text-6xl font-serif font-bold leading-tight mb-4 drop-shadow-lg">
-            A Saúde do <br /> <span className="text-brand-400 italic">Seu Pet é Arte.</span>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="inline-flex items-center gap-3 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-8"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
+            </span>
+            <span className="text-white text-[10px] font-bold uppercase tracking-[0.3em]">
+              Excelência Hospitalar Itaim Bibi
+            </span>
+          </motion.div>
+
+          <h1 className="text-5xl md:text-8xl font-serif font-bold text-white leading-[1.1] mb-8 tracking-tighter">
+            A Saúde do <br /> 
+            <span className="text-brand-400 italic relative">
+              Seu Pet é Arte.
+              <motion.svg 
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 2, delay: 1 }}
+                className="absolute -bottom-2 left-0 w-full h-3 text-brand-400/30" 
+                viewBox="0 0 300 12" 
+                fill="none"
+              >
+                <path d="M1 10.5C50 3.5 150 1.5 299 10.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </motion.svg>
+            </span>
           </h1>
-          <p className="text-lg md:text-xl text-white/90 mb-0 leading-relaxed font-medium max-w-lg drop-shadow-md">
-            Referência em medicina avançada e atendimento humanizado na DUNO.
+
+          <p className="text-xl md:text-2xl text-white/80 mb-12 leading-relaxed font-light max-w-xl">
+            Referência em medicina avançada e atendimento humanizado. Onde a ciência encontra o amor incondicional.
           </p>
+
+          <div className="flex flex-col sm:flex-row gap-6">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary group">
+              <span className="flex items-center gap-3">
+                <WhatsAppLogo className="w-5 h-5 fill-current" /> 
+                AGENDAR CONSULTA
+              </span>
+            </a>
+            <a href="#services" className="btn-outline !text-white !border-white/30 hover:!bg-white hover:!text-brand-950">
+              CONHECER SERVIÇOS
+            </a>
+          </div>
         </motion.div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div 
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 hidden md:block"
+      >
+        <div className="w-[1px] h-20 bg-gradient-to-b from-brand-400 to-transparent opacity-50"></div>
+      </motion.div>
     </section>
   );
 };
@@ -228,28 +317,31 @@ const Stats = () => {
   ];
 
   return (
-    <section className="relative z-20 -mt-12 px-6">
+    <section className="relative z-20 -mt-16 px-6">
       <motion.div 
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="max-w-6xl mx-auto bg-white rounded-[2.5rem] shadow-2xl p-8 md:p-12 grid grid-cols-2 lg:grid-cols-4 gap-6 border border-brand-50"
+        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+        className="max-w-6xl mx-auto bg-white rounded-[3rem] shadow-[0_30px_100px_-20px_rgba(0,0,0,0.1)] p-10 md:p-16 grid grid-cols-2 lg:grid-cols-4 gap-12 border border-brand-100/50"
       >
         {stats.map((stat, index) => (
           <motion.div 
             key={index} 
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: index * 0.05 }}
+            transition={{ delay: index * 0.1 }}
             className="flex flex-col items-center text-center group"
           >
-            <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-brand-900 group-hover:text-white transition-all duration-500 rotate-3 group-hover:rotate-0">
-              {stat.icon}
+            <div className="w-16 h-16 bg-brand-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-brand-900 group-hover:text-white transition-all duration-700 ease-out rotate-3 group-hover:rotate-0 group-hover:scale-110">
+              <div className="transition-transform duration-500 group-hover:scale-110">
+                {stat.icon}
+              </div>
             </div>
-            <h3 className="text-3xl font-serif font-bold text-brand-950 mb-1 tracking-tighter">{stat.value}</h3>
-            <p className="text-[9px] font-bold text-brand-600 uppercase tracking-widest">{stat.label}</p>
+            <h3 className="text-4xl md:text-5xl font-serif font-bold text-brand-950 mb-2 tracking-tighter tabular-nums">{stat.value}</h3>
+            <div className="w-8 h-[2px] bg-brand-200 mb-3 group-hover:w-12 transition-all duration-500"></div>
+            <p className="text-[10px] font-bold text-brand-600/60 uppercase tracking-[0.3em]">{stat.label}</p>
           </motion.div>
         ))}
       </motion.div>
@@ -258,60 +350,61 @@ const Stats = () => {
 };
 
 function ServiceCard({ service, index }: any) {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
-
   return (
     <motion.div 
-      ref={ref}
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, margin: "-50px" }}
       transition={{ delay: index * 0.1, duration: 0.8, ease: "easeOut" }}
-      className="relative aspect-square rounded-3xl overflow-hidden group cursor-pointer shadow-2xl border border-white/10"
+      className="group relative h-[500px] rounded-[2.5rem] overflow-hidden cursor-pointer shadow-2xl border border-brand-100/10"
     >
-      {/* Background Image with Parallax */}
-      <motion.div 
-        style={{ y }}
-        className="absolute inset-0 z-0"
-      >
+      {/* Image with sophisticated zoom */}
+      <div className="absolute inset-0 overflow-hidden">
         <img 
           src={service.image} 
           alt={service.title} 
-          className="w-full h-[130%] object-cover scale-110 group-hover:scale-125 transition-transform duration-[1500ms] ease-out"
+          className="w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-110"
           referrerPolicy="no-referrer"
           loading="lazy"
         />
-        {/* Sophisticated Luxury Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-950/20 via-brand-950/50 to-brand-950/90"></div>
-      </motion.div>
-
-      {/* Content - Info */}
-      <div className="absolute inset-0 z-10 p-8 flex flex-col items-center justify-center text-center">
-        <h3 className="text-2xl md:text-3xl font-serif font-bold text-white mb-4 uppercase tracking-tighter leading-none drop-shadow-2xl">
-          {service.title}
-        </h3>
-        
-        <p className="text-brand-50/80 text-xs leading-relaxed max-w-[240px] mb-8 font-medium group-hover:text-white transition-colors duration-500">
-          {service.description}
-        </p>
-
-        <motion.a 
-          href={WHATSAPP_URL} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          whileHover={{ scale: 1.05, backgroundColor: "#fff", color: "#000" }}
-          whileTap={{ scale: 0.95 }}
-          className="px-8 py-3 bg-brand-400 text-brand-950 rounded-full text-[10px] font-bold tracking-[0.25em] uppercase flex items-center gap-3 transition-all shadow-2xl border border-brand-400/50"
-        >
-          <WhatsAppLogo className="w-4 h-4 fill-brand-950" /> AGENDAR CONSULTA
-        </motion.a>
+        {/* Dynamic Overlays */}
+        <div className="absolute inset-0 bg-brand-950/40 group-hover:bg-brand-950/20 transition-colors duration-700"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-950/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-700"></div>
       </div>
+
+      {/* Index Number */}
+      <div className="absolute top-8 left-8 z-20">
+        <span className="text-white/20 font-serif text-5xl font-bold italic tracking-tighter group-hover:text-brand-400/40 transition-colors duration-700">
+          {(index + 1).toString().padStart(2, '0')}
+        </span>
+      </div>
+
+      {/* Content */}
+      <div className="absolute inset-0 z-10 p-10 flex flex-col justify-end">
+        <div className="transform translate-y-8 group-hover:translate-y-0 transition-transform duration-700 ease-out">
+          <div className="w-12 h-1 w-0 group-hover:w-12 bg-brand-400 mb-6 transition-all duration-700 delay-100"></div>
+          
+          <h3 className="text-3xl font-serif font-bold text-white mb-4 leading-none tracking-tighter uppercase">
+            {service.title}
+          </h3>
+          
+          <p className="text-white/70 text-sm leading-relaxed mb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-200">
+            {service.description}
+          </p>
+
+          <motion.a 
+            href={WHATSAPP_URL} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="inline-flex items-center gap-3 text-brand-400 text-[10px] font-bold tracking-[0.3em] uppercase group-hover:text-white transition-colors"
+          >
+            Saber Mais <ChevronRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+          </motion.a>
+        </div>
+      </div>
+      
+      {/* Hover Border Beam */}
+      <div className="absolute inset-0 border-2 border-brand-400/0 group-hover:border-brand-400/20 rounded-[2.5rem] transition-all duration-700 pointer-events-none"></div>
     </motion.div>
   );
 }
@@ -351,36 +444,41 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="section-padding bg-[#FDFDFD] relative overflow-hidden">
-      <div className="absolute inset-0 bg-pattern opacity-[0.04] pointer-events-none"></div>
+    <section id="services" className="section-padding bg-white relative overflow-hidden">
+      <div className="absolute inset-0 bg-pattern opacity-[0.03] pointer-events-none"></div>
       
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-20">
-          <motion.span 
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+          <div className="max-w-2xl">
+            <motion.span 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-6 block"
+            >
+              Nossas Áreas de Atuação
+            </motion.span>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="text-5xl md:text-7xl font-serif font-bold text-brand-950 leading-[0.9] tracking-tighter"
+            >
+              MEDICINA DE <br /> <span className="text-brand-600 italic">ALTA PERFORMANCE.</span>
+            </motion.h2>
+          </div>
+          
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-6 block"
+            transition={{ duration: 1, delay: 0.3 }}
+            className="text-brand-800/60 max-w-sm text-sm leading-relaxed pb-2"
           >
-            Nossas Áreas de Atuação
-          </motion.span>
-          <motion.h2 
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-            className="text-4xl md:text-6xl font-serif font-bold text-brand-950 mb-6 leading-none tracking-tighter"
-          >
-            MEDICINA DE <br /> <span className="text-brand-600 italic">ALTA PERFORMANCE.</span>
-          </motion.h2>
-          <motion.div 
-            initial={{ width: 0 }}
-            whileInView={{ width: 120 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="h-[1px] bg-brand-200 mx-auto mt-10"
-          ></motion.div>
+            Combinamos tecnologia de ponta com cuidado humanizado para garantir o bem-estar absoluto do seu melhor amigo.
+          </motion.p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -422,7 +520,7 @@ const PetGallery = () => {
         </div>
       </motion.div>
       
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 px-6">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 px-6 md:px-12">
         {images.map((img, i) => (
           <motion.div 
             key={i}
@@ -648,8 +746,8 @@ const About = () => {
               <p className="font-bold text-brand-950 uppercase tracking-widest text-[9px]">Cuidado Humanizado</p>
             </div>
           </div>
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary mt-10 inline-flex items-center gap-3 py-3 px-8 text-sm">
-            <WhatsAppLogo className="w-4 h-4 fill-white" /> FALAR COM ESPECIALISTA NO WHATSAPP
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary mt-10 inline-flex items-center gap-3 py-4 px-10 text-[10px]" aria-label="Falar com especialista no WhatsApp">
+            <WhatsAppLogo className="w-5 h-5 fill-white" /> AGENDAR CONSULTA ESPECIALIZADA
           </a>
         </motion.div>
       </div>
