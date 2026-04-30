@@ -413,43 +413,43 @@ const Services = () => {
   const services = [
     {
       title: "CONSULTA VETERINÁRIA",
-      description: "Atendimento clínico completo com especialistas dedicados à saúde preventiva.",
-      image: "https://images.unsplash.com/photo-1596272875729-ed2ff7d6d9c5?q=80&w=2070&auto=format&fit=crop"
+      description: "Atendimento clínico completo com especialistas dedicados à saúde preventiva e diagnósticos detalhados para o seu pet.",
+      image: "/imagem/Consulta veterinária.png"
     },
     {
       title: "VACINAÇÃO",
-      description: "Protocolos vacinais atualizados para garantir a imunização total do seu pet.",
-      image: "https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?q=80&w=2070&auto=format&fit=crop"
+      description: "Protocolos vacinais atualizados e seguros para garantir a imunização total e a proteção contra as principais doenças.",
+      image: "/imagem/Vacinação.jpg"
     },
     {
       title: "EXAMES LABORATORIAIS",
-      description: "Diagnósticos precisos com laboratório próprio e tecnologia de última geração.",
-      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop"
+      description: "Diagnósticos rápidos e precisos com laboratório próprio, utilizando tecnologia de ponta para resultados confiáveis.",
+      image: "/imagem/Exames laboratoriais.jpg"
     },
     {
       title: "CIRURGIAS VETERINÁRIAS",
-      description: "Centro cirúrgico avançado com monitoramento constante e anestesia inalatória.",
-      image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?q=80&w=2070&auto=format&fit=crop"
+      description: "Centro cirúrgico moderno com equipe especializada, monitoramento avançado e foco total na segurança do paciente.",
+      image: "/imagem/Cirurgias veterinárias.jpg"
     },
     {
       title: "INTERNAÇÃO",
-      description: "Acomodações climatizadas e supervisão 24h para uma recuperação segura e rápida.",
-      image: "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=1988&auto=format&fit=crop"
+      description: "Acomodações climatizadas e supervisão médica 24 horas, garantindo conforto e uma recuperação monitorada e segura.",
+      image: "/imagem/internação.png"
     },
     {
       title: "ATENDIMENTO EMERGENCIAL",
-      description: "Equipe de prontidão para casos críticos com suporte vital avançado imediato.",
-      image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=2069&auto=format&fit=crop"
+      description: "Equipe de prontidão absoluta para casos críticos, equipada com suporte vital avançado para intervenções imediatas.",
+      image: "/imagem/atendimento emergencial.jpg"
     },
     {
       title: "BANHO E TOSA",
-      description: "Estética animal com produtos premium e profissionais especializados em cada raça.",
-      image: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?q=80&w=2071&auto=format&fit=crop"
+      description: "Estética animal com produtos de alta qualidade, profissionais qualificados e um ambiente relaxante para o seu melhor amigo.",
+      image: "/imagem/Banho e tosa.png"
     },
     {
       title: "ATENDIMENTO DOMICILIAR",
-      description: "Conforto e praticidade para seu pet com o mesmo padrão de excelência da clínica.",
-      image: "https://images.unsplash.com/photo-1581888227599-779811939961?q=80&w=2070&auto=format&fit=crop"
+      description: "Toda a excelência e cuidado da nossa clínica no conforto do seu lar, ideal para pets que necessitam de atendimento sem estresse.",
+      image: "/imagem/Atendimento domiciliar.webp"
     }
   ];
 
