@@ -262,9 +262,9 @@ const Hero = () => {
           </motion.div>
 
           <h1 className="text-5xl md:text-8xl font-serif font-bold text-white leading-[1.1] mb-8 tracking-tighter">
-            A Saúde do <br /> 
+            Excelência para <br /> 
             <span className="text-brand-400 italic relative">
-              Seu Pet é Arte.
+              Vidas Extraordinárias.
               <motion.svg 
                 initial={{ pathLength: 0 }}
                 animate={{ pathLength: 1 }}
@@ -279,7 +279,7 @@ const Hero = () => {
           </h1>
 
           <p className="text-xl md:text-2xl text-white/80 mb-12 leading-relaxed font-light max-w-xl">
-            Referência em medicina avançada e atendimento humanizado. Onde a ciência encontra o amor incondicional.
+            Unindo tecnologia de ponta e o mais profundo respeito pela vida animal. Na DUNO, o cuidado sublime é a nossa única regra.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6">
@@ -310,10 +310,10 @@ const Hero = () => {
 
 const Stats = () => {
   const stats = [
-    { icon: <HeartPulse className="w-5 h-5 text-brand-700" />, value: "22k+", label: "VIDAS SALVAS" },
-    { icon: <Stethoscope className="w-5 h-5 text-brand-700" />, value: "15+", label: "ESPECIALISTAS" },
-    { icon: <ShieldCheck className="w-5 h-5 text-brand-700" />, value: "24h", label: "SUPORTE VITAL" },
-    { icon: <Award className="w-5 h-5 text-brand-700" />, value: "100%", label: "PADRÃO ELITE" },
+    { icon: <HeartPulse className="w-6 h-6 text-brand-700" />, value: "25k+", label: "VIDAS TRANSFORMADAS" },
+    { icon: <Stethoscope className="w-6 h-6 text-brand-700" />, value: "18+", label: "MESTRES ESPECIALISTAS" },
+    { icon: <ShieldCheck className="w-6 h-6 text-brand-700" />, value: "24h", label: "VIGILÂNCIA ABSOLUTA" },
+    { icon: <Award className="w-6 h-6 text-brand-700" />, value: "Elite", label: "PADRÃO OURO" },
   ];
 
   return (
@@ -481,7 +481,7 @@ const Services = () => {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="text-5xl md:text-7xl font-serif font-bold text-brand-950 leading-[0.9] tracking-tighter"
             >
-              MEDICINA DE <br /> <span className="text-brand-600 italic">ALTA PERFORMANCE.</span>
+              CUIDADO QUE <br /> <span className="text-brand-600 italic">TRANSCENDE.</span>
             </motion.h2>
           </div>
           
@@ -492,7 +492,7 @@ const Services = () => {
             transition={{ duration: 1, delay: 0.3 }}
             className="text-brand-800/60 max-w-sm text-sm leading-relaxed pb-2"
           >
-            Combinamos tecnologia de ponta com cuidado humanizado para garantir o bem-estar absoluto do seu melhor amigo.
+            Tecnologia avançada e humanização absoluta para garantir o bem-estar do seu pet em cada detalhe.
           </motion.p>
         </div>
 
@@ -528,9 +528,9 @@ const PetGallery = () => {
         className="max-w-7xl mx-auto px-6 mb-8"
       >
         <div className="max-w-2xl text-center mx-auto">
-          <span className="text-brand-600 font-bold uppercase tracking-widest text-[10px] mb-4 block">Nossos Pacientes Felizes</span>
+          <span className="text-brand-600 font-bold uppercase tracking-widest text-[10px] mb-4 block">Legado de Sorrisos</span>
           <h2 className="text-3xl md:text-5xl font-serif font-bold text-brand-950 leading-none">
-            VIDAS QUE <br /> <span className="text-brand-700 italic">TRANSFORMAMOS.</span>
+            HISTÓRIAS QUE <br /> <span className="text-brand-700 italic">NOS INSPIRAM.</span>
           </h2>
         </div>
       </motion.div>
@@ -735,16 +735,16 @@ const About = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <span className="text-brand-600 font-bold uppercase tracking-widest text-[10px] mb-4 block">A Clínica</span>
+          <span className="text-brand-600 font-bold uppercase tracking-widest text-[10px] mb-4 block">A Experiência Duno</span>
           <h2 className="text-3xl md:text-5xl font-serif font-bold text-brand-950 mb-6 leading-tight">
-            Ciência e <span className="text-brand-700 italic">Empatia</span> em cada atendimento.
+            Ciência com Alma e <span className="text-brand-700 italic">Empatia Verdadeira.</span>
           </h2>
           <div className="space-y-4 text-base text-brand-800/70 leading-relaxed">
             <p>
-              Na DUNO, acreditamos que a medicina veterinária deve ser exercida com o mais alto rigor científico, sem nunca perder a ternura e o respeito pela vida animal.
+              Na DUNO, redefinimos a medicina veterinária ao integrar o mais alto rigor técnico a um atendimento que acolhe e entende a individualidade de cada ser.
             </p>
             <p>
-              Nossa estrutura foi planejada para oferecer um ambiente calmo e seguro, reduzindo o estresse dos pacientes e proporcionando uma experiência positiva para tutores e pets.
+              Nossa clínica não é apenas um hospital, mas um santuário de saúde onde o silêncio, a calma e a tecnologia operam em perfeita sintonia.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-6 mt-10">
