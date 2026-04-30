@@ -181,12 +181,12 @@ const Stats = () => {
   ];
 
   return (
-    <section className="relative z-20 -mt-16 px-6">
-      <div className="max-w-6xl mx-auto bg-white rounded-[2.5rem] shadow-2xl p-10 md:p-16 grid grid-cols-2 lg:grid-cols-4 gap-12 text-center border border-brand-100/50">
+    <section className="relative z-20 bg-white py-20 px-6">
+      <div className="max-w-6xl mx-auto bg-white rounded-[2.5rem] shadow-xl p-10 md:p-16 grid grid-cols-2 lg:grid-cols-4 gap-12 text-center border border-brand-100">
         {stats.map((stat, i) => (
-          <div key={i}>
-            <div className="text-4xl md:text-5xl font-serif font-bold text-brand-950 mb-2">{stat.value}</div>
-            <div className="text-[10px] font-bold text-brand-600 uppercase tracking-widest">{stat.label}</div>
+          <div key={i} className="group">
+            <div className="text-4xl md:text-5xl font-serif font-bold text-brand-950 mb-2 transition-transform group-hover:scale-110 duration-500">{stat.value}</div>
+            <div className="text-[10px] font-bold text-brand-600 uppercase tracking-[0.3em]">{stat.label}</div>
           </div>
         ))}
       </div>
@@ -251,43 +251,44 @@ const Services = () => {
           <h2 className="text-5xl md:text-7xl font-serif font-bold text-brand-950 tracking-tighter uppercase">Nossos <span className="text-brand-600 italic">Serviços</span></h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
           {services.map((service, index) => (
             <div key={index} className="group relative aspect-square overflow-hidden cursor-pointer bg-white">
               {/* Main Image - Center and clear by default */}
               <img 
                 src={service.image} 
                 alt={service.title} 
-                className="w-full h-full object-cover object-center transition-transform duration-[1500ms] group-hover:scale-110" 
+                className="w-full h-full object-cover object-center transition-transform duration-[1500ms] group-hover:scale-105" 
               />
               
-              {/* Subtle bottom gradient for permanent title visibility without darkening the whole image */}
-              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-950/50 to-transparent z-10"></div>
-
-              {/* Dark Overlay (Only on hover - for description) */}
-              <div className="absolute inset-0 bg-brand-950/0 group-hover:bg-brand-950/70 transition-all duration-500 z-20"></div>
-
-              {/* Category Tag (Top Right) */}
-              <div className="absolute top-6 right-6 z-30">
-                <span className="bg-brand-600/90 text-white text-[8px] font-bold uppercase tracking-[0.3em] px-4 py-2">
-                  {index < 3 ? "CLÍNICO" : index < 6 ? "ESPECIALIZADO" : "BEM-ESTAR"}
+              {/* Editorial Numbering */}
+              <div className="absolute top-8 left-8 z-30 overflow-hidden">
+                <span className="text-[10px] font-bold text-white/40 group-hover:text-brand-400 transition-colors tracking-widest">
+                  0{index + 1}
                 </span>
               </div>
-              
+
+              {/* Subtle bottom gradient for permanent title visibility */}
+              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-brand-950/60 via-brand-950/20 to-transparent z-10 opacity-80 group-hover:opacity-100 transition-opacity"></div>
+
+              {/* Dark Overlay (On hover - for description) */}
+              <div className="absolute inset-0 bg-brand-950/0 group-hover:bg-brand-950/70 transition-all duration-700 z-20"></div>
+
               {/* Content */}
-              <div className="absolute inset-0 p-8 flex flex-col justify-end z-40">
-                {/* Title - Always visible */}
-                <h3 className="text-xl md:text-2xl font-serif font-medium text-white tracking-tight leading-tight drop-shadow-md">
-                  {service.title}
-                </h3>
-                
-                {/* Description - Revealed on hover */}
-                <div className="max-h-0 overflow-hidden group-hover:max-h-24 transition-all duration-500 ease-in-out">
-                  <p className="text-white/80 text-xs leading-relaxed mt-4 line-clamp-2">
-                    {service.description}
-                  </p>
-                  <div className="mt-4 flex items-center gap-2 text-brand-400 text-[10px] font-bold uppercase tracking-widest">
-                    Agendar Agora <ChevronRight className="w-3 h-3" />
+              <div className="absolute inset-0 p-10 flex flex-col justify-end z-40">
+                <div className="transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
+                  <h3 className="text-2xl font-serif font-medium text-white tracking-tight leading-tight drop-shadow-lg mb-0 group-hover:mb-4 transition-all">
+                    {service.title}
+                  </h3>
+                  
+                  {/* Description - Revealed on hover */}
+                  <div className="max-h-0 overflow-hidden group-hover:max-h-32 transition-all duration-700 ease-in-out">
+                    <p className="text-white/70 text-[13px] leading-relaxed line-clamp-3 mb-6">
+                      {service.description}
+                    </p>
+                    <div className="flex items-center gap-3 text-brand-400 text-[10px] font-bold uppercase tracking-[0.3em]">
+                      Agendar Consulta <ChevronRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+                    </div>
                   </div>
                 </div>
               </div>
