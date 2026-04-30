@@ -238,13 +238,13 @@ const Hero = () => {
         <div className="grain-overlay"></div>
       </motion.div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
+      <div className="relative z-30 max-w-7xl mx-auto px-6 md:px-12 w-full">
         <motion.div 
           style={{ y: y2 }}
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="max-w-3xl"
+          className="max-w-3xl pb-32"
         >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -310,14 +310,14 @@ const Hero = () => {
 
 const Stats = () => {
   const stats = [
-    { icon: <HeartPulse className="w-6 h-6 text-brand-700" />, value: "25k+", label: "VIDAS TRANSFORMADAS" },
-    { icon: <Stethoscope className="w-6 h-6 text-brand-700" />, value: "18+", label: "MESTRES ESPECIALISTAS" },
+    { icon: <HeartPulse className="w-6 h-6 text-brand-700" />, value: "10k+", label: "VIDAS TRANSFORMADAS" },
+    { icon: <Stethoscope className="w-6 h-6 text-brand-700" />, value: "12+", label: "MESTRES ESPECIALISTAS" },
     { icon: <ShieldCheck className="w-6 h-6 text-brand-700" />, value: "24h", label: "VIGILÂNCIA ABSOLUTA" },
     { icon: <Award className="w-6 h-6 text-brand-700" />, value: "Elite", label: "PADRÃO OURO" },
   ];
 
   return (
-    <section className="relative z-20 -mt-16 px-6">
+    <section className="relative z-20 -mt-24 px-6">
       <motion.div 
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
