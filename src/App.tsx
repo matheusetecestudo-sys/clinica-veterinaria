@@ -356,7 +356,7 @@ function ServiceCard({ service, index }: any) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ delay: index * 0.1, duration: 0.8, ease: "easeOut" }}
-      className="group relative h-[420px] rounded-[2rem] overflow-hidden cursor-pointer shadow-2xl border border-brand-100/10"
+      className="group relative h-[500px] rounded-[2rem] overflow-hidden cursor-pointer shadow-2xl border border-brand-100/10"
     >
       {/* Image with sophisticated zoom */}
       <div className="absolute inset-0 overflow-hidden">
@@ -491,7 +491,7 @@ const Services = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {services.map((service, index) => (
             <ServiceCard key={index} service={service} index={index} />
           ))}
