@@ -220,7 +220,7 @@ const Hero = () => {
   // Removed scroll-based opacity to ensure constant visibility
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-20">
+    <section id="home" className="relative min-h-[110vh] flex flex-col justify-center overflow-hidden pt-40 pb-52">
       {/* Background Image with Parallax */}
       <motion.div 
         style={{ y: y1 }}
@@ -282,7 +282,7 @@ const Hero = () => {
             Unindo tecnologia de ponta e o mais profundo respeito pela vida animal. Na DUNO, o cuidado sublime é a nossa única regra.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6">
+          <div className="relative z-50 flex flex-col sm:flex-row gap-6">
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary !bg-brand-400 !text-brand-950 hover:!bg-white group">
               <span className="flex items-center gap-3">
                 <WhatsAppLogo className="w-5 h-5 fill-current" /> 
@@ -310,14 +310,14 @@ const Hero = () => {
 
 const Stats = () => {
   const stats = [
-    { icon: <HeartPulse className="w-6 h-6 text-brand-700" />, value: "10k+", label: "VIDAS TRANSFORMADAS" },
-    { icon: <Stethoscope className="w-6 h-6 text-brand-700" />, value: "12+", label: "MESTRES ESPECIALISTAS" },
+    { icon: <HeartPulse className="w-6 h-6 text-brand-700" />, value: "9k+", label: "VIDAS TRANSFORMADAS" },
+    { icon: <Stethoscope className="w-6 h-6 text-brand-700" />, value: "10+", label: "MESTRES ESPECIALISTAS" },
     { icon: <ShieldCheck className="w-6 h-6 text-brand-700" />, value: "24h", label: "VIGILÂNCIA ABSOLUTA" },
     { icon: <Award className="w-6 h-6 text-brand-700" />, value: "Elite", label: "PADRÃO OURO" },
   ];
 
   return (
-    <section className="relative z-20 -mt-24 px-6">
+    <section className="relative z-20 -mt-32 px-6">
       <motion.div 
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
