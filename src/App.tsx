@@ -359,31 +359,37 @@ const About = () => {
 };
 
 const ImpactSection = () => (
-  <section className="py-32 bg-brand-950 overflow-hidden relative">
-    <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-0 items-stretch border border-white/5 shadow-2xl">
-      <div className="relative h-[500px] lg:h-auto overflow-hidden order-2 lg:order-1">
-        <img 
-          src="https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?q=80&w=1200&auto=format&fit=crop" 
-          alt="Cuidado especializado" 
-          className="w-full h-full object-cover transition-transform duration-[2000ms] hover:scale-105" 
-        />
-        <div className="absolute inset-0 bg-brand-950/20"></div>
+  <section className="py-40 bg-brand-950 overflow-hidden relative text-center px-6">
+    {/* Subtle Decorative Elements */}
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-20 bg-gradient-to-b from-brand-400 to-transparent opacity-50"></div>
+    
+    <div className="max-w-4xl mx-auto relative z-10">
+      <div className="w-16 h-16 bg-brand-900 rounded-2xl flex items-center justify-center mx-auto mb-12 border border-brand-800 shadow-2xl">
+        <HeartPulse className="text-brand-400 w-8 h-8" />
       </div>
-      <div className="bg-white p-12 md:p-24 flex flex-col justify-center order-1 lg:order-2">
-        <span className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-8 block">Compromisso com a Vida</span>
-        <h2 className="text-4xl md:text-6xl font-serif font-bold text-brand-950 mb-8 leading-tight tracking-tighter">
-          SAÚDE É A NOSSA <br /> <span className="text-brand-700 italic">PRIORIDADE.</span>
-        </h2>
-        <p className="text-lg text-brand-800/70 leading-relaxed mb-10 max-w-md">
-          Na DUNO, cada paciente é tratado como um membro da nossa própria família. Tecnologia avançada e amor incondicional em cada detalhe.
-        </p>
-        <div>
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center gap-4">
-            AGENDAR CONSULTA AGORA <ChevronRight className="w-4 h-4" />
-          </a>
-        </div>
+      
+      <span className="text-brand-400 font-bold uppercase tracking-[0.6em] text-[10px] mb-8 block">Manifesto de Excelência</span>
+      
+      <h2 className="text-5xl md:text-8xl font-serif font-bold text-white mb-12 leading-[1.1] tracking-tighter">
+        A VIDA É O NOSSO <br /> 
+        <span className="text-brand-400 italic">MAIOR COMPROMISSO.</span>
+      </h2>
+      
+      <div className="w-20 h-[1px] bg-brand-800 mx-auto mb-12"></div>
+      
+      <p className="text-xl md:text-2xl text-white/60 leading-relaxed mb-16 max-w-2xl mx-auto font-light">
+        Na DUNO, não tratamos apenas animais; honramos o vínculo sagrado entre você e seu melhor amigo através da medicina de elite.
+      </p>
+      
+      <div className="flex flex-col sm:flex-row justify-center gap-8">
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bg-white text-brand-950 px-12 py-6 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-brand-400 transition-all shadow-2xl">
+          FALAR COM UM ESPECIALISTA
+        </a>
       </div>
     </div>
+
+    {/* Luxury Ambient Light */}
+    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-brand-900/20 rounded-full blur-[120px]"></div>
   </section>
 );
 
