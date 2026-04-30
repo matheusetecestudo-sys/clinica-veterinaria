@@ -359,29 +359,29 @@ const About = () => {
 };
 
 const ImpactSection = () => (
-  <section className="py-24 bg-brand-400 overflow-hidden relative">
-    <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-      <div className="relative z-10">
-        <h2 className="text-5xl md:text-7xl font-serif font-bold text-brand-950 mb-8 leading-none tracking-tighter">
-          SAÚDE É <br /> <span className="italic">FELICIDADE.</span>
-        </h2>
-        <p className="text-xl text-brand-950/80 mb-10 max-w-md font-medium leading-relaxed">
-          Garantimos que cada momento ao lado do seu melhor amigo seja repleto de vitalidade e alegria. Porque eles merecem o melhor.
-        </p>
-        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-block bg-brand-950 text-white px-10 py-5 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-white hover:text-brand-950 transition-all shadow-xl">
-          AGENDAR AGORA
-        </a>
+  <section className="py-32 bg-brand-950 overflow-hidden relative">
+    <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-0 items-stretch border border-white/5 shadow-2xl">
+      <div className="relative h-[500px] lg:h-auto overflow-hidden order-2 lg:order-1">
+        <img 
+          src="https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?q=80&w=1200&auto=format&fit=crop" 
+          alt="Cuidado especializado" 
+          className="w-full h-full object-cover transition-transform duration-[2000ms] hover:scale-105" 
+        />
+        <div className="absolute inset-0 bg-brand-950/20"></div>
       </div>
-      <div className="relative">
-        <div className="aspect-square rounded-[3rem] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-700">
-          <img 
-            src="https://images.unsplash.com/photo-1554692998-012af5e9dbfe?q=80&w=800" 
-            alt="Cachorro preto feliz" 
-            className="w-full h-full object-cover scale-110" 
-          />
+      <div className="bg-white p-12 md:p-24 flex flex-col justify-center order-1 lg:order-2">
+        <span className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-8 block">Compromisso com a Vida</span>
+        <h2 className="text-4xl md:text-6xl font-serif font-bold text-brand-950 mb-8 leading-tight tracking-tighter">
+          SAÚDE É A NOSSA <br /> <span className="text-brand-700 italic">PRIORIDADE.</span>
+        </h2>
+        <p className="text-lg text-brand-800/70 leading-relaxed mb-10 max-w-md">
+          Na DUNO, cada paciente é tratado como um membro da nossa própria família. Tecnologia avançada e amor incondicional em cada detalhe.
+        </p>
+        <div>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center gap-4">
+            AGENDAR CONSULTA AGORA <ChevronRight className="w-4 h-4" />
+          </a>
         </div>
-        {/* Decorative elements to match the yellow theme */}
-        <div className="absolute -top-10 -right-10 w-40 h-40 bg-brand-950/5 rounded-full blur-3xl"></div>
       </div>
     </div>
   </section>
