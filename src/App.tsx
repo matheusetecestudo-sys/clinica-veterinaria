@@ -356,7 +356,7 @@ function ServiceCard({ service, index }: any) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ delay: index * 0.1, duration: 0.8, ease: "easeOut" }}
-      className="group relative h-[500px] rounded-[2.5rem] overflow-hidden cursor-pointer shadow-2xl border border-brand-100/10"
+      className="group relative h-[420px] rounded-[2rem] overflow-hidden cursor-pointer shadow-2xl border border-brand-100/10"
     >
       {/* Image with sophisticated zoom */}
       <div className="absolute inset-0 overflow-hidden">
@@ -412,33 +412,43 @@ function ServiceCard({ service, index }: any) {
 const Services = () => {
   const services = [
     {
-      title: "MEDICINA DIAGNÓSTICA",
-      description: "Laboratório próprio e imagens de alta resolução para diagnósticos imediatos.",
-      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop"
-    },
-    {
-      title: "BLOCO CIRÚRGICO",
-      description: "Equipamentos de suporte à vida e anestesia inalatória monitorada de alta precisão.",
-      image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?q=80&w=2070&auto=format&fit=crop"
-    },
-    {
-      title: "INTERNAÇÃO ELITE",
-      description: "Acomodações climatizadas e supervisão médica constante para recuperação segura.",
-      image: "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=1988&auto=format&fit=crop"
-    },
-    {
-      title: "VETERINÁRIA",
-      description: "Acompanhamento integral do desenvolvimento e nutrição de ponta para seu pet.",
+      title: "CONSULTA VETERINÁRIA",
+      description: "Atendimento clínico completo com especialistas dedicados à saúde preventiva.",
       image: "https://images.unsplash.com/photo-1596272875729-ed2ff7d6d9c5?q=80&w=2070&auto=format&fit=crop"
     },
     {
-      title: "HIGIENE SÔNICA",
-      description: "Tratamentos para cálculo dentário e profilaxia bucal avançada com tecnologia.",
+      title: "VACINAÇÃO",
+      description: "Protocolos vacinais atualizados para garantir a imunização total do seu pet.",
+      image: "https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      title: "EXAMES LABORATORIAIS",
+      description: "Diagnósticos precisos com laboratório próprio e tecnologia de última geração.",
+      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      title: "CIRURGIAS VETERINÁRIAS",
+      description: "Centro cirúrgico avançado com monitoramento constante e anestesia inalatória.",
+      image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      title: "INTERNAÇÃO",
+      description: "Acomodações climatizadas e supervisão 24h para uma recuperação segura e rápida.",
+      image: "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=1988&auto=format&fit=crop"
+    },
+    {
+      title: "ATENDIMENTO EMERGENCIAL",
+      description: "Equipe de prontidão para casos críticos com suporte vital avançado imediato.",
+      image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=2069&auto=format&fit=crop"
+    },
+    {
+      title: "BANHO E TOSA",
+      description: "Estética animal com produtos premium e profissionais especializados em cada raça.",
       image: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?q=80&w=2071&auto=format&fit=crop"
     },
     {
-      title: "ESPECIALIDADES",
-      description: "Cardiologia, Fisioterapia e Ortopedia com especialistas de renome internacional.",
+      title: "ATENDIMENTO DOMICILIAR",
+      description: "Conforto e praticidade para seu pet com o mesmo padrão de excelência da clínica.",
       image: "https://images.unsplash.com/photo-1581888227599-779811939961?q=80&w=2070&auto=format&fit=crop"
     }
   ];
@@ -481,7 +491,7 @@ const Services = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <ServiceCard key={index} service={service} index={index} />
           ))}
