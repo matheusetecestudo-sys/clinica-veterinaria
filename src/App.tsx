@@ -233,11 +233,6 @@ const Services = () => {
       title: "ATENDIMENTO DOMICILIAR",
       description: "Toda a excelência e cuidado da nossa clínica no conforto do seu lar.",
       image: "/imagem/Atendimento domiciliar.webp"
-    },
-    {
-      title: "CHECK-UP COMPLETO",
-      description: "Avaliação preventiva integral para detectar alterações e garantir a longevidade.",
-      image: "/imagem/Check-up veterinário completo.jpg"
     }
   ];
 
@@ -249,7 +244,7 @@ const Services = () => {
           <h2 className="text-5xl md:text-7xl font-serif font-bold text-brand-950 tracking-tighter uppercase">Nossos <span className="text-brand-600 italic">Serviços</span></h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 gap-2">
           {services.map((service, index) => (
             <div key={index} className="group relative aspect-square overflow-hidden cursor-pointer bg-brand-950">
               {/* Main Image */}
