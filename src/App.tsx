@@ -263,22 +263,23 @@ const Services = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-950/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity z-10"></div>
 
               {/* Content Area */}
-              <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 z-20">
-                <h3 className="text-lg md:text-xl font-serif font-bold text-white mb-2 uppercase tracking-tighter leading-tight">
+              <div className="absolute inset-x-0 bottom-0 p-5 md:p-8 z-20 bg-gradient-to-t from-brand-950 via-brand-950/80 to-transparent">
+                <h3 className="text-base md:text-xl font-serif font-bold text-white mb-3 uppercase tracking-tighter leading-tight">
                   {service.title}
                 </h3>
                 
-                <div className="max-h-0 overflow-hidden group-hover:max-h-32 transition-all duration-700 ease-in-out">
-                  <p className="text-white/60 text-[11px] leading-relaxed mb-6 line-clamp-3">
+                {/* Description & Button - Always visible on mobile, reveal on desktop */}
+                <div className="max-h-40 md:max-h-0 overflow-hidden md:group-hover:max-h-40 transition-all duration-700 ease-in-out">
+                  <p className="text-white/80 text-[11px] md:text-sm leading-relaxed mb-6 line-clamp-3">
                     {service.description}
                   </p>
                   <a 
                     href={WHATSAPP_URL} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="inline-flex items-center gap-2 bg-brand-400 text-brand-950 px-4 py-2 rounded-full text-[8px] font-bold uppercase tracking-widest hover:bg-white transition-all"
+                    className="inline-flex items-center gap-2 bg-brand-400 text-brand-950 px-5 py-2.5 rounded-full text-[9px] font-bold uppercase tracking-widest hover:bg-white transition-all w-full md:w-auto justify-center"
                   >
-                    <WhatsAppLogo className="w-3 h-3 fill-current" />
+                    <WhatsAppLogo className="w-4 h-4 fill-current" />
                     AGENDAR AGORA
                   </a>
                 </div>
