@@ -226,7 +226,7 @@ const Services = () => {
     },
     {
       title: "BANHO E TOSA",
-      description: "Estética animal com produtos de alta qualidade em um ambiente relaxante.",
+      description: "Higiene e estética premium com produtos de alta qualidade em um ambiente relaxante.",
       image: "/imagem/Banho e tosa.png"
     },
     {
