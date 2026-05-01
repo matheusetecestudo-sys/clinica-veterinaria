@@ -244,60 +244,48 @@ const Services = () => {
           <h2 className="text-5xl md:text-7xl font-serif font-bold text-brand-950 tracking-tighter uppercase">Nossos <span className="text-brand-600 italic">Serviços</span></h2>
         </div>
 
-        <div className="max-w-5xl mx-auto grid grid-cols-2 gap-3 md:gap-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4">
           {services.map((service, index) => (
-            <div key={index} className="group relative aspect-square overflow-hidden cursor-pointer bg-brand-950 rounded-[1.5rem] md:rounded-[2.5rem]">
-              {/* Blurred Background to prevent cropping visual issues */}
-              <div className="absolute inset-0 opacity-40 blur-xl scale-110">
-                <img src={service.image} alt="" className="w-full h-full object-cover" />
-              </div>
-
-              {/* Main Image - Center and contain to prevent cuts */}
-              <div className="absolute inset-0 flex items-center justify-center p-4 md:p-10 z-10">
-                <img 
-                  src={service.image} 
-                  alt={service.title} 
-                  className="w-full h-full object-contain transition-transform duration-[2000ms] group-hover:scale-105" 
-                />
-              </div>
+            <div key={index} className="group relative aspect-[3/4] overflow-hidden cursor-pointer bg-brand-950 rounded-[1.5rem] md:rounded-[2rem]">
+              {/* Main Image - Full bleed cover */}
+              <img 
+                src={service.image} 
+                alt={service.title} 
+                className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-[2000ms] group-hover:scale-110" 
+              />
               
               {/* Editorial Numbering */}
-              <div className="absolute top-6 left-6 md:top-8 md:left-8 z-30">
-                <span className="text-[8px] md:text-[10px] font-bold text-white/40 tracking-[0.4em]">0{index + 1}</span>
+              <div className="absolute top-6 left-6 z-30">
+                <span className="text-[10px] font-bold text-white/40 tracking-[0.4em]">0{index + 1}</span>
               </div>
 
-              {/* Permanent Bottom Info Area */}
-              <div className="absolute inset-x-0 bottom-0 p-6 md:p-10 z-40 bg-gradient-to-t from-brand-950 via-brand-950/80 to-transparent">
-                <h3 className="text-sm md:text-2xl font-serif font-bold text-white mb-2 md:mb-3 uppercase tracking-tighter leading-none">
+              {/* Gradient Overlay for Text Visibility */}
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-950/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity z-10"></div>
+
+              {/* Content Area */}
+              <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 z-20">
+                <h3 className="text-lg md:text-xl font-serif font-bold text-white mb-2 uppercase tracking-tighter leading-tight">
                   {service.title}
                 </h3>
                 
-                {/* Description - Always visible on mobile, reveal on hover on desktop */}
-                <div className="max-h-20 md:max-h-0 overflow-hidden md:group-hover:max-h-24 transition-all duration-700 ease-in-out">
-                  <p className="text-white/60 text-[10px] md:text-xs leading-relaxed mb-4 md:mb-6 line-clamp-2">
+                <div className="max-h-0 overflow-hidden group-hover:max-h-32 transition-all duration-700 ease-in-out">
+                  <p className="text-white/60 text-[11px] leading-relaxed mb-6 line-clamp-3">
                     {service.description}
                   </p>
-                </div>
-
-                {/* WhatsApp Button - High Impact */}
-                <div className="flex items-center justify-between mt-1 md:mt-2">
                   <a 
                     href={WHATSAPP_URL} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex items-center gap-2 md:gap-3 bg-brand-400 text-brand-950 px-4 py-2 md:px-5 md:py-2.5 rounded-full text-[7px] md:text-[9px] font-bold uppercase tracking-widest hover:bg-white transition-all transform md:translate-y-4 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 duration-500"
+                    className="inline-flex items-center gap-2 bg-brand-400 text-brand-950 px-4 py-2 rounded-full text-[8px] font-bold uppercase tracking-widest hover:bg-white transition-all"
                   >
-                    <WhatsAppLogo className="w-3 h-3 md:w-4 md:h-4 fill-current" />
-                    <span className="hidden xs:inline">AGENDAR</span>
-                    <span className="xs:hidden">OK</span>
+                    <WhatsAppLogo className="w-3 h-3 fill-current" />
+                    AGENDAR AGORA
                   </a>
-                  
-                  <ChevronRight className="text-white/20 w-4 h-4 md:w-5 md:h-5 md:group-hover:translate-x-2 transition-transform" />
                 </div>
               </div>
 
               {/* Subtle inner border */}
-              <div className="absolute inset-0 border border-white/5 pointer-events-none z-50 rounded-[1.5rem] md:rounded-[2.5rem]"></div>
+              <div className="absolute inset-0 border border-white/5 pointer-events-none z-50 rounded-[1.5rem] md:rounded-[2rem]"></div>
             </div>
           ))}
         </div>
