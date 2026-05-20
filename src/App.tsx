@@ -10,6 +10,7 @@ import {
   Instagram, 
   Facebook, 
   ChevronRight, 
+  ArrowRight,
   Plus, 
   Minus, 
   Search, 
@@ -27,7 +28,9 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
 // Fix Leaflet icon issue
+// @ts-ignore
 import icon from 'leaflet/dist/images/marker-icon.png';
+// @ts-ignore
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
 let DefaultIcon = L.icon({
@@ -54,6 +57,18 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   const navLinks = [
     { name: "Home", href: "#home" },
     { name: "Serviços", href: "#services" },
@@ -63,55 +78,125 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${isScrolled ? "bg-white/95 backdrop-blur-md py-4 shadow-sm" : "bg-transparent py-6"}`}>
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-        <div className="flex items-center gap-3 cursor-pointer">
-          <div className="w-10 h-10 bg-brand-900 rounded-xl flex items-center justify-center">
-            <PawPrint className="text-brand-400 w-6 h-6" />
+    <>
+      <nav className={`fixed top-0 left-0 right-0 z-[90] transition-all duration-500 ${isScrolled ? "bg-white/95 backdrop-blur-md py-4 shadow-sm" : "bg-transparent py-6"}`}>
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+          <div className="flex items-center gap-3 cursor-pointer">
+            <div className="w-10 h-10 bg-brand-900 rounded-xl flex items-center justify-center">
+              <PawPrint className="text-brand-400 w-6 h-6" />
+            </div>
+            <span className={`text-2xl font-serif font-bold tracking-tighter transition-colors duration-500 ${isScrolled ? "text-brand-950" : "text-white"}`}>DUNO</span>
           </div>
-          <span className={`text-2xl font-serif font-bold tracking-tighter transition-colors duration-500 ${isScrolled ? "text-brand-950" : "text-white"}`}>DUNO</span>
-        </div>
 
-        <div className="hidden md:flex items-center gap-10">
-          {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href} 
-              className={`text-[11px] font-bold uppercase tracking-[0.2em] relative group ${isScrolled ? "text-brand-950/70 hover:text-brand-950" : "text-white/70 hover:text-white"}`}
-            >
-              {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-current transition-all duration-300 group-hover:w-full"></span>
+          <div className="hidden md:flex items-center gap-10">
+            {navLinks.map((link) => (
+              <a 
+                key={link.name} 
+                href={link.href} 
+                className={`text-[11px] font-bold uppercase tracking-[0.2em] relative group ${isScrolled ? "text-brand-950/70 hover:text-brand-950" : "text-white/70 hover:text-white"}`}
+              >
+                {link.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-current transition-all duration-300 group-hover:w-full"></span>
+              </a>
+            ))}
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary !py-3 !px-6 !text-[9px] group">
+              <span>AGENDAR AGORA</span>
+              <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
-          ))}
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary !py-3 !px-6 !text-[9px]">AGENDAR AGORA</a>
+          </div>
+
+          <button 
+            className={`md:hidden p-2 rounded-lg transition-colors ${isScrolled ? "text-brand-950" : "text-white"}`} 
+            onClick={() => setIsMobileMenuOpen(true)}
+            aria-label="Abrir Menu"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
         </div>
+      </nav>
 
-        <button 
-          className={`md:hidden p-2 rounded-lg ${isScrolled ? "text-brand-950" : "text-white"}`} 
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </div>
-
+      {/* Mobile Drawer Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="absolute top-full left-0 right-0 bg-white shadow-2xl overflow-hidden md:hidden border-t border-brand-50"
-          >
-            <div className="p-8 flex flex-col gap-6">
-              {navLinks.map((link) => (
-                <a key={link.name} href={link.href} onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-serif font-bold text-brand-950">{link.name}</a>
-              ))}
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary w-full mt-6 text-center">FALAR NO WHATSAPP</a>
-            </div>
-          </motion.div>
+          <>
+            {/* Backdrop */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] md:hidden"
+            />
+
+            {/* Drawer Container */}
+            <motion.div 
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "tween", duration: 0.35, ease: "easeOut" }}
+              className="fixed top-0 right-0 h-screen w-full sm:w-[380px] bg-brand-950 text-white z-[110] shadow-2xl md:hidden flex flex-col justify-between p-8"
+            >
+              {/* Header */}
+              <div>
+                <div className="flex justify-between items-center mb-12">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-brand-900 rounded-xl flex items-center justify-center">
+                      <PawPrint className="text-brand-400 w-5 h-5" />
+                    </div>
+                    <span className="text-xl font-serif font-bold tracking-tighter">DUNO</span>
+                  </div>
+                  <button 
+                    className="p-2 rounded-lg text-white hover:text-brand-400 transition-colors" 
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    aria-label="Fechar Menu"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+
+                {/* Links */}
+                <div className="flex flex-col gap-6">
+                  {navLinks.map((link) => (
+                    <a 
+                      key={link.name} 
+                      href={link.href} 
+                      onClick={() => setIsMobileMenuOpen(false)} 
+                      className="text-3xl font-serif font-bold text-white hover:text-brand-400 transition-colors uppercase tracking-tight"
+                    >
+                      {link.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bottom Quick Info & CTA */}
+              <div className="flex flex-col gap-6 border-t border-white/10 pt-8">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3 text-white/70 text-xs tracking-wider">
+                    <MapPin className="w-4 h-4 text-brand-400 shrink-0" />
+                    <span>Av. Faria Lima, 2000 - Itaim Bibi, SP</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-white/70 text-xs tracking-wider">
+                    <Phone className="w-4 h-4 text-brand-400 shrink-0" />
+                    <span>(11) 99287-6219</span>
+                  </div>
+                </div>
+
+                <a 
+                  href={WHATSAPP_URL} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="btn-primary w-full text-center py-4 bg-brand-400 text-brand-950 hover:bg-white hover:text-brand-950 font-bold uppercase tracking-wider group"
+                >
+                  <span>FALAR NO WHATSAPP</span>
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </a>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 };
 
@@ -156,12 +241,14 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6">
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bg-brand-400 text-brand-950 px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] hover:bg-white transition-all shadow-2xl shadow-brand-400/20 flex items-center justify-center gap-3">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bg-brand-400 hover:bg-white text-brand-950 px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] transition-all shadow-2xl shadow-brand-400/20 flex items-center justify-center gap-3 group">
               <WhatsAppLogo className="w-5 h-5 fill-current" /> 
-              AGENDAR CONSULTA
+              <span>AGENDAR CONSULTA</span>
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
-            <a href="#services" className="border border-white/30 text-white px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] hover:bg-white hover:text-brand-950 transition-all flex items-center justify-center">
-              CONHECER SERVIÇOS
+            <a href="#services" className="border border-white/30 text-white px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] hover:bg-white hover:text-brand-950 transition-all flex items-center justify-center gap-2 group">
+              <span>CONHECER SERVIÇOS</span>
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
           </div>
         </motion.div>
@@ -205,7 +292,7 @@ const Services = () => {
       image: "/imagem/Vacinação.jpg"
     },
     {
-      title: "EXAMES LABORATORIAIS",
+      title: "EXAMES LABORIAIS",
       description: "Diagnósticos rápidos e precisos com laboratório próprio e tecnologia de ponta.",
       image: "/imagem/Exames laboratoriais.jpg"
     },
@@ -244,49 +331,45 @@ const Services = () => {
           <h2 className="text-5xl md:text-7xl font-serif font-bold text-brand-950 tracking-tighter uppercase">Nossos <span className="text-brand-600 italic">Serviços</span></h2>
         </div>
 
-        <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
-            <div key={index} className="group relative aspect-[3/4] overflow-hidden cursor-pointer bg-brand-950 rounded-[1.5rem] md:rounded-[2rem]">
-              {/* Main Image - Full bleed cover */}
-              <img 
-                src={service.image} 
-                alt={service.title} 
-                className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-[2000ms] group-hover:scale-110" 
-              />
-              
-              {/* Editorial Numbering */}
-              <div className="absolute top-6 left-6 z-30">
-                <span className="text-[10px] font-bold text-white/40 tracking-[0.4em]">0{index + 1}</span>
-              </div>
-
-              {/* Gradient Overlay for Text Visibility */}
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-950/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity z-10"></div>
-
-              {/* Content Area */}
-              <div className="absolute inset-x-0 bottom-0 p-5 md:p-8 z-20 bg-gradient-to-t from-brand-950 via-brand-950/80 to-transparent">
-                <h3 className="text-base md:text-xl font-serif font-bold text-white mb-3 uppercase tracking-tighter leading-tight">
-                  {service.title}
-                </h3>
+            <div key={index} className="flex flex-col h-[520px] bg-white rounded-[2rem] overflow-hidden border border-brand-100/60 hover:shadow-xl transition-all duration-500 group relative">
+              {/* Upper 50% - Image */}
+              <div className="h-1/2 w-full overflow-hidden relative">
+                <img 
+                  src={service.image} 
+                  alt={service.title} 
+                  className="w-full h-full object-cover object-center transition-transform duration-[1200ms] group-hover:scale-105" 
+                />
                 
-                {/* Description & Button - Always visible on mobile, reveal on desktop */}
-                <div className="max-h-40 md:max-h-0 overflow-hidden md:group-hover:max-h-40 transition-all duration-700 ease-in-out">
-                  <p className="text-white/80 text-[11px] md:text-sm leading-relaxed mb-6 line-clamp-3">
-                    {service.description}
-                  </p>
-                  <a 
-                    href={WHATSAPP_URL} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="inline-flex items-center gap-2 bg-brand-400 text-brand-950 px-5 py-2.5 rounded-full text-[9px] font-bold uppercase tracking-widest hover:bg-white transition-all w-full md:w-auto justify-center"
-                  >
-                    <WhatsAppLogo className="w-4 h-4 fill-current" />
-                    AGENDAR AGORA
-                  </a>
+                {/* Editorial Numbering */}
+                <div className="absolute top-4 left-4 z-20 bg-brand-950/75 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+                  <span className="text-[9px] font-bold text-brand-400 tracking-[0.2em]">0{index + 1}</span>
                 </div>
               </div>
 
-              {/* Subtle inner border */}
-              <div className="absolute inset-0 border border-white/5 pointer-events-none z-50 rounded-[1.5rem] md:rounded-[2rem]"></div>
+              {/* Lower 50% - Content */}
+              <div className="h-1/2 p-6 flex flex-col justify-between bg-white border-t border-brand-50">
+                <div>
+                  <h3 className="text-base font-serif font-bold text-brand-950 mb-2 uppercase tracking-tight line-clamp-2 leading-snug">
+                    {service.title}
+                  </h3>
+                  <p className="text-brand-800/70 text-xs md:text-sm leading-relaxed line-clamp-3 md:line-clamp-4">
+                    {service.description}
+                  </p>
+                </div>
+                
+                {/* Button Saiba Mais */}
+                <a 
+                  href={`https://wa.me/5511992876219?text=${encodeURIComponent(`Olá! Gostaria de saber mais sobre o serviço de ${service.title} na Duno.`)}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="btn-primary !py-3.5 !px-5 !text-[9px] w-full text-center mt-2 group"
+                >
+                  <span>SAIBA MAIS</span>
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                </a>
+              </div>
             </div>
           ))}
         </div>
@@ -379,8 +462,9 @@ const ImpactSection = () => (
       </p>
       
       <div className="flex flex-col sm:flex-row justify-center gap-8">
-        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bg-white text-brand-950 px-12 py-6 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-brand-400 transition-all shadow-2xl">
-          FALAR COM UM ESPECIALISTA
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 bg-white text-brand-950 px-12 py-6 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-brand-400 hover:text-brand-950 transition-all shadow-2xl group">
+          <span>FALAR COM UM ESPECIALISTA</span>
+          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
         </a>
       </div>
     </div>
@@ -470,6 +554,62 @@ const Contact = () => (
   </section>
 );
 
+const CTASection = () => {
+  return (
+    <section className="py-24 bg-brand-950 text-white relative overflow-hidden px-6">
+      {/* Decorative background overlay */}
+      <div className="absolute inset-0 bg-pattern opacity-5"></div>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-20 bg-gradient-to-b from-brand-400 to-transparent opacity-30"></div>
+      
+      <div className="max-w-5xl mx-auto relative z-10">
+        <div className="bg-brand-900/40 border border-brand-800/80 rounded-[3rem] p-10 md:p-16 text-center backdrop-blur-md shadow-3xl">
+          <div className="inline-flex items-center gap-3 px-4 py-2 bg-brand-950/80 border border-brand-800 rounded-full mb-8">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-400"></span>
+            </span>
+            <span className="text-brand-400 text-[10px] font-bold uppercase tracking-[0.3em]">
+              Atendimento Emergencial 24h & Consultas
+            </span>
+          </div>
+
+          <h2 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6 tracking-tighter leading-tight uppercase">
+            GARANTA O MELHOR CUIDADO <br />
+            <span className="text-brand-400 italic font-medium">PARA QUEM VOCÊ AMA.</span>
+          </h2>
+
+          <p className="text-base md:text-lg text-white/70 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Seja para uma consulta preventiva de rotina ou um atendimento de emergência, nossa equipe médica de elite está de prontidão absoluta. Fale conosco agora mesmo.
+          </p>
+
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
+            <a 
+              href={WHATSAPP_URL} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="bg-brand-400 hover:bg-white text-brand-950 px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] transition-all duration-300 shadow-2xl flex items-center justify-center gap-3 group w-full sm:w-auto"
+            >
+              <WhatsAppLogo className="w-5 h-5 fill-current" />
+              <span>AGENDAR NO WHATSAPP</span>
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
+            <a 
+              href="tel:5511992876219" 
+              className="border border-white/20 hover:border-white text-white px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] transition-all duration-300 flex items-center justify-center gap-3 group w-full sm:w-auto"
+            >
+              <span>LIGAR AGORA</span>
+              <Phone className="w-4 h-4 text-brand-400" />
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      {/* Ambient glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-48 bg-brand-900/10 rounded-full blur-[100px]"></div>
+    </section>
+  );
+};
+
 const Footer = () => (
   <footer className="py-20 bg-black text-white/50 px-6">
     <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 mb-16 text-left">
@@ -507,6 +647,7 @@ export default function App() {
       <PetGallery />
       <FAQ />
       <Contact />
+      <CTASection />
       <Footer />
       <a 
         href={WHATSAPP_URL} 
