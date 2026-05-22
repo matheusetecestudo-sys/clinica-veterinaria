@@ -22,7 +22,9 @@ import {
   PawPrint,
   Quote,
   Menu,
-  X
+  X,
+  Activity,
+  ShieldPlus
 } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
