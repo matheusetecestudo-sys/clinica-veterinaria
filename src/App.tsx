@@ -73,48 +73,47 @@ const Navbar = () => {
   const navLinks = [
     { name: "Home", href: "#home" },
     { name: "Serviços", href: "#services" },
-    { name: "Sobre", href: "#about" },
-    { name: "Galeria", href: "#gallery" },
+    { name: "Equipe", href: "#equipe" },
     { name: "Contato", href: "#contact" },
   ];
 
   return (
     <>
-      <div className="bg-brand-600 text-white py-2 px-6 text-center text-xs md:text-sm font-bold tracking-wider z-[100] relative flex items-center justify-center gap-2">
+      <div className="bg-brand-600 text-white py-2.5 px-6 text-center text-xs font-bold tracking-widest z-[110] relative flex items-center justify-center gap-2 shadow-md">
         <span className="relative flex h-2 w-2">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
         </span>
         PLANTÃO VETERINÁRIO 24H: (11) 99287-6219
       </div>
-      <nav className={`fixed top-0 left-0 right-0 z-[90] transition-all duration-500 mt-8 ${isScrolled ? "bg-white/95 backdrop-blur-md py-4 shadow-sm" : "bg-transparent py-6"}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 mt-9 ${isScrolled ? "bg-white/95 backdrop-blur-md py-4 shadow-sm" : "bg-transparent py-6"}`}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
           <div className="flex items-center gap-3 cursor-pointer">
-            <div className="w-10 h-10 bg-brand-900 rounded-xl flex items-center justify-center">
-              <PawPrint className="text-brand-400 w-6 h-6" />
+            <div className="w-12 h-12 bg-brand-900 rounded-xl flex items-center justify-center">
+              <PawPrint className="text-brand-400 w-7 h-7" />
             </div>
-            <span className={`text-2xl font-serif font-bold tracking-tighter transition-colors duration-500 ${isScrolled ? "text-brand-950" : "text-white"}`}>DUNO</span>
+            <span className={`text-3xl font-serif font-bold tracking-tighter transition-colors duration-500 ${isScrolled ? "text-brand-950" : "text-white"}`}>DUNO</span>
           </div>
 
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden lg:flex items-center gap-10">
             {navLinks.map((link) => (
               <a 
                 key={link.name} 
                 href={link.href} 
-                className={`text-[11px] font-bold uppercase tracking-[0.2em] relative group ${isScrolled ? "text-brand-950/70 hover:text-brand-950" : "text-white/70 hover:text-white"}`}
+                className={`text-[11px] font-bold uppercase tracking-[0.2em] relative group ${isScrolled ? "text-brand-950 hover:text-brand-600" : "text-white/90 hover:text-white"}`}
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-current transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-current transition-all duration-300 group-hover:w-full"></span>
               </a>
             ))}
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary !py-3 !px-6 !text-[9px] group">
-              <span>AGENDAR AGORA</span>
-              <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bg-brand-400 text-brand-950 hover:bg-white transition-colors py-3.5 px-7 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 shadow-lg">
+              <span>AGENDAR CONSULTA</span>
+              <ArrowRight className="w-4 h-4" />
             </a>
           </div>
 
           <button 
-            className={`md:hidden p-2 rounded-lg transition-colors ${isScrolled ? "text-brand-950" : "text-white"}`} 
+            className={`lg:hidden p-2 rounded-lg transition-colors ${isScrolled ? "text-brand-950 bg-brand-50" : "text-white bg-white/10 backdrop-blur-sm"} border ${isScrolled ? "border-brand-100" : "border-white/20"}`} 
             onClick={() => setIsMobileMenuOpen(true)}
             aria-label="Abrir Menu"
           >
@@ -239,21 +238,21 @@ const Hero = () => {
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-[5.5rem] font-serif font-bold text-white leading-[1] mb-10 tracking-tighter">
+          <h1 className="text-5xl md:text-[5.5rem] font-serif font-bold text-white leading-[1] mb-8 tracking-tighter">
             Excelência para <br /> 
             <span className="text-brand-400 italic">Vidas Extraordinárias.</span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-white/80 mb-8 leading-relaxed font-light max-w-2xl">
+          <p className="text-lg md:text-xl text-white/70 mb-10 leading-relaxed font-light max-w-2xl">
             Unindo tecnologia de ponta e o mais profundo respeito pela vida animal. Na DUNO, o cuidado sublime é a nossa única regra.
           </p>
 
-          <div className="flex items-center gap-4 mb-12">
+          <div className="flex items-center gap-6 mb-12">
             <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Atendemos:</span>
-            <div className="flex gap-3">
-              <span className="px-3 py-1 bg-white/10 rounded-full text-white text-xs border border-white/20">Cães</span>
-              <span className="px-3 py-1 bg-white/10 rounded-full text-white text-xs border border-white/20">Gatos</span>
-              <span className="px-3 py-1 bg-white/10 rounded-full text-white text-xs border border-white/20">Silvestres</span>
+            <div className="flex items-center gap-5">
+              <span className="text-brand-400 text-xs font-bold uppercase tracking-widest flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brand-400 rounded-full"></span> Cães</span>
+              <span className="text-brand-400 text-xs font-bold uppercase tracking-widest flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brand-400 rounded-full"></span> Gatos</span>
+              <span className="text-brand-400 text-xs font-bold uppercase tracking-widest flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brand-400 rounded-full"></span> Silvestres</span>
             </div>
           </div>
 
@@ -347,11 +346,11 @@ const Services = () => {
           <h2 className="text-5xl md:text-7xl font-serif font-bold text-brand-950 tracking-tighter uppercase">Nossos <span className="text-brand-600 italic">Serviços</span></h2>
         </div>
 
-        <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
           {services.map((service, index) => (
-            <div key={index} className="flex flex-col h-[380px] md:h-[480px] bg-white rounded-[1.5rem] md:rounded-[2rem] overflow-hidden border-2 border-brand-100 hover:border-brand-300 hover:shadow-2xl transition-all duration-500 group relative">
-              {/* Upper 50% - Image */}
-              <div className="h-1/2 w-full overflow-hidden relative">
+            <div key={index} className="flex flex-col bg-white rounded-3xl overflow-hidden border border-brand-100 hover:border-brand-300 hover:shadow-2xl transition-all duration-500 group relative">
+              {/* Image with fixed aspect ratio */}
+              <div className="w-full aspect-[4/3] overflow-hidden relative">
                 <img 
                   src={service.image} 
                   alt={service.title} 
@@ -359,34 +358,33 @@ const Services = () => {
                 />
                 
                 {/* Editorial Numbering */}
-                <div className="absolute top-3 left-3 md:top-4 md:left-4 z-20 bg-brand-950/75 backdrop-blur-md px-2 py-1 md:px-3 rounded-full border border-white/20">
-                  <span className="text-[8px] md:text-[9px] font-bold text-brand-400 tracking-[0.2em]">0{index + 1}</span>
+                <div className="absolute top-4 left-4 z-20 bg-brand-950/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+                  <span className="text-[10px] font-bold text-brand-400 tracking-[0.2em]">0{index + 1}</span>
                 </div>
               </div>
 
-              {/* Lower 50% - Content */}
-              <div className="h-1/2 p-3 md:p-6 flex flex-col justify-between bg-white border-t border-brand-50 relative">
-                {/* Decorative element */}
-                <div className="absolute top-0 right-4 w-8 h-1 bg-brand-400/30 rounded-b-full"></div>
+              {/* Content */}
+              <div className="p-6 md:p-8 flex-1 flex flex-col justify-between bg-white border-t border-brand-50 relative">
+                <div className="absolute top-0 right-6 w-10 h-1 bg-brand-400/50 rounded-b-full"></div>
                 
-                <div>
-                  <h3 className="text-[11px] md:text-base font-serif font-bold text-brand-950 mb-1.5 md:mb-2 uppercase tracking-tight line-clamp-2 leading-snug group-hover:text-brand-600 transition-colors">
+                <div className="mb-6">
+                  <h3 className="text-lg font-serif font-bold text-brand-950 mb-3 uppercase tracking-tight leading-snug group-hover:text-brand-600 transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-brand-800/70 text-[9px] md:text-sm leading-relaxed line-clamp-3 md:line-clamp-4">
+                  <p className="text-brand-800/70 text-sm leading-relaxed">
                     {service.description}
                   </p>
                 </div>
                 
-                {/* Button Saiba Mais */}
+                {/* High Contrast Schedule Button */}
                 <a 
-                  href={`https://wa.me/5511992876219?text=${encodeURIComponent(`Olá! Gostaria de saber mais sobre o serviço de ${service.title} na Duno.`)}`} 
+                  href={`https://wa.me/5511992876219?text=${encodeURIComponent(`Olá! Gostaria de agendar o serviço de ${service.title} na Duno.`)}`} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="btn-primary !py-2.5 md:!py-3.5 !px-2 md:!px-5 !text-[8px] md:!text-[9px] w-full text-center mt-2 group/btn"
+                  className="bg-brand-950 text-brand-400 hover:bg-brand-800 transition-colors py-4 px-6 rounded-2xl text-[10px] font-bold uppercase tracking-widest flex items-center justify-between w-full group/btn"
                 >
-                  <span>SAIBA MAIS</span>
-                  <ArrowRight className="w-3 h-3 md:w-3.5 md:h-3.5 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                  <span>AGENDAR</span>
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
                 </a>
               </div>
             </div>
@@ -399,9 +397,12 @@ const Services = () => {
 
 const Testimonials = () => {
   const reviews = [
-    { name: "Mariana Silva", pet: "Bento (Golden Retriever)", text: "A DUNO salvou a vida do Bento. O atendimento foi impecável e a equipe nos manteve informados o tempo todo." },
-    { name: "Ricardo Oliveira", pet: "Luna (Persa)", text: "O padrão de higiene e o cuidado com gatos é diferenciado. A Luna se sente em casa, sem o estresse comum de outras clínicas." },
-    { name: "Ana Paula Costa", pet: "Thor (Bulldog Francês)", text: "Especialistas de altíssimo nível. Resolvemos um problema dermatológico crônico que ninguém conseguia tratar." },
+    { name: "Mariana Silva", pet: "Bento (Golden Retriever)", text: "A DUNO salvou a vida do Bento após um atropelamento. O atendimento foi impecável e a equipe nos manteve informados o tempo todo.", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop" },
+    { name: "Ricardo Oliveira", pet: "Luna (Persa)", text: "O padrão de higiene e o cuidado com gatos é diferenciado. A Luna se sente em casa, sem o estresse comum de outras clínicas.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop" },
+    { name: "Ana Paula Costa", pet: "Thor (Bulldog Francês)", text: "Especialistas de altíssimo nível. Resolvemos um problema dermatológico crônico que ninguém conseguia tratar há anos.", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop" },
+    { name: "Carlos Eduardo", pet: "Mel (SRD)", text: "Precisei do plantão de madrugada e a rapidez salvou minha cachorrinha. O veterinário foi um anjo, estrutura fantástica.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop" },
+    { name: "Fernanda Lima", pet: "Fred (Calopsita)", text: "É tão difícil achar quem entenda de aves. A especialista em silvestres da Duno nos deu uma aula de manejo e cuidado.", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop" },
+    { name: "Sérgio Martins", pet: "Nina (Spitz)", text: "Fizemos a castração e a limpeza de tártaro no mesmo dia com anestesia inalatória. A recuperação foi maravilhosa.", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=150&auto=format&fit=crop" }
   ];
 
   return (
@@ -412,13 +413,16 @@ const Testimonials = () => {
           <span className="text-brand-400 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Vidas que Transformamos</span>
           <h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tighter uppercase">Nossos Pacientes <span className="text-brand-400 italic">Felizes.</span></h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {reviews.map((review, i) => (
-            <div key={i} className="bg-brand-900/30 p-10 rounded-[2.5rem] border border-brand-800/50">
-              <p className="text-lg text-brand-100/80 italic mb-8">"{review.text}"</p>
-              <div>
-                <h4 className="text-xl font-serif font-bold text-white uppercase">{review.name}</h4>
-                <p className="text-brand-400 text-[10px] font-bold uppercase tracking-widest mt-1">{review.pet}</p>
+            <div key={i} className="bg-brand-900/40 p-8 rounded-[2rem] border border-brand-800/50 flex flex-col justify-between">
+              <p className="text-base text-brand-100/90 italic mb-8 leading-relaxed">"{review.text}"</p>
+              <div className="flex items-center gap-4">
+                <img src={review.img} alt={review.name} className="w-12 h-12 rounded-full object-cover border-2 border-brand-400" />
+                <div>
+                  <h4 className="text-base font-serif font-bold text-white uppercase">{review.name}</h4>
+                  <p className="text-brand-400 text-[10px] font-bold uppercase tracking-widest mt-0.5">{review.pet}</p>
+                </div>
               </div>
             </div>
           ))}
@@ -430,10 +434,10 @@ const Testimonials = () => {
 
 const Team = () => {
   const team = [
-    { name: "Dr. Carlos Eduardo", crmv: "CRMV-SP 12345", specialty: "Cirurgia Geral e Ortopedia", img: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=400&auto=format&fit=crop" },
-    { name: "Dra. Marina Silva", crmv: "CRMV-SP 54321", specialty: "Felinos e Dermatologia", img: "https://images.unsplash.com/photo-1594824436998-d50d6ff71c66?q=80&w=400&auto=format&fit=crop" },
-    { name: "Dr. Roberto Alves", crmv: "CRMV-SP 67890", specialty: "Animais Silvestres e Exóticos", img: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=400&auto=format&fit=crop" },
-    { name: "Dra. Juliana Mendes", crmv: "CRMV-SP 09876", specialty: "Anestesiologia e Terapia Intensiva", img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=400&auto=format&fit=crop" }
+    { name: "Dr. Carlos Eduardo", crmv: "CRMV-SP 12345", specialty: "Cirurgia Geral", subSpecialty: "Ortopedia Avançada", img: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=400&auto=format&fit=crop" },
+    { name: "Dra. Marina Silva", crmv: "CRMV-SP 54321", specialty: "Medicina Felina", subSpecialty: "Dermatologia Veterinária", img: "https://images.unsplash.com/photo-1594824436998-d50d6ff71c66?q=80&w=400&auto=format&fit=crop" },
+    { name: "Dr. Roberto Alves", crmv: "CRMV-SP 67890", specialty: "Animais Silvestres", subSpecialty: "Animais Exóticos", img: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=400&auto=format&fit=crop" },
+    { name: "Dra. Juliana Mendes", crmv: "CRMV-SP 09876", specialty: "Anestesiologia", subSpecialty: "Terapia Intensiva (UTI)", img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=400&auto=format&fit=crop" }
   ];
 
   return (
@@ -446,13 +450,16 @@ const Team = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {team.map((vet, i) => (
             <div key={i} className="group relative overflow-hidden rounded-3xl bg-brand-50 border border-brand-100">
-              <div className="aspect-[3/4] overflow-hidden">
-                <img src={vet.img} alt={vet.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="aspect-square overflow-hidden bg-brand-200">
+                <img src={vet.img} alt={vet.name} className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
               </div>
-              <div className="p-6 bg-white absolute bottom-0 left-0 right-0 m-4 rounded-2xl shadow-xl transform transition-transform duration-500 translate-y-2 group-hover:-translate-y-2">
-                <h3 className="font-serif font-bold text-brand-950 text-lg uppercase tracking-tight">{vet.name}</h3>
-                <p className="text-brand-600 font-bold text-[10px] tracking-widest mt-1 mb-2">{vet.crmv}</p>
-                <p className="text-brand-800/80 text-xs leading-relaxed">{vet.specialty}</p>
+              <div className="p-6 bg-white absolute bottom-0 left-0 right-0 m-4 rounded-2xl shadow-xl transform transition-transform duration-500 translate-y-2 group-hover:-translate-y-2 border border-brand-50">
+                <h3 className="font-serif font-bold text-brand-950 text-xl uppercase tracking-tight">{vet.name}</h3>
+                <p className="text-brand-600 font-black text-sm tracking-widest mt-1 mb-3">{vet.crmv}</p>
+                <div className="space-y-1">
+                  <p className="text-brand-950 font-bold text-xs uppercase tracking-wider">{vet.specialty}</p>
+                  <p className="text-brand-800/60 text-[10px] uppercase tracking-widest">{vet.subSpecialty}</p>
+                </div>
               </div>
             </div>
           ))}
@@ -464,9 +471,9 @@ const Team = () => {
 
 const SuccessCases = () => {
   const cases = [
-    { name: "Max (Golden Retriever)", desc: "Recuperação total após cirurgia ortopédica complexa devido a ruptura de ligamento.", img: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=400&auto=format&fit=crop" },
-    { name: "Luna (Persa)", desc: "Tratamento bem-sucedido de insuficiência renal aguda. Hoje vive com qualidade.", img: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=400&auto=format&fit=crop" },
-    { name: "Thor (Bulldog)", desc: "Correção cirúrgica de síndrome braquicefálica. Agora respira e brinca sem limitações.", img: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=400&auto=format&fit=crop" }
+    { name: "Max", especie: "Pitbull", condition: "Displasia Coxofemoral Severa", result: "Voltou a correr normalmente 3 meses após a cirurgia ortopédica.", img: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=400&auto=format&fit=crop" },
+    { name: "Luna", especie: "Gato Persa", condition: "Obstrução Uretral Aguda", result: "Atendimento emergencial às 3h da manhã salvou seus rins. Recuperação 100%.", img: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=400&auto=format&fit=crop" },
+    { name: "Thor", especie: "Bulldog Francês", condition: "Síndrome Braquicefálica", result: "Correção cirúrgica das narinas. Respira sem ruídos e brinca sem limitações.", img: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=400&auto=format&fit=crop" }
   ];
 
   return (
@@ -479,15 +486,63 @@ const SuccessCases = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {cases.map((c, i) => (
             <div key={i} className="bg-brand-900 rounded-[2rem] overflow-hidden border border-brand-800 flex flex-col group">
-              <div className="h-64 overflow-hidden">
+              <div className="h-64 overflow-hidden relative">
                 <img src={c.img} alt={c.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <div className="absolute top-4 right-4 bg-brand-950/80 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10">
+                  <span className="text-[10px] font-bold text-brand-400 uppercase tracking-widest">{c.especie}</span>
+                </div>
               </div>
               <div className="p-8 flex-1 flex flex-col">
-                <h3 className="text-xl font-serif font-bold uppercase mb-4 text-white">{c.name}</h3>
-                <p className="text-brand-100/70 text-sm leading-relaxed mb-8 flex-1">{c.desc}</p>
+                <h3 className="text-2xl font-serif font-bold uppercase mb-6 text-white">{c.name}</h3>
+                
+                <div className="space-y-4 mb-8 flex-1">
+                  <div>
+                    <span className="text-[9px] uppercase tracking-widest text-brand-400 font-bold block mb-1">Condição Tratada</span>
+                    <p className="text-white text-sm font-medium">{c.condition}</p>
+                  </div>
+                  <div className="w-full h-[1px] bg-brand-800/50"></div>
+                  <div>
+                    <span className="text-[9px] uppercase tracking-widest text-emerald-400 font-bold block mb-1">Resultado</span>
+                    <p className="text-brand-100/80 text-sm leading-relaxed">{c.result}</p>
+                  </div>
+                </div>
+
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-brand-400 font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 group-hover:text-white transition-colors">
                   AGENDAR CONSULTA <ArrowRight className="w-4 h-4" />
                 </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Infrastructure = () => {
+  const infraData = [
+    { title: "Centro Cirúrgico de Alta Complexidade", desc: "Equipado com Anestesia Inalatória e Monitoramento Multiparamétrico de última geração.", icon: <Activity className="w-8 h-8 text-brand-400" /> },
+    { title: "UTI Veterinária 24H", desc: "Suporte intensivo ininterrupto com oxigenoterapia, aquecimento controlado e acompanhamento veterinário 24/7.", icon: <ShieldPlus className="w-8 h-8 text-brand-400" /> },
+    { title: "Laboratório e Imagem", desc: "Raio-X digital e ultrassom de alta definição no local. Resultados rápidos para diagnósticos precisos.", icon: <Stethoscope className="w-8 h-8 text-brand-400" /> },
+    { title: "99,7% de Sucesso Cirúrgico", desc: "Nossos protocolos rígidos de assepsia e manejo anestésico garantem os maiores índices de segurança do país.", icon: <HeartPulse className="w-8 h-8 text-brand-400" /> }
+  ];
+
+  return (
+    <section className="section-padding bg-brand-50 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <span className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Tecnologia e Segurança</span>
+          <h2 className="text-5xl font-serif font-bold text-brand-950 uppercase tracking-tighter">Infraestrutura <span className="text-brand-700 italic">Hospitalar</span></h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {infraData.map((item, i) => (
+            <div key={i} className="bg-white p-8 md:p-10 rounded-3xl border border-brand-100 shadow-xl shadow-brand-900/5 flex gap-6 items-start group hover:border-brand-300 transition-colors">
+              <div className="bg-brand-950 p-4 rounded-2xl shrink-0 group-hover:bg-brand-900 transition-colors">
+                {item.icon}
+              </div>
+              <div>
+                <h3 className="text-xl font-serif font-bold text-brand-950 uppercase mb-3 leading-tight">{item.title}</h3>
+                <p className="text-brand-800/70 text-sm leading-relaxed">{item.desc}</p>
               </div>
             </div>
           ))}
@@ -517,14 +572,19 @@ const FAQ = () => {
     <section id="faq" className="section-padding bg-white px-6">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-serif font-bold text-brand-950 text-center mb-16 uppercase tracking-tighter">Dúvidas <span className="text-brand-700 italic">Frequentes</span></h2>
-        <div className="space-y-4">
+        <div className="space-y-6">
           {faqs.map((faq, index) => (
-            <div key={index} className="border border-brand-100 rounded-2xl overflow-hidden">
-              <button onClick={() => setActiveIndex(activeIndex === index ? null : index)} className="w-full p-6 flex justify-between items-center text-left bg-white hover:bg-brand-50 transition-colors">
-                <span className="font-serif font-bold text-brand-950 uppercase pr-8">{faq.question}</span>
-                {activeIndex === index ? <Minus className="w-4 h-4 shrink-0 text-brand-600" /> : <Plus className="w-4 h-4 shrink-0 text-brand-600" />}
+            <div key={index} className={`border border-brand-100 rounded-2xl overflow-hidden transition-all duration-300 ${activeIndex === index ? 'shadow-xl shadow-brand-900/5 bg-white' : 'bg-brand-50/30'}`}>
+              <button onClick={() => setActiveIndex(activeIndex === index ? null : index)} className="w-full p-6 md:p-8 flex justify-between items-center text-left hover:bg-brand-50 transition-colors">
+                <span className="font-serif font-bold text-brand-950 text-lg uppercase pr-8 leading-snug">{faq.question}</span>
+                {activeIndex === index ? <Minus className="w-6 h-6 shrink-0 text-brand-600" /> : <Plus className="w-6 h-6 shrink-0 text-brand-600" />}
               </button>
-              {activeIndex === index && <div className="p-6 pt-0 text-brand-800/70 leading-relaxed">{faq.answer}</div>}
+              {activeIndex === index && (
+                <div className="px-6 md:px-8 pb-8 pt-2">
+                  <div className="w-12 h-1 bg-brand-400 mb-6"></div>
+                  <p className="text-brand-800/80 leading-relaxed text-base">{faq.answer}</p>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -535,16 +595,49 @@ const FAQ = () => {
 
 const Contact = () => (
   <section id="contact" className="section-padding bg-brand-950 text-white px-6">
-    <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+    <div className="max-w-7xl mx-auto grid lg:grid-cols-[40%_60%] gap-12 lg:gap-20 items-center">
       <div>
         <h2 className="text-5xl font-serif font-bold mb-10 tracking-tighter uppercase">Onde <span className="text-brand-400 italic">Estamos.</span></h2>
-        <div className="space-y-8">
-          <div className="flex gap-6"><MapPin className="text-brand-400 w-8 h-8 shrink-0" /><p className="text-lg">Av. Brigadeiro Faria Lima, 2000 - Itaim Bibi, SP</p></div>
-          <div className="flex gap-6"><Phone className="text-brand-400 w-8 h-8 shrink-0" /><p className="text-lg">(11) 99287-6219</p></div>
-          <div className="flex gap-6"><Clock className="text-brand-400 w-8 h-8 shrink-0" /><p className="text-lg">Seg-Sex: 08:00 - 20:00 | Sáb: 08:00 - 18:00</p></div>
+        <div className="space-y-8 mb-12">
+          <div className="flex gap-6 items-start">
+            <MapPin className="text-brand-400 w-8 h-8 shrink-0 mt-1" />
+            <div>
+              <p className="text-lg font-bold mb-1">Endereço</p>
+              <p className="text-brand-100/70">Av. Brigadeiro Faria Lima, 2000<br/>Itaim Bibi, São Paulo - SP</p>
+            </div>
+          </div>
+          <div className="flex gap-6 items-start">
+            <Phone className="text-brand-400 w-8 h-8 shrink-0 mt-1" />
+            <div>
+              <p className="text-lg font-bold mb-1">Contato Regular</p>
+              <p className="text-brand-100/70">(11) 99287-6219</p>
+            </div>
+          </div>
+          <div className="flex gap-6 items-start bg-red-950/40 p-4 rounded-2xl border border-red-500/30">
+            <Activity className="text-red-500 w-8 h-8 shrink-0 mt-1" />
+            <div>
+              <p className="text-xl font-black text-red-400 mb-1">PLANTÃO EMERGÊNCIA</p>
+              <a href="tel:5511999999999" className="text-3xl font-black text-white hover:text-red-400 transition-colors">(11) 99999-9999</a>
+            </div>
+          </div>
+          <div className="flex gap-6 items-start">
+            <Clock className="text-brand-400 w-8 h-8 shrink-0 mt-1" />
+            <div>
+              <p className="text-lg font-bold mb-1">Horários (Rotina)</p>
+              <p className="text-brand-100/70">Seg-Sex: 08:00 - 20:00<br/>Sáb: 08:00 - 18:00</p>
+            </div>
+          </div>
         </div>
+        <a 
+          href="https://maps.google.com/?q=Av.+Brigadeiro+Faria+Lima,+2000+-+Itaim+Bibi" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="inline-flex items-center gap-3 bg-brand-800 hover:bg-brand-700 text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-[11px] transition-colors"
+        >
+          <MapPin className="w-4 h-4" /> ABRIR NO GOOGLE MAPS
+        </a>
       </div>
-      <div className="h-[400px] rounded-[3rem] overflow-hidden shadow-2xl border border-white/10">
+      <div className="h-[500px] rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 lg:order-last order-first">
         <MapContainer center={[-23.5899, -46.6815]} zoom={15} style={{ height: "100%", width: "100%" }}>
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           <Marker position={[-23.5899, -46.6815]} />
@@ -594,11 +687,11 @@ const CTASection = () => {
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
             <a 
-              href="tel:5511992876219" 
-              className="border border-white/20 hover:border-white text-white px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] transition-all duration-300 flex items-center justify-center gap-3 group w-full sm:w-auto"
+              href="tel:5511999999999" 
+              className="border border-red-500 hover:bg-red-500 hover:text-white text-red-500 px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] transition-all duration-300 flex items-center justify-center gap-3 group w-full sm:w-auto"
             >
-              <span>LIGAR AGORA</span>
-              <Phone className="w-4 h-4 text-brand-400" />
+              <Phone className="w-4 h-4" />
+              <span>EMERGÊNCIA (LIGAR AGORA)</span>
             </a>
           </div>
         </div>
@@ -612,25 +705,30 @@ const CTASection = () => {
 
 const Footer = () => (
   <footer className="py-20 bg-black text-white/50 px-6">
-    <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 mb-16 text-left">
-      <div>
+    <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-16 text-left">
+      <div className="md:col-span-2">
         <div className="flex items-center gap-2 mb-6"><PawPrint className="text-brand-400 w-8 h-8" /><span className="text-2xl font-serif font-bold text-white uppercase tracking-tighter">DUNO</span></div>
-        <p className="text-sm leading-relaxed">Excelência hospitalar e cuidado humanizado no coração do Itaim Bibi.</p>
+        <p className="text-sm leading-relaxed mb-6 max-w-sm">Excelência hospitalar e cuidado humanizado no coração do Itaim Bibi. Atendimento de elite para quem você mais ama.</p>
+        <p className="text-[10px] font-bold tracking-widest text-brand-400">Responsável Técnico: Dr. Carlos Eduardo (CRMV-SP 12345)<br/>Razão Social: Duno Clínica Veterinária LTDA - CNPJ: 00.000.000/0001-00</p>
       </div>
       <div>
-        <h4 className="text-white font-serif font-bold mb-6 uppercase tracking-widest">Especialidades</h4>
+        <h4 className="text-white font-serif font-bold mb-6 uppercase tracking-widest">Links Rápidos</h4>
         <ul className="text-xs space-y-4 tracking-widest font-bold">
-          <li>CIRURGIA AVANÇADA</li>
-          <li>EXAMES DIAGNÓSTICOS</li>
-          <li>INTERNAÇÃO 24H</li>
+          <li><a href="#services" className="hover:text-brand-400 transition-colors">SERVIÇOS</a></li>
+          <li><a href="#equipe" className="hover:text-brand-400 transition-colors">CORPO CLÍNICO</a></li>
+          <li><a href="#faq" className="hover:text-brand-400 transition-colors">DÚVIDAS FREQUENTES</a></li>
+          <li><a href="#" className="hover:text-brand-400 transition-colors">POLÍTICA DE PRIVACIDADE</a></li>
         </ul>
       </div>
       <div>
         <h4 className="text-white font-serif font-bold mb-6 uppercase tracking-widest">Siga-nos</h4>
-        <div className="flex gap-6"><Instagram className="w-6 h-6 hover:text-brand-400 cursor-pointer" /><Facebook className="w-6 h-6 hover:text-brand-400 cursor-pointer" /></div>
+        <div className="flex gap-4">
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="bg-brand-950 p-3 rounded-full hover:bg-brand-400 hover:text-brand-950 transition-colors"><Instagram className="w-5 h-5" /></a>
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="bg-brand-950 p-3 rounded-full hover:bg-brand-400 hover:text-brand-950 transition-colors"><Facebook className="w-5 h-5" /></a>
+        </div>
       </div>
     </div>
-    <p className="text-center text-[10px] font-bold tracking-[0.5em] pt-12 border-t border-white/5">© 2026 DUNO. TODOS OS DIREITOS RESERVADOS.</p>
+    <p className="text-center text-[10px] font-bold tracking-[0.5em] pt-12 border-t border-white/5">© 2026 DUNO CLÍNICA VETERINÁRIA. TODOS OS DIREITOS RESERVADOS.</p>
   </footer>
 );
 
@@ -644,6 +742,7 @@ export default function App() {
       <Testimonials />
       <Team />
       <SuccessCases />
+      <Infrastructure />
       <FAQ />
       <Contact />
       <CTASection />
