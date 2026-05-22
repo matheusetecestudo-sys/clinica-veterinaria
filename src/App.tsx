@@ -332,30 +332,33 @@ const Services = () => {
           <h2 className="text-5xl md:text-7xl font-serif font-bold text-brand-950 tracking-tighter uppercase">Nossos <span className="text-brand-600 italic">Serviços</span></h2>
         </div>
 
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
           {services.map((service, index) => (
-            <div key={index} className="flex flex-col h-[520px] bg-white rounded-[2rem] overflow-hidden border border-brand-100/60 hover:shadow-xl transition-all duration-500 group relative">
+            <div key={index} className="flex flex-col h-[380px] md:h-[480px] bg-white rounded-[1.5rem] md:rounded-[2rem] overflow-hidden border-2 border-brand-100 hover:border-brand-300 hover:shadow-2xl transition-all duration-500 group relative">
               {/* Upper 50% - Image */}
               <div className="h-1/2 w-full overflow-hidden relative">
                 <img 
                   src={service.image} 
                   alt={service.title} 
-                  className="w-full h-full object-cover object-center transition-transform duration-[1200ms] group-hover:scale-105" 
+                  className="w-full h-full object-cover object-center transition-transform duration-[1200ms] group-hover:scale-110" 
                 />
                 
                 {/* Editorial Numbering */}
-                <div className="absolute top-4 left-4 z-20 bg-brand-950/75 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
-                  <span className="text-[9px] font-bold text-brand-400 tracking-[0.2em]">0{index + 1}</span>
+                <div className="absolute top-3 left-3 md:top-4 md:left-4 z-20 bg-brand-950/75 backdrop-blur-md px-2 py-1 md:px-3 rounded-full border border-white/20">
+                  <span className="text-[8px] md:text-[9px] font-bold text-brand-400 tracking-[0.2em]">0{index + 1}</span>
                 </div>
               </div>
 
               {/* Lower 50% - Content */}
-              <div className="h-1/2 p-6 flex flex-col justify-between bg-white border-t border-brand-50">
+              <div className="h-1/2 p-3 md:p-6 flex flex-col justify-between bg-white border-t border-brand-50 relative">
+                {/* Decorative element */}
+                <div className="absolute top-0 right-4 w-8 h-1 bg-brand-400/30 rounded-b-full"></div>
+                
                 <div>
-                  <h3 className="text-base font-serif font-bold text-brand-950 mb-2 uppercase tracking-tight line-clamp-2 leading-snug">
+                  <h3 className="text-[11px] md:text-base font-serif font-bold text-brand-950 mb-1.5 md:mb-2 uppercase tracking-tight line-clamp-2 leading-snug group-hover:text-brand-600 transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-brand-800/70 text-xs md:text-sm leading-relaxed line-clamp-3 md:line-clamp-4">
+                  <p className="text-brand-800/70 text-[9px] md:text-sm leading-relaxed line-clamp-3 md:line-clamp-4">
                     {service.description}
                   </p>
                 </div>
@@ -365,10 +368,10 @@ const Services = () => {
                   href={`https://wa.me/5511992876219?text=${encodeURIComponent(`Olá! Gostaria de saber mais sobre o serviço de ${service.title} na Duno.`)}`} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="btn-primary !py-3.5 !px-5 !text-[9px] w-full text-center mt-2 group"
+                  className="btn-primary !py-2.5 md:!py-3.5 !px-2 md:!px-5 !text-[8px] md:!text-[9px] w-full text-center mt-2 group/btn"
                 >
                   <span>SAIBA MAIS</span>
-                  <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                  <ArrowRight className="w-3 h-3 md:w-3.5 md:h-3.5 transition-transform duration-300 group-hover/btn:translate-x-1" />
                 </a>
               </div>
             </div>
