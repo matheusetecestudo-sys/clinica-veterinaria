@@ -80,7 +80,14 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-[90] transition-all duration-500 ${isScrolled ? "bg-white/95 backdrop-blur-md py-4 shadow-sm" : "bg-transparent py-6"}`}>
+      <div className="bg-brand-600 text-white py-2 px-6 text-center text-xs md:text-sm font-bold tracking-wider z-[100] relative flex items-center justify-center gap-2">
+        <span className="relative flex h-2 w-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+        </span>
+        PLANTÃO VETERINÁRIO 24H: (11) 99287-6219
+      </div>
+      <nav className={`fixed top-0 left-0 right-0 z-[90] transition-all duration-500 mt-8 ${isScrolled ? "bg-white/95 backdrop-blur-md py-4 shadow-sm" : "bg-transparent py-6"}`}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
           <div className="flex items-center gap-3 cursor-pointer">
             <div className="w-10 h-10 bg-brand-900 rounded-xl flex items-center justify-center">
@@ -237,18 +244,27 @@ const Hero = () => {
             <span className="text-brand-400 italic">Vidas Extraordinárias.</span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-white/80 mb-12 leading-relaxed font-light max-w-2xl">
+          <p className="text-xl md:text-2xl text-white/80 mb-8 leading-relaxed font-light max-w-2xl">
             Unindo tecnologia de ponta e o mais profundo respeito pela vida animal. Na DUNO, o cuidado sublime é a nossa única regra.
           </p>
+
+          <div className="flex items-center gap-4 mb-12">
+            <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Atendemos:</span>
+            <div className="flex gap-3">
+              <span className="px-3 py-1 bg-white/10 rounded-full text-white text-xs border border-white/20">Cães</span>
+              <span className="px-3 py-1 bg-white/10 rounded-full text-white text-xs border border-white/20">Gatos</span>
+              <span className="px-3 py-1 bg-white/10 rounded-full text-white text-xs border border-white/20">Silvestres</span>
+            </div>
+          </div>
 
           <div className="flex flex-col sm:flex-row gap-6">
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bg-brand-400 hover:bg-white text-brand-950 px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] transition-all shadow-2xl shadow-brand-400/20 flex items-center justify-center gap-3 group">
               <WhatsAppLogo className="w-5 h-5 fill-current" /> 
-              <span>AGENDAR CONSULTA</span>
+              <span>AGENDAR CONSULTA AGORA</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
-            <a href="#services" className="border border-white/30 text-white px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] hover:bg-white hover:text-brand-950 transition-all flex items-center justify-center gap-2 group">
-              <span>CONHECER SERVIÇOS</span>
+            <a href={WHATSAPP_URL.replace("uma consulta", "um atendimento de urgência")} target="_blank" rel="noopener noreferrer" className="border border-brand-400 text-brand-400 px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] hover:bg-brand-400 hover:text-brand-950 transition-all flex items-center justify-center gap-2 group">
+              <span>EMERGÊNCIA 24H</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
           </div>
@@ -260,19 +276,18 @@ const Hero = () => {
 
 const Stats = () => {
   const stats = [
-    { label: "VIDAS TRANSFORMADAS", value: "9k+" },
-    { label: "MESTRES ESPECIALISTAS", value: "10+" },
-    { label: "VIGILÂNCIA ABSOLUTA", value: "24h" },
-    { label: "PADRÃO OURO", value: "Elite" },
+    { label: "ESPECIALIDADES", value: "10+" },
+    { label: "ATENDIMENTOS", value: "9.000+" },
+    { label: "PLANTÃO", value: "24h" },
   ];
 
   return (
     <section className="relative z-20 bg-white py-20 px-6">
-      <div className="max-w-6xl mx-auto bg-white rounded-[2.5rem] shadow-xl p-10 md:p-16 grid grid-cols-2 lg:grid-cols-4 gap-12 text-center border border-brand-100">
+      <div className="max-w-5xl mx-auto bg-white rounded-[2.5rem] shadow-xl p-10 md:p-16 grid grid-cols-1 md:grid-cols-3 gap-12 text-center border border-brand-100">
         {stats.map((stat, i) => (
-          <div key={i} className="group">
-            <div className="text-4xl md:text-5xl font-serif font-bold text-brand-950 mb-2 transition-transform group-hover:scale-110 duration-500">{stat.value}</div>
-            <div className="text-[10px] font-bold text-brand-600 uppercase tracking-[0.3em]">{stat.label}</div>
+          <div key={i} className="group flex flex-col items-center">
+            <div className="text-5xl md:text-6xl font-serif font-bold text-brand-950 mb-3 transition-transform group-hover:scale-110 duration-500">{stat.value}</div>
+            <div className="text-xs font-bold text-brand-600 uppercase tracking-[0.3em]">{stat.label}</div>
           </div>
         ))}
       </div>
@@ -413,92 +428,67 @@ const Testimonials = () => {
   );
 };
 
-const About = () => {
+const Team = () => {
+  const team = [
+    { name: "Dr. Carlos Eduardo", crmv: "CRMV-SP 12345", specialty: "Cirurgia Geral e Ortopedia", img: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=400&auto=format&fit=crop" },
+    { name: "Dra. Marina Silva", crmv: "CRMV-SP 54321", specialty: "Felinos e Dermatologia", img: "https://images.unsplash.com/photo-1594824436998-d50d6ff71c66?q=80&w=400&auto=format&fit=crop" },
+    { name: "Dr. Roberto Alves", crmv: "CRMV-SP 67890", specialty: "Animais Silvestres e Exóticos", img: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=400&auto=format&fit=crop" },
+    { name: "Dra. Juliana Mendes", crmv: "CRMV-SP 09876", specialty: "Anestesiologia e Terapia Intensiva", img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=400&auto=format&fit=crop" }
+  ];
+
   return (
-    <section id="about" className="section-padding bg-white px-6">
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
-        <div className="rounded-[3rem] overflow-hidden shadow-2xl aspect-[4/5]">
-          <img src="https://images.unsplash.com/photo-1581888227599-779811939961?q=80&w=2070&auto=format&fit=crop" alt="Sobre Duno" className="w-full h-full object-cover" />
+    <section id="equipe" className="section-padding bg-white px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <span className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Quem Cuida do seu Pet</span>
+          <h2 className="text-5xl font-serif font-bold text-brand-950 uppercase tracking-tighter">Corpo <span className="text-brand-700 italic">Clínico</span></h2>
         </div>
-        <div>
-          <span className="text-brand-600 font-bold uppercase tracking-widest text-[10px] mb-6 block">A Experiência Duno</span>
-          <h2 className="text-5xl font-serif font-bold text-brand-950 mb-8 leading-tight">Ciência com Alma e <span className="text-brand-700 italic">Empatia Verdadeira.</span></h2>
-          <p className="text-lg text-brand-800/70 leading-relaxed mb-10">
-            Na DUNO, redefinimos a medicina veterinária ao integrar o mais alto rigor técnico a um atendimento que acolhe e entende a individualidade de cada ser. Nossa clínica opera em perfeita sintonia entre tecnologia e humanização.
-          </p>
-          <div className="flex flex-wrap gap-8">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-brand-50 rounded-full flex items-center justify-center text-brand-700 shadow-sm"><PawPrint className="w-6 h-6" /></div>
-              <p className="font-bold text-brand-950 uppercase tracking-widest text-[10px]">Tecnologia Global</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {team.map((vet, i) => (
+            <div key={i} className="group relative overflow-hidden rounded-3xl bg-brand-50 border border-brand-100">
+              <div className="aspect-[3/4] overflow-hidden">
+                <img src={vet.img} alt={vet.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              </div>
+              <div className="p-6 bg-white absolute bottom-0 left-0 right-0 m-4 rounded-2xl shadow-xl transform transition-transform duration-500 translate-y-2 group-hover:-translate-y-2">
+                <h3 className="font-serif font-bold text-brand-950 text-lg uppercase tracking-tight">{vet.name}</h3>
+                <p className="text-brand-600 font-bold text-[10px] tracking-widest mt-1 mb-2">{vet.crmv}</p>
+                <p className="text-brand-800/80 text-xs leading-relaxed">{vet.specialty}</p>
+              </div>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-brand-50 rounded-full flex items-center justify-center text-brand-700 shadow-sm"><HeartPulse className="w-6 h-6" /></div>
-              <p className="font-bold text-brand-950 uppercase tracking-widest text-[10px]">Cuidado Humanizado</p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
 
-const ImpactSection = () => (
-  <section className="py-40 bg-brand-950 overflow-hidden relative text-center px-6">
-    {/* Subtle Decorative Elements */}
-    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-20 bg-gradient-to-b from-brand-400 to-transparent opacity-50"></div>
-    
-    <div className="max-w-4xl mx-auto relative z-10">
-      <div className="w-16 h-16 bg-brand-900 rounded-2xl flex items-center justify-center mx-auto mb-12 border border-brand-800 shadow-2xl">
-        <HeartPulse className="text-brand-400 w-8 h-8" />
-      </div>
-      
-      <span className="text-brand-400 font-bold uppercase tracking-[0.6em] text-[10px] mb-8 block">Manifesto de Excelência</span>
-      
-      <h2 className="text-5xl md:text-8xl font-serif font-bold text-white mb-12 leading-[1.1] tracking-tighter">
-        A VIDA É O NOSSO <br /> 
-        <span className="text-brand-400 italic">MAIOR COMPROMISSO.</span>
-      </h2>
-      
-      <div className="w-20 h-[1px] bg-brand-800 mx-auto mb-12"></div>
-      
-      <p className="text-xl md:text-2xl text-white/60 leading-relaxed mb-16 max-w-2xl mx-auto font-light">
-        Na DUNO, não tratamos apenas animais; honramos o vínculo sagrado entre você e seu melhor amigo através da medicina de elite.
-      </p>
-      
-      <div className="flex flex-col sm:flex-row justify-center gap-8">
-        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 bg-white text-brand-950 px-12 py-6 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-brand-400 hover:text-brand-950 transition-all shadow-2xl group">
-          <span>FALAR COM UM ESPECIALISTA</span>
-          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-        </a>
-      </div>
-    </div>
-
-    {/* Luxury Ambient Light */}
-    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-brand-900/20 rounded-full blur-[120px]"></div>
-  </section>
-);
-
-const PetGallery = () => {
-  const images = [
-    "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=800",
-    "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=800",
-    "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=800",
-    "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=800",
-    "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?q=80&w=800",
-    "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?q=80&w=800",
+const SuccessCases = () => {
+  const cases = [
+    { name: "Max (Golden Retriever)", desc: "Recuperação total após cirurgia ortopédica complexa devido a ruptura de ligamento.", img: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=400&auto=format&fit=crop" },
+    { name: "Luna (Persa)", desc: "Tratamento bem-sucedido de insuficiência renal aguda. Hoje vive com qualidade.", img: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=400&auto=format&fit=crop" },
+    { name: "Thor (Bulldog)", desc: "Correção cirúrgica de síndrome braquicefálica. Agora respira e brinca sem limitações.", img: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=400&auto=format&fit=crop" }
   ];
 
   return (
-    <section id="gallery" className="py-32 bg-brand-50 px-6">
+    <section id="cases" className="py-32 bg-brand-950 text-white px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <span className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Histórias que nos Inspiram</span>
-          <h2 className="text-5xl font-serif font-bold text-brand-950 uppercase tracking-tighter">Legado de <span className="text-brand-700 italic">Sorrisos</span></h2>
+          <span className="text-brand-400 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Vidas Transformadas</span>
+          <h2 className="text-5xl font-serif font-bold uppercase tracking-tighter">Casos de <span className="text-brand-400 italic">Sucesso</span></h2>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
-          {images.map((img, i) => (
-            <div key={i} className="rounded-3xl overflow-hidden aspect-square shadow-md">
-              <img src={img} alt="Pet" className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {cases.map((c, i) => (
+            <div key={i} className="bg-brand-900 rounded-[2rem] overflow-hidden border border-brand-800 flex flex-col group">
+              <div className="h-64 overflow-hidden">
+                <img src={c.img} alt={c.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              </div>
+              <div className="p-8 flex-1 flex flex-col">
+                <h3 className="text-xl font-serif font-bold uppercase mb-4 text-white">{c.name}</h3>
+                <p className="text-brand-100/70 text-sm leading-relaxed mb-8 flex-1">{c.desc}</p>
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-brand-400 font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 group-hover:text-white transition-colors">
+                  AGENDAR CONSULTA <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
           ))}
         </div>
@@ -509,10 +499,16 @@ const PetGallery = () => {
 
 const FAQ = () => {
   const faqs = [
-    { question: "Quais são os horários de atendimento?", answer: "Funcionamos de segunda a sexta das 08h às 22h e sábados das 08h às 18h. Emergências críticas 24h." },
-    { question: "Preciso agendar consulta com antecedência?", answer: "Para consultas de rotina e especialistas, recomendamos o agendamento prévio via WhatsApp." },
-    { question: "A clínica atende animais silvestres?", answer: "Sim! Temos especialistas em animais exóticos e silvestres em nossa equipe." },
-    { question: "Quais formas de pagamento são aceitas?", answer: "Aceitamos todos os cartões (parcelado em até 10x), PIX e convênios selecionados." }
+    { question: "Quais são os horários de atendimento da clínica?", answer: "Funcionamos de segunda a sexta das 08h às 20h e sábados das 08h às 18h. Nosso plantão emergencial funciona 24h por dia, todos os dias da semana, incluindo feriados." },
+    { question: "Onde vocês estão localizados?", answer: "Estamos localizados na Av. Brigadeiro Faria Lima, 2000 - Itaim Bibi, SP. Contamos com estacionamento próprio para sua comodidade." },
+    { question: "Preciso agendar consulta com antecedência?", answer: "Para consultas de rotina, vacinação e especialistas, é altamente recomendável o agendamento prévio via WhatsApp. Em casos de urgência e emergência, o atendimento é imediato no plantão 24h." },
+    { question: "A clínica atende animais silvestres e exóticos?", answer: "Sim! Temos veterinários especializados no manejo e tratamento de animais silvestres, aves e répteis." },
+    { question: "Quais formas de pagamento são aceitas?", answer: "Aceitamos todos os cartões de crédito e débito, PIX, dinheiro e convênios veterinários selecionados. Tratamentos complexos podem ser parcelados em até 10x sem juros." },
+    { question: "Fazem cirurgias complexas e ortopédicas?", answer: "Sim, nosso centro cirúrgico é de alta complexidade, equipado com anestesia inalatória, monitoramento completo e UTI veterinária para o pós-operatório." },
+    { question: "O pet pode ficar internado com vocês?", answer: "Sim, possuímos internação 24h com baias separadas para cães, gatos e silvestres, garantindo o máximo conforto e acompanhamento veterinário ininterrupto." },
+    { question: "Fazem exames laboratoriais na hora?", answer: "Contamos com laboratório próprio que nos permite realizar exames de sangue, imagem (Raio-X e Ultrassom) e obter resultados rapidamente para iniciar o tratamento adequado." },
+    { question: "Qual o valor da consulta?", answer: "Como os valores variam dependendo da especialidade (Clínico Geral vs Especialistas), pedimos que entre em contato direto pelo WhatsApp para passarmos o orçamento correto para o seu caso." },
+    { question: "Vocês aplicam vacinas importadas?", answer: "Trabalhamos exclusivamente com vacinas éticas importadas (V10, V8, Raiva, Gripe, Giárdia, etc) para garantir a melhor imunização e segurança para o seu pet." }
   ];
 
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -525,10 +521,10 @@ const FAQ = () => {
           {faqs.map((faq, index) => (
             <div key={index} className="border border-brand-100 rounded-2xl overflow-hidden">
               <button onClick={() => setActiveIndex(activeIndex === index ? null : index)} className="w-full p-6 flex justify-between items-center text-left bg-white hover:bg-brand-50 transition-colors">
-                <span className="font-serif font-bold text-brand-950 uppercase">{faq.question}</span>
-                {activeIndex === index ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                <span className="font-serif font-bold text-brand-950 uppercase pr-8">{faq.question}</span>
+                {activeIndex === index ? <Minus className="w-4 h-4 shrink-0 text-brand-600" /> : <Plus className="w-4 h-4 shrink-0 text-brand-600" />}
               </button>
-              {activeIndex === index && <div className="p-6 pt-0 text-brand-800/70">{faq.answer}</div>}
+              {activeIndex === index && <div className="p-6 pt-0 text-brand-800/70 leading-relaxed">{faq.answer}</div>}
             </div>
           ))}
         </div>
@@ -646,9 +642,8 @@ export default function App() {
       <Stats />
       <Services />
       <Testimonials />
-      <About />
-      <ImpactSection />
-      <PetGallery />
+      <Team />
+      <SuccessCases />
       <FAQ />
       <Contact />
       <CTASection />
