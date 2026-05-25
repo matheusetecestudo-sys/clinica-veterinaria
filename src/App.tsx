@@ -81,14 +81,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="bg-brand-600 text-white py-2.5 px-6 text-center text-xs font-bold tracking-widest z-[110] relative flex items-center justify-center gap-2 shadow-md">
-        <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-        </span>
-        PLANTÃO VETERINÁRIO 24H: (11) 99287-6219
-      </div>
-      <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 mt-9 ${isScrolled ? "bg-white/95 backdrop-blur-md py-4 shadow-sm" : "bg-transparent py-6"}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${isScrolled ? "bg-white/95 backdrop-blur-md py-4 shadow-sm" : "bg-transparent py-6"}`}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
           <div className="flex items-center gap-3 cursor-pointer">
             <div className="w-12 h-12 bg-brand-900 rounded-xl flex items-center justify-center">
@@ -348,7 +341,7 @@ const Services = () => {
           <h2 className="text-5xl md:text-7xl font-serif font-bold text-brand-950 tracking-tighter uppercase">Nossos <span className="text-brand-600 italic">Serviços</span></h2>
         </div>
 
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
           {services.map((service, index) => (
             <div key={index} className="flex flex-col bg-white rounded-3xl overflow-hidden border border-brand-100 hover:border-brand-300 hover:shadow-2xl transition-all duration-500 group relative">
               {/* Image with fixed aspect ratio */}
