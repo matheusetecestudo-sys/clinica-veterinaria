@@ -292,94 +292,85 @@ const Stats = () => {
 const Services = () => {
   const services = [
     {
-      title: "CONSULTA VETERINÁRIA",
+      title: "Consulta Veterinária",
       description: "Atendimento clínico completo com especialistas dedicados à saúde preventiva e diagnósticos detalhados.",
       image: "/imagem/Consulta veterinária.png"
     },
     {
-      title: "VACINAÇÃO",
+      title: "Vacinação",
       description: "Protocolos vacinais atualizados e seguros para garantir a imunização total e proteção contra doenças.",
       image: "/imagem/Vacinação.jpg"
     },
     {
-      title: "EXAMES LABORIAIS",
+      title: "Exames Laboratoriais",
       description: "Diagnósticos rápidos e precisos com laboratório próprio e tecnologia de ponta.",
       image: "/imagem/Exames laboratoriais.jpg"
     },
     {
-      title: "CIRURGIAS VETERINÁRIAS",
+      title: "Cirurgias Veterinárias",
       description: "Centro cirúrgico moderno com equipe especializada e monitoramento avançado.",
       image: "/imagem/Cirurgias veterinárias.jpg"
     },
     {
-      title: "INTERNAÇÃO",
+      title: "Internação",
       description: "Acomodações climatizadas e supervisão médica 24 horas, garantindo conforto e segurança.",
       image: "/imagem/internação.png"
     },
     {
-      title: "ATENDIMENTO EMERGENCIAL",
+      title: "Atendimento Emergencial",
       description: "Equipe de prontidão absoluta para casos críticos com suporte vital avançado.",
       image: "/imagem/atendimento emergencial.jpg"
     },
     {
-      title: "BANHO E TOSA",
+      title: "Banho e Tosa",
       description: "Higiene e estética premium com produtos de alta qualidade em um ambiente relaxante.",
       image: "/imagem/Banho e tosa.png"
     },
     {
-      title: "ATENDIMENTO DOMICILIAR",
+      title: "Atendimento Domiciliar",
       description: "Toda a excelência e cuidado da nossa clínica no conforto do seu lar.",
       image: "/imagem/Atendimento domiciliar.webp"
     }
   ];
 
   return (
-    <section id="services" className="section-padding bg-white">
+    <section id="services" className="section-padding bg-brand-50/50">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-20">
+        <div className="text-center mb-16">
           <span className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Nossas Áreas de Atuação</span>
-          <h2 className="text-5xl md:text-7xl font-serif font-bold text-brand-950 tracking-tighter uppercase">Nossos <span className="text-brand-600 italic">Serviços</span></h2>
+          <h2 className="text-5xl md:text-7xl font-serif font-bold text-brand-950 tracking-tighter">Nossos <span className="text-brand-700 italic">Serviços</span></h2>
         </div>
 
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
           {services.map((service, index) => (
-            <div key={index} className="flex flex-col bg-white rounded-3xl overflow-hidden border border-brand-100 hover:border-brand-300 hover:shadow-2xl transition-all duration-500 group relative">
-              {/* Image with fixed aspect ratio */}
-              <div className="w-full aspect-[4/3] overflow-hidden relative">
-                <img 
-                  src={service.image} 
-                  alt={service.title} 
-                  className="w-full h-full object-cover object-center transition-transform duration-[1200ms] group-hover:scale-110" 
+            <div
+              key={index}
+              className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100 hover:border-brand-200 transition-all duration-500 group flex flex-col"
+            >
+              {/* Image */}
+              <div className="w-full aspect-[4/5] overflow-hidden">
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 />
-                
-                {/* Editorial Numbering */}
-                <div className="absolute top-4 left-4 z-20 bg-brand-950/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
-                  <span className="text-[10px] font-bold text-brand-400 tracking-[0.2em]">0{index + 1}</span>
-                </div>
               </div>
 
               {/* Content */}
-              <div className="p-6 md:p-8 flex-1 flex flex-col justify-between bg-white border-t border-brand-50 relative">
-                <div className="absolute top-0 right-6 w-10 h-1 bg-brand-400/50 rounded-b-full"></div>
-                
-                <div className="mb-6">
-                  <h3 className="text-lg font-serif font-bold text-brand-950 mb-3 uppercase tracking-tight leading-snug group-hover:text-brand-600 transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-brand-800/70 text-sm leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
-                
-                {/* High Contrast Schedule Button */}
-                <a 
-                  href={`https://wa.me/5511992876219?text=${encodeURIComponent(`Olá! Gostaria de agendar o serviço de ${service.title} na Duno.`)}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="bg-brand-950 text-brand-400 hover:bg-brand-800 transition-colors py-4 px-6 rounded-2xl text-[10px] font-bold uppercase tracking-widest flex items-center justify-between w-full group/btn"
+              <div className="p-5 md:p-6 flex flex-col flex-1">
+                <h3 className="text-base md:text-lg font-bold text-brand-950 mb-2 leading-snug">
+                  {service.title}
+                </h3>
+                <p className="text-gray-500 text-sm leading-relaxed mb-5 flex-1">
+                  {service.description}
+                </p>
+                <a
+                  href={`https://wa.me/5511992876219?text=${encodeURIComponent(`Olá! Gostaria de agendar o serviço de ${service.title} na Duno.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center bg-brand-700 hover:bg-brand-800 text-white rounded-full py-3 px-6 text-[11px] font-bold uppercase tracking-widest transition-colors duration-300 w-full mt-auto"
                 >
-                  <span>AGENDAR</span>
-                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                  AGENDAR
                 </a>
               </div>
             </div>
@@ -390,33 +381,96 @@ const Services = () => {
   );
 };
 
+const StarRating = () => (
+  <div className="flex items-center gap-1 mb-4">
+    {[1,2,3,4,5].map(i => (
+      <svg key={i} className="w-4 h-4 fill-amber-400 text-amber-400" viewBox="0 0 20 20">
+        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+      </svg>
+    ))}
+  </div>
+);
+
 const Testimonials = () => {
   const reviews = [
-    { name: "Mariana Silva", pet: "Bento (Golden Retriever)", text: "A DUNO salvou a vida do Bento após um atropelamento. O atendimento foi impecável e a equipe nos manteve informados o tempo todo.", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop" },
-    { name: "Ricardo Oliveira", pet: "Luna (Persa)", text: "O padrão de higiene e o cuidado com gatos é diferenciado. A Luna se sente em casa, sem o estresse comum de outras clínicas.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop" },
-    { name: "Ana Paula Costa", pet: "Thor (Bulldog Francês)", text: "Especialistas de altíssimo nível. Resolvemos um problema dermatológico crônico que ninguém conseguia tratar há anos.", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop" },
-    { name: "Carlos Eduardo", pet: "Mel (SRD)", text: "Precisei do plantão de madrugada e a rapidez salvou minha cachorrinha. O veterinário foi um anjo, estrutura fantástica.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop" },
-    { name: "Fernanda Lima", pet: "Fred (Calopsita)", text: "É tão difícil achar quem entenda de aves. A especialista em silvestres da Duno nos deu uma aula de manejo e cuidado.", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop" },
-    { name: "Sérgio Martins", pet: "Nina (Spitz)", text: "Fizemos a castração e a limpeza de tártaro no mesmo dia com anestesia inalatória. A recuperação foi maravilhosa.", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=150&auto=format&fit=crop" }
+    {
+      name: "Mariana Silva",
+      role: "Tutora do Bento",
+      pet: "Golden Retriever",
+      text: "A DUNO salvou a vida do Bento após um atropelamento. O atendimento foi impecável e a equipe nos manteve informados o tempo todo.",
+      img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop"
+    },
+    {
+      name: "Ricardo Oliveira",
+      role: "Tutor da Luna",
+      pet: "Gato Persa",
+      text: "O padrão de higiene e o cuidado com gatos é diferenciado. A Luna se sente em casa, sem o estresse comum de outras clínicas.",
+      img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop"
+    },
+    {
+      name: "Ana Paula Costa",
+      role: "Tutora do Thor",
+      pet: "Bulldog Francês",
+      text: "Especialistas de altíssimo nível. Resolvemos um problema dermatológico crônico que ninguém conseguia tratar há anos.",
+      img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop"
+    },
+    {
+      name: "Carlos Eduardo",
+      role: "Tutor da Mel",
+      pet: "SRD",
+      text: "Precisei do plantão de madrugada e a rapidez salvou minha cachorrinha. O veterinário foi um anjo, estrutura fantástica.",
+      img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop"
+    },
+    {
+      name: "Fernanda Lima",
+      role: "Tutora do Fred",
+      pet: "Calopsita",
+      text: "É tão difícil achar quem entenda de aves. A especialista em silvestres da Duno nos deu uma aula de manejo e cuidado.",
+      img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop"
+    },
+    {
+      name: "Sérgio Martins",
+      role: "Tutor da Nina",
+      pet: "Spitz Alemão",
+      text: "Fizemos a castração e a limpeza de tártaro no mesmo dia com anestesia inalatória. A recuperação foi maravilhosa.",
+      img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=150&auto=format&fit=crop"
+    }
   ];
 
   return (
-    <section className="section-padding bg-brand-950 text-white px-6">
+    <section className="section-padding bg-white px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-20">
-          <Quote className="w-12 h-12 text-brand-400 mx-auto mb-6 opacity-50" />
-          <span className="text-brand-400 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Vidas que Transformamos</span>
-          <h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tighter uppercase">Nossos Pacientes <span className="text-brand-400 italic">Felizes.</span></h2>
+        <div className="text-center mb-16">
+          <span className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Vidas que Transformamos</span>
+          <h2 className="text-4xl md:text-6xl font-serif font-bold text-brand-950 tracking-tighter">O que nossos <span className="text-brand-700 italic">clientes dizem.</span></h2>
+          <p className="text-gray-500 mt-4 max-w-xl mx-auto text-base">Veja como a vida dos pets e de seus tutores mudou de verdade.</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {reviews.map((review, i) => (
-            <div key={i} className="bg-brand-900/40 p-8 rounded-[2rem] border border-brand-800/50 flex flex-col justify-between">
-              <p className="text-base text-brand-100/90 italic mb-8 leading-relaxed">"{review.text}"</p>
-              <div className="flex items-center gap-4">
-                <img src={review.img} alt={review.name} className="w-12 h-12 rounded-full object-cover border-2 border-brand-400" />
+            <div key={i} className="bg-white rounded-3xl border border-brand-200 p-8 flex flex-col relative shadow-sm hover:shadow-lg transition-shadow duration-300">
+              {/* Quote icon badge */}
+              <div className="w-12 h-12 border-2 border-brand-700 rounded-2xl flex items-center justify-center mb-5 shrink-0">
+                <Quote className="w-5 h-5 text-brand-700" />
+              </div>
+              <StarRating />
+              <p className="text-gray-600 italic text-sm leading-relaxed mb-8 flex-1">
+                "{review.text}"
+              </p>
+              {/* Author */}
+              <div className="flex items-center gap-4 pt-5 border-t border-gray-100">
+                <div className="relative shrink-0">
+                  <img
+                    src={review.img}
+                    alt={review.name}
+                    className="w-12 h-12 rounded-full object-cover border-2 border-brand-200"
+                  />
+                  <span className="absolute -bottom-1 -right-1 w-5 h-5 bg-brand-600 rounded-full border-2 border-white flex items-center justify-center">
+                    <svg className="w-2.5 h-2.5 fill-white" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/></svg>
+                  </span>
+                </div>
                 <div>
-                  <h4 className="text-base font-serif font-bold text-white uppercase">{review.name}</h4>
-                  <p className="text-brand-400 text-[10px] font-bold uppercase tracking-widest mt-0.5">{review.pet}</p>
+                  <h4 className="font-bold text-brand-950 text-sm">{review.name}</h4>
+                  <p className="text-brand-600 text-[10px] font-bold uppercase tracking-widest mt-0.5">{review.role} • <span className="text-brand-500">VERIFICADO</span></p>
                 </div>
               </div>
             </div>
@@ -429,32 +483,67 @@ const Testimonials = () => {
 
 const Team = () => {
   const team = [
-    { name: "Dr. Carlos Eduardo", crmv: "CRMV-SP 12345", specialty: "Cirurgia Geral", subSpecialty: "Ortopedia Avançada", img: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=400&auto=format&fit=crop" },
-    { name: "Dra. Marina Silva", crmv: "CRMV-SP 54321", specialty: "Medicina Felina", subSpecialty: "Dermatologia Veterinária", img: "https://images.unsplash.com/photo-1594824436998-d50d6ff71c66?q=80&w=400&auto=format&fit=crop" },
-    { name: "Dr. Roberto Alves", crmv: "CRMV-SP 67890", specialty: "Animais Silvestres", subSpecialty: "Animais Exóticos", img: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=400&auto=format&fit=crop" },
-    { name: "Dra. Juliana Mendes", crmv: "CRMV-SP 09876", specialty: "Anestesiologia", subSpecialty: "Terapia Intensiva (UTI)", img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=400&auto=format&fit=crop" }
+    {
+      name: "Dr. Carlos Eduardo",
+      crmv: "CRMV-SP 12345",
+      specialty: "Cirurgia Geral e Ortopedia",
+      bio: "Especialista em cirurgias de alta complexidade. Mais de 12 anos transformando vidas com procedimentos ortopédicos e cirurgia guiada de última geração.",
+      img: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=400&auto=format&fit=crop"
+    },
+    {
+      name: "Dra. Marina Silva",
+      crmv: "CRMV-SP 54321",
+      specialty: "Medicina Felina e Dermatologia",
+      bio: "Referência nacional em saúde felina. Trata casos dermatológicos complexos com protocolos inovadores, devolvendo qualidade de vida aos felinos.",
+      img: "https://images.unsplash.com/photo-1594824436998-d50d6ff71c66?q=80&w=400&auto=format&fit=crop"
+    },
+    {
+      name: "Dr. Roberto Alves",
+      crmv: "CRMV-SP 67890",
+      specialty: "Animais Silvestres e Exóticos",
+      bio: "Pioneiro no atendimento de animais silvestres e répteis. Utiliza técnicas de medicina zoológica de ponta para diagnóstico e tratamento.",
+      img: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=400&auto=format&fit=crop"
+    },
+    {
+      name: "Dra. Juliana Mendes",
+      crmv: "CRMV-SP 09876",
+      specialty: "Anestesiologia e UTI Veterinária",
+      bio: "Especialista em anestesia inalatória de alta segurança e terapia intensiva. Garante o máximo conforto e monitoramento multiparamétrico.",
+      img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=400&auto=format&fit=crop"
+    }
   ];
 
   return (
-    <section id="equipe" className="section-padding bg-white px-6">
+    <section id="equipe" className="section-padding bg-brand-50/50 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Quem Cuida do seu Pet</span>
-          <h2 className="text-5xl font-serif font-bold text-brand-950 uppercase tracking-tighter">Corpo <span className="text-brand-700 italic">Clínico</span></h2>
+          <h2 className="text-5xl font-serif font-bold text-brand-950 tracking-tighter">Corpo <span className="text-brand-700 italic">Clínico</span></h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {team.map((vet, i) => (
-            <div key={i} className="group relative overflow-hidden rounded-3xl bg-brand-50 border border-brand-100">
-              <div className="aspect-square overflow-hidden bg-brand-200">
-                <img src={vet.img} alt={vet.name} className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
-              </div>
-              <div className="p-6 bg-white absolute bottom-0 left-0 right-0 m-4 rounded-2xl shadow-xl transform transition-transform duration-500 translate-y-2 group-hover:-translate-y-2 border border-brand-50">
-                <h3 className="font-serif font-bold text-brand-950 text-xl uppercase tracking-tight">{vet.name}</h3>
-                <p className="text-brand-600 font-black text-sm tracking-widest mt-1 mb-3">{vet.crmv}</p>
-                <div className="space-y-1">
-                  <p className="text-brand-950 font-bold text-xs uppercase tracking-wider">{vet.specialty}</p>
-                  <p className="text-brand-800/60 text-[10px] uppercase tracking-widest">{vet.subSpecialty}</p>
+            <div key={i} className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 group flex flex-col">
+              {/* Photo area */}
+              <div className="relative overflow-hidden" style={{ aspectRatio: '3/4' }}>
+                <img
+                  src={vet.img}
+                  alt={vet.name}
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                />
+                {/* CRMV badge overlay */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-4 py-4">
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck className="w-4 h-4 text-brand-400 shrink-0" />
+                    <span className="text-white text-xs font-bold tracking-widest">{vet.crmv}</span>
+                  </div>
                 </div>
+              </div>
+
+              {/* Info area */}
+              <div className="p-6 flex flex-col flex-1">
+                <h3 className="font-bold text-brand-950 text-lg leading-tight mb-1">{vet.name}</h3>
+                <p className="text-brand-600 font-bold text-[11px] uppercase tracking-widest mb-3">{vet.specialty}</p>
+                <p className="text-gray-500 text-sm leading-relaxed">{vet.bio}</p>
               </div>
             </div>
           ))}
