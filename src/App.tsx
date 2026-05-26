@@ -274,26 +274,7 @@ const Hero = () => {
   );
 };
 
-const Stats = () => {
-  const stats = [
-    { label: "ESPECIALIDADES", value: "10+" },
-    { label: "ATENDIMENTOS", value: "9.000+" },
-    { label: "PLANTÃO", value: "24h" },
-  ];
 
-  return (
-    <section className="relative z-20 bg-white py-20 px-6">
-      <div className="max-w-5xl mx-auto bg-white rounded-[2.5rem] shadow-xl p-10 md:p-16 grid grid-cols-1 md:grid-cols-3 gap-12 text-center border border-brand-100">
-        {stats.map((stat, i) => (
-          <div key={i} className="group flex flex-col items-center">
-            <div className="text-5xl md:text-6xl font-serif font-bold text-brand-950 mb-3 transition-transform group-hover:scale-110 duration-500">{stat.value}</div>
-            <div className="text-xs font-bold text-brand-600 uppercase tracking-[0.3em]">{stat.label}</div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-};
 
 const Services = () => {
   const services = [
@@ -926,7 +907,6 @@ export default function App() {
     <div className="bg-white min-h-screen">
       <Navbar />
       <Hero />
-      <Stats />
       <Services />
       <Testimonials />
       <Team />
