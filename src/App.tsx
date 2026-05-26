@@ -208,7 +208,7 @@ const Hero = () => {
       {/* Background elements */}
       <div className="absolute inset-0 z-0 opacity-10">
         <img 
-          src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?q=80&w=2070&auto=format&fit=crop" 
+          src="/imagem/banner03.png" 
           alt="Veterinarian with dog background" 
           className="w-full h-full object-cover scale-105"
           referrerPolicy="no-referrer"
@@ -284,7 +284,7 @@ const Hero = () => {
             {/* The Image frame */}
             <div className="relative z-10 w-full max-w-[400px] aspect-[4/5] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl">
               <img 
-                src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?q=80&w=800&auto=format&fit=crop" 
+                src="/imagem/banner03.png" 
                 alt="Veterinarian with dog" 
                 className="w-full h-full object-cover object-center"
                 referrerPolicy="no-referrer"
@@ -521,28 +521,21 @@ const Team = () => {
       crmv: "CRMV-SP 12345",
       specialty: "Cirurgia Geral e Ortopedia",
       bio: "Especialista em cirurgias de alta complexidade. Mais de 12 anos transformando vidas com procedimentos ortopédicos e cirurgia guiada de última geração.",
-      img: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=400&auto=format&fit=crop"
+      img: "/imagem/veterinario_2.webp"
     },
     {
       name: "Dra. Marina Silva",
       crmv: "CRMV-SP 54321",
       specialty: "Medicina Felina e Dermatologia",
       bio: "Referência nacional em saúde felina. Trata casos dermatológicos complexos com protocolos inovadores, devolvendo qualidade de vida aos felinos.",
-      img: "https://images.unsplash.com/photo-1594824436998-d50d6ff71c66?q=80&w=400&auto=format&fit=crop"
-    },
-    {
-      name: "Dr. Roberto Alves",
-      crmv: "CRMV-SP 67890",
-      specialty: "Animais Silvestres e Exóticos",
-      bio: "Pioneiro no atendimento de animais silvestres e répteis. Utiliza técnicas de medicina zoológica de ponta para diagnóstico e tratamento.",
-      img: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=400&auto=format&fit=crop"
+      img: "/imagem/veterinaria_1.webp"
     },
     {
       name: "Dra. Juliana Mendes",
       crmv: "CRMV-SP 09876",
       specialty: "Anestesiologia e UTI Veterinária",
       bio: "Especialista em anestesia inalatória de alta segurança e terapia intensiva. Garante o máximo conforto e monitoramento multiparamétrico.",
-      img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=400&auto=format&fit=crop"
+      img: "/imagem/veterinaria_3.webp"
     }
   ];
 
@@ -553,7 +546,7 @@ const Team = () => {
           <span className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Quem Cuida do seu Pet</span>
           <h2 className="text-5xl font-serif font-bold text-brand-950 tracking-tighter">Corpo <span className="text-brand-700 italic">Clínico</span></h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {team.map((vet, i) => (
             <div key={i} className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 group flex flex-col">
               {/* Photo area */}
@@ -588,9 +581,9 @@ const Team = () => {
 
 const SuccessCases = () => {
   const cases = [
-    { name: "Max", especie: "Pitbull", condition: "Displasia Coxofemoral Severa", result: "Voltou a correr normalmente 3 meses após a cirurgia ortopédica.", img: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=400&auto=format&fit=crop" },
-    { name: "Luna", especie: "Gato Persa", condition: "Obstrução Uretral Aguda", result: "Atendimento emergencial às 3h da manhã salvou seus rins. Recuperação 100%.", img: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=400&auto=format&fit=crop" },
-    { name: "Thor", especie: "Bulldog Francês", condition: "Síndrome Braquicefálica", result: "Correção cirúrgica das narinas. Respira sem ruídos e brinca sem limitações.", img: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=400&auto=format&fit=crop" }
+    { name: "Max", especie: "Pitbull", condition: "Displasia Coxofemoral Severa", result: "Voltou a correr normalmente 3 meses após a cirurgia ortopédica.", img: "/imagem/pet01.jpg" },
+    { name: "Luna", especie: "Gato Persa", condition: "Obstrução Uretral Aguda", result: "Atendimento emergencial às 3h da manhã salvou seus rins. Recuperação 100%.", img: "/imagem/pet02.jpg" },
+    { name: "Thor", especie: "Bulldog Francês", condition: "Síndrome Braquicefálica", result: "Correção cirúrgica das narinas. Respira sem ruídos e brinca sem limitações.", img: "/imagem/pet03.jpg" }
   ];
 
   return (
