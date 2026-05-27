@@ -465,26 +465,16 @@ const Testimonials = () => {
         {/* Desktop grid */}
         <div className="hidden lg:grid grid-cols-3 gap-6">
           {reviews.map((review, i) => (
-              <p className="text-gray-600 italic text-sm leading-relaxed mb-8 flex-1">
-                "{review.text}"
-              </p>
-              {/* Author */}
-              <div className="flex items-center gap-4 pt-5 border-t border-gray-100">
-                <div className="relative shrink-0">
-                  <img
-                    src={review.img}
-                    alt={review.name}
-                    className="w-12 h-12 rounded-full object-cover border-2 border-brand-200"
-                  />
-                  <span className="absolute -bottom-1 -right-1 w-5 h-5 bg-brand-600 rounded-full border-2 border-white flex items-center justify-center">
-                    <svg className="w-2.5 h-2.5 fill-white" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/></svg>
-                  </span>
-                </div>
+            <div key={i} className="bg-white rounded-3xl border border-brand-200 p-8 shadow-sm hover:shadow-lg transition-shadow duration-300">
+              <div className="flex items-center gap-4 mb-4">
+                <img src={review.img} alt={review.name} className="w-12 h-12 rounded-full object-cover" />
                 <div>
                   <h4 className="font-bold text-brand-950 text-sm">{review.name}</h4>
-                  <p className="text-brand-600 text-[10px] font-bold uppercase tracking-widest mt-0.5">{review.role} • <span className="text-brand-500">VERIFICADO</span></p>
+                  <p className="text-brand-600 text-xs uppercase">{review.role}</p>
                 </div>
               </div>
+              <p className="text-gray-600 italic mb-4">"{review.text}"</p>
+              <p className="text-brand-400 text-xs uppercase">{review.pet}</p>
             </div>
           ))}
         </div>
