@@ -1,30 +1,16 @@
-// Rollback to e547e39
 import React, { useState, useEffect } from 'react';
-import { 
-  motion, 
-  AnimatePresence 
-} from 'framer-motion';
 import { 
   MapPin, 
   Phone, 
   Clock, 
   Instagram, 
   Facebook, 
-  ChevronRight, 
-  ArrowRight,
   Plus, 
-  Minus, 
-  Search, 
-  HeartPulse, 
-  Stethoscope, 
-  ShieldCheck, 
-  Award,
-  PawPrint,
-  Quote,
-  Menu,
   X,
-  Activity,
-  ShieldPlus
+  Check,
+  Star,
+  ArrowRight,
+  Menu
 } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -46,10 +32,6 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 const WHATSAPP_URL = "https://wa.me/5511992876219?text=Olá! Gostaria de agendar uma consulta na Duno.";
 
-const WhatsAppLogo = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" className={className}><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" /></svg>
-);
-
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -60,514 +42,248 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isMobileMenuOpen]);
-
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "Serviços", href: "#services" },
-    { name: "Equipe", href: "#equipe" },
-    { name: "Contato", href: "#contact" },
+    { name: "INÍCIO", href: "#home" },
+    { name: "SERVIÇOS", href: "#services" },
+    { name: "EQUIPE", href: "#equipe" },
+    { name: "ANTES E DEPOIS", href: "#cases" },
+    { name: "DEPOIMENTOS", href: "#depoimentos" },
+    { name: "FAQ", href: "#faq" }
   ];
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-500 ${isScrolled ? "bg-white/95 backdrop-blur-md py-4 shadow-sm" : "bg-transparent py-6"}`}>
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-          <div className="flex items-center gap-3 cursor-pointer">
-            <div className="w-12 h-12 bg-brand-900 rounded-xl flex items-center justify-center">
-              <PawPrint className="text-brand-highlight w-7 h-7" />
-            </div>
-            <span className={`text-3xl font-serif font-bold tracking-tighter transition-colors duration-500 ${isScrolled ? "text-brand-950" : "text-white"}`}>DUNO</span>
+      <nav className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${isScrolled ? "bg-[#0D0D0D] py-4 shadow-lg border-b border-white/5" : "bg-transparent py-6"}`}>
+        <div className="max-w-[1200px] mx-auto px-6 flex justify-between items-center">
+          <div className="text-white font-bold text-2xl tracking-tight cursor-pointer">
+            DUNO
           </div>
 
-          <div className="hidden lg:flex items-center gap-10">
+          <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <a 
                 key={link.name} 
                 href={link.href} 
-                className={`text-[11px] font-bold uppercase tracking-[0.2em] relative group ${isScrolled ? "text-brand-950 hover:text-brand-secondary" : "text-white/90 hover:text-white"}`}
+                className="text-white/80 hover:text-brand-primary font-medium text-[14px] transition-colors"
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-current transition-all duration-300 group-hover:w-full"></span>
               </a>
             ))}
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bg-brand-accent text-white hover:bg-brand-secondary transition-all py-3 px-6 rounded-lg text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 shadow-lg">
-              <span>AGENDAR CONSULTA</span>
-              <ArrowRight className="w-4 h-4" />
+          </div>
+
+          <div className="hidden lg:block">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bg-brand-primary text-white hover:bg-brand-600 transition-colors py-2.5 px-6 rounded text-[13px] font-bold uppercase tracking-wide">
+              AGENDAR
             </a>
           </div>
 
           <button 
-            className={`lg:hidden p-2 rounded-lg transition-colors ${isScrolled ? "text-brand-950 bg-brand-neutral" : "text-white bg-white/10 backdrop-blur-sm"} border ${isScrolled ? "border-gray-200" : "border-white/20"}`} 
+            className="lg:hidden p-2 text-brand-primary" 
             onClick={() => setIsMobileMenuOpen(true)}
-            aria-label="Abrir Menu"
           >
             <Menu className="w-6 h-6" />
           </button>
         </div>
       </nav>
 
-      {/* Mobile Drawer Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[10000] md:hidden"
-            />
-
-            {/* Drawer Container */}
-            <motion.div 
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "tween", duration: 0.35, ease: "easeOut" }}
-              className="fixed top-0 right-0 h-screen w-full sm:w-[380px] bg-brand-950 text-white z-[10001] shadow-2xl md:hidden flex flex-col justify-between p-8"
-            >
-              {/* Header */}
-              <div>
-                <div className="flex justify-between items-center mb-12">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-brand-900 rounded-xl flex items-center justify-center">
-                      <PawPrint className="text-brand-highlight w-5 h-5" />
-                    </div>
-                    <span className="text-xl font-serif font-bold tracking-tighter">DUNO</span>
-                  </div>
-                  <button 
-                    className="p-2 rounded-lg text-white hover:text-brand-highlight transition-colors" 
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    aria-label="Fechar Menu"
-                  >
-                    <X className="w-6 h-6" />
-                  </button>
-                </div>
-
-                {/* Links */}
-                <div className="flex flex-col gap-6">
-                  {navLinks.map((link) => (
-                    <a 
-                      key={link.name} 
-                      href={link.href} 
-                      onClick={() => setIsMobileMenuOpen(false)} 
-                      className="text-3xl font-serif font-bold text-white hover:text-brand-highlight transition-colors uppercase tracking-tight"
-                    >
-                      {link.name}
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* Bottom Quick Info & CTA */}
-              <div className="flex flex-col gap-6 border-t border-white/10 pt-8">
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3 text-white/70 text-xs tracking-wider">
-                    <MapPin className="w-4 h-4 text-brand-highlight shrink-0" />
-                    <span>Av. Faria Lima, 2000 - Itaim Bibi, SP</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-white/70 text-xs tracking-wider">
-                    <Phone className="w-4 h-4 text-brand-highlight shrink-0" />
-                    <span>(11) 99287-6219</span>
-                  </div>
-                </div>
-
-                <a 
-                  href={WHATSAPP_URL} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="btn-primary w-full text-center py-4 font-bold uppercase tracking-wider group"
-                >
-                  <span>FALAR NO WHATSAPP</span>
-                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </a>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 bg-[#0D0D0D] z-[10000] flex flex-col p-6">
+          <div className="flex justify-between items-center mb-12">
+            <div className="text-white font-bold text-2xl">DUNO</div>
+            <button onClick={() => setIsMobileMenuOpen(false)} className="text-brand-primary p-2">
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+          <div className="flex flex-col gap-6">
+            {navLinks.map((link) => (
+              <a 
+                key={link.name} 
+                href={link.href} 
+                onClick={() => setIsMobileMenuOpen(false)} 
+                className="text-white text-xl font-medium"
+              >
+                {link.name}
+              </a>
+            ))}
+            <a href={WHATSAPP_URL} className="bg-brand-primary text-white text-center py-4 rounded font-bold uppercase tracking-wide mt-4 w-full">
+              AGENDAR
+            </a>
+          </div>
+        </div>
+      )}
     </>
   );
 };
 
 const Hero = () => {
   return (
-    <section id="home" className="relative min-h-[90vh] flex flex-col justify-center bg-brand-950 py-20 overflow-hidden">
-      {/* Background Image: 100% of the card/section area */}
+    <section id="home" className="relative h-screen flex flex-col justify-center bg-[#0D0D0D] overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img 
           src="/imagem/banner03.png" 
           alt="Duno Clínica Veterinária" 
-          className="w-full h-full object-contain scale-105"
-          referrerPolicy="no-referrer"
-          loading="eager"
+          className="w-full h-full object-cover object-center"
         />
-        {/* Dark brand gradient overlays for perfect text contrast and styling */}
         <div 
           className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(to right, rgba(27, 94, 59, 0.85) 40%, rgba(27, 94, 59, 0.1) 100%)'
-          }}
+          style={{ background: 'linear-gradient(to right, rgba(13,13,13,0.92) 50%, rgba(13,13,13,0.3) 100%)' }}
         ></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-950/80 via-transparent to-brand-950/30"></div>
       </div>
-      
-      {/* Ambient glows */}
-      <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-brand-primary/20 rounded-full blur-[150px] pointer-events-none z-0"></div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-3xl text-left"
-        >
-          <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-8">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-highlight opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-highlight"></span>
-            </span>
-            <span className="text-white text-[10px] font-bold uppercase tracking-[0.3em]">
-              Excelência Hospitalar Itaim Bibi
-            </span>
-          </div>
-
-          <h1 className="text-4xl md:text-[56px] lg:text-[64px] font-serif font-bold text-white leading-[1.1] mb-6 tracking-tighter">
-            Excelência para <br /> 
-            <span className="text-brand-highlight italic">Vidas Extraordinárias.</span>
+      <div className="relative z-10 max-w-[1200px] w-full mx-auto px-6">
+        <div className="max-w-[600px] pt-12 md:pt-0">
+          <h1 className="text-white font-[800] text-[40px] md:text-[64px] leading-[1.1] mb-6">
+            Transforme a vida <br />
+            <span className="italic text-brand-primary">do seu pet.</span> <br />
+            Transforme sua <br />
+            família.
           </h1>
-
-          <p className="text-base md:text-lg text-white/80 mb-10 leading-relaxed font-light max-w-2xl">
-            Unindo tecnologia de ponta e o mais profundo respeito pela vida animal. Na DUNO, o cuidado sublime é a nossa única regra.
+          
+          <p className="text-white/70 text-[16px] leading-relaxed max-w-[480px] mb-10">
+            Lemos cada sinal do seu animal como ninguém. Em nossa clínica, cada consulta é personalizada, humanizada e realizada com os equipamentos mais modernos.
           </p>
 
-          <div className="flex items-center gap-6 mb-12">
-            <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Atendemos:</span>
-            <div className="flex flex-wrap items-center gap-4">
-              <span className="text-brand-highlight text-xs font-bold uppercase tracking-widest flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brand-highlight rounded-full"></span> Cães</span>
-              <span className="text-brand-highlight text-xs font-bold uppercase tracking-widest flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brand-highlight rounded-full"></span> Gatos</span>
-              <span className="text-brand-highlight text-xs font-bold uppercase tracking-widest flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brand-highlight rounded-full"></span> Silvestres</span>
-            </div>
-          </div>
-
           <div className="flex flex-col sm:flex-row gap-4">
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bg-brand-accent hover:bg-amber-600 text-white px-10 py-5 rounded-lg font-bold uppercase tracking-[0.2em] text-[11px] transition-all duration-300 shadow-xl shadow-brand-accent/20 flex items-center justify-center gap-3 group">
-              <WhatsAppLogo className="w-5 h-5 fill-current" /> 
-              <span>AGENDAR CONSULTA AGORA</span>
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary w-full sm:w-auto">
+              AGENDE SUA CONSULTA
             </a>
-            <a href={WHATSAPP_URL.replace("uma consulta", "um atendimento de urgência")} target="_blank" rel="noopener noreferrer" className="border-2 border-white/40 text-white px-10 py-5 rounded-lg font-bold uppercase tracking-[0.2em] text-[11px] hover:bg-white hover:text-brand-primary hover:border-white transition-all duration-300 flex items-center justify-center gap-2 group">
-              <span>EMERGÊNCIA 24H</span>
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            <a href="#services" className="btn-outline w-full sm:w-auto sm:ml-4">
+              SAIBA MAIS
             </a>
           </div>
-        </motion.div>
+        </div>
+      </div>
+      
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-60 animate-bounce">
+        <div className="w-[1px] h-12 bg-white/50 mb-2"></div>
       </div>
     </section>
   );
 };
 
-// About Section
-const About = () => (
-  <section id="sobre" className="section-padding bg-brand-neutral text-brand-text overflow-hidden relative">
-    {/* Top accent line */}
-    <div className="w-full h-px bg-gradient-to-r from-transparent via-brand-secondary to-transparent opacity-20 absolute top-0 left-0" />
+const Services = () => {
+  const services = [
+    { title: "Clínica Geral", desc: "Atendimento completo com foco na saúde preventiva do seu pet.", image: "/imagem/Consulta veterinária.png" },
+    { title: "Vacinação", desc: "Protocolos vacinais atualizados e seguros para imunização.", image: "/imagem/Vacinação.jpg" },
+    { title: "Odontologia Veterinária", desc: "Saúde bucal avançada para qualidade de vida.", image: "/imagem/Exames laboratoriais.jpg" },
+    { title: "Dermatologia Animal", desc: "Diagnóstico e tratamento de condições de pele e alergias.", image: "/imagem/Cirurgias veterinárias.jpg" },
+    { title: "Endoscopia Clínica", desc: "Procedimentos minimamente invasivos.", image: "/imagem/internação.png" },
+    { title: "Cirurgia e Internação", desc: "Centro cirúrgico e monitoramento 24h.", image: "/imagem/atendimento emergencial.jpg" },
+    { title: "Exames de Imagem", desc: "Raio-X e ultrassom de alta resolução.", image: "/imagem/Banho e tosa.png" },
+    { title: "Prevenção & Bem-Estar", desc: "Acompanhamento geriátrico e nutricional.", image: "/imagem/Atendimento domiciliar.webp" }
+  ];
 
-    <div className="max-w-7xl mx-auto">
-      <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+  return (
+    <section id="services" className="section-padding bg-white">
+      <div className="mb-[56px]">
+        <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">NOSSOS SERVIÇOS</span>
+        <h2 className="text-[32px] md:text-[44px] font-[800] text-brand-text leading-[1.2]">
+          Tratamentos de <span className="text-brand-primary italic">Alta<br/>Performance</span>
+        </h2>
+        <p className="text-[#6B6B6B] text-[16px] mt-4 max-w-[600px] leading-[1.7]">
+          Nossos protocolos são desenhados para oferecer longevidade e conforto ao seu pet, com excelência clínica incomparável.
+        </p>
+      </div>
 
-        {/* Left: Text Content */}
-        <div>
-          <span className="text-brand-primary font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Nossa História</span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tighter leading-[1.1] mb-8 text-brand-primary">
-            Cuidado que vai <br />
-            <span className="text-brand-secondary italic">além do esperado.</span>
-          </h2>
-          <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-6">
-            Fundada por veterinários apaixonados pela medicina animal, a DUNO nasceu com um propósito claro: elevar o padrão de saúde e bem-estar dos pets do Brasil. Reunimos os melhores especialistas, a tecnologia mais avançada e um ambiente de acolhimento genuíno.
-          </p>
-          <p className="text-gray-500 text-sm md:text-base leading-relaxed mb-12">
-            Cada consulta, cada cirurgia, cada internação é tratada com o rigor de um hospital humano de excelência — porque acreditamos que a vida animal merece o mesmo respeito e dedicação.
-          </p>
-
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-6 mb-12">
-            {[
-              { num: "500+", label: "Cirurgias" },
-              { num: "15", label: "Anos" },
-              { num: "99,7%", label: "Sucesso" },
-            ].map((stat, i) => (
-              <div key={i} className="border-l-2 border-brand-secondary pl-4">
-                <p className="text-2xl md:text-3xl font-serif font-bold text-brand-primary">{stat.num}</p>
-                <p className="text-gray-500 text-[10px] uppercase tracking-widest mt-1 leading-snug">{stat.label}</p>
-              </div>
-            ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[24px]">
+        {services.map((service, index) => (
+          <div key={index} className="flex flex-col group cursor-pointer">
+            <img src={service.image} alt={service.title} className="w-full h-[200px] object-cover rounded-[12px]" />
+            <h3 className="font-[600] text-[16px] text-brand-text mt-[12px]">{service.title}</h3>
+            <p className="text-[#6B6B6B] text-[14px] mt-1 mb-3 line-clamp-2 leading-[1.7] flex-1">{service.desc}</p>
+            <a href={WHATSAPP_URL} className="text-brand-primary font-[600] text-[14px] group-hover:underline">Saiba Mais &rarr;</a>
           </div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
-          {/* Pillars */}
-          <div className="space-y-4 mb-12">
+const SuccessCases = () => {
+  const cases = [
+    { num: "01", name: "Max - Husky", desc: "Recuperação total após cirurgia ortopédica avançada e reabilitação.", img: "/imagem/pet01.jpg" },
+    { num: "02", name: "Kiwi - Papagaio", desc: "Tratamento de infecção respiratória com retorno do canto normal.", img: "/imagem/pet02.jpg" },
+    { num: "03", name: "Luna - Gato", desc: "Controle de doença renal crônica e melhora na qualidade de vida.", img: "/imagem/pet03.jpg" }
+  ];
+
+  return (
+    <section id="cases" className="section-padding bg-[#F7F7F7]">
+      <div className="mb-[56px] text-center md:text-left">
+        <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">GALERIA DE EXCELÊNCIA</span>
+        <h2 className="text-[32px] md:text-[44px] font-[800] text-brand-text leading-[1.2]">
+          Transformações <span className="text-brand-primary italic">Reais</span>
+        </h2>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
+        {cases.map((c, i) => (
+          <div key={i} className="flex flex-col">
+            <div className="relative aspect-[4/3] rounded-[12px] overflow-hidden mb-[16px]">
+              <img src={c.img} alt={c.name} className="w-full h-full object-cover" />
+              <div className="absolute top-4 left-4 bg-black/60 text-white rounded-[4px] px-[10px] py-[4px] text-[11px] uppercase font-bold tracking-wide">
+                ANTES / DEPOIS
+              </div>
+            </div>
+            <h3 className="font-[700] text-[20px] text-brand-text mb-2">{c.name}</h3>
+            <p className="text-[#6B6B6B] text-[14px] leading-[1.7] mb-6 line-clamp-3">{c.desc}</p>
+            <a href={WHATSAPP_URL} className="inline-block text-center border-2 border-brand-text text-brand-text px-[24px] py-[12px] rounded-[4px] font-[600] text-[13px] uppercase tracking-wide transition-colors hover:bg-brand-primary hover:border-brand-primary hover:text-white self-start">
+              VEJA ESTE CASO &rarr;
+            </a>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const Infrastructure = () => {
+  return (
+    <section className="section-padding bg-[#111111]">
+      <div className="grid lg:grid-cols-[55%_45%] gap-12 items-center">
+        <div>
+          <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">A CLÍNICA</span>
+          <h2 className="text-[32px] md:text-[40px] font-[800] text-white leading-[1.2] mb-6">
+            Tecnologia de ponta. <span className="text-brand-primary italic">Conforto</span><br/>
+            <span className="text-brand-primary italic">absoluto.</span>
+          </h2>
+          <p className="text-white/65 text-[16px] leading-[1.7] max-w-[460px] mb-10">
+            Mais do que tratar, nosso objetivo é garantir a melhor experiência para você e a recuperação mais rápida e segura para o seu pet.
+          </p>
+
+          <div className="space-y-6 mb-12">
             {[
-              { icon: <Stethoscope className="w-5 h-5 text-brand-primary" />, title: "Tecnologia de Ponta", desc: "Equipamentos diagnósticos e cirúrgicos de última geração." },
-              { icon: <HeartPulse className="w-5 h-5 text-brand-primary" />, title: "Cuidado Humanizado", desc: "Ambiente acolhedor e comunicação transparente com os tutores." },
-              { icon: <ShieldCheck className="w-5 h-5 text-brand-primary" />, title: "Segurança & Confiança", desc: "Protocolos rígidos de assepsia e equipe altamente qualificada." },
-            ].map((pillar, i) => (
-              <div key={i} className="flex items-start gap-4 bg-white border border-gray-100 rounded-2xl p-4 hover:border-brand-secondary/35 hover:shadow-md transition-all">
-                <div className="bg-brand-neutral p-2.5 rounded-xl shrink-0">{pillar.icon}</div>
-                <div>
-                  <h4 className="font-bold text-brand-primary text-sm mb-0.5">{pillar.title}</h4>
-                  <p className="text-gray-500 text-xs leading-relaxed">{pillar.desc}</p>
+              { label: "Primeiro Cirurgião 3D", value: "98%" },
+              { label: "Atendimento Acolhedor", value: "100%" },
+              { label: "Monitoramento Hospitalar", value: "96%" },
+              { label: "Área Espaçosa e Moderna", value: "99%" },
+            ].map((item, i) => (
+              <div key={i}>
+                <div className="flex items-center gap-2 mb-2">
+                  <Check className="w-4 h-4 text-brand-primary" />
+                  <span className="text-white text-[14px] font-medium">{item.label}</span>
+                </div>
+                <div className="w-full h-[3px] bg-white/15 rounded-full overflow-hidden">
+                  <div className="h-full bg-brand-primary rounded-full" style={{ width: item.value }}></div>
                 </div>
               </div>
             ))}
           </div>
 
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">
-            <WhatsAppLogo className="w-5 h-5 fill-current" />
-            <span>Agendar Consulta</span>
-            <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
-
-        {/* Right: Image */}
-        <div className="relative">
-          {/* Decorative glow */}
-          <div className="absolute -inset-8 bg-brand-primary/5 rounded-[3rem] blur-3xl" />
-          <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border border-gray-100" style={{ aspectRatio: '3/4' }}>
-            <img
-              src="/imagem/veterinario_2.webp"
-              alt="Equipe DUNO"
-              className="w-full h-full object-cover object-top"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-primary/20 via-transparent to-transparent" />
-          </div>
-          {/* Floating badge */}
-          <div className="absolute -bottom-6 -left-6 bg-brand-primary text-white px-6 py-4 rounded-2xl shadow-2xl border border-brand-secondary/20">
-            <p className="text-3xl font-serif font-bold text-brand-highlight">+15</p>
-            <p className="text-xs font-bold uppercase tracking-widest text-white/80">Anos cuidando</p>
-          </div>
-          {/* Floating live badge */}
-          <div className="absolute top-6 -right-4 bg-white/95 backdrop-blur-md border border-gray-200/80 px-4 py-3 rounded-2xl shadow-xl">
-            <div className="flex items-center gap-2">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-primary" />
-              </span>
-              <span className="text-brand-primary text-[10px] font-bold uppercase tracking-widest">Emergência 24h</span>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-[#1A1A1A] flex items-center justify-center rounded">
+              <span className="text-white font-bold text-lg">D</span>
+            </div>
+            <div>
+              <p className="text-white font-bold text-sm leading-tight">DUNO</p>
+              <p className="text-white/40 text-[11px] uppercase tracking-widest">Clínica Veterinária</p>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-);
 
-
-
-const Services = () => {
-  const services = [
-    {
-      title: "Consulta Veterinária",
-      description: "Atendimento clínico completo com foco na saúde preventiva do seu pet.",
-      image: "/imagem/Consulta veterinária.png"
-    },
-    {
-      title: "Vacinação",
-      description: "Protocolos vacinais atualizados e seguros para imunização total.",
-      image: "/imagem/Vacinação.jpg"
-    },
-    {
-      title: "Exames Laboratoriais",
-      description: "Diagnósticos rápidos com laboratório próprio e tecnologia avançada.",
-      image: "/imagem/Exames laboratoriais.jpg"
-    },
-    {
-      title: "Cirurgias Veterinárias",
-      description: "Centro cirúrgico moderno com anestesiologia e monitoramento seguro.",
-      image: "/imagem/Cirurgias veterinárias.jpg"
-    },
-    {
-      title: "Internação",
-      description: "Supervisão veterinária 24 horas em ambientes confortáveis e climatizados.",
-      image: "/imagem/internação.png"
-    },
-    {
-      title: "Atendimento Emergencial",
-      description: "Equipe de prontidão absoluta e UTI veterinária para casos críticos.",
-      image: "/imagem/atendimento emergencial.jpg"
-    },
-    {
-      title: "Banho e Tosa",
-      description: "Estética e higiene premium com produtos de ponta em ambiente relaxante.",
-      image: "/imagem/Banho e tosa.png"
-    },
-    {
-      title: "Atendimento Domiciliar",
-      description: "O cuidado de excelência da nossa clínica no conforto da sua casa.",
-      image: "/imagem/Atendimento domiciliar.webp"
-    }
-  ];
-
-  return (
-    <section id="services" className="section-padding bg-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12 md:mb-16">
-          <span className="text-brand-primary font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Nossas Áreas de Atuação</span>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-primary tracking-tighter">Nossos <span className="text-brand-secondary italic">Serviços</span></h2>
-        </div>
-
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl border border-gray-100 border-t-4 border-t-brand-secondary hover:-translate-y-1 transition-all duration-300 ease-in-out group flex flex-col"
-            >
-              {/* Image with fixed height */}
-              <div className="w-full h-[200px] overflow-hidden">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-
-              {/* Content */}
-              <div className="p-3 md:p-5 flex flex-col flex-1">
-                <h3 className="text-xs md:text-base font-bold text-brand-primary mb-1 leading-snug">
-                  {service.title}
-                </h3>
-                <p className="text-gray-500 text-[10px] md:text-xs leading-relaxed mb-3 flex-1 line-clamp-2">
-                  {service.description}
-                </p>
-                <a
-                  href={`https://wa.me/5511992876219?text=${encodeURIComponent(`Olá! Gostaria de agendar o serviço de ${service.title} na Duno.`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center border-2 border-brand-primary text-brand-primary bg-transparent hover:bg-brand-primary hover:text-white rounded-lg py-2 px-4 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-all duration-300 w-full mt-auto"
-                >
-                  AGENDAR
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const StarRating = () => (
-  <div className="flex items-center gap-1 mb-4">
-    {[1,2,3,4,5].map(i => (
-      <svg key={i} className="w-5 h-5 fill-brand-accent text-brand-accent" viewBox="0 0 20 20">
-        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-      </svg>
-    ))}
-  </div>
-);
-
-const Testimonials = () => {
-  const reviews = [
-    {
-      name: "Mariana Silva",
-      role: "Tutora do Bento",
-      pet: "Golden Retriever",
-      text: "A DUNO salvou a vida do Bento após um atropelamento. O atendimento foi impecável e a equipe nos manteve informados o tempo todo. Nunca me senti tão segura.",
-      img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop"
-    },
-    {
-      name: "Ricardo Oliveira",
-      role: "Tutor da Luna",
-      pet: "Gato Persa",
-      text: "O padrão de higiene e o cuidado com gatos é diferenciado. A Luna se sente em casa, sem o estresse comum de outras clínicas. Recomendo de olhos fechados.",
-      img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop"
-    },
-    {
-      name: "Ana Paula Costa",
-      role: "Tutora do Thor",
-      pet: "Bulldog Francês",
-      text: "Especialistas de altíssimo nível. Resolvemos um problema dermatológico crônico que ninguém conseguia tratar há anos. O Thor está radiante!",
-      img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop"
-    }
-  ];
-
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const TestimonialCard = ({ review }: { review: typeof reviews[0] }) => (
-    <div className="bg-white border border-gray-100 rounded-3xl p-8 flex flex-col gap-6 transition-all duration-300 hover:shadow-lg hover:border-brand-secondary/20 relative overflow-hidden group h-full">
-      {/* Decorative Quote icon in background */}
-      <div className="absolute top-4 right-6 text-[80px] text-brand-highlight opacity-40 font-serif leading-none select-none pointer-events-none">&rdquo;</div>
-      {/* Stars */}
-      <StarRating />
-      {/* Text */}
-      <p className="text-brand-text text-[16px] leading-[1.7] italic flex-1 relative z-10">{review.text}</p>
-      {/* Divider */}
-      <div className="w-full h-px bg-gray-100" />
-      {/* Author */}
-      <div className="flex items-center gap-4 relative z-10">
-        <img src={review.img} alt={review.name} className="w-12 h-12 rounded-full object-cover border-2 border-brand-secondary" />
-        <div>
-          <h4 className="font-bold text-brand-primary text-base leading-snug">{review.name}</h4>
-          <p className="text-gray-500 text-xs uppercase tracking-widest font-bold">{review.role}</p>
-          <span className="inline-block mt-1 bg-brand-neutral text-brand-secondary text-[9px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full">{review.pet}</span>
-        </div>
-      </div>
-    </div>
-  );
-
-  return (
-    <section className="section-padding bg-brand-neutral">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12 md:mb-16">
-          <span className="text-brand-primary font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Vidas que Transformamos</span>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-primary">O que nossos <span className="text-brand-secondary italic">clientes dizem.</span></h2>
-          <p className="text-gray-500 mt-4 max-w-xl mx-auto text-base">Veja como a vida dos pets e de seus tutores mudou de verdade.</p>
-        </div>
-
-        {/* Mobile carousel */}
-        <div className="lg:hidden relative overflow-hidden">
-          <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
-            {reviews.map((review, i) => (
-              <div key={i} className="w-full shrink-0 px-2">
-                <TestimonialCard review={review} />
-              </div>
-            ))}
-          </div>
-          {/* Navigation */}
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <button onClick={() => setActiveIndex(prev => Math.max(0, prev - 1))} disabled={activeIndex === 0}
-              className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-brand-secondary disabled:opacity-30 hover:bg-white bg-transparent transition-colors">
-              <ChevronRight className="w-5 h-5 rotate-180" />
-            </button>
-            <div className="flex gap-2">
-              {reviews.map((_, i) => (
-                <button key={i} onClick={() => setActiveIndex(i)}
-                  className={`h-2 rounded-full transition-all duration-300 ${activeIndex === i ? 'bg-brand-secondary w-6' : 'bg-gray-300 w-2'}`} />
-              ))}
-            </div>
-            <button onClick={() => setActiveIndex(prev => Math.min(reviews.length - 1, prev + 1))} disabled={activeIndex === reviews.length - 1}
-              className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-brand-secondary disabled:opacity-30 hover:bg-white bg-transparent transition-colors">
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-
-        {/* Desktop grid */}
-        <div className="hidden lg:grid grid-cols-3 gap-6">
-          {reviews.map((review, i) => (
-            <TestimonialCard key={i} review={review} />
-          ))}
+        <div className="w-full aspect-[4/3] rounded-[16px] overflow-hidden">
+          <img src="/imagem/veterinario_2.webp" alt="Infraestrutura" className="w-full h-full object-cover" />
         </div>
       </div>
     </section>
@@ -576,281 +292,83 @@ const Testimonials = () => {
 
 const Team = () => {
   const team = [
-    {
-      name: "Dr. Carlos Eduardo",
-      crmv: "CRMV-SP 12345",
-      specialty: "Cirurgia Geral e Ortopedia",
-      bio: "Especialista em cirurgias de alta complexidade. Mais de 12 anos transformando vidas com procedimentos ortopédicos e cirurgia guiada de última geração.",
-      img: "/imagem/veterinario_2.webp"
-    },
-    {
-      name: "Dra. Marina Silva",
-      crmv: "CRMV-SP 54321",
-      specialty: "Medicina Felina e Dermatologia",
-      bio: "Referência nacional em saúde felina. Trata casos dermatológicos complexos com protocolos inovadores, devolvendo qualidade de vida aos felinos.",
-      img: "/imagem/veterinaria_1.webp"
-    },
-    {
-      name: "Dra. Juliana Mendes",
-      crmv: "CRMV-SP 09876",
-      specialty: "Anestesiologia e UTI Veterinária",
-      bio: "Especialista em anestesia inalatória de alta segurança e terapia intensiva. Garante o máximo conforto e monitoramento multiparamétrico.",
-      img: "/imagem/veterinaria_3.webp"
-    }
+    { name: "Dr. Carlos Eduardo", crmv: "CRMV-SP 12345", specialty: "Cirurgia Geral e Ortopedia", bio: "Especialista em cirurgias complexas e recuperação motora de cães de médio e grande porte.", img: "/imagem/veterinario_2.webp" },
+    { name: "Dra. Marina Silva", crmv: "CRMV-SP 54321", specialty: "Medicina Felina", bio: "Compreende a linguagem única dos felinos, tratando-os em ambientes livres de estresse.", img: "/imagem/veterinaria_1.webp" },
+    { name: "Dra. Juliana Mendes", crmv: "CRMV-SP 09876", specialty: "Anestesiologia Veterinária", bio: "Garante procedimentos 100% seguros com monitoramento contínuo durante e após as cirurgias.", img: "/imagem/veterinaria_3.webp" }
   ];
-
-  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <section id="equipe" className="section-padding bg-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12 md:mb-16">
-          <span className="text-brand-primary font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Quem Cuida do seu Pet</span>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-primary tracking-tighter">Corpo <span className="text-brand-secondary italic">Clínico</span></h2>
-        </div>
+      <div className="mb-[56px] text-center">
+        <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">NOSSA EQUIPE</span>
+        <h2 className="text-[32px] md:text-[44px] font-[800] text-brand-text leading-[1.2]">
+          Mentes brilhantes por trás de <span className="text-brand-primary italic">vidas</span><br/>
+          <span className="text-brand-primary italic">saudáveis.</span>
+        </h2>
+        <p className="text-[#6B6B6B] text-[16px] mt-4 max-w-[600px] mx-auto leading-[1.7]">
+          Especialistas renomados que tratam seu animal com a seriedade da medicina avançada e o carinho que ele merece.
+        </p>
+      </div>
 
-        {/* Carousel for mobile/tablet, grid for desktop */}
-        <div className="relative">
-          {/* Mobile/Tablet view (hidden on lg, slider) */}
-          <div className="lg:hidden relative overflow-hidden">
-            <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
-              {team.map((vet, i) => (
-                <div key={i} className="w-full shrink-0 px-4">
-                  <div className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm flex flex-col max-w-sm mx-auto group">
-                    <div className="relative h-[320px] overflow-hidden rounded-2xl">
-                      <img
-                        src={vet.img}
-                        alt={vet.name}
-                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-4 py-4">
-                        <div className="flex items-center gap-2">
-                          <ShieldCheck className="w-4 h-4 text-brand-highlight shrink-0" />
-                          <span className="text-white text-xs font-bold tracking-widest">{vet.crmv}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-6 flex flex-col flex-1">
-                      <h3 className="font-bold text-brand-primary text-lg leading-tight mb-1">{vet.name}</h3>
-                      <div className="mb-3">
-                        <span className="bg-brand-highlight text-brand-primary px-3 py-1 rounded-full text-xs font-semibold inline-block">
-                          {vet.specialty}
-                        </span>
-                      </div>
-                      <p className="text-gray-500 text-sm leading-relaxed">{vet.bio}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Navigation Dots and Arrows */}
-            <div className="flex items-center justify-center gap-4 mt-8">
-              <button 
-                onClick={() => setActiveIndex(prev => Math.max(0, prev - 1))}
-                disabled={activeIndex === 0}
-                className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-brand-secondary disabled:opacity-30 disabled:pointer-events-none hover:bg-brand-neutral bg-white"
-              >
-                <ChevronRight className="w-5 h-5 rotate-180" />
-              </button>
-              <div className="flex gap-2">
-                {team.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActiveIndex(i)}
-                    className={`w-2 h-2 rounded-full transition-all ${activeIndex === i ? 'bg-brand-secondary w-4' : 'bg-gray-200'}`}
-                  />
-                ))}
-              </div>
-              <button 
-                onClick={() => setActiveIndex(prev => Math.min(team.length - 1, prev + 1))}
-                disabled={activeIndex === team.length - 1}
-                className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-brand-secondary disabled:opacity-30 disabled:pointer-events-none hover:bg-brand-neutral bg-white"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {team.map((vet, i) => (
+          <div key={i} className="flex flex-col items-center">
+            <img 
+              src={vet.img} 
+              alt={vet.name} 
+              className="w-[140px] h-[140px] rounded-full object-cover object-top border-[4px] border-[#F7F7F7] shadow-[0_0_0_2px_#E8671A] mb-[16px]"
+            />
+            <h3 className="font-[700] text-[18px] text-brand-text">{vet.name}</h3>
+            <p className="text-brand-primary text-[11px] uppercase tracking-[2px] font-bold mt-1 mb-1">{vet.crmv}</p>
+            <p className="text-[#6B6B6B] text-[14px] mb-3">{vet.specialty}</p>
+            <p className="text-[#6B6B6B] text-[14px] text-center max-w-[280px] leading-[1.7] mb-4">{vet.bio}</p>
+            <div className="flex gap-3">
+              <a href="#" className="text-brand-text hover:text-brand-primary transition-colors"><Instagram className="w-[18px] h-[18px]" /></a>
+              <a href="#" className="text-brand-text hover:text-brand-primary transition-colors"><Facebook className="w-[18px] h-[18px]" /></a>
             </div>
           </div>
-
-          {/* Desktop view (grid, hidden on mobile/tablet) */}
-          <div className="hidden lg:grid grid-cols-3 gap-8">
-            {team.map((vet, i) => (
-              <div key={i} className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 group flex flex-col">
-                <div className="relative h-[320px] overflow-hidden rounded-2xl">
-                  <img
-                    src={vet.img}
-                    alt={vet.name}
-                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-4 py-4">
-                    <div className="flex items-center gap-2">
-                      <ShieldCheck className="w-4 h-4 text-brand-highlight shrink-0" />
-                      <span className="text-white text-xs font-bold tracking-widest">{vet.crmv}</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="p-6 flex flex-col flex-1">
-                  <h3 className="font-bold text-brand-primary text-lg leading-tight mb-1">{vet.name}</h3>
-                  <div className="mb-3">
-                    <span className="bg-brand-highlight text-brand-primary px-3 py-1 rounded-full text-xs font-semibold inline-block">
-                      {vet.specialty}
-                    </span>
-                  </div>
-                  <p className="text-gray-500 text-sm leading-relaxed">{vet.bio}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        ))}
       </div>
     </section>
   );
 };
 
-const SuccessCases = () => {
-  const cases = [
-    { num: "01", name: "Max", especie: "Husky Siberiano", condition: "Displasia Coxofemoral Severa", result: "Voltou a correr normalmente 3 meses após a cirurgia ortopédica avançada.", img: "/imagem/pet01.jpg" },
-    { num: "02", name: "Kiwi", especie: "Papagaio Amazônico", condition: "Infecção Respiratória Grave", result: "Tratamento com antibioticoterapia especializada. Canto e voo totalmente recuperados.", img: "/imagem/pet02.jpg" },
-    { num: "03", name: "Luna", especie: "Gato Branco", condition: "Síndrome do Trato Urinário Felino", result: "Atendimento emergencial às 3h da manhã. Recuperação 100% em 2 semanas.", img: "/imagem/pet03.jpg" }
+const Testimonials = () => {
+  const reviews = [
+    { name: "Mariana Silva", pet: "Bento", text: "A equipe salvou a vida do Bento após um trauma severo. O cuidado, a transparência e a estrutura são de primeiro mundo.", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop" },
+    { name: "Ricardo Oliveira", pet: "Luna", text: "Minha gata é super assustada, mas o atendimento Cat Friendly daqui fez toda a diferença. Ela ficou tranquila o tempo todo.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop" },
+    { name: "Ana Paula Costa", pet: "Thor", text: "Investigamos a alergia do Thor por anos sem sucesso. A dermatologista daqui resolveu em semanas. Só tenho a agradecer!", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop" }
   ];
 
-  const [activeIndex, setActiveIndex] = useState(0);
-
   return (
-    <section id="cases" className="section-padding bg-brand-neutral">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12 md:mb-16">
-          <span className="text-brand-primary font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Vidas Transformadas</span>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-primary tracking-tighter">Casos de <span className="text-brand-secondary italic">Sucesso</span></h2>
-          <p className="text-gray-500 mt-4 max-w-xl mx-auto">Histórias reais de recuperação e superação com o cuidado DUNO.</p>
-        </div>
-
-        {/* Carousel for mobile/tablet, grid for desktop */}
-        <div className="relative">
-          {/* Mobile/Tablet view */}
-          <div className="lg:hidden relative overflow-hidden">
-            <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
-              {cases.map((c, i) => (
-                <div key={i} className="w-full shrink-0 px-2">
-                  <div className="bg-white rounded-[2rem] overflow-hidden border border-brand-100 shadow-xl flex flex-col max-w-sm mx-auto h-full">
-                    <div className="h-[240px] overflow-hidden relative">
-                      <img src={c.img} alt={c.name} className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-brand-950/80 via-transparent to-transparent" />
-                      <div className="absolute top-4 left-4 bg-brand-950/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-brand-800">
-                        <span className="text-[10px] font-bold text-brand-highlight uppercase tracking-widest">{c.especie}</span>
-                      </div>
-                      <div className="absolute top-4 right-4 text-5xl font-serif font-bold text-white/10">{c.num}</div>
-                    </div>
-                    <div className="p-8 flex-1 flex flex-col bg-brand-950">
-                      <h3 className="text-2xl font-serif font-bold mb-4 text-white">{c.name}</h3>
-                      <div className="space-y-4 mb-6 flex-1">
-                        <div className="bg-brand-900 rounded-xl p-4">
-                          <span className="text-[9px] uppercase tracking-widest text-brand-highlight font-bold block mb-1">Condição Tratada</span>
-                          <p className="text-brand-100/80 text-sm">{c.condition}</p>
-                        </div>
-                        <div className="bg-brand-900 rounded-xl p-4 border-l-4 border-brand-highlight">
-                          <span className="text-[9px] uppercase tracking-widest text-brand-highlight font-bold block mb-1">✓ Resultado</span>
-                          <p className="text-white text-sm leading-relaxed">{c.result}</p>
-                        </div>
-                      </div>
-                      <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 bg-brand-accent hover:bg-amber-600 text-white font-bold uppercase tracking-widest text-[10px] py-3.5 px-6 rounded-lg transition-all duration-300">
-                        Agendar Consulta <ArrowRight className="w-4 h-4" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            {/* Navigation */}
-            <div className="flex items-center justify-center gap-4 mt-8">
-              <button onClick={() => setActiveIndex(prev => Math.max(0, prev - 1))} disabled={activeIndex === 0}
-                className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-brand-secondary disabled:opacity-30 hover:bg-white bg-transparent shadow-sm">
-                <ChevronRight className="w-5 h-5 rotate-180" />
-              </button>
-              <div className="flex gap-2">
-                {cases.map((_, i) => (
-                  <button key={i} onClick={() => setActiveIndex(i)}
-                    className={`h-2 rounded-full transition-all duration-300 ${activeIndex === i ? 'bg-brand-secondary w-6' : 'bg-gray-300 w-2'}`} />
-                ))}
-              </div>
-              <button onClick={() => setActiveIndex(prev => Math.min(cases.length - 1, prev + 1))} disabled={activeIndex === cases.length - 1}
-                className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-brand-secondary disabled:opacity-30 hover:bg-white bg-transparent shadow-sm">
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-
-          {/* Desktop grid */}
-          <div className="hidden lg:grid grid-cols-3 gap-8">
-            {cases.map((c, i) => (
-              <div key={i} className="bg-white rounded-[2rem] overflow-hidden border border-brand-100 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col group h-full">
-                <div className="h-[240px] overflow-hidden relative">
-                  <img src={c.img} alt={c.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-950/70 via-transparent to-transparent" />
-                  <div className="absolute top-4 left-4 bg-brand-950/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-brand-800">
-                    <span className="text-[10px] font-bold text-brand-highlight uppercase tracking-widest">{c.especie}</span>
-                  </div>
-                  <div className="absolute top-3 right-5 text-6xl font-serif font-bold text-white/10 leading-none">{c.num}</div>
-                  <div className="absolute bottom-4 left-6">
-                    <h3 className="text-3xl font-serif font-bold text-white">{c.name}</h3>
-                  </div>
-                </div>
-                <div className="p-8 flex-1 flex flex-col bg-brand-950">
-                  <div className="space-y-4 mb-6 flex-1">
-                    <div className="bg-brand-900 rounded-xl p-4">
-                      <span className="text-[9px] uppercase tracking-widest text-brand-highlight font-bold block mb-1">Condição Tratada</span>
-                      <p className="text-brand-100/80 text-sm">{c.condition}</p>
-                    </div>
-                    <div className="bg-brand-900 rounded-xl p-4 border-l-4 border-brand-highlight">
-                      <span className="text-[9px] uppercase tracking-widest text-brand-highlight font-bold block mb-1">✓ Resultado</span>
-                      <p className="text-white text-sm leading-relaxed">{c.result}</p>
-                    </div>
-                  </div>
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 bg-brand-accent hover:bg-amber-600 text-white font-bold uppercase tracking-widest text-[10px] py-3.5 px-6 rounded-lg transition-all duration-300 w-full">
-                    Agendar Consulta <ArrowRight className="w-4 h-4" />
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+    <section id="depoimentos" className="section-padding bg-[#111111]">
+      <div className="mb-[56px] text-center">
+        <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">PROVA SOCIAL</span>
+        <h2 className="text-[32px] md:text-[44px] font-[800] text-white leading-[1.2]">
+          A prova de nossa <span className="text-brand-primary italic">excelência</span>
+        </h2>
       </div>
-    </section>
-  );
-};
 
-const Infrastructure = () => {
-  const infraData = [
-    { title: "Centro Cirúrgico de Alta Complexidade", desc: "Equipado com Anestesia Inalatória e Monitoramento Multiparamétrico de última geração.", icon: <Activity className="w-8 h-8 text-brand-400" /> },
-    { title: "UTI Veterinária 24H", desc: "Suporte intensivo ininterrupto com oxigenoterapia, aquecimento controlado e acompanhamento veterinário 24/7.", icon: <ShieldPlus className="w-8 h-8 text-brand-400" /> },
-    { title: "Laboratório e Imagem", desc: "Raio-X digital e ultrassom de alta definição no local. Resultados rápidos para diagnósticos precisos.", icon: <Stethoscope className="w-8 h-8 text-brand-400" /> },
-    { title: "99,7% de Sucesso Cirúrgico", desc: "Nossos protocolos rígidos de assepsia e manejo anestésico garantem os maiores índices de segurança do país.", icon: <HeartPulse className="w-8 h-8 text-brand-400" /> }
-  ];
-
-  return (
-    <section className="section-padding bg-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12 md:mb-16">
-          <span className="text-brand-primary font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Tecnologia e Segurança</span>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-primary uppercase tracking-tighter">Infraestrutura <span className="text-brand-secondary italic">Hospitalar</span></h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {infraData.map((item, i) => (
-            <div key={i} className="bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-xl shadow-gray-200/50 flex gap-6 items-start group hover:border-brand-secondary/30 transition-all duration-300">
-              <div className="bg-brand-neutral p-4 rounded-2xl shrink-0 group-hover:bg-brand-primary transition-colors duration-300">
-                {React.cloneElement(item.icon, {
-                  className: "w-8 h-8 text-brand-primary group-hover:text-white transition-colors duration-300"
-                })}
-              </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {reviews.map((r, i) => (
+          <div key={i} className="bg-[#1A1A1A] rounded-[16px] p-[32px] relative">
+            <div className="absolute top-6 right-8 text-[64px] font-serif leading-none text-brand-primary opacity-30">"</div>
+            <div className="flex gap-1 mb-4">
+              {[1,2,3,4,5].map(s => <Star key={s} className="w-[18px] h-[18px] fill-brand-primary text-brand-primary" />)}
+            </div>
+            <p className="text-white/80 text-[15px] leading-[1.8] relative z-10 mb-[20px] min-h-[100px]">
+              {r.text}
+            </p>
+            <div className="w-full h-[1px] bg-white/10 mb-[20px]"></div>
+            <div className="flex items-center gap-3">
+              <img src={r.img} alt={r.name} className="w-[44px] h-[44px] rounded-full object-cover" />
               <div>
-                <h3 className="text-xl font-serif font-bold text-brand-primary uppercase mb-3 leading-tight">{item.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                <p className="text-white text-[14px] font-[600]">{r.name}</p>
+                <p className="text-[#6B6B6B] text-[13px]">Tutor do {r.pet}</p>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -858,242 +376,193 @@ const Infrastructure = () => {
 
 const FAQ = () => {
   const faqs = [
-    { question: "Quais são os horários de atendimento da clínica?", answer: "Funcionamos de segunda a sexta das 08h às 20h e sábados das 08h às 18h. Nosso plantão emergencial funciona 24h por dia, todos os dias da semana, incluindo feriados." },
-    { question: "Onde vocês estão localizados?", answer: "Estamos localizados na Av. Brigadeiro Faria Lima, 2000 - Itaim Bibi, SP. Contamos com estacionamento próprio para sua comodidade." },
-    { question: "Preciso agendar consulta com antecedência?", answer: "Para consultas de rotina, vacinação e especialistas, é altamente recomendável o agendamento prévio via WhatsApp. Em casos de urgência e emergência, o atendimento é imediato no plantão 24h." },
-    { question: "A clínica atende animais silvestres e exóticos?", answer: "Sim! Temos veterinários especializados no manejo e tratamento de animais silvestres, aves e répteis." },
-    { question: "Quais formas de pagamento são aceitas?", answer: "Aceitamos todos os cartões de crédito e débito, PIX, dinheiro e convênios veterinários selecionados. Tratamentos complexos podem ser parcelados em até 10x sem juros." },
-    { question: "Fazem cirurgias complexas e ortopédicas?", answer: "Sim, nosso centro cirúrgico é de alta complexidade, equipado com anestesia inalatória, monitoramento completo e UTI veterinária para o pós-operatório." },
-    { question: "O pet pode ficar internado com vocês?", answer: "Sim, possuímos internação 24h com baias separadas para cães, gatos e silvestres, garantindo o máximo conforto e acompanhamento veterinário ininterrupto." },
-    { question: "Fazem exames laboratoriais na hora?", answer: "Contamos com laboratório próprio que nos permite realizar exames de sangue, imagem (Raio-X e Ultrassom) e obter resultados rapidamente para iniciar o tratamento adequado." },
-    { question: "Qual o valor da consulta?", answer: "Como os valores variam dependendo da especialidade (Clínico Geral vs Especialistas), pedimos que entre em contato direto pelo WhatsApp para passarmos o orçamento correto para o seu caso." },
-    { question: "Vocês aplicam vacinas importadas?", answer: "Trabalhamos exclusivamente com vacinas éticas importadas (V10, V8, Raiva, Gripe, Giárdia, etc) para garantir a melhor imunização e segurança para o seu pet." }
+    { q: "Quais são os horários de atendimento?", a: "Segunda a Sexta: 08:00 às 20:00. Sábado: 08:00 às 18:00. Plantão emergencial 24 horas todos os dias." },
+    { q: "Preciso agendar consulta com antecedência?", a: "Recomendamos agendamento para consultas de rotina. Urgências são atendidas de imediato no plantão 24h." },
+    { q: "Quais formas de pagamento são aceitas?", a: "Cartões de crédito (até 10x dependendo do tratamento), débito, PIX e dinheiro." },
+    { q: "A clínica atende felinos em espaço separado?", a: "Sim, possuímos ambiente exclusivo e técnicas Cat Friendly para minimizar o estresse dos gatos." }
   ];
 
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="section-padding bg-brand-neutral">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-primary text-center mb-12 uppercase tracking-tighter">Dúvidas <span className="text-brand-secondary italic">Frequentes</span></h2>
-        <div className="space-y-6">
-          {faqs.map((faq, index) => (
-            <div 
-              key={index} 
-              className={`border border-gray-200 rounded-2xl overflow-hidden transition-all duration-300 bg-white ${
-                activeIndex === index 
-                  ? 'shadow-lg border-l-4 border-l-brand-secondary' 
-                  : 'hover:bg-gray-50/50'
-              }`}
+    <section id="faq" className="section-padding bg-white">
+      <div className="mb-[56px] text-center">
+        <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">DÚVIDAS FREQUENTES</span>
+        <h2 className="text-[32px] md:text-[44px] font-[800] text-brand-text leading-[1.2]">
+          Tudo o que você precisa <span className="text-brand-primary italic">saber.</span>
+        </h2>
+      </div>
+
+      <div className="max-w-[800px] mx-auto">
+        {faqs.map((faq, i) => (
+          <div key={i} className={`border-b border-[#E0E0E0] ${activeIndex === i ? 'border-l-[3px] border-l-brand-primary' : ''}`}>
+            <button 
+              onClick={() => setActiveIndex(activeIndex === i ? null : i)}
+              className="w-full py-[20px] px-[24px] flex justify-between items-center text-left"
             >
-              <button 
-                onClick={() => setActiveIndex(activeIndex === index ? null : index)} 
-                className="w-full py-5 px-6 md:py-6 md:px-8 flex justify-between items-center text-left transition-colors"
-              >
-                <span className="text-[17px] font-semibold text-brand-text pr-8 leading-snug">{faq.question}</span>
-                <Plus className={`w-6 h-6 shrink-0 text-brand-secondary transition-transform duration-300 ${activeIndex === index ? 'rotate-45' : ''}`} />
-              </button>
-              {activeIndex === index && (
-                <div className="px-6 md:px-8 pb-6 md:pb-8 pt-2">
-                  <div className="w-12 h-1 bg-brand-accent mb-6"></div>
-                  <p className="text-gray-500 leading-relaxed text-sm md:text-base">{faq.answer}</p>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+              <span className="font-[600] text-[16px] text-brand-text">{faq.q}</span>
+              {activeIndex === i ? <X className="w-6 h-6 text-brand-primary shrink-0" /> : <Plus className="w-6 h-6 text-brand-primary shrink-0" />}
+            </button>
+            {activeIndex === i && (
+              <div className="px-[24px] pb-[20px] pt-[12px] text-[#6B6B6B] text-[15px] leading-[1.7]">
+                {faq.a}
+              </div>
+            )}
+          </div>
+        ))}
       </div>
     </section>
   );
 };
 
-const Contact = () => (
-  <section id="contact" className="section-padding bg-brand-950 text-white overflow-hidden relative">
-    {/* Ambient glow */}
-    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/10 rounded-full blur-[120px] pointer-events-none" />
-    <div className="max-w-7xl mx-auto">
-      <div className="text-center mb-12 md:mb-16">
-        <span className="text-brand-highlight font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Venha Nos Visitar</span>
-        <h2 className="text-3xl md:text-4xl font-serif font-bold tracking-tighter">Onde <span className="text-brand-highlight italic">Estamos.</span></h2>
-        <p className="text-brand-100/50 mt-4 max-w-lg mx-auto">No coração do Itaim Bibi, com fácil acesso e estacionamento próprio.</p>
+const Location = () => {
+  return (
+    <section className="section-padding bg-white pt-0">
+      <div className="mb-[56px] text-center md:text-left">
+        <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">COMO NOS ENCONTRAR</span>
+        <h2 className="text-[32px] md:text-[44px] font-[800] text-brand-text leading-[1.2]">
+          Venha nos <span className="text-brand-primary italic">Visitar</span>
+        </h2>
       </div>
 
-      <div className="grid lg:grid-cols-[40%_60%] gap-10 lg:gap-16 items-start">
-        {/* Left info */}
-        <div className="space-y-4">
-          {[
-            { icon: <MapPin className="w-5 h-5 text-brand-secondary" />, title: "Endereço", info: "Av. Brigadeiro Faria Lima, 2000\nItaim Bibi, São Paulo – SP" },
-            { icon: <Phone className="w-5 h-5 text-brand-secondary" />, title: "WhatsApp / Contato", info: "(11) 99287-6219" },
-            { icon: <Phone className="w-5 h-5 text-brand-secondary" />, title: "Plantão Emergência 24h", info: "(11) 99999-9999" },
-            { icon: <Clock className="w-5 h-5 text-brand-secondary" />, title: "Horários de Atendimento", info: "Seg–Sex: 08:00–20:00\nSáb: 08:00–18:00" },
-          ].map((item, i) => (
-            <div key={i} className="flex items-start gap-5 bg-brand-900/60 border border-brand-800 hover:border-brand-secondary/40 rounded-2xl p-5 transition-all duration-300 group">
-              <div className="bg-brand-900 group-hover:bg-brand-secondary p-3 rounded-xl shrink-0 transition-colors">{item.icon}</div>
-              <div>
-                <p className="font-bold text-white text-[18px] mb-1">{item.title}</p>
-                <p className="text-brand-100/60 text-sm whitespace-pre-line leading-relaxed">{item.info}</p>
-              </div>
+      <div className="grid lg:grid-cols-[40%_60%] gap-12">
+        <div className="flex flex-col gap-[32px] justify-center">
+          <div>
+            <div className="flex items-center gap-3 mb-2">
+              <MapPin className="w-6 h-6 text-brand-primary" />
+              <h3 className="font-[700] text-[16px] text-brand-text">Nossa Localização</h3>
             </div>
-          ))}
-
-          {/* Emergency badge */}
-          <div className="bg-brand-accent/10 border border-brand-accent/30 rounded-2xl p-5 flex items-center gap-4 mt-2">
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75" />
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-accent" />
-            </span>
-            <p className="text-brand-accent font-bold text-sm uppercase tracking-widest">Plantão Emergencial Ativo 24h</p>
+            <p className="text-[#6B6B6B] text-[15px] pl-9">
+              Av. Brigadeiro Faria Lima, 2000<br/>Itaim Bibi, São Paulo – SP
+            </p>
           </div>
-
-          <a
-            href="https://maps.google.com/?q=Av.+Brigadeiro+Faria+Lima,+2000+-+Itaim+Bibi"
-            target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 bg-brand-accent hover:bg-amber-600 text-white px-8 py-4 rounded-lg font-bold uppercase tracking-widest text-[11px] transition-all duration-300 shadow-xl w-full justify-center"
-          >
-            <MapPin className="w-4 h-4" /> Abrir no Google Maps
-          </a>
+          <div>
+            <div className="flex items-center gap-3 mb-2">
+              <Clock className="w-6 h-6 text-brand-primary" />
+              <h3 className="font-[700] text-[16px] text-brand-text">Horário de Atendimento</h3>
+            </div>
+            <p className="text-[#6B6B6B] text-[15px] pl-9">
+              Seg–Sex: 08:00 – 20:00<br/>
+              Sáb: 08:00 – 18:00<br/>
+              Emergência: 24 horas
+            </p>
+          </div>
+          <div className="mt-4">
+            <a href={WHATSAPP_URL} className="text-brand-primary font-[600] hover:underline flex items-center gap-2">
+              Chamar no WhatsApp <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
         </div>
 
-        {/* Right map */}
-        <div className="h-[520px] rounded-2xl overflow-hidden shadow-md border border-brand-secondary/30 lg:order-last order-first">
-          <MapContainer center={[-23.5899, -46.6815]} zoom={15} style={{ height: "100%", width: "100%" }}>
+        <div className="w-full h-[380px] rounded-[16px] overflow-hidden shadow-minimal">
+          <MapContainer center={[-23.5899, -46.6815]} zoom={15} style={{ height: "100%", width: "100%", zIndex: 0 }}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <Marker position={[-23.5899, -46.6815]}>
-              <Popup>DUNO Clínica Veterinária – Itaim Bibi</Popup>
+              <Popup>DUNO Clínica Veterinária</Popup>
             </Marker>
           </MapContainer>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const CTASection = () => {
   return (
-    <section className="section-padding bg-brand-950 text-white relative overflow-hidden">
-      {/* Background pattern */}
-      <div className="absolute inset-0 bg-pattern opacity-[0.04]" />
-      {/* Gradient orbs */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-primary/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-brand-secondary to-transparent opacity-40" />
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-t from-brand-secondary to-transparent opacity-20" />
-
-      <div className="max-w-5xl mx-auto relative z-10">
-        <div className="bg-gradient-to-br from-brand-900/60 to-brand-950/80 border border-brand-800 rounded-[3rem] p-10 md:p-20 text-center backdrop-blur-md shadow-2xl">
-
-          {/* Live badge */}
-          <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-brand-950 border border-brand-850 rounded-full mb-10">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-highlight opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-highlight" />
-            </span>
-            <span className="text-brand-highlight text-[10px] font-bold uppercase tracking-[0.35em]">Emergência 24h · Consultas · Internação</span>
-          </div>
-
-          <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-6 tracking-tighter leading-tight">
-            Garanta o Melhor Cuidado <br />
-            <span className="text-brand-highlight italic">para quem você ama.</span>
-          </h2>
-
-          <p className="text-base md:text-lg text-brand-100/60 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Seja para uma consulta preventiva ou um atendimento emergencial, nossa equipe de elite está pronta. Fale conosco agora mesmo.
-          </p>
-
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-5">
-            <a
-              href={WHATSAPP_URL}
-              target="_blank" rel="noopener noreferrer"
-              className="bg-brand-accent hover:bg-amber-600 text-white px-10 py-5 rounded-lg font-bold uppercase tracking-[0.2em] text-[11px] transition-all duration-300 shadow-2xl shadow-brand-accent/20 flex items-center justify-center gap-3 group w-full sm:w-auto hover:scale-105"
-            >
-              <WhatsAppLogo className="w-5 h-5 fill-current" />
-              <span>Agendar no WhatsApp</span>
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
-            <a
-              href="tel:5511999999999"
-              className="border-2 border-brand-secondary hover:border-brand-highlight text-white hover:text-brand-highlight px-10 py-5 rounded-lg font-bold uppercase tracking-[0.2em] text-[11px] transition-all duration-300 flex items-center justify-center gap-3 w-full sm:w-auto"
-            >
-              <Phone className="w-4 h-4" />
-              <span>Emergência (Ligar Agora)</span>
-            </a>
-          </div>
-
-          {/* Trust indicators */}
-          <div className="mt-12 pt-10 border-t border-brand-800 grid grid-cols-3 gap-6 text-center">
-            {[
-              { val: "24h", label: "Plantão ativo" },
-              { val: "500+", label: "Cirurgias" },
-              { val: "99,7%", label: "Sucesso" },
-            ].map((stat, i) => (
-              <div key={i}>
-                <p className="text-2xl font-serif font-bold text-brand-highlight">{stat.val}</p>
-                <p className="text-brand-100/40 text-xs uppercase tracking-widest mt-1">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+    <section className="py-[96px] px-[24px] bg-[#0D0D0D] text-center">
+      <div className="max-w-[800px] mx-auto">
+        <h2 className="text-[40px] md:text-[52px] font-[800] text-white leading-[1.2] mb-6">
+          Garanta o melhor cuidado <br />
+          para quem você <span className="text-brand-primary italic">ama.</span>
+        </h2>
+        <p className="text-white/60 text-[16px] max-w-[520px] mx-auto mb-10 leading-[1.7]">
+          Nossa equipe de especialistas está pronta para receber o seu pet com tecnologia, segurança e carinho.
+        </p>
+        <a href={WHATSAPP_URL} className="inline-block bg-brand-primary hover:bg-[#D4580E] text-white px-[40px] py-[18px] rounded-[4px] font-[700] uppercase tracking-[1.5px] text-[13px] transition-colors">
+          MARQUE UMA CONSULTA
+        </a>
       </div>
     </section>
   );
 };
 
-const Footer = () => (
-  <footer className="py-16 bg-black text-white/50 px-6">
-    <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-16 text-left">
-      <div className="md:col-span-2 space-y-6">
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-brand-primary rounded-xl flex items-center justify-center">
-            <PawPrint className="text-brand-highlight w-6 h-6" />
+const Footer = () => {
+  return (
+    <footer className="bg-[#0D0D0D] pt-[96px] pb-[48px] px-[24px]">
+      <div className="max-w-[1200px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-[48px]">
+          <div>
+            <div className="text-white font-bold text-2xl tracking-tight mb-4">DUNO</div>
+            <p className="text-white/55 text-[14px] leading-[1.8] mb-6 max-w-[250px]">
+              Clínica Veterinária de excelência. Tecnologia médica de ponta unida ao cuidado humanizado.
+            </p>
+            <div className="flex gap-4">
+              <a href="#" className="text-white/50 hover:text-brand-primary transition-colors"><Instagram className="w-[18px] h-[18px]" /></a>
+              <a href="#" className="text-white/50 hover:text-brand-primary transition-colors"><Facebook className="w-[18px] h-[18px]" /></a>
+            </div>
           </div>
-          <span className="text-2xl font-serif font-bold text-white uppercase tracking-tighter">DUNO</span>
+          
+          <div>
+            <h4 className="text-white font-[700] text-[13px] uppercase tracking-[1.5px] mb-6">NAVEGAÇÃO</h4>
+            <ul className="flex flex-col gap-2">
+              <li><a href="#home" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Início</a></li>
+              <li><a href="#services" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Tratamentos</a></li>
+              <li><a href="#cases" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Casos de Sucesso</a></li>
+              <li><a href="#equipe" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Corpo Clínico</a></li>
+              <li><a href="#depoimentos" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Depoimentos</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-white font-[700] text-[13px] uppercase tracking-[1.5px] mb-6">SERVIÇOS</h4>
+            <ul className="flex flex-col gap-2">
+              <li><a href="#" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Clínica Geral</a></li>
+              <li><a href="#" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Cirurgias</a></li>
+              <li><a href="#" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Odontologia</a></li>
+              <li><a href="#" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Exames Laboratoriais</a></li>
+              <li><a href="#" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Plantão 24h</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-white font-[700] text-[13px] uppercase tracking-[1.5px] mb-6">CONTATO</h4>
+            <ul className="flex flex-col gap-2">
+              <li className="text-white/55 text-[14px] leading-[2.2]">(11) 99287-6219</li>
+              <li className="text-white/55 text-[14px] leading-[2.2]">contato@dunovet.com.br</li>
+              <li className="text-white/55 text-[14px] leading-[2.2] mt-2">
+                Av. Brigadeiro Faria Lima, 2000<br/>Itaim Bibi, São Paulo - SP
+              </li>
+            </ul>
+          </div>
         </div>
-        <p className="text-sm leading-relaxed max-w-sm text-gray-400">Excelência hospitalar e cuidado humanizado no coração do Itaim Bibi. Atendimento de elite para quem você mais ama.</p>
-        <p className="text-[10px] font-bold tracking-widest text-brand-highlight/75">Responsável Técnico: Dr. Carlos Eduardo (CRMV-SP 12345)<br/>Razão Social: Duno Clínica Veterinária LTDA - CNPJ: 00.000.000/0001-00</p>
-      </div>
-      <div>
-        <h4 className="text-white font-serif font-bold mb-6 uppercase tracking-widest text-sm">Links Rápidos</h4>
-        <ul className="text-[14px] space-y-2 font-bold tracking-wide">
-          <li><a href="#services" className="hover:text-brand-accent transition-colors leading-[2.0] block">Serviços</a></li>
-          <li><a href="#equipe" className="hover:text-brand-accent transition-colors leading-[2.0] block">Corpo Clínico</a></li>
-          <li><a href="#faq" className="hover:text-brand-accent transition-colors leading-[2.0] block">Dúvidas Frequentes</a></li>
-          <li><a href="#" className="hover:text-brand-accent transition-colors leading-[2.0] block">Política de Privacidade</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 className="text-white font-serif font-bold mb-6 uppercase tracking-widest text-sm">Siga-nos</h4>
-        <div className="flex gap-4">
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-brand-neutral/10 flex items-center justify-center text-white hover:text-brand-accent hover:bg-brand-neutral/20 transition-all"><Instagram className="w-5 h-5" /></a>
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-brand-neutral/10 flex items-center justify-center text-white hover:text-brand-accent hover:bg-brand-neutral/20 transition-all"><Facebook className="w-5 h-5" /></a>
+
+        <div className="border-t border-white/10 pt-[24px] flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-white/30 text-[13px]">
+            &copy; 2026 DUNO Clínica Veterinária. Todos os direitos reservados.
+          </p>
+          <p className="text-white/30 text-[13px]">
+            Resp. Técnico: Dr. Carlos Eduardo CRMV-SP 12345
+          </p>
         </div>
       </div>
-    </div>
-    <p className="text-center text-[10px] font-bold tracking-[0.5em] pt-12 border-t border-white/15">© 2026 DUNO CLÍNICA VETERINÁRIA. TODOS OS DIREITOS RESERVADOS.</p>
-  </footer>
-);
+    </footer>
+  );
+};
 
 export default function App() {
   return (
     <div className="bg-white min-h-screen">
       <Navbar />
       <Hero />
-      <About />
       <Services />
-      <Testimonials />
-      <Team />
       <SuccessCases />
       <Infrastructure />
+      <Team />
+      <Testimonials />
       <FAQ />
-      <Contact />
+      <Location />
       <CTASection />
       <Footer />
-      <a 
-        href={WHATSAPP_URL} 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="fixed bottom-8 right-8 z-[100] w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform"
-      >
-        <WhatsAppLogo className="w-9 h-9 fill-current" />
-      </a>
     </div>
   );
 }
