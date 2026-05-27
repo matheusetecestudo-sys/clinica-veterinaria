@@ -351,33 +351,36 @@ const Testimonials = () => {
   ];
 
   return (
-      <div className="mb-[56px] text-center">
-        <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">PROVA SOCIAL</span>
-        <h2 className="text-[32px] md:text-[44px] font-[800] text-white leading-[1.2]">
-          A prova de nossa <span className="text-brand-primary italic">excelência</span>
-        </h2>
-      </div>
+    <section id="depoimentos" className="py-20 px-6 bg-[#0D0D0D]">
+      <div className="max-w-[1200px] mx-auto">
+        <div className="mb-[56px] text-center">
+          <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">PROVA SOCIAL</span>
+          <h2 className="text-[32px] md:text-[44px] font-[800] text-white leading-[1.2]">
+            A prova de nossa <span className="text-brand-primary italic">excelência</span>
+          </h2>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {reviews.map((r, i) => (
-          <div key={i} className="bg-[#1A1A1A] rounded-[16px] p-[32px] relative">
-            <div className="absolute top-6 right-8 text-[64px] font-serif leading-none text-brand-primary opacity-30">"</div>
-            <div className="flex gap-1 mb-4">
-              {[1,2,3,4,5].map(s => <Star key={s} className="w-[18px] h-[18px] fill-brand-primary text-brand-primary" />)}
-            </div>
-            <p className="text-white/80 text-[15px] leading-[1.8] relative z-10 mb-[20px] min-h-[100px]">
-              {r.text}
-            </p>
-            <div className="w-full h-[1px] bg-white/10 mb-[20px]"></div>
-            <div className="flex items-center gap-3">
-              <img src={r.img} alt={r.name} className="w-[44px] h-[44px] rounded-full object-cover" />
-              <div>
-                <p className="text-white text-[14px] font-[600]">{r.name}</p>
-                <p className="text-[#6B6B6B] text-[13px]">Tutor do {r.pet}</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {reviews.map((r, i) => (
+            <div key={i} className="bg-[#1A1A1A] rounded-[16px] p-[32px] relative">
+              <div className="absolute top-6 right-8 text-[64px] font-serif leading-none text-brand-primary opacity-30">"</div>
+              <div className="flex gap-1 mb-4">
+                {[1,2,3,4,5].map(s => <Star key={s} className="w-[18px] h-[18px] fill-brand-primary text-brand-primary" />)}
+              </div>
+              <p className="text-white/80 text-[15px] leading-[1.8] relative z-10 mb-[20px] min-h-[100px]">
+                {r.text}
+              </p>
+              <div className="w-full h-[1px] bg-white/10 mb-[20px]"></div>
+              <div className="flex items-center gap-3">
+                <img src={r.img} alt={r.name} className="w-[44px] h-[44px] rounded-full object-cover" />
+                <div>
+                  <p className="text-white text-[14px] font-[600]">{r.name}</p>
+                  <p className="text-[#6B6B6B] text-[13px]">Tutor do {r.pet}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
