@@ -210,7 +210,7 @@ const Hero = () => {
         <img 
           src="/imagem/banner03.png" 
           alt="Duno Clínica Veterinária" 
-          className="w-full h-full object-cover scale-105"
+          className="w-full h-full object-contain scale-105"
           referrerPolicy="no-referrer"
           loading="eager"
         />
@@ -273,6 +273,21 @@ const Hero = () => {
     </section>
   );
 };
+
+// About Section
+const About = () => (
+  <section id="sobre" className="section-padding bg-brand-50 px-6">
+    <div className="max-w-7xl mx-auto">
+      <div className="text-center mb-12">
+        <h2 className="text-5xl font-serif font-bold text-brand-950">Sobre a DUNO</h2>
+        <p className="text-lg text-brand-800 mt-4 max-w-2xl mx-auto">
+          Somos uma clínica veterinária de excelência, combinando tecnologia avançada e cuidado humanizado para garantir a melhor saúde aos seus pets.
+        </p>
+      </div>
+      <img src="/imagem/about.jpg" alt="Sobre Duno" className="w-full h-auto rounded-xl shadow-lg" />
+    </div>
+  </section>
+);
 
 
 
@@ -403,22 +418,53 @@ const Testimonials = () => {
     }
   ];
 
+  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
     <section className="section-padding bg-white px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Vidas que Transformamos</span>
-          <h2 className="text-4xl md:text-6xl font-serif font-bold text-brand-950 tracking-tighter">O que nossos <span className="text-brand-700 italic">clientes dizem.</span></h2>
+          <h2 className="text-4xl md:text-6xl font-serif font-bold text-brand-950">O que nossos <span className="text-brand-700 italic">clientes dizem.</span></h2>
           <p className="text-gray-500 mt-4 max-w-xl mx-auto text-base">Veja como a vida dos pets e de seus tutores mudou de verdade.</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reviews.map((review, i) => (
-            <div key={i} className="bg-white rounded-3xl border border-brand-200 p-8 flex flex-col relative shadow-sm hover:shadow-lg transition-shadow duration-300">
-              {/* Quote icon badge */}
-              <div className="w-12 h-12 border-2 border-brand-700 rounded-2xl flex items-center justify-center mb-5 shrink-0">
-                <Quote className="w-5 h-5 text-brand-700" />
+        {/* Mobile carousel */}
+        <div className="lg:hidden relative overflow-hidden">
+          <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
+            {reviews.map((review, i) => (
+              <div key={i} className="w-full shrink-0 px-4">
+                <div className="bg-white rounded-3xl border border-brand-200 p-8 shadow-sm hover:shadow-lg transition-shadow duration-300">
+                  <div className="flex items-center gap-4 mb-4">
+                    <img src={review.img} alt={review.name} className="w-12 h-12 rounded-full object-cover" />
+                    <div>
+                      <h4 className="font-bold text-brand-950 text-sm">{review.name}</h4>
+                      <p className="text-brand-600 text-xs uppercase">{review.role}</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-600 italic mb-4">"{review.text}"</p>
+                  <p className="text-brand-400 text-xs uppercase">{review.pet}</p>
+                </div>
               </div>
-              <StarRating />
+            ))}
+          </div>
+          {/* Navigation */}
+          <div className="flex items-center justify-center gap-4 mt-6">
+            <button onClick={() => setActiveIndex(prev => Math.max(0, prev - 1))} disabled={activeIndex === 0} className="p-2 bg-brand-100 rounded-full disabled:opacity-30">
+              <ChevronRight className="w-5 h-5 rotate-180" />
+            </button>
+            <div className="flex gap-2">
+              {reviews.map((_, i) => (
+                <button key={i} onClick={() => setActiveIndex(i)} className={`w-2 h-2 rounded-full ${activeIndex === i ? 'bg-brand-400 w-4' : 'bg-brand-200'}`}></button>
+              ))}
+            </div>
+            <button onClick={() => setActiveIndex(prev => Math.min(reviews.length - 1, prev + 1))} disabled={activeIndex === reviews.length - 1} className="p-2 bg-brand-100 rounded-full disabled:opacity-30">
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+        {/* Desktop grid */}
+        <div className="hidden lg:grid grid-cols-3 gap-6">
+          {reviews.map((review, i) => (
               <p className="text-gray-600 italic text-sm leading-relaxed mb-8 flex-1">
                 "{review.text}"
               </p>
@@ -494,7 +540,7 @@ const Team = () => {
                       <img
                         src={vet.img}
                         alt={vet.name}
-                        className="w-full h-full object-cover object-top"
+                        className="w-full h-full object-contain"
                       />
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-4 py-4">
                         <div className="flex items-center gap-2">
