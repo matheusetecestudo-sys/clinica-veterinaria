@@ -55,8 +55,8 @@ const Navbar = () => {
     <>
       <nav className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${isScrolled ? "bg-[#0D0D0D] py-4 shadow-lg border-b border-white/5" : "bg-transparent py-6"}`}>
         <div className="max-w-[1200px] mx-auto px-6 flex justify-between items-center">
-          <div className="text-white font-bold text-2xl tracking-tight cursor-pointer">
-            DUNO
+          <div className="text-white font-bold text-[20px] tracking-tight cursor-pointer">
+            DUNO<span className="text-brand-primary">.</span>
           </div>
 
           <div className="hidden lg:flex items-center gap-8">
@@ -90,7 +90,7 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="fixed inset-0 bg-[#0D0D0D] z-[10000] flex flex-col p-6">
           <div className="flex justify-between items-center mb-12">
-            <div className="text-white font-bold text-2xl">DUNO</div>
+            <div className="text-white font-bold text-[20px]">DUNO<span className="text-brand-primary">.</span></div>
             <button onClick={() => setIsMobileMenuOpen(false)} className="text-brand-primary p-2">
               <X className="w-6 h-6" />
             </button>
@@ -190,7 +190,9 @@ const Services = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[24px]">
         {services.map((service, index) => (
           <div key={index} className="flex flex-col group cursor-pointer">
-            <img src={service.image} alt={service.title} className="w-full h-[200px] object-cover rounded-[12px]" />
+            <div className="w-full h-[200px] shrink-0">
+              <img src={service.image} alt={service.title} className="w-full h-full object-cover rounded-[12px]" />
+            </div>
             <h3 className="font-[600] text-[16px] text-brand-text mt-[12px]">{service.title}</h3>
             <p className="text-[#6B6B6B] text-[14px] mt-1 mb-3 line-clamp-2 leading-[1.7] flex-1">{service.desc}</p>
             <a href={WHATSAPP_URL} className="text-brand-primary font-[600] text-[14px] group-hover:underline">Saiba Mais &rarr;</a>
@@ -219,8 +221,8 @@ const SuccessCases = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
         {cases.map((c, i) => (
-          <div key={i} className="flex flex-col">
-            <div className="relative aspect-[4/3] rounded-[12px] overflow-hidden mb-[16px]">
+          <div key={i} className="flex flex-col w-full">
+            <div className="relative w-full aspect-[4/3] rounded-[12px] overflow-hidden mb-[16px]">
               <img src={c.img} alt={c.name} className="w-full h-full object-cover" />
               <div className="absolute top-4 left-4 bg-black/60 text-white rounded-[4px] px-[10px] py-[4px] text-[11px] uppercase font-bold tracking-wide">
                 ANTES / DEPOIS
@@ -454,7 +456,7 @@ const Location = () => {
           </div>
         </div>
 
-        <div className="w-full h-[380px] rounded-[16px] overflow-hidden shadow-minimal">
+        <div className="w-full h-[400px] rounded-[16px] overflow-hidden shadow-minimal">
           <MapContainer center={[-23.5899, -46.6815]} zoom={15} style={{ height: "100%", width: "100%", zIndex: 0 }}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <Marker position={[-23.5899, -46.6815]}>
