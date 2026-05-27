@@ -276,16 +276,98 @@ const Hero = () => {
 
 // About Section
 const About = () => (
-  <section id="sobre" className="section-padding bg-brand-50 px-6">
-    <div className="max-w-7xl mx-auto">
-      <div className="text-center mb-12">
-        <h2 className="text-5xl font-serif font-bold text-brand-950">Sobre a DUNO</h2>
-        <p className="text-lg text-brand-800 mt-4 max-w-2xl mx-auto">
-          Somos uma clínica veterinária de excelência, combinando tecnologia avançada e cuidado humanizado para garantir a melhor saúde aos seus pets.
-        </p>
+  <section id="sobre" className="bg-brand-950 text-white overflow-hidden">
+    {/* Top accent line */}
+    <div className="w-full h-1 bg-gradient-to-r from-transparent via-brand-400 to-transparent opacity-60" />
+
+    <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-28 lg:py-36">
+      <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+        {/* Left: Text Content */}
+        <div>
+          <span className="text-brand-400 font-bold uppercase tracking-[0.5em] text-[10px] mb-6 block">Nossa História</span>
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold tracking-tighter leading-[1.05] mb-8">
+            Cuidado que vai <br />
+            <span className="text-brand-400 italic">além do esperado.</span>
+          </h2>
+          <p className="text-brand-100/70 text-lg leading-relaxed mb-6">
+            Fundada por veterinários apaixonados pela medicina animal, a DUNO nasceu com um propósito claro: elevar o padrão de saúde e bem-estar dos pets do Brasil. Reunimos os melhores especialistas, a tecnologia mais avançada e um ambiente de acolhimento genuíno.
+          </p>
+          <p className="text-brand-100/60 text-base leading-relaxed mb-12">
+            Cada consulta, cada cirurgia, cada internação é tratada com o rigor de um hospital humano de excelência — porque acreditamos que a vida animal merece o mesmo respeito e dedicação.
+          </p>
+
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-6 mb-12">
+            {[
+              { num: "500+", label: "Cirurgias realizadas" },
+              { num: "15", label: "Anos de experiência" },
+              { num: "99,7%", label: "Índice de sucesso" },
+            ].map((stat, i) => (
+              <div key={i} className="border-l-2 border-brand-700 pl-4">
+                <p className="text-3xl font-serif font-bold text-brand-400">{stat.num}</p>
+                <p className="text-brand-100/50 text-xs uppercase tracking-widest mt-1">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Pillars */}
+          <div className="space-y-4 mb-12">
+            {[
+              { icon: <Stethoscope className="w-5 h-5 text-brand-400" />, title: "Tecnologia de Ponta", desc: "Equipamentos diagnósticos e cirúrgicos de última geração." },
+              { icon: <HeartPulse className="w-5 h-5 text-brand-400" />, title: "Cuidado Humanizado", desc: "Ambiente acolhedor e comunicação transparente com os tutores." },
+              { icon: <ShieldCheck className="w-5 h-5 text-brand-400" />, title: "Segurança & Confiança", desc: "Protocolos rígidos de assepsia e equipe altamente qualificada." },
+            ].map((pillar, i) => (
+              <div key={i} className="flex items-start gap-4 bg-brand-900/50 border border-brand-800 rounded-2xl p-4 hover:border-brand-600 transition-colors">
+                <div className="bg-brand-800 p-2.5 rounded-xl shrink-0">{pillar.icon}</div>
+                <div>
+                  <h4 className="font-bold text-white text-sm mb-0.5">{pillar.title}</h4>
+                  <p className="text-brand-100/50 text-xs leading-relaxed">{pillar.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 bg-brand-400 hover:bg-white text-brand-950 px-8 py-4 rounded-full font-bold uppercase tracking-widest text-[11px] transition-all duration-300 shadow-xl">
+            <WhatsAppLogo className="w-5 h-5 fill-current" />
+            Agendar Consulta
+            <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
+
+        {/* Right: Image */}
+        <div className="relative">
+          {/* Decorative glow */}
+          <div className="absolute -inset-8 bg-brand-400/10 rounded-[3rem] blur-3xl" />
+          <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border border-brand-800" style={{ aspectRatio: '3/4' }}>
+            <img
+              src="/imagem/veterinario_2.webp"
+              alt="Equipe DUNO"
+              className="w-full h-full object-cover object-top"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-950/80 via-transparent to-transparent" />
+          </div>
+          {/* Floating badge */}
+          <div className="absolute -bottom-6 -left-6 bg-brand-400 text-brand-950 px-6 py-4 rounded-2xl shadow-2xl">
+            <p className="text-3xl font-serif font-bold">+15</p>
+            <p className="text-xs font-bold uppercase tracking-widest">Anos cuidando</p>
+          </div>
+          {/* Floating live badge */}
+          <div className="absolute top-6 -right-4 bg-brand-950/90 backdrop-blur-md border border-brand-700 px-4 py-3 rounded-2xl shadow-xl">
+            <div className="flex items-center gap-2">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-400" />
+              </span>
+              <span className="text-white text-[10px] font-bold uppercase tracking-widest">Emergência 24h</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <img src="/imagem/about.jpg" alt="Sobre Duno" className="w-full h-auto rounded-xl shadow-lg" />
     </div>
+
+    {/* Bottom accent line */}
+    <div className="w-full h-1 bg-gradient-to-r from-transparent via-brand-400 to-transparent opacity-30" />
   </section>
 );
 
@@ -399,83 +481,92 @@ const Testimonials = () => {
       name: "Mariana Silva",
       role: "Tutora do Bento",
       pet: "Golden Retriever",
-      text: "A DUNO salvou a vida do Bento após um atropelamento. O atendimento foi impecável e a equipe nos manteve informados o tempo todo.",
+      text: "A DUNO salvou a vida do Bento após um atropelamento. O atendimento foi impecável e a equipe nos manteve informados o tempo todo. Nunca me senti tão segura.",
       img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop"
     },
     {
       name: "Ricardo Oliveira",
       role: "Tutor da Luna",
       pet: "Gato Persa",
-      text: "O padrão de higiene e o cuidado com gatos é diferenciado. A Luna se sente em casa, sem o estresse comum de outras clínicas.",
+      text: "O padrão de higiene e o cuidado com gatos é diferenciado. A Luna se sente em casa, sem o estresse comum de outras clínicas. Recomendo de olhos fechados.",
       img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop"
     },
     {
       name: "Ana Paula Costa",
       role: "Tutora do Thor",
       pet: "Bulldog Francês",
-      text: "Especialistas de altíssimo nível. Resolvemos um problema dermatológico crônico que ninguém conseguia tratar há anos.",
+      text: "Especialistas de altíssimo nível. Resolvemos um problema dermatológico crônico que ninguém conseguia tratar há anos. O Thor está radiante!",
       img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop"
     }
   ];
 
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const TestimonialCard = ({ review }: { review: typeof reviews[0] }) => (
+    <div className="bg-brand-900 border border-brand-800 hover:border-brand-600 rounded-3xl p-8 flex flex-col gap-6 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-950/50 group h-full">
+      {/* Quote icon */}
+      <div className="w-10 h-10 bg-brand-800 rounded-xl flex items-center justify-center shrink-0">
+        <Quote className="w-5 h-5 text-brand-400" />
+      </div>
+      {/* Stars */}
+      <StarRating />
+      {/* Text */}
+      <p className="text-brand-100/80 text-base leading-relaxed italic flex-1">&ldquo;{review.text}&rdquo;</p>
+      {/* Divider */}
+      <div className="w-full h-px bg-brand-800" />
+      {/* Author */}
+      <div className="flex items-center gap-4">
+        <img src={review.img} alt={review.name} className="w-14 h-14 rounded-full object-cover border-2 border-brand-700 group-hover:border-brand-400 transition-colors" />
+        <div>
+          <h4 className="font-bold text-white text-base">{review.name}</h4>
+          <p className="text-brand-400 text-xs uppercase tracking-widest font-bold">{review.role}</p>
+          <span className="inline-block mt-1 bg-brand-800 text-brand-300 text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full">{review.pet}</span>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <section className="section-padding bg-white px-6">
+    <section className="py-32 bg-brand-950 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <span className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Vidas que Transformamos</span>
-          <h2 className="text-4xl md:text-6xl font-serif font-bold text-brand-950">O que nossos <span className="text-brand-700 italic">clientes dizem.</span></h2>
-          <p className="text-gray-500 mt-4 max-w-xl mx-auto text-base">Veja como a vida dos pets e de seus tutores mudou de verdade.</p>
+          <span className="text-brand-400 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Vidas que Transformamos</span>
+          <h2 className="text-4xl md:text-6xl font-serif font-bold text-white">O que nossos <span className="text-brand-400 italic">clientes dizem.</span></h2>
+          <p className="text-brand-100/50 mt-4 max-w-xl mx-auto text-base">Veja como a vida dos pets e de seus tutores mudou de verdade.</p>
         </div>
+
         {/* Mobile carousel */}
         <div className="lg:hidden relative overflow-hidden">
           <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
             {reviews.map((review, i) => (
-              <div key={i} className="w-full shrink-0 px-4">
-                <div className="bg-gray-900 rounded-3xl border border-brand-200 p-8 shadow-sm hover:shadow-lg transition-shadow duration-300">
-                  <div className="flex items-center gap-4 mb-4">
-                    <img src={review.img} alt={review.name} className="w-12 h-12 rounded-full object-cover" />
-                    <div>
-                      <h4 className="font-bold text-brand-950 text-sm">{review.name}</h4>
-                      <p className="text-brand-600 text-xs uppercase">{review.role}</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-600 italic mb-4">"{review.text}"</p>
-                  <p className="text-brand-400 text-xs uppercase">{review.pet}</p>
-                </div>
+              <div key={i} className="w-full shrink-0 px-2">
+                <TestimonialCard review={review} />
               </div>
             ))}
           </div>
           {/* Navigation */}
-          <div className="flex items-center justify-center gap-4 mt-6">
-            <button onClick={() => setActiveIndex(prev => Math.max(0, prev - 1))} disabled={activeIndex === 0} className="p-2 bg-brand-100 rounded-full disabled:opacity-30">
+          <div className="flex items-center justify-center gap-4 mt-8">
+            <button onClick={() => setActiveIndex(prev => Math.max(0, prev - 1))} disabled={activeIndex === 0}
+              className="w-12 h-12 rounded-full border border-brand-700 flex items-center justify-center text-brand-400 disabled:opacity-30 hover:bg-brand-800 transition-colors">
               <ChevronRight className="w-5 h-5 rotate-180" />
             </button>
             <div className="flex gap-2">
               {reviews.map((_, i) => (
-                <button key={i} onClick={() => setActiveIndex(i)} className={`w-2 h-2 rounded-full ${activeIndex === i ? 'bg-brand-400 w-4' : 'bg-brand-200'}`}></button>
+                <button key={i} onClick={() => setActiveIndex(i)}
+                  className={`h-2 rounded-full transition-all duration-300 ${activeIndex === i ? 'bg-brand-400 w-6' : 'bg-brand-700 w-2'}`} />
               ))}
             </div>
-            <button onClick={() => setActiveIndex(prev => Math.min(reviews.length - 1, prev + 1))} disabled={activeIndex === reviews.length - 1} className="p-2 bg-brand-100 rounded-full disabled:opacity-30">
+            <button onClick={() => setActiveIndex(prev => Math.min(reviews.length - 1, prev + 1))} disabled={activeIndex === reviews.length - 1}
+              className="w-12 h-12 rounded-full border border-brand-700 flex items-center justify-center text-brand-400 disabled:opacity-30 hover:bg-brand-800 transition-colors">
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
         </div>
+
         {/* Desktop grid */}
-        <div className="hidden lg:grid grid-cols-3 gap-6 bg-gray-900 text-white">
+        <div className="hidden lg:grid grid-cols-3 gap-6">
           {reviews.map((review, i) => (
-            <div key={i} className="bg-gray-900 rounded-3xl border border-brand-200 p-8 shadow-sm hover:shadow-lg transition-shadow duration-300">
-              <div className="flex items-center gap-4 mb-4">
-                <img src={review.img} alt={review.name} className="w-12 h-12 rounded-full object-cover" />
-                <div>
-                  <h4 className="font-bold text-brand-950 text-sm">{review.name}</h4>
-                  <p className="text-brand-600 text-xs uppercase">{review.role}</p>
-                </div>
-              </div>
-              <p className="text-gray-600 italic mb-4">"{review.text}"</p>
-              <p className="text-brand-400 text-xs uppercase">{review.pet}</p>
-            </div>
+            <TestimonialCard key={i} review={review} />
           ))}
         </div>
       </div>
@@ -610,110 +701,107 @@ const Team = () => {
 
 const SuccessCases = () => {
   const cases = [
-    { name: "Max", especie: "Pitbull", condition: "Displasia Coxofemoral Severa", result: "Voltou a correr normalmente 3 meses após a cirurgia ortopédica.", img: "/imagem/pet01.jpg" },
-    { name: "Luna", especie: "Gato Persa", condition: "Obstrução Uretral Aguda", result: "Atendimento emergencial às 3h da manhã salvou seus rins. Recuperação 100%.", img: "/imagem/pet02.jpg" },
-    { name: "Thor", especie: "Bulldog Francês", condition: "Síndrome Braquicefálica", result: "Correção cirúrgica das narinas. Respira sem ruídos e brinca sem limitações.", img: "/imagem/pet03.jpg" }
+    { num: "01", name: "Max", especie: "Husky Siberiano", condition: "Displasia Coxofemoral Severa", result: "Voltou a correr normalmente 3 meses após a cirurgia ortopédica avançada.", img: "/imagem/pet01.jpg" },
+    { num: "02", name: "Kiwi", especie: "Papagaio Amazônico", condition: "Infecção Respiratória Grave", result: "Tratamento com antibioticoterapia especializada. Canto e voo totalmente recuperados.", img: "/imagem/pet02.jpg" },
+    { num: "03", name: "Luna", especie: "Gato Branco", condition: "Síndrome do Trato Urinário Felino", result: "Atendimento emergencial às 3h da manhã. Recuperação 100% em 2 semanas.", img: "/imagem/pet03.jpg" }
   ];
 
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section id="cases" className="py-32 bg-white text-gray-800 px-6">
+    <section id="cases" className="py-32 bg-brand-50 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <span className="text-brand-400 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Vidas Transformadas</span>
-          <h2 className="text-5xl font-serif font-bold uppercase tracking-tighter">Casos de <span className="text-brand-400 italic">Sucesso</span></h2>
+          <span className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Vidas Transformadas</span>
+          <h2 className="text-5xl md:text-6xl font-serif font-bold text-brand-950 tracking-tighter">Casos de <span className="text-brand-700 italic">Sucesso</span></h2>
+          <p className="text-brand-800/60 mt-4 max-w-xl mx-auto">Histórias reais de recuperação e superação com o cuidado DUNO.</p>
         </div>
 
         {/* Carousel for mobile/tablet, grid for desktop */}
         <div className="relative">
-          {/* Mobile/Tablet view (hidden on lg, slider) */}
+          {/* Mobile/Tablet view */}
           <div className="lg:hidden relative overflow-hidden">
             <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
               {cases.map((c, i) => (
-                <div key={i} className="w-full shrink-0 px-4">
-                  <div className="bg-brand-900 rounded-[2rem] overflow-hidden border border-brand-800 flex flex-col max-w-sm mx-auto">
-                    <div className="h-64 overflow-hidden relative">
+                <div key={i} className="w-full shrink-0 px-2">
+                  <div className="bg-white rounded-[2rem] overflow-hidden border border-brand-100 shadow-xl flex flex-col max-w-sm mx-auto">
+                    <div className="h-72 overflow-hidden relative">
                       <img src={c.img} alt={c.name} className="w-full h-full object-cover" />
-                      <div className="absolute top-4 right-4 bg-brand-950/80 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10">
+                      <div className="absolute inset-0 bg-gradient-to-t from-brand-950/80 via-transparent to-transparent" />
+                      <div className="absolute top-4 left-4 bg-brand-950/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-brand-700">
                         <span className="text-[10px] font-bold text-brand-400 uppercase tracking-widest">{c.especie}</span>
                       </div>
+                      <div className="absolute top-4 right-4 text-5xl font-serif font-bold text-white/10">{c.num}</div>
                     </div>
-                    <div className="p-8 flex-1 flex flex-col">
-                      <h3 className="text-2xl font-serif font-bold uppercase mb-6 text-white">{c.name}</h3>
-                      <div className="space-y-4 mb-8 flex-1">
-                        <div>
+                    <div className="p-8 flex-1 flex flex-col bg-brand-950">
+                      <h3 className="text-2xl font-serif font-bold mb-4 text-white">{c.name}</h3>
+                      <div className="space-y-4 mb-6 flex-1">
+                        <div className="bg-brand-900 rounded-xl p-4">
                           <span className="text-[9px] uppercase tracking-widest text-brand-400 font-bold block mb-1">Condição Tratada</span>
-                          <p className="text-white text-sm font-medium">{c.condition}</p>
+                          <p className="text-brand-100/80 text-sm">{c.condition}</p>
                         </div>
-                        <div className="w-full h-[1px] bg-brand-800/50"></div>
-                        <div>
-                          <span className="text-[9px] uppercase tracking-widest text-emerald-400 font-bold block mb-1">Resultado</span>
-                          <p className="text-brand-100/80 text-sm leading-relaxed">{c.result}</p>
+                        <div className="bg-brand-900 rounded-xl p-4 border-l-4 border-brand-400">
+                          <span className="text-[9px] uppercase tracking-widest text-brand-400 font-bold block mb-1">✓ Resultado</span>
+                          <p className="text-white text-sm leading-relaxed">{c.result}</p>
                         </div>
                       </div>
-                      <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-brand-400 font-bold text-[10px] uppercase tracking-widest flex items-center gap-2">
-                        AGENDAR CONSULTA <ArrowRight className="w-4 h-4" />
+                      <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 bg-brand-400 hover:bg-white text-brand-950 font-bold uppercase tracking-widest text-[10px] py-3 px-6 rounded-full transition-all duration-300">
+                        Agendar Consulta <ArrowRight className="w-4 h-4" />
                       </a>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-
-            {/* Navigation Dots and Arrows */}
+            {/* Navigation */}
             <div className="flex items-center justify-center gap-4 mt-8">
-              <button 
-                onClick={() => setActiveIndex(prev => Math.max(0, prev - 1))}
-                disabled={activeIndex === 0}
-                className="w-10 h-10 rounded-full border border-brand-800 flex items-center justify-center text-brand-400 disabled:opacity-30 disabled:pointer-events-none hover:bg-brand-900 bg-brand-900"
-              >
+              <button onClick={() => setActiveIndex(prev => Math.max(0, prev - 1))} disabled={activeIndex === 0}
+                className="w-12 h-12 rounded-full border border-brand-300 flex items-center justify-center text-brand-700 disabled:opacity-30 hover:bg-brand-100 bg-white shadow-sm">
                 <ChevronRight className="w-5 h-5 rotate-180" />
               </button>
               <div className="flex gap-2">
                 {cases.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActiveIndex(i)}
-                    className={`w-2 h-2 rounded-full transition-all ${activeIndex === i ? 'bg-brand-400 w-4' : 'bg-white/20'}`}
-                  />
+                  <button key={i} onClick={() => setActiveIndex(i)}
+                    className={`h-2 rounded-full transition-all duration-300 ${activeIndex === i ? 'bg-brand-600 w-6' : 'bg-brand-200 w-2'}`} />
                 ))}
               </div>
-              <button 
-                onClick={() => setActiveIndex(prev => Math.min(cases.length - 1, prev + 1))}
-                disabled={activeIndex === cases.length - 1}
-                className="w-10 h-10 rounded-full border border-brand-800 flex items-center justify-center text-brand-400 disabled:opacity-30 disabled:pointer-events-none hover:bg-brand-900 bg-brand-900"
-              >
+              <button onClick={() => setActiveIndex(prev => Math.min(cases.length - 1, prev + 1))} disabled={activeIndex === cases.length - 1}
+                className="w-12 h-12 rounded-full border border-brand-300 flex items-center justify-center text-brand-700 disabled:opacity-30 hover:bg-brand-100 bg-white shadow-sm">
                 <ChevronRight className="w-5 h-5" />
               </button>
             </div>
           </div>
 
-          {/* Desktop view (grid, hidden on mobile/tablet) */}
+          {/* Desktop grid */}
           <div className="hidden lg:grid grid-cols-3 gap-8">
             {cases.map((c, i) => (
-              <div key={i} className="bg-brand-900 rounded-[2rem] overflow-hidden border border-brand-800 flex flex-col group">
-                <div className="h-64 overflow-hidden relative">
-                  <img src={c.img} alt={c.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute top-4 right-4 bg-brand-950/80 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10">
+              <div key={i} className="bg-white rounded-[2rem] overflow-hidden border border-brand-100 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col group">
+                <div className="h-72 overflow-hidden relative">
+                  <img src={c.img} alt={c.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-950/70 via-transparent to-transparent" />
+                  <div className="absolute top-4 left-4 bg-brand-950/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-brand-700">
                     <span className="text-[10px] font-bold text-brand-400 uppercase tracking-widest">{c.especie}</span>
                   </div>
+                  <div className="absolute top-3 right-5 text-6xl font-serif font-bold text-white/10 leading-none">{c.num}</div>
+                  <div className="absolute bottom-4 left-6">
+                    <h3 className="text-3xl font-serif font-bold text-white">{c.name}</h3>
+                  </div>
                 </div>
-                <div className="p-8 flex-1 flex flex-col">
-                  <h3 className="text-2xl font-serif font-bold uppercase mb-6 text-white">{c.name}</h3>
-                  <div className="space-y-4 mb-8 flex-1">
-                    <div>
-                      <span className="text-[9px] uppercase tracking-widest text-brand-400 block mb-1">Condição Tratada</span>
-                      <p className="text-white text-sm font-medium">{c.condition}</p>
+                <div className="p-8 flex-1 flex flex-col bg-brand-950">
+                  <div className="space-y-4 mb-6 flex-1">
+                    <div className="bg-brand-900 rounded-xl p-4">
+                      <span className="text-[9px] uppercase tracking-widest text-brand-400 font-bold block mb-1">Condição Tratada</span>
+                      <p className="text-brand-100/80 text-sm">{c.condition}</p>
                     </div>
-                    <div className="w-full h-[1px] bg-brand-800/50"></div>
-                    <div>
-                      <span className="text-[9px] uppercase tracking-widest text-emerald-400 block mb-1">Resultado</span>
-                      <p className="text-brand-100/80 text-sm leading-relaxed">{c.result}</p>
+                    <div className="bg-brand-900 rounded-xl p-4 border-l-4 border-brand-400">
+                      <span className="text-[9px] uppercase tracking-widest text-brand-400 font-bold block mb-1">✓ Resultado</span>
+                      <p className="text-white text-sm leading-relaxed">{c.result}</p>
                     </div>
                   </div>
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-brand-400 font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 group-hover:text-white transition-colors">
-                    AGENDAR CONSULTA <ArrowRight className="w-4 h-4" />
+                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 bg-brand-400 hover:bg-white text-brand-950 font-bold uppercase tracking-widest text-[10px] py-3 px-6 rounded-full transition-all duration-300 w-full">
+                    Agendar Consulta <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>
               </div>
@@ -800,54 +888,61 @@ const FAQ = () => {
 };
 
 const Contact = () => (
-  <section id="contact" className="section-padding bg-brand-950 text-white px-6">
-    <div className="max-w-7xl mx-auto grid lg:grid-cols-[40%_60%] gap-12 lg:gap-20 items-center">
-      <div>
-        <h2 className="text-5xl font-serif font-bold mb-10 tracking-tighter uppercase">Onde <span className="text-brand-400 italic">Estamos.</span></h2>
-        <div className="space-y-8 mb-12">
-          <div className="flex gap-6 items-start">
-            <MapPin className="text-brand-400 w-8 h-8 shrink-0 mt-1" />
-            <div>
-              <p className="text-lg font-bold mb-1">Endereço</p>
-              <p className="text-brand-100/70">Av. Brigadeiro Faria Lima, 2000<br/>Itaim Bibi, São Paulo - SP</p>
-            </div>
-          </div>
-          <div className="flex gap-6 items-start">
-            <Phone className="text-brand-400 w-8 h-8 shrink-0 mt-1" />
-            <div>
-              <p className="text-lg font-bold mb-1">Contato Regular</p>
-              <p className="text-brand-100/70">(11) 99287-6219</p>
-            </div>
-          </div>
-          <div className="flex gap-6 items-start">
-            <Phone className="text-brand-400 w-8 h-8 shrink-0 mt-1" />
-            <div>
-              <p className="text-lg font-bold mb-1">Plantão Emergência</p>
-              <p className="text-brand-100/70">(11) 99999-9999</p>
-            </div>
-          </div>
-          <div className="flex gap-6 items-start">
-            <Clock className="text-brand-400 w-8 h-8 shrink-0 mt-1" />
-            <div>
-              <p className="text-lg font-bold mb-1">Horários (Rotina)</p>
-              <p className="text-brand-100/70">Seg-Sex: 08:00 - 20:00<br/>Sáb: 08:00 - 18:00</p>
-            </div>
-          </div>
-        </div>
-        <a 
-          href="https://maps.google.com/?q=Av.+Brigadeiro+Faria+Lima,+2000+-+Itaim+Bibi" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="inline-flex items-center gap-3 bg-brand-800 hover:bg-brand-700 text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-[11px] transition-colors"
-        >
-          <MapPin className="w-4 h-4" /> ABRIR NO GOOGLE MAPS
-        </a>
+  <section id="contact" className="py-28 bg-brand-950 text-white px-6 overflow-hidden relative">
+    {/* Ambient glow */}
+    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-800/20 rounded-full blur-[120px] pointer-events-none" />
+    <div className="max-w-7xl mx-auto">
+      <div className="text-center mb-16">
+        <span className="text-brand-400 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Venha Nos Visitar</span>
+        <h2 className="text-5xl md:text-6xl font-serif font-bold tracking-tighter">Onde <span className="text-brand-400 italic">Estamos.</span></h2>
+        <p className="text-brand-100/50 mt-4 max-w-lg mx-auto">No coração do Itaim Bibi, com fácil acesso e estacionamento próprio.</p>
       </div>
-      <div className="h-[500px] rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 lg:order-last order-first">
-        <MapContainer center={[-23.5899, -46.6815]} zoom={15} style={{ height: "100%", width: "100%" }}>
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          <Marker position={[-23.5899, -46.6815]} />
-        </MapContainer>
+
+      <div className="grid lg:grid-cols-[42%_58%] gap-10 lg:gap-16 items-start">
+        {/* Left info */}
+        <div className="space-y-4">
+          {[
+            { icon: <MapPin className="w-6 h-6 text-brand-400" />, title: "Endereço", info: "Av. Brigadeiro Faria Lima, 2000\nItaim Bibi, São Paulo – SP" },
+            { icon: <Phone className="w-6 h-6 text-brand-400" />, title: "WhatsApp / Contato", info: "(11) 99287-6219" },
+            { icon: <Phone className="w-6 h-6 text-brand-400" />, title: "Plantão Emergência 24h", info: "(11) 99999-9999" },
+            { icon: <Clock className="w-6 h-6 text-brand-400" />, title: "Horários de Atendimento", info: "Seg–Sex: 08:00–20:00\nSáb: 08:00–18:00" },
+          ].map((item, i) => (
+            <div key={i} className="flex items-start gap-5 bg-brand-900/60 border border-brand-800 hover:border-brand-600 rounded-2xl p-5 transition-colors group">
+              <div className="bg-brand-800 group-hover:bg-brand-700 p-3 rounded-xl shrink-0 transition-colors">{item.icon}</div>
+              <div>
+                <p className="font-bold text-white text-sm mb-1">{item.title}</p>
+                <p className="text-brand-100/60 text-sm whitespace-pre-line leading-relaxed">{item.info}</p>
+              </div>
+            </div>
+          ))}
+
+          {/* Emergency badge */}
+          <div className="bg-brand-400/10 border border-brand-400/30 rounded-2xl p-5 flex items-center gap-4 mt-2">
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-400" />
+            </span>
+            <p className="text-brand-300 font-bold text-sm uppercase tracking-widest">Plantão Emergencial Ativo 24h</p>
+          </div>
+
+          <a
+            href="https://maps.google.com/?q=Av.+Brigadeiro+Faria+Lima,+2000+-+Itaim+Bibi"
+            target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 bg-brand-400 hover:bg-white text-brand-950 px-8 py-4 rounded-full font-bold uppercase tracking-widest text-[11px] transition-all duration-300 shadow-xl w-full justify-center"
+          >
+            <MapPin className="w-4 h-4" /> Abrir no Google Maps
+          </a>
+        </div>
+
+        {/* Right map */}
+        <div className="h-[520px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-brand-800 lg:order-last order-first">
+          <MapContainer center={[-23.5899, -46.6815]} zoom={15} style={{ height: "100%", width: "100%" }}>
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            <Marker position={[-23.5899, -46.6815]}>
+              <Popup>DUNO Clínica Veterinária – Itaim Bibi</Popup>
+            </Marker>
+          </MapContainer>
+        </div>
       </div>
     </div>
   </section>
@@ -855,56 +950,69 @@ const Contact = () => (
 
 const CTASection = () => {
   return (
-    <section className="py-24 bg-brand-950 text-white relative overflow-hidden px-6">
-      {/* Decorative background overlay */}
-      <div className="absolute inset-0 bg-pattern opacity-5"></div>
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-20 bg-gradient-to-b from-brand-400 to-transparent opacity-30"></div>
-      
+    <section className="py-28 bg-brand-950 text-white relative overflow-hidden px-6">
+      {/* Background pattern */}
+      <div className="absolute inset-0 bg-pattern opacity-[0.04]" />
+      {/* Gradient orbs */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-700/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-brand-400 to-transparent opacity-40" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-t from-brand-400 to-transparent opacity-20" />
+
       <div className="max-w-5xl mx-auto relative z-10">
-        <div className="bg-brand-900/40 border border-brand-800/80 rounded-[3rem] p-10 md:p-16 text-center backdrop-blur-md shadow-3xl">
-          <div className="inline-flex items-center gap-3 px-4 py-2 bg-brand-950/80 border border-brand-800 rounded-full mb-8">
+        <div className="bg-gradient-to-br from-brand-900/60 to-brand-950/80 border border-brand-700/50 rounded-[3rem] p-10 md:p-20 text-center backdrop-blur-md shadow-2xl">
+
+          {/* Live badge */}
+          <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-brand-950 border border-brand-700 rounded-full mb-10">
             <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-400"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-400" />
             </span>
-            <span className="text-brand-400 text-[10px] font-bold uppercase tracking-[0.3em]">
-              Atendimento Emergencial 24h & Consultas
-            </span>
+            <span className="text-brand-400 text-[10px] font-bold uppercase tracking-[0.35em]">Emergência 24h · Consultas · Internação</span>
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6 tracking-tighter leading-tight uppercase">
-            GARANTA O MELHOR CUIDADO <br />
-            <span className="text-brand-400 italic font-medium">PARA QUEM VOCÊ AMA.</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 tracking-tighter leading-tight">
+            Garanta o Melhor Cuidado <br />
+            <span className="text-brand-400 italic">para quem você ama.</span>
           </h2>
 
-          <p className="text-base md:text-lg text-white/70 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Seja para uma consulta preventiva de rotina ou um atendimento de emergência, nossa equipe médica de elite está de prontidão absoluta. Fale conosco agora mesmo.
+          <p className="text-lg text-brand-100/60 mb-12 max-w-2xl mx-auto leading-relaxed">
+            Seja para uma consulta preventiva ou um atendimento emergencial, nossa equipe de elite está pronta. Fale conosco agora mesmo.
           </p>
 
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-            <a 
-              href={WHATSAPP_URL} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="bg-brand-400 hover:bg-white text-brand-950 px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] transition-all duration-300 shadow-2xl flex items-center justify-center gap-3 group w-full sm:w-auto"
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-5">
+            <a
+              href={WHATSAPP_URL}
+              target="_blank" rel="noopener noreferrer"
+              className="bg-brand-400 hover:bg-white text-brand-950 px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] transition-all duration-300 shadow-2xl shadow-brand-400/20 flex items-center justify-center gap-3 group w-full sm:w-auto hover:scale-105"
             >
               <WhatsAppLogo className="w-5 h-5 fill-current" />
-              <span>AGENDAR NO WHATSAPP</span>
+              <span>Agendar no WhatsApp</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
-            <a 
-              href="tel:5511999999999" 
-              className="border border-brand-400/40 text-brand-400 px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] transition-all duration-300 flex items-center justify-center gap-3 group w-full sm:w-auto"
+            <a
+              href="tel:5511999999999"
+              className="border-2 border-brand-600 hover:border-brand-400 text-brand-300 hover:text-brand-400 px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] transition-all duration-300 flex items-center justify-center gap-3 w-full sm:w-auto"
             >
               <Phone className="w-4 h-4" />
-              <span>EMERGÊNCIA (LIGAR AGORA)</span>
+              <span>Emergência (Ligar Agora)</span>
             </a>
+          </div>
+
+          {/* Trust indicators */}
+          <div className="mt-12 pt-10 border-t border-brand-800 grid grid-cols-3 gap-6 text-center">
+            {[
+              { val: "24h", label: "Plantão ativo" },
+              { val: "500+", label: "Cirurgias" },
+              { val: "99,7%", label: "Sucesso" },
+            ].map((stat, i) => (
+              <div key={i}>
+                <p className="text-2xl font-serif font-bold text-brand-400">{stat.val}</p>
+                <p className="text-brand-100/40 text-xs uppercase tracking-widest mt-1">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-      
-      {/* Ambient glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-48 bg-brand-900/10 rounded-full blur-[100px]"></div>
     </section>
   );
 };
