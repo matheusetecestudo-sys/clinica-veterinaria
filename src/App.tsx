@@ -347,7 +347,7 @@ const Services = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100 hover:border-brand-200 transition-all duration-500 group flex flex-col"
+              className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border-2 border-[#28a745] hover:border-brand-200 transition-all duration-500 group flex flex-col"
             >
               {/* Image with shorter aspect-ratio */}
               <div className="w-full aspect-[16/10] overflow-hidden">
@@ -433,7 +433,7 @@ const Testimonials = () => {
           <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
             {reviews.map((review, i) => (
               <div key={i} className="w-full shrink-0 px-4">
-                <div className="bg-white rounded-3xl border border-brand-200 p-8 shadow-sm hover:shadow-lg transition-shadow duration-300">
+                <div className="bg-gray-900 rounded-3xl border border-brand-200 p-8 shadow-sm hover:shadow-lg transition-shadow duration-300">
                   <div className="flex items-center gap-4 mb-4">
                     <img src={review.img} alt={review.name} className="w-12 h-12 rounded-full object-cover" />
                     <div>
@@ -463,9 +463,9 @@ const Testimonials = () => {
           </div>
         </div>
         {/* Desktop grid */}
-        <div className="hidden lg:grid grid-cols-3 gap-6">
+        <div className="hidden lg:grid grid-cols-3 gap-6 bg-gray-900 text-white">
           {reviews.map((review, i) => (
-            <div key={i} className="bg-white rounded-3xl border border-brand-200 p-8 shadow-sm hover:shadow-lg transition-shadow duration-300">
+            <div key={i} className="bg-gray-900 rounded-3xl border border-brand-200 p-8 shadow-sm hover:shadow-lg transition-shadow duration-300">
               <div className="flex items-center gap-4 mb-4">
                 <img src={review.img} alt={review.name} className="w-12 h-12 rounded-full object-cover" />
                 <div>
@@ -530,7 +530,7 @@ const Team = () => {
                       <img
                         src={vet.img}
                         alt={vet.name}
-                        className="w-full h-full object-contain"
+                        className="w-full h-full object-cover"
                       />
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-4 py-4">
                         <div className="flex items-center gap-2">
@@ -618,7 +618,7 @@ const SuccessCases = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section id="cases" className="py-32 bg-brand-950 text-white px-6">
+    <section id="cases" className="py-32 bg-white text-gray-800 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-brand-400 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Vidas Transformadas</span>
@@ -943,6 +943,7 @@ export default function App() {
     <div className="bg-white min-h-screen">
       <Navbar />
       <Hero />
+      <About />
       <Services />
       <Testimonials />
       <Team />
