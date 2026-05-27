@@ -12,6 +12,21 @@ import {
   ArrowRight,
   Menu
 } from 'lucide-react';
+
+const ProgressBar = () => {
+  const [scroll, setScroll] = React.useState(0);
+  React.useEffect(() => {
+    const onScroll = () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      setScroll(scrolled);
+    };
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  return <div className="fixed top-0 left-0 h-1 bg-brand-primary" style={{ width: `${scroll}%` }} />;
+};
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -55,7 +70,7 @@ const Navbar = () => {
     <>
       <nav className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${isScrolled ? "bg-[#0D0D0D] py-4 shadow-lg border-b border-white/5" : "bg-transparent py-6"}`}>
         <div className="max-w-[1200px] mx-auto px-6 flex justify-between items-center">
-          <div className="text-white font-bold text-[20px] tracking-tight cursor-pointer">
+          <div className="text-logo cursor-pointer">
             DUNO<span className="text-brand-primary">.</span>
           </div>
 
@@ -86,7 +101,10 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Floating WhatsApp Button */}
+      <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="fixed bottom-6 right-6 bg-brand-primary text-white p-4 rounded-full shadow-minimal hover:bg-brand-600 transition-colors flex items-center justify-center">
+        <MessageCircle className="w-6 h-6" />
+      </a>
       {isMobileMenuOpen && (
         <div className="fixed inset-0 bg-[#0D0D0D] z-[10000] flex flex-col p-6">
           <div className="flex justify-between items-center mb-12">
@@ -95,7 +113,7 @@ const Navbar = () => {
               <X className="w-6 h-6" />
             </button>
           </div>
-          <div className="flex flex-col gap-6">
+              <div className="flex flex-col w-full border-2 border-brand-primary rounded-[12px] overflow-hidden">
             {navLinks.map((link) => (
               <a 
                 key={link.name} 
@@ -187,15 +205,21 @@ const Services = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[24px]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-[24px]">
         {services.map((service, index) => (
-          <div key={index} className="flex flex-col group cursor-pointer">
-            <div className="w-full h-[200px] shrink-0">
-              <img src={service.image} alt={service.title} className="w-full h-full object-cover rounded-[12px]" />
+          <div key={index} className="flex flex-col group cursor-pointer border-2 border-brand-primary rounded-[12px] overflow-hidden p-4 transition-all">
+            <div className="w-full h-[200px] shrink-0 mb-4">
+              <img src={service.image} alt={service.title} className="w-full h-full object-cover rounded-[8px]" />
             </div>
-            <h3 className="font-[600] text-[16px] text-brand-text mt-[12px]">{service.title}</h3>
-            <p className="text-[#6B6B6B] text-[14px] mt-1 mb-3 line-clamp-2 leading-[1.7] flex-1">{service.desc}</p>
-            <a href={WHATSAPP_URL} className="text-brand-primary font-[600] text-[14px] group-hover:underline">Saiba Mais &rarr;</a>
+            <h3 className="font-[600] text-[16px] text-brand-text mb-2">
+              {service.title}
+            </h3>
+            <p className="text-[#6B6B6B] text-[14px] mb-3 line-clamp-2 leading-[1.7] flex-1">
+              {service.desc}
+            </p>
+            <a href={WHATSAPP_URL} className="text-brand-primary font-[600] text-[14px] group-hover:underline">
+              Saiba Mais &rarr;
+            </a>
           </div>
         ))}
       </div>
@@ -211,30 +235,27 @@ const SuccessCases = () => {
   ];
 
   return (
-    <section id="cases" className="section-padding bg-[#F7F7F7]">
-      <div className="mb-[56px] text-center md:text-left">
-        <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">GALERIA DE EXCELÊNCIA</span>
-        <h2 className="text-[32px] md:text-[44px] font-[800] text-brand-text leading-[1.2]">
-          Transformações <span className="text-brand-primary italic">Reais</span>
-        </h2>
-      </div>
+    <section id="cases" className="py-20 px-6 bg-[#F7F7F7]">
+      <div className="max-w-[1200px] mx-auto">
+        <div className="mb-[56px] text-center md:text-left">
+          <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">GALERIA DE EXCELÊNCIA</span>
+          <h2 className="text-[32px] md:text-[44px] font-[800] text-brand-text leading-[1.2]">
+            Transformações <span className="text-brand-primary italic">Reais</span>
+          </h2>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
-        {cases.map((c, i) => (
-          <div key={i} className="flex flex-col w-full">
-            <div className="relative w-full aspect-[4/3] rounded-[12px] overflow-hidden mb-[16px]">
-              <img src={c.img} alt={c.name} className="w-full h-full object-cover" />
-              <div className="absolute top-4 left-4 bg-black/60 text-white rounded-[4px] px-[10px] py-[4px] text-[11px] uppercase font-bold tracking-wide">
-                ANTES / DEPOIS
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
+          {cases.map((c, i) => (
+            <div key={i} className="flex flex-col w-full border-2 border-brand-primary rounded-[12px] overflow-hidden p-4 transition-all">
+              <div className="relative w-full aspect-[4/3] rounded-[8px] overflow-hidden mb-[16px]">
+                <img src={c.img} alt={c.name} className="w-full h-full object-cover" />
               </div>
+              <h3 className="font-[700] text-[20px] text-brand-text mb-2">{c.name}</h3>
+              <p className="text-[#6B6B6B] text-[14px] leading-[1.7] mb-6 line-clamp-3">{c.desc}</p>
+              
             </div>
-            <h3 className="font-[700] text-[20px] text-brand-text mb-2">{c.name}</h3>
-            <p className="text-[#6B6B6B] text-[14px] leading-[1.7] mb-6 line-clamp-3">{c.desc}</p>
-            <a href={WHATSAPP_URL} className="inline-block text-center border-2 border-brand-text text-brand-text px-[24px] py-[12px] rounded-[4px] font-[600] text-[13px] uppercase tracking-wide transition-colors hover:bg-brand-primary hover:border-brand-primary hover:text-white self-start">
-              VEJA ESTE CASO &rarr;
-            </a>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -242,8 +263,8 @@ const SuccessCases = () => {
 
 const Infrastructure = () => {
   return (
-    <section className="section-padding bg-[#111111]">
-      <div className="grid lg:grid-cols-[55%_45%] gap-12 items-center">
+    <section className="py-20 px-6 bg-[#111111]">
+      <div className="max-w-[1200px] mx-auto grid lg:grid-cols-[55%_45%] gap-12 items-center">
         <div>
           <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">A CLÍNICA</span>
           <h2 className="text-[32px] md:text-[40px] font-[800] text-white leading-[1.2] mb-6">
@@ -272,16 +293,6 @@ const Infrastructure = () => {
               </div>
             ))}
           </div>
-
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#1A1A1A] flex items-center justify-center rounded">
-              <span className="text-white font-bold text-lg">D</span>
-            </div>
-            <div>
-              <p className="text-white font-bold text-sm leading-tight">DUNO</p>
-              <p className="text-white/40 text-[11px] uppercase tracking-widest">Clínica Veterinária</p>
-            </div>
-          </div>
         </div>
 
         <div className="w-full aspect-[4/3] rounded-[16px] overflow-hidden">
@@ -300,26 +311,23 @@ const Team = () => {
   ];
 
   return (
-    <section id="equipe" className="section-padding bg-white">
+    <section id="equipe" className="py-20 px-6 bg-white max-w-[1200px] mx-auto">
       <div className="mb-[56px] text-center">
         <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">NOSSA EQUIPE</span>
         <h2 className="text-[32px] md:text-[44px] font-[800] text-brand-text leading-[1.2]">
           Mentes brilhantes por trás de <span className="text-brand-primary italic">vidas</span><br/>
           <span className="text-brand-primary italic">saudáveis.</span>
         </h2>
-        <p className="text-[#6B6B6B] text-[16px] mt-4 max-w-[600px] mx-auto leading-[1.7]">
-          Especialistas renomados que tratam seu animal com a seriedade da medicina avançada e o carinho que ele merece.
-        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {team.map((vet, i) => (
           <div key={i} className="flex flex-col items-center">
-            <img 
-              src={vet.img} 
-              alt={vet.name} 
-              className="w-[140px] h-[140px] rounded-full object-cover object-top border-[4px] border-[#F7F7F7] shadow-[0_0_0_2px_#E8671A] mb-[16px]"
-            />
+                <img 
+                  src={vet.img} 
+                  alt={vet.name} 
+                  className="w-[250px] h-[250px] rounded-full object-cover object-top border-[4px] border-[#F7F7F7] shadow-[0_0_0_2px_#E8671A] mb-[16px]" 
+                />
             <h3 className="font-[700] text-[18px] text-brand-text">{vet.name}</h3>
             <p className="text-brand-primary text-[11px] uppercase tracking-[2px] font-bold mt-1 mb-1">{vet.crmv}</p>
             <p className="text-[#6B6B6B] text-[14px] mb-3">{vet.specialty}</p>
@@ -343,7 +351,6 @@ const Testimonials = () => {
   ];
 
   return (
-    <section id="depoimentos" className="section-padding bg-[#111111]">
       <div className="mb-[56px] text-center">
         <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">PROVA SOCIAL</span>
         <h2 className="text-[32px] md:text-[44px] font-[800] text-white leading-[1.2]">
@@ -554,6 +561,7 @@ const Footer = () => {
 export default function App() {
   return (
     <div className="bg-white min-h-screen">
+      <ProgressBar />
       <Navbar />
       <Hero />
       <Services />

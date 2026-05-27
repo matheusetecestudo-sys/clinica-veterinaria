@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Inter:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
 
@@ -54,7 +54,7 @@
   }
 }
 
-.section-padding {
+.text-logo { @apply font-bold text-[20px] text-white; font-family: 'Montserrat', sans-serif; }
   @apply py-[64px] lg:py-[96px] px-[24px] max-w-[1200px] mx-auto;
 }
 
