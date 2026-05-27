@@ -85,7 +85,7 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
           <div className="flex items-center gap-3 cursor-pointer">
             <div className="w-12 h-12 bg-brand-900 rounded-xl flex items-center justify-center">
-              <PawPrint className="text-brand-400 w-7 h-7" />
+              <PawPrint className="text-brand-highlight w-7 h-7" />
             </div>
             <span className={`text-3xl font-serif font-bold tracking-tighter transition-colors duration-500 ${isScrolled ? "text-brand-950" : "text-white"}`}>DUNO</span>
           </div>
@@ -95,20 +95,20 @@ const Navbar = () => {
               <a 
                 key={link.name} 
                 href={link.href} 
-                className={`text-[11px] font-bold uppercase tracking-[0.2em] relative group ${isScrolled ? "text-brand-950 hover:text-brand-600" : "text-white/90 hover:text-white"}`}
+                className={`text-[11px] font-bold uppercase tracking-[0.2em] relative group ${isScrolled ? "text-brand-950 hover:text-brand-secondary" : "text-white/90 hover:text-white"}`}
               >
                 {link.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-current transition-all duration-300 group-hover:w-full"></span>
               </a>
             ))}
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bg-brand-400 text-brand-950 hover:bg-white transition-colors py-3.5 px-7 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 shadow-lg">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bg-brand-accent text-white hover:bg-brand-secondary transition-all py-3 px-6 rounded-lg text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 shadow-lg">
               <span>AGENDAR CONSULTA</span>
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>
 
           <button 
-            className={`lg:hidden p-2 rounded-lg transition-colors ${isScrolled ? "text-brand-950 bg-brand-50" : "text-white bg-white/10 backdrop-blur-sm"} border ${isScrolled ? "border-brand-100" : "border-white/20"}`} 
+            className={`lg:hidden p-2 rounded-lg transition-colors ${isScrolled ? "text-brand-950 bg-brand-neutral" : "text-white bg-white/10 backdrop-blur-sm"} border ${isScrolled ? "border-gray-200" : "border-white/20"}`} 
             onClick={() => setIsMobileMenuOpen(true)}
             aria-label="Abrir Menu"
           >
@@ -143,12 +143,12 @@ const Navbar = () => {
                 <div className="flex justify-between items-center mb-12">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-brand-900 rounded-xl flex items-center justify-center">
-                      <PawPrint className="text-brand-400 w-5 h-5" />
+                      <PawPrint className="text-brand-highlight w-5 h-5" />
                     </div>
                     <span className="text-xl font-serif font-bold tracking-tighter">DUNO</span>
                   </div>
                   <button 
-                    className="p-2 rounded-lg text-white hover:text-brand-400 transition-colors" 
+                    className="p-2 rounded-lg text-white hover:text-brand-highlight transition-colors" 
                     onClick={() => setIsMobileMenuOpen(false)}
                     aria-label="Fechar Menu"
                   >
@@ -163,7 +163,7 @@ const Navbar = () => {
                       key={link.name} 
                       href={link.href} 
                       onClick={() => setIsMobileMenuOpen(false)} 
-                      className="text-3xl font-serif font-bold text-white hover:text-brand-400 transition-colors uppercase tracking-tight"
+                      className="text-3xl font-serif font-bold text-white hover:text-brand-highlight transition-colors uppercase tracking-tight"
                     >
                       {link.name}
                     </a>
@@ -175,11 +175,11 @@ const Navbar = () => {
               <div className="flex flex-col gap-6 border-t border-white/10 pt-8">
                 <div className="space-y-3">
                   <div className="flex items-center gap-3 text-white/70 text-xs tracking-wider">
-                    <MapPin className="w-4 h-4 text-brand-400 shrink-0" />
+                    <MapPin className="w-4 h-4 text-brand-highlight shrink-0" />
                     <span>Av. Faria Lima, 2000 - Itaim Bibi, SP</span>
                   </div>
                   <div className="flex items-center gap-3 text-white/70 text-xs tracking-wider">
-                    <Phone className="w-4 h-4 text-brand-400 shrink-0" />
+                    <Phone className="w-4 h-4 text-brand-highlight shrink-0" />
                     <span>(11) 99287-6219</span>
                   </div>
                 </div>
@@ -188,7 +188,7 @@ const Navbar = () => {
                   href={WHATSAPP_URL} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="btn-primary w-full text-center py-4 bg-brand-400 text-brand-950 hover:bg-white hover:text-brand-950 font-bold uppercase tracking-wider group"
+                  className="btn-primary w-full text-center py-4 font-bold uppercase tracking-wider group"
                 >
                   <span>FALAR NO WHATSAPP</span>
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -204,7 +204,7 @@ const Navbar = () => {
 
 const Hero = () => {
   return (
-    <section id="home" className="relative min-h-screen flex flex-col justify-center bg-brand-950 py-32 lg:py-40 overflow-hidden">
+    <section id="home" className="relative min-h-[90vh] flex flex-col justify-center bg-brand-950 py-20 overflow-hidden">
       {/* Background Image: 100% of the card/section area */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -215,12 +215,17 @@ const Hero = () => {
           loading="eager"
         />
         {/* Dark brand gradient overlays for perfect text contrast and styling */}
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-950/95 via-brand-950/70 to-transparent"></div>
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to right, rgba(27, 94, 59, 0.85) 40%, rgba(27, 94, 59, 0.1) 100%)'
+          }}
+        ></div>
         <div className="absolute inset-0 bg-gradient-to-t from-brand-950/80 via-transparent to-brand-950/30"></div>
       </div>
       
       {/* Ambient glows */}
-      <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-brand-900/20 rounded-full blur-[150px] pointer-events-none z-0"></div>
+      <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-brand-primary/20 rounded-full blur-[150px] pointer-events-none z-0"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
         <motion.div 
@@ -231,17 +236,17 @@ const Hero = () => {
         >
           <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-8">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-400"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-highlight opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-highlight"></span>
             </span>
             <span className="text-white text-[10px] font-bold uppercase tracking-[0.3em]">
               Excelência Hospitalar Itaim Bibi
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-[5.5rem] lg:text-[6.5rem] font-serif font-bold text-white leading-[1.05] mb-6 tracking-tighter">
+          <h1 className="text-4xl md:text-[56px] lg:text-[64px] font-serif font-bold text-white leading-[1.1] mb-6 tracking-tighter">
             Excelência para <br /> 
-            <span className="text-brand-400 italic">Vidas Extraordinárias.</span>
+            <span className="text-brand-highlight italic">Vidas Extraordinárias.</span>
           </h1>
 
           <p className="text-base md:text-lg text-white/80 mb-10 leading-relaxed font-light max-w-2xl">
@@ -251,19 +256,19 @@ const Hero = () => {
           <div className="flex items-center gap-6 mb-12">
             <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Atendemos:</span>
             <div className="flex flex-wrap items-center gap-4">
-              <span className="text-brand-400 text-xs font-bold uppercase tracking-widest flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brand-400 rounded-full"></span> Cães</span>
-              <span className="text-brand-400 text-xs font-bold uppercase tracking-widest flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brand-400 rounded-full"></span> Gatos</span>
-              <span className="text-brand-400 text-xs font-bold uppercase tracking-widest flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brand-400 rounded-full"></span> Silvestres</span>
+              <span className="text-brand-highlight text-xs font-bold uppercase tracking-widest flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brand-highlight rounded-full"></span> Cães</span>
+              <span className="text-brand-highlight text-xs font-bold uppercase tracking-widest flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brand-highlight rounded-full"></span> Gatos</span>
+              <span className="text-brand-highlight text-xs font-bold uppercase tracking-widest flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brand-highlight rounded-full"></span> Silvestres</span>
             </div>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bg-brand-400 hover:bg-white text-brand-950 px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] transition-all duration-300 shadow-xl shadow-brand-400/10 flex items-center justify-center gap-3 group">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bg-brand-accent hover:bg-amber-600 text-white px-10 py-5 rounded-lg font-bold uppercase tracking-[0.2em] text-[11px] transition-all duration-300 shadow-xl shadow-brand-accent/20 flex items-center justify-center gap-3 group">
               <WhatsAppLogo className="w-5 h-5 fill-current" /> 
               <span>AGENDAR CONSULTA AGORA</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
-            <a href={WHATSAPP_URL.replace("uma consulta", "um atendimento de urgência")} target="_blank" rel="noopener noreferrer" className="border border-brand-400/40 text-brand-400 px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] hover:bg-brand-400 hover:text-brand-950 hover:border-brand-400 transition-all duration-300 flex items-center justify-center gap-2 group">
+            <a href={WHATSAPP_URL.replace("uma consulta", "um atendimento de urgência")} target="_blank" rel="noopener noreferrer" className="border-2 border-white/40 text-white px-10 py-5 rounded-lg font-bold uppercase tracking-[0.2em] text-[11px] hover:bg-white hover:text-brand-primary hover:border-white transition-all duration-300 flex items-center justify-center gap-2 group">
               <span>EMERGÊNCIA 24H</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
@@ -276,37 +281,37 @@ const Hero = () => {
 
 // About Section
 const About = () => (
-  <section id="sobre" className="bg-brand-950 text-white overflow-hidden">
+  <section id="sobre" className="section-padding bg-brand-neutral text-brand-text overflow-hidden relative">
     {/* Top accent line */}
-    <div className="w-full h-1 bg-gradient-to-r from-transparent via-brand-400 to-transparent opacity-60" />
+    <div className="w-full h-px bg-gradient-to-r from-transparent via-brand-secondary to-transparent opacity-20 absolute top-0 left-0" />
 
-    <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-28 lg:py-36">
+    <div className="max-w-7xl mx-auto">
       <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
         {/* Left: Text Content */}
         <div>
-          <span className="text-brand-400 font-bold uppercase tracking-[0.5em] text-[10px] mb-6 block">Nossa História</span>
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold tracking-tighter leading-[1.05] mb-8">
+          <span className="text-brand-primary font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Nossa História</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tighter leading-[1.1] mb-8 text-brand-primary">
             Cuidado que vai <br />
-            <span className="text-brand-400 italic">além do esperado.</span>
+            <span className="text-brand-secondary italic">além do esperado.</span>
           </h2>
-          <p className="text-brand-100/70 text-lg leading-relaxed mb-6">
+          <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-6">
             Fundada por veterinários apaixonados pela medicina animal, a DUNO nasceu com um propósito claro: elevar o padrão de saúde e bem-estar dos pets do Brasil. Reunimos os melhores especialistas, a tecnologia mais avançada e um ambiente de acolhimento genuíno.
           </p>
-          <p className="text-brand-100/60 text-base leading-relaxed mb-12">
+          <p className="text-gray-500 text-sm md:text-base leading-relaxed mb-12">
             Cada consulta, cada cirurgia, cada internação é tratada com o rigor de um hospital humano de excelência — porque acreditamos que a vida animal merece o mesmo respeito e dedicação.
           </p>
 
           {/* Stats */}
           <div className="grid grid-cols-3 gap-6 mb-12">
             {[
-              { num: "500+", label: "Cirurgias realizadas" },
-              { num: "15", label: "Anos de experiência" },
-              { num: "99,7%", label: "Índice de sucesso" },
+              { num: "500+", label: "Cirurgias" },
+              { num: "15", label: "Anos" },
+              { num: "99,7%", label: "Sucesso" },
             ].map((stat, i) => (
-              <div key={i} className="border-l-2 border-brand-700 pl-4">
-                <p className="text-3xl font-serif font-bold text-brand-400">{stat.num}</p>
-                <p className="text-brand-100/50 text-xs uppercase tracking-widest mt-1">{stat.label}</p>
+              <div key={i} className="border-l-2 border-brand-secondary pl-4">
+                <p className="text-2xl md:text-3xl font-serif font-bold text-brand-primary">{stat.num}</p>
+                <p className="text-gray-500 text-[10px] uppercase tracking-widest mt-1 leading-snug">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -314,23 +319,23 @@ const About = () => (
           {/* Pillars */}
           <div className="space-y-4 mb-12">
             {[
-              { icon: <Stethoscope className="w-5 h-5 text-brand-400" />, title: "Tecnologia de Ponta", desc: "Equipamentos diagnósticos e cirúrgicos de última geração." },
-              { icon: <HeartPulse className="w-5 h-5 text-brand-400" />, title: "Cuidado Humanizado", desc: "Ambiente acolhedor e comunicação transparente com os tutores." },
-              { icon: <ShieldCheck className="w-5 h-5 text-brand-400" />, title: "Segurança & Confiança", desc: "Protocolos rígidos de assepsia e equipe altamente qualificada." },
+              { icon: <Stethoscope className="w-5 h-5 text-brand-primary" />, title: "Tecnologia de Ponta", desc: "Equipamentos diagnósticos e cirúrgicos de última geração." },
+              { icon: <HeartPulse className="w-5 h-5 text-brand-primary" />, title: "Cuidado Humanizado", desc: "Ambiente acolhedor e comunicação transparente com os tutores." },
+              { icon: <ShieldCheck className="w-5 h-5 text-brand-primary" />, title: "Segurança & Confiança", desc: "Protocolos rígidos de assepsia e equipe altamente qualificada." },
             ].map((pillar, i) => (
-              <div key={i} className="flex items-start gap-4 bg-brand-900/50 border border-brand-800 rounded-2xl p-4 hover:border-brand-600 transition-colors">
-                <div className="bg-brand-800 p-2.5 rounded-xl shrink-0">{pillar.icon}</div>
+              <div key={i} className="flex items-start gap-4 bg-white border border-gray-100 rounded-2xl p-4 hover:border-brand-secondary/35 hover:shadow-md transition-all">
+                <div className="bg-brand-neutral p-2.5 rounded-xl shrink-0">{pillar.icon}</div>
                 <div>
-                  <h4 className="font-bold text-white text-sm mb-0.5">{pillar.title}</h4>
-                  <p className="text-brand-100/50 text-xs leading-relaxed">{pillar.desc}</p>
+                  <h4 className="font-bold text-brand-primary text-sm mb-0.5">{pillar.title}</h4>
+                  <p className="text-gray-500 text-xs leading-relaxed">{pillar.desc}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 bg-brand-400 hover:bg-white text-brand-950 px-8 py-4 rounded-full font-bold uppercase tracking-widest text-[11px] transition-all duration-300 shadow-xl">
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">
             <WhatsAppLogo className="w-5 h-5 fill-current" />
-            Agendar Consulta
+            <span>Agendar Consulta</span>
             <ArrowRight className="w-4 h-4" />
           </a>
         </div>
@@ -338,36 +343,33 @@ const About = () => (
         {/* Right: Image */}
         <div className="relative">
           {/* Decorative glow */}
-          <div className="absolute -inset-8 bg-brand-400/10 rounded-[3rem] blur-3xl" />
-          <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border border-brand-800" style={{ aspectRatio: '3/4' }}>
+          <div className="absolute -inset-8 bg-brand-primary/5 rounded-[3rem] blur-3xl" />
+          <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border border-gray-100" style={{ aspectRatio: '3/4' }}>
             <img
               src="/imagem/veterinario_2.webp"
               alt="Equipe DUNO"
               className="w-full h-full object-cover object-top"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-950/80 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-primary/20 via-transparent to-transparent" />
           </div>
           {/* Floating badge */}
-          <div className="absolute -bottom-6 -left-6 bg-brand-400 text-brand-950 px-6 py-4 rounded-2xl shadow-2xl">
-            <p className="text-3xl font-serif font-bold">+15</p>
-            <p className="text-xs font-bold uppercase tracking-widest">Anos cuidando</p>
+          <div className="absolute -bottom-6 -left-6 bg-brand-primary text-white px-6 py-4 rounded-2xl shadow-2xl border border-brand-secondary/20">
+            <p className="text-3xl font-serif font-bold text-brand-highlight">+15</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-white/80">Anos cuidando</p>
           </div>
           {/* Floating live badge */}
-          <div className="absolute top-6 -right-4 bg-brand-950/90 backdrop-blur-md border border-brand-700 px-4 py-3 rounded-2xl shadow-xl">
+          <div className="absolute top-6 -right-4 bg-white/95 backdrop-blur-md border border-gray-200/80 px-4 py-3 rounded-2xl shadow-xl">
             <div className="flex items-center gap-2">
               <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-400" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-primary" />
               </span>
-              <span className="text-white text-[10px] font-bold uppercase tracking-widest">Emergência 24h</span>
+              <span className="text-brand-primary text-[10px] font-bold uppercase tracking-widest">Emergência 24h</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    {/* Bottom accent line */}
-    <div className="w-full h-1 bg-gradient-to-r from-transparent via-brand-400 to-transparent opacity-30" />
   </section>
 );
 
@@ -418,21 +420,21 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="section-padding bg-brand-50/50">
+    <section id="services" className="section-padding bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <span className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Nossas Áreas de Atuação</span>
-          <h2 className="text-5xl md:text-7xl font-serif font-bold text-brand-950 tracking-tighter">Nossos <span className="text-brand-700 italic">Serviços</span></h2>
+        <div className="text-center mb-12 md:mb-16">
+          <span className="text-brand-primary font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Nossas Áreas de Atuação</span>
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-primary tracking-tighter">Nossos <span className="text-brand-secondary italic">Serviços</span></h2>
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border-2 border-[#28a745] hover:border-brand-200 transition-all duration-500 group flex flex-col"
+              className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl border border-gray-100 border-t-4 border-t-brand-secondary hover:-translate-y-1 transition-all duration-300 ease-in-out group flex flex-col"
             >
-              {/* Image with shorter aspect-ratio */}
-              <div className="w-full aspect-[16/10] overflow-hidden">
+              {/* Image with fixed height */}
+              <div className="w-full h-[200px] overflow-hidden">
                 <img
                   src={service.image}
                   alt={service.title}
@@ -442,7 +444,7 @@ const Services = () => {
 
               {/* Content */}
               <div className="p-3 md:p-5 flex flex-col flex-1">
-                <h3 className="text-xs md:text-base font-bold text-brand-950 mb-1 leading-snug">
+                <h3 className="text-xs md:text-base font-bold text-brand-primary mb-1 leading-snug">
                   {service.title}
                 </h3>
                 <p className="text-gray-500 text-[10px] md:text-xs leading-relaxed mb-3 flex-1 line-clamp-2">
@@ -452,7 +454,7 @@ const Services = () => {
                   href={`https://wa.me/5511992876219?text=${encodeURIComponent(`Olá! Gostaria de agendar o serviço de ${service.title} na Duno.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center bg-brand-700 hover:bg-brand-800 text-white rounded-full py-2.5 px-4 text-[9px] md:text-[11px] font-bold uppercase tracking-widest transition-colors duration-300 w-full mt-auto"
+                  className="inline-flex items-center justify-center border-2 border-brand-primary text-brand-primary bg-transparent hover:bg-brand-primary hover:text-white rounded-lg py-2 px-4 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-all duration-300 w-full mt-auto"
                 >
                   AGENDAR
                 </a>
@@ -468,7 +470,7 @@ const Services = () => {
 const StarRating = () => (
   <div className="flex items-center gap-1 mb-4">
     {[1,2,3,4,5].map(i => (
-      <svg key={i} className="w-4 h-4 fill-amber-400 text-amber-400" viewBox="0 0 20 20">
+      <svg key={i} className="w-5 h-5 fill-brand-accent text-brand-accent" viewBox="0 0 20 20">
         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
       </svg>
     ))}
@@ -503,36 +505,34 @@ const Testimonials = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const TestimonialCard = ({ review }: { review: typeof reviews[0] }) => (
-    <div className="bg-brand-900 border border-brand-800 hover:border-brand-600 rounded-3xl p-8 flex flex-col gap-6 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-950/50 group h-full">
-      {/* Quote icon */}
-      <div className="w-10 h-10 bg-brand-800 rounded-xl flex items-center justify-center shrink-0">
-        <Quote className="w-5 h-5 text-brand-400" />
-      </div>
+    <div className="bg-white border border-gray-100 rounded-3xl p-8 flex flex-col gap-6 transition-all duration-300 hover:shadow-lg hover:border-brand-secondary/20 relative overflow-hidden group h-full">
+      {/* Decorative Quote icon in background */}
+      <div className="absolute top-4 right-6 text-[80px] text-brand-highlight opacity-40 font-serif leading-none select-none pointer-events-none">&rdquo;</div>
       {/* Stars */}
       <StarRating />
       {/* Text */}
-      <p className="text-brand-100/80 text-base leading-relaxed italic flex-1">&ldquo;{review.text}&rdquo;</p>
+      <p className="text-brand-text text-[16px] leading-[1.7] italic flex-1 relative z-10">{review.text}</p>
       {/* Divider */}
-      <div className="w-full h-px bg-brand-800" />
+      <div className="w-full h-px bg-gray-100" />
       {/* Author */}
-      <div className="flex items-center gap-4">
-        <img src={review.img} alt={review.name} className="w-14 h-14 rounded-full object-cover border-2 border-brand-700 group-hover:border-brand-400 transition-colors" />
+      <div className="flex items-center gap-4 relative z-10">
+        <img src={review.img} alt={review.name} className="w-12 h-12 rounded-full object-cover border-2 border-brand-secondary" />
         <div>
-          <h4 className="font-bold text-white text-base">{review.name}</h4>
-          <p className="text-brand-400 text-xs uppercase tracking-widest font-bold">{review.role}</p>
-          <span className="inline-block mt-1 bg-brand-800 text-brand-300 text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full">{review.pet}</span>
+          <h4 className="font-bold text-brand-primary text-base leading-snug">{review.name}</h4>
+          <p className="text-gray-500 text-xs uppercase tracking-widest font-bold">{review.role}</p>
+          <span className="inline-block mt-1 bg-brand-neutral text-brand-secondary text-[9px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full">{review.pet}</span>
         </div>
       </div>
     </div>
   );
 
   return (
-    <section className="py-32 bg-brand-950 px-6">
+    <section className="section-padding bg-brand-neutral">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <span className="text-brand-400 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Vidas que Transformamos</span>
-          <h2 className="text-4xl md:text-6xl font-serif font-bold text-white">O que nossos <span className="text-brand-400 italic">clientes dizem.</span></h2>
-          <p className="text-brand-100/50 mt-4 max-w-xl mx-auto text-base">Veja como a vida dos pets e de seus tutores mudou de verdade.</p>
+        <div className="text-center mb-12 md:mb-16">
+          <span className="text-brand-primary font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Vidas que Transformamos</span>
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-primary">O que nossos <span className="text-brand-secondary italic">clientes dizem.</span></h2>
+          <p className="text-gray-500 mt-4 max-w-xl mx-auto text-base">Veja como a vida dos pets e de seus tutores mudou de verdade.</p>
         </div>
 
         {/* Mobile carousel */}
@@ -547,17 +547,17 @@ const Testimonials = () => {
           {/* Navigation */}
           <div className="flex items-center justify-center gap-4 mt-8">
             <button onClick={() => setActiveIndex(prev => Math.max(0, prev - 1))} disabled={activeIndex === 0}
-              className="w-12 h-12 rounded-full border border-brand-700 flex items-center justify-center text-brand-400 disabled:opacity-30 hover:bg-brand-800 transition-colors">
+              className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-brand-secondary disabled:opacity-30 hover:bg-white bg-transparent transition-colors">
               <ChevronRight className="w-5 h-5 rotate-180" />
             </button>
             <div className="flex gap-2">
               {reviews.map((_, i) => (
                 <button key={i} onClick={() => setActiveIndex(i)}
-                  className={`h-2 rounded-full transition-all duration-300 ${activeIndex === i ? 'bg-brand-400 w-6' : 'bg-brand-700 w-2'}`} />
+                  className={`h-2 rounded-full transition-all duration-300 ${activeIndex === i ? 'bg-brand-secondary w-6' : 'bg-gray-300 w-2'}`} />
               ))}
             </div>
             <button onClick={() => setActiveIndex(prev => Math.min(reviews.length - 1, prev + 1))} disabled={activeIndex === reviews.length - 1}
-              className="w-12 h-12 rounded-full border border-brand-700 flex items-center justify-center text-brand-400 disabled:opacity-30 hover:bg-brand-800 transition-colors">
+              className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-brand-secondary disabled:opacity-30 hover:bg-white bg-transparent transition-colors">
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
@@ -602,11 +602,11 @@ const Team = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section id="equipe" className="section-padding bg-brand-50/50 px-6">
+    <section id="equipe" className="section-padding bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <span className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Quem Cuida do seu Pet</span>
-          <h2 className="text-5xl font-serif font-bold text-brand-950 tracking-tighter">Corpo <span className="text-brand-700 italic">Clínico</span></h2>
+        <div className="text-center mb-12 md:mb-16">
+          <span className="text-brand-primary font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Quem Cuida do seu Pet</span>
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-primary tracking-tighter">Corpo <span className="text-brand-secondary italic">Clínico</span></h2>
         </div>
 
         {/* Carousel for mobile/tablet, grid for desktop */}
@@ -616,23 +616,27 @@ const Team = () => {
             <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
               {team.map((vet, i) => (
                 <div key={i} className="w-full shrink-0 px-4">
-                  <div className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm flex flex-col max-w-sm mx-auto">
-                    <div className="relative overflow-hidden" style={{ aspectRatio: '3/4' }}>
+                  <div className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm flex flex-col max-w-sm mx-auto group">
+                    <div className="relative h-[320px] overflow-hidden rounded-2xl">
                       <img
                         src={vet.img}
                         alt={vet.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                       />
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-4 py-4">
                         <div className="flex items-center gap-2">
-                          <ShieldCheck className="w-4 h-4 text-brand-400 shrink-0" />
+                          <ShieldCheck className="w-4 h-4 text-brand-highlight shrink-0" />
                           <span className="text-white text-xs font-bold tracking-widest">{vet.crmv}</span>
                         </div>
                       </div>
                     </div>
                     <div className="p-6 flex flex-col flex-1">
-                      <h3 className="font-bold text-brand-950 text-lg leading-tight mb-1">{vet.name}</h3>
-                      <p className="text-brand-600 font-bold text-[11px] uppercase tracking-widest mb-3">{vet.specialty}</p>
+                      <h3 className="font-bold text-brand-primary text-lg leading-tight mb-1">{vet.name}</h3>
+                      <div className="mb-3">
+                        <span className="bg-brand-highlight text-brand-primary px-3 py-1 rounded-full text-xs font-semibold inline-block">
+                          {vet.specialty}
+                        </span>
+                      </div>
                       <p className="text-gray-500 text-sm leading-relaxed">{vet.bio}</p>
                     </div>
                   </div>
@@ -645,7 +649,7 @@ const Team = () => {
               <button 
                 onClick={() => setActiveIndex(prev => Math.max(0, prev - 1))}
                 disabled={activeIndex === 0}
-                className="w-10 h-10 rounded-full border border-brand-200 flex items-center justify-center text-brand-600 disabled:opacity-30 disabled:pointer-events-none hover:bg-brand-50 bg-white"
+                className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-brand-secondary disabled:opacity-30 disabled:pointer-events-none hover:bg-brand-neutral bg-white"
               >
                 <ChevronRight className="w-5 h-5 rotate-180" />
               </button>
@@ -654,14 +658,14 @@ const Team = () => {
                   <button
                     key={i}
                     onClick={() => setActiveIndex(i)}
-                    className={`w-2 h-2 rounded-full transition-all ${activeIndex === i ? 'bg-brand-600 w-4' : 'bg-brand-200'}`}
+                    className={`w-2 h-2 rounded-full transition-all ${activeIndex === i ? 'bg-brand-secondary w-4' : 'bg-gray-200'}`}
                   />
                 ))}
               </div>
               <button 
                 onClick={() => setActiveIndex(prev => Math.min(team.length - 1, prev + 1))}
                 disabled={activeIndex === team.length - 1}
-                className="w-10 h-10 rounded-full border border-brand-200 flex items-center justify-center text-brand-600 disabled:opacity-30 disabled:pointer-events-none hover:bg-brand-50 bg-white"
+                className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-brand-secondary disabled:opacity-30 disabled:pointer-events-none hover:bg-brand-neutral bg-white"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -672,7 +676,7 @@ const Team = () => {
           <div className="hidden lg:grid grid-cols-3 gap-8">
             {team.map((vet, i) => (
               <div key={i} className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 group flex flex-col">
-                <div className="relative overflow-hidden" style={{ aspectRatio: '3/4' }}>
+                <div className="relative h-[320px] overflow-hidden rounded-2xl">
                   <img
                     src={vet.img}
                     alt={vet.name}
@@ -680,14 +684,18 @@ const Team = () => {
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-4 py-4">
                     <div className="flex items-center gap-2">
-                      <ShieldCheck className="w-4 h-4 text-brand-400 shrink-0" />
+                      <ShieldCheck className="w-4 h-4 text-brand-highlight shrink-0" />
                       <span className="text-white text-xs font-bold tracking-widest">{vet.crmv}</span>
                     </div>
                   </div>
                 </div>
                 <div className="p-6 flex flex-col flex-1">
-                  <h3 className="font-bold text-brand-950 text-lg leading-tight mb-1">{vet.name}</h3>
-                  <p className="text-brand-600 font-bold text-[11px] uppercase tracking-widest mb-3">{vet.specialty}</p>
+                  <h3 className="font-bold text-brand-primary text-lg leading-tight mb-1">{vet.name}</h3>
+                  <div className="mb-3">
+                    <span className="bg-brand-highlight text-brand-primary px-3 py-1 rounded-full text-xs font-semibold inline-block">
+                      {vet.specialty}
+                    </span>
+                  </div>
                   <p className="text-gray-500 text-sm leading-relaxed">{vet.bio}</p>
                 </div>
               </div>
@@ -709,12 +717,12 @@ const SuccessCases = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section id="cases" className="py-32 bg-brand-50 px-6">
+    <section id="cases" className="section-padding bg-brand-neutral">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <span className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Vidas Transformadas</span>
-          <h2 className="text-5xl md:text-6xl font-serif font-bold text-brand-950 tracking-tighter">Casos de <span className="text-brand-700 italic">Sucesso</span></h2>
-          <p className="text-brand-800/60 mt-4 max-w-xl mx-auto">Histórias reais de recuperação e superação com o cuidado DUNO.</p>
+        <div className="text-center mb-12 md:mb-16">
+          <span className="text-brand-primary font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Vidas Transformadas</span>
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-primary tracking-tighter">Casos de <span className="text-brand-secondary italic">Sucesso</span></h2>
+          <p className="text-gray-500 mt-4 max-w-xl mx-auto">Histórias reais de recuperação e superação com o cuidado DUNO.</p>
         </div>
 
         {/* Carousel for mobile/tablet, grid for desktop */}
@@ -724,12 +732,12 @@ const SuccessCases = () => {
             <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
               {cases.map((c, i) => (
                 <div key={i} className="w-full shrink-0 px-2">
-                  <div className="bg-white rounded-[2rem] overflow-hidden border border-brand-100 shadow-xl flex flex-col max-w-sm mx-auto">
-                    <div className="h-72 overflow-hidden relative">
+                  <div className="bg-white rounded-[2rem] overflow-hidden border border-brand-100 shadow-xl flex flex-col max-w-sm mx-auto h-full">
+                    <div className="h-[240px] overflow-hidden relative">
                       <img src={c.img} alt={c.name} className="w-full h-full object-cover" />
                       <div className="absolute inset-0 bg-gradient-to-t from-brand-950/80 via-transparent to-transparent" />
-                      <div className="absolute top-4 left-4 bg-brand-950/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-brand-700">
-                        <span className="text-[10px] font-bold text-brand-400 uppercase tracking-widest">{c.especie}</span>
+                      <div className="absolute top-4 left-4 bg-brand-950/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-brand-800">
+                        <span className="text-[10px] font-bold text-brand-highlight uppercase tracking-widest">{c.especie}</span>
                       </div>
                       <div className="absolute top-4 right-4 text-5xl font-serif font-bold text-white/10">{c.num}</div>
                     </div>
@@ -737,16 +745,16 @@ const SuccessCases = () => {
                       <h3 className="text-2xl font-serif font-bold mb-4 text-white">{c.name}</h3>
                       <div className="space-y-4 mb-6 flex-1">
                         <div className="bg-brand-900 rounded-xl p-4">
-                          <span className="text-[9px] uppercase tracking-widest text-brand-400 font-bold block mb-1">Condição Tratada</span>
+                          <span className="text-[9px] uppercase tracking-widest text-brand-highlight font-bold block mb-1">Condição Tratada</span>
                           <p className="text-brand-100/80 text-sm">{c.condition}</p>
                         </div>
-                        <div className="bg-brand-900 rounded-xl p-4 border-l-4 border-brand-400">
-                          <span className="text-[9px] uppercase tracking-widest text-brand-400 font-bold block mb-1">✓ Resultado</span>
+                        <div className="bg-brand-900 rounded-xl p-4 border-l-4 border-brand-highlight">
+                          <span className="text-[9px] uppercase tracking-widest text-brand-highlight font-bold block mb-1">✓ Resultado</span>
                           <p className="text-white text-sm leading-relaxed">{c.result}</p>
                         </div>
                       </div>
                       <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 bg-brand-400 hover:bg-white text-brand-950 font-bold uppercase tracking-widest text-[10px] py-3 px-6 rounded-full transition-all duration-300">
+                        className="inline-flex items-center justify-center gap-2 bg-brand-accent hover:bg-amber-600 text-white font-bold uppercase tracking-widest text-[10px] py-3.5 px-6 rounded-lg transition-all duration-300">
                         Agendar Consulta <ArrowRight className="w-4 h-4" />
                       </a>
                     </div>
@@ -757,17 +765,17 @@ const SuccessCases = () => {
             {/* Navigation */}
             <div className="flex items-center justify-center gap-4 mt-8">
               <button onClick={() => setActiveIndex(prev => Math.max(0, prev - 1))} disabled={activeIndex === 0}
-                className="w-12 h-12 rounded-full border border-brand-300 flex items-center justify-center text-brand-700 disabled:opacity-30 hover:bg-brand-100 bg-white shadow-sm">
+                className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-brand-secondary disabled:opacity-30 hover:bg-white bg-transparent shadow-sm">
                 <ChevronRight className="w-5 h-5 rotate-180" />
               </button>
               <div className="flex gap-2">
                 {cases.map((_, i) => (
                   <button key={i} onClick={() => setActiveIndex(i)}
-                    className={`h-2 rounded-full transition-all duration-300 ${activeIndex === i ? 'bg-brand-600 w-6' : 'bg-brand-200 w-2'}`} />
+                    className={`h-2 rounded-full transition-all duration-300 ${activeIndex === i ? 'bg-brand-secondary w-6' : 'bg-gray-300 w-2'}`} />
                 ))}
               </div>
               <button onClick={() => setActiveIndex(prev => Math.min(cases.length - 1, prev + 1))} disabled={activeIndex === cases.length - 1}
-                className="w-12 h-12 rounded-full border border-brand-300 flex items-center justify-center text-brand-700 disabled:opacity-30 hover:bg-brand-100 bg-white shadow-sm">
+                className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-brand-secondary disabled:opacity-30 hover:bg-white bg-transparent shadow-sm">
                 <ChevronRight className="w-5 h-5" />
               </button>
             </div>
@@ -776,12 +784,12 @@ const SuccessCases = () => {
           {/* Desktop grid */}
           <div className="hidden lg:grid grid-cols-3 gap-8">
             {cases.map((c, i) => (
-              <div key={i} className="bg-white rounded-[2rem] overflow-hidden border border-brand-100 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col group">
-                <div className="h-72 overflow-hidden relative">
+              <div key={i} className="bg-white rounded-[2rem] overflow-hidden border border-brand-100 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col group h-full">
+                <div className="h-[240px] overflow-hidden relative">
                   <img src={c.img} alt={c.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-950/70 via-transparent to-transparent" />
-                  <div className="absolute top-4 left-4 bg-brand-950/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-brand-700">
-                    <span className="text-[10px] font-bold text-brand-400 uppercase tracking-widest">{c.especie}</span>
+                  <div className="absolute top-4 left-4 bg-brand-950/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-brand-800">
+                    <span className="text-[10px] font-bold text-brand-highlight uppercase tracking-widest">{c.especie}</span>
                   </div>
                   <div className="absolute top-3 right-5 text-6xl font-serif font-bold text-white/10 leading-none">{c.num}</div>
                   <div className="absolute bottom-4 left-6">
@@ -791,16 +799,16 @@ const SuccessCases = () => {
                 <div className="p-8 flex-1 flex flex-col bg-brand-950">
                   <div className="space-y-4 mb-6 flex-1">
                     <div className="bg-brand-900 rounded-xl p-4">
-                      <span className="text-[9px] uppercase tracking-widest text-brand-400 font-bold block mb-1">Condição Tratada</span>
+                      <span className="text-[9px] uppercase tracking-widest text-brand-highlight font-bold block mb-1">Condição Tratada</span>
                       <p className="text-brand-100/80 text-sm">{c.condition}</p>
                     </div>
-                    <div className="bg-brand-900 rounded-xl p-4 border-l-4 border-brand-400">
-                      <span className="text-[9px] uppercase tracking-widest text-brand-400 font-bold block mb-1">✓ Resultado</span>
+                    <div className="bg-brand-900 rounded-xl p-4 border-l-4 border-brand-highlight">
+                      <span className="text-[9px] uppercase tracking-widest text-brand-highlight font-bold block mb-1">✓ Resultado</span>
                       <p className="text-white text-sm leading-relaxed">{c.result}</p>
                     </div>
                   </div>
                   <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 bg-brand-400 hover:bg-white text-brand-950 font-bold uppercase tracking-widest text-[10px] py-3 px-6 rounded-full transition-all duration-300 w-full">
+                    className="inline-flex items-center justify-center gap-2 bg-brand-accent hover:bg-amber-600 text-white font-bold uppercase tracking-widest text-[10px] py-3.5 px-6 rounded-lg transition-all duration-300 w-full">
                     Agendar Consulta <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>
@@ -822,21 +830,23 @@ const Infrastructure = () => {
   ];
 
   return (
-    <section className="section-padding bg-brand-50 px-6">
+    <section className="section-padding bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <span className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Tecnologia e Segurança</span>
-          <h2 className="text-5xl font-serif font-bold text-brand-950 uppercase tracking-tighter">Infraestrutura <span className="text-brand-700 italic">Hospitalar</span></h2>
+        <div className="text-center mb-12 md:mb-16">
+          <span className="text-brand-primary font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Tecnologia e Segurança</span>
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-primary uppercase tracking-tighter">Infraestrutura <span className="text-brand-secondary italic">Hospitalar</span></h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {infraData.map((item, i) => (
-            <div key={i} className="bg-white p-8 md:p-10 rounded-3xl border border-brand-100 shadow-xl shadow-brand-900/5 flex gap-6 items-start group hover:border-brand-300 transition-colors">
-              <div className="bg-brand-950 p-4 rounded-2xl shrink-0 group-hover:bg-brand-900 transition-colors">
-                {item.icon}
+            <div key={i} className="bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-xl shadow-gray-200/50 flex gap-6 items-start group hover:border-brand-secondary/30 transition-all duration-300">
+              <div className="bg-brand-neutral p-4 rounded-2xl shrink-0 group-hover:bg-brand-primary transition-colors duration-300">
+                {React.cloneElement(item.icon, {
+                  className: "w-8 h-8 text-brand-primary group-hover:text-white transition-colors duration-300"
+                })}
               </div>
               <div>
-                <h3 className="text-xl font-serif font-bold text-brand-950 uppercase mb-3 leading-tight">{item.title}</h3>
-                <p className="text-brand-800/70 text-sm leading-relaxed">{item.desc}</p>
+                <h3 className="text-xl font-serif font-bold text-brand-primary uppercase mb-3 leading-tight">{item.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
               </div>
             </div>
           ))}
@@ -863,20 +873,30 @@ const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="section-padding bg-white px-6">
+    <section id="faq" className="section-padding bg-brand-neutral">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-serif font-bold text-brand-950 text-center mb-16 uppercase tracking-tighter">Dúvidas <span className="text-brand-700 italic">Frequentes</span></h2>
+        <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-primary text-center mb-12 uppercase tracking-tighter">Dúvidas <span className="text-brand-secondary italic">Frequentes</span></h2>
         <div className="space-y-6">
           {faqs.map((faq, index) => (
-            <div key={index} className={`border border-brand-100 rounded-2xl overflow-hidden transition-all duration-300 ${activeIndex === index ? 'shadow-xl shadow-brand-900/5 bg-white' : 'bg-brand-50/30'}`}>
-              <button onClick={() => setActiveIndex(activeIndex === index ? null : index)} className="w-full p-6 md:p-8 flex justify-between items-center text-left hover:bg-brand-50 transition-colors">
-                <span className="font-serif font-bold text-brand-950 text-lg uppercase pr-8 leading-snug">{faq.question}</span>
-                {activeIndex === index ? <Minus className="w-6 h-6 shrink-0 text-brand-600" /> : <Plus className="w-6 h-6 shrink-0 text-brand-600" />}
+            <div 
+              key={index} 
+              className={`border border-gray-200 rounded-2xl overflow-hidden transition-all duration-300 bg-white ${
+                activeIndex === index 
+                  ? 'shadow-lg border-l-4 border-l-brand-secondary' 
+                  : 'hover:bg-gray-50/50'
+              }`}
+            >
+              <button 
+                onClick={() => setActiveIndex(activeIndex === index ? null : index)} 
+                className="w-full py-5 px-6 md:py-6 md:px-8 flex justify-between items-center text-left transition-colors"
+              >
+                <span className="text-[17px] font-semibold text-brand-text pr-8 leading-snug">{faq.question}</span>
+                <Plus className={`w-6 h-6 shrink-0 text-brand-secondary transition-transform duration-300 ${activeIndex === index ? 'rotate-45' : ''}`} />
               </button>
               {activeIndex === index && (
-                <div className="px-6 md:px-8 pb-8 pt-2">
-                  <div className="w-12 h-1 bg-brand-400 mb-6"></div>
-                  <p className="text-brand-800/80 leading-relaxed text-base">{faq.answer}</p>
+                <div className="px-6 md:px-8 pb-6 md:pb-8 pt-2">
+                  <div className="w-12 h-1 bg-brand-accent mb-6"></div>
+                  <p className="text-gray-500 leading-relaxed text-sm md:text-base">{faq.answer}</p>
                 </div>
               )}
             </div>
@@ -888,54 +908,54 @@ const FAQ = () => {
 };
 
 const Contact = () => (
-  <section id="contact" className="py-28 bg-brand-950 text-white px-6 overflow-hidden relative">
+  <section id="contact" className="section-padding bg-brand-950 text-white overflow-hidden relative">
     {/* Ambient glow */}
-    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-800/20 rounded-full blur-[120px] pointer-events-none" />
+    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/10 rounded-full blur-[120px] pointer-events-none" />
     <div className="max-w-7xl mx-auto">
-      <div className="text-center mb-16">
-        <span className="text-brand-400 font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Venha Nos Visitar</span>
-        <h2 className="text-5xl md:text-6xl font-serif font-bold tracking-tighter">Onde <span className="text-brand-400 italic">Estamos.</span></h2>
+      <div className="text-center mb-12 md:mb-16">
+        <span className="text-brand-highlight font-bold uppercase tracking-[0.5em] text-[10px] mb-4 block">Venha Nos Visitar</span>
+        <h2 className="text-3xl md:text-4xl font-serif font-bold tracking-tighter">Onde <span className="text-brand-highlight italic">Estamos.</span></h2>
         <p className="text-brand-100/50 mt-4 max-w-lg mx-auto">No coração do Itaim Bibi, com fácil acesso e estacionamento próprio.</p>
       </div>
 
-      <div className="grid lg:grid-cols-[42%_58%] gap-10 lg:gap-16 items-start">
+      <div className="grid lg:grid-cols-[40%_60%] gap-10 lg:gap-16 items-start">
         {/* Left info */}
         <div className="space-y-4">
           {[
-            { icon: <MapPin className="w-6 h-6 text-brand-400" />, title: "Endereço", info: "Av. Brigadeiro Faria Lima, 2000\nItaim Bibi, São Paulo – SP" },
-            { icon: <Phone className="w-6 h-6 text-brand-400" />, title: "WhatsApp / Contato", info: "(11) 99287-6219" },
-            { icon: <Phone className="w-6 h-6 text-brand-400" />, title: "Plantão Emergência 24h", info: "(11) 99999-9999" },
-            { icon: <Clock className="w-6 h-6 text-brand-400" />, title: "Horários de Atendimento", info: "Seg–Sex: 08:00–20:00\nSáb: 08:00–18:00" },
+            { icon: <MapPin className="w-5 h-5 text-brand-secondary" />, title: "Endereço", info: "Av. Brigadeiro Faria Lima, 2000\nItaim Bibi, São Paulo – SP" },
+            { icon: <Phone className="w-5 h-5 text-brand-secondary" />, title: "WhatsApp / Contato", info: "(11) 99287-6219" },
+            { icon: <Phone className="w-5 h-5 text-brand-secondary" />, title: "Plantão Emergência 24h", info: "(11) 99999-9999" },
+            { icon: <Clock className="w-5 h-5 text-brand-secondary" />, title: "Horários de Atendimento", info: "Seg–Sex: 08:00–20:00\nSáb: 08:00–18:00" },
           ].map((item, i) => (
-            <div key={i} className="flex items-start gap-5 bg-brand-900/60 border border-brand-800 hover:border-brand-600 rounded-2xl p-5 transition-colors group">
-              <div className="bg-brand-800 group-hover:bg-brand-700 p-3 rounded-xl shrink-0 transition-colors">{item.icon}</div>
+            <div key={i} className="flex items-start gap-5 bg-brand-900/60 border border-brand-800 hover:border-brand-secondary/40 rounded-2xl p-5 transition-all duration-300 group">
+              <div className="bg-brand-900 group-hover:bg-brand-secondary p-3 rounded-xl shrink-0 transition-colors">{item.icon}</div>
               <div>
-                <p className="font-bold text-white text-sm mb-1">{item.title}</p>
+                <p className="font-bold text-white text-[18px] mb-1">{item.title}</p>
                 <p className="text-brand-100/60 text-sm whitespace-pre-line leading-relaxed">{item.info}</p>
               </div>
             </div>
           ))}
 
           {/* Emergency badge */}
-          <div className="bg-brand-400/10 border border-brand-400/30 rounded-2xl p-5 flex items-center gap-4 mt-2">
+          <div className="bg-brand-accent/10 border border-brand-accent/30 rounded-2xl p-5 flex items-center gap-4 mt-2">
             <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-400" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75" />
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-accent" />
             </span>
-            <p className="text-brand-300 font-bold text-sm uppercase tracking-widest">Plantão Emergencial Ativo 24h</p>
+            <p className="text-brand-accent font-bold text-sm uppercase tracking-widest">Plantão Emergencial Ativo 24h</p>
           </div>
 
           <a
             href="https://maps.google.com/?q=Av.+Brigadeiro+Faria+Lima,+2000+-+Itaim+Bibi"
             target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 bg-brand-400 hover:bg-white text-brand-950 px-8 py-4 rounded-full font-bold uppercase tracking-widest text-[11px] transition-all duration-300 shadow-xl w-full justify-center"
+            className="inline-flex items-center gap-3 bg-brand-accent hover:bg-amber-600 text-white px-8 py-4 rounded-lg font-bold uppercase tracking-widest text-[11px] transition-all duration-300 shadow-xl w-full justify-center"
           >
             <MapPin className="w-4 h-4" /> Abrir no Google Maps
           </a>
         </div>
 
         {/* Right map */}
-        <div className="h-[520px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-brand-800 lg:order-last order-first">
+        <div className="h-[520px] rounded-2xl overflow-hidden shadow-md border border-brand-secondary/30 lg:order-last order-first">
           <MapContainer center={[-23.5899, -46.6815]} zoom={15} style={{ height: "100%", width: "100%" }}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <Marker position={[-23.5899, -46.6815]}>
@@ -950,32 +970,32 @@ const Contact = () => (
 
 const CTASection = () => {
   return (
-    <section className="py-28 bg-brand-950 text-white relative overflow-hidden px-6">
+    <section className="section-padding bg-brand-950 text-white relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 bg-pattern opacity-[0.04]" />
       {/* Gradient orbs */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-700/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-brand-400 to-transparent opacity-40" />
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-t from-brand-400 to-transparent opacity-20" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-primary/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-brand-secondary to-transparent opacity-40" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-t from-brand-secondary to-transparent opacity-20" />
 
       <div className="max-w-5xl mx-auto relative z-10">
-        <div className="bg-gradient-to-br from-brand-900/60 to-brand-950/80 border border-brand-700/50 rounded-[3rem] p-10 md:p-20 text-center backdrop-blur-md shadow-2xl">
+        <div className="bg-gradient-to-br from-brand-900/60 to-brand-950/80 border border-brand-800 rounded-[3rem] p-10 md:p-20 text-center backdrop-blur-md shadow-2xl">
 
           {/* Live badge */}
-          <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-brand-950 border border-brand-700 rounded-full mb-10">
+          <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-brand-950 border border-brand-850 rounded-full mb-10">
             <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-400" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-highlight opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-highlight" />
             </span>
-            <span className="text-brand-400 text-[10px] font-bold uppercase tracking-[0.35em]">Emergência 24h · Consultas · Internação</span>
+            <span className="text-brand-highlight text-[10px] font-bold uppercase tracking-[0.35em]">Emergência 24h · Consultas · Internação</span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 tracking-tighter leading-tight">
+          <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-6 tracking-tighter leading-tight">
             Garanta o Melhor Cuidado <br />
-            <span className="text-brand-400 italic">para quem você ama.</span>
+            <span className="text-brand-highlight italic">para quem você ama.</span>
           </h2>
 
-          <p className="text-lg text-brand-100/60 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg text-brand-100/60 mb-12 max-w-2xl mx-auto leading-relaxed">
             Seja para uma consulta preventiva ou um atendimento emergencial, nossa equipe de elite está pronta. Fale conosco agora mesmo.
           </p>
 
@@ -983,7 +1003,7 @@ const CTASection = () => {
             <a
               href={WHATSAPP_URL}
               target="_blank" rel="noopener noreferrer"
-              className="bg-brand-400 hover:bg-white text-brand-950 px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] transition-all duration-300 shadow-2xl shadow-brand-400/20 flex items-center justify-center gap-3 group w-full sm:w-auto hover:scale-105"
+              className="bg-brand-accent hover:bg-amber-600 text-white px-10 py-5 rounded-lg font-bold uppercase tracking-[0.2em] text-[11px] transition-all duration-300 shadow-2xl shadow-brand-accent/20 flex items-center justify-center gap-3 group w-full sm:w-auto hover:scale-105"
             >
               <WhatsAppLogo className="w-5 h-5 fill-current" />
               <span>Agendar no WhatsApp</span>
@@ -991,7 +1011,7 @@ const CTASection = () => {
             </a>
             <a
               href="tel:5511999999999"
-              className="border-2 border-brand-600 hover:border-brand-400 text-brand-300 hover:text-brand-400 px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] transition-all duration-300 flex items-center justify-center gap-3 w-full sm:w-auto"
+              className="border-2 border-brand-secondary hover:border-brand-highlight text-white hover:text-brand-highlight px-10 py-5 rounded-lg font-bold uppercase tracking-[0.2em] text-[11px] transition-all duration-300 flex items-center justify-center gap-3 w-full sm:w-auto"
             >
               <Phone className="w-4 h-4" />
               <span>Emergência (Ligar Agora)</span>
@@ -1006,7 +1026,7 @@ const CTASection = () => {
               { val: "99,7%", label: "Sucesso" },
             ].map((stat, i) => (
               <div key={i}>
-                <p className="text-2xl font-serif font-bold text-brand-400">{stat.val}</p>
+                <p className="text-2xl font-serif font-bold text-brand-highlight">{stat.val}</p>
                 <p className="text-brand-100/40 text-xs uppercase tracking-widest mt-1">{stat.label}</p>
               </div>
             ))}
@@ -1018,31 +1038,36 @@ const CTASection = () => {
 };
 
 const Footer = () => (
-  <footer className="py-20 bg-black text-white/50 px-6">
+  <footer className="py-16 bg-black text-white/50 px-6">
     <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-16 text-left">
-      <div className="md:col-span-2">
-        <div className="flex items-center gap-2 mb-6"><PawPrint className="text-brand-400 w-8 h-8" /><span className="text-2xl font-serif font-bold text-white uppercase tracking-tighter">DUNO</span></div>
-        <p className="text-sm leading-relaxed mb-6 max-w-sm">Excelência hospitalar e cuidado humanizado no coração do Itaim Bibi. Atendimento de elite para quem você mais ama.</p>
-        <p className="text-[10px] font-bold tracking-widest text-brand-400">Responsável Técnico: Dr. Carlos Eduardo (CRMV-SP 12345)<br/>Razão Social: Duno Clínica Veterinária LTDA - CNPJ: 00.000.000/0001-00</p>
+      <div className="md:col-span-2 space-y-6">
+        <div className="flex items-center gap-2">
+          <div className="w-10 h-10 bg-brand-primary rounded-xl flex items-center justify-center">
+            <PawPrint className="text-brand-highlight w-6 h-6" />
+          </div>
+          <span className="text-2xl font-serif font-bold text-white uppercase tracking-tighter">DUNO</span>
+        </div>
+        <p className="text-sm leading-relaxed max-w-sm text-gray-400">Excelência hospitalar e cuidado humanizado no coração do Itaim Bibi. Atendimento de elite para quem você mais ama.</p>
+        <p className="text-[10px] font-bold tracking-widest text-brand-highlight/75">Responsável Técnico: Dr. Carlos Eduardo (CRMV-SP 12345)<br/>Razão Social: Duno Clínica Veterinária LTDA - CNPJ: 00.000.000/0001-00</p>
       </div>
       <div>
-        <h4 className="text-white font-serif font-bold mb-6 uppercase tracking-widest">Links Rápidos</h4>
-        <ul className="text-xs space-y-4 tracking-widest font-bold">
-          <li><a href="#services" className="hover:text-brand-400 transition-colors">SERVIÇOS</a></li>
-          <li><a href="#equipe" className="hover:text-brand-400 transition-colors">CORPO CLÍNICO</a></li>
-          <li><a href="#faq" className="hover:text-brand-400 transition-colors">DÚVIDAS FREQUENTES</a></li>
-          <li><a href="#" className="hover:text-brand-400 transition-colors">POLÍTICA DE PRIVACIDADE</a></li>
+        <h4 className="text-white font-serif font-bold mb-6 uppercase tracking-widest text-sm">Links Rápidos</h4>
+        <ul className="text-[14px] space-y-2 font-bold tracking-wide">
+          <li><a href="#services" className="hover:text-brand-accent transition-colors leading-[2.0] block">Serviços</a></li>
+          <li><a href="#equipe" className="hover:text-brand-accent transition-colors leading-[2.0] block">Corpo Clínico</a></li>
+          <li><a href="#faq" className="hover:text-brand-accent transition-colors leading-[2.0] block">Dúvidas Frequentes</a></li>
+          <li><a href="#" className="hover:text-brand-accent transition-colors leading-[2.0] block">Política de Privacidade</a></li>
         </ul>
       </div>
       <div>
-        <h4 className="text-white font-serif font-bold mb-6 uppercase tracking-widest">Siga-nos</h4>
+        <h4 className="text-white font-serif font-bold mb-6 uppercase tracking-widest text-sm">Siga-nos</h4>
         <div className="flex gap-4">
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="bg-brand-950 p-3 rounded-full hover:bg-brand-400 hover:text-brand-950 transition-colors"><Instagram className="w-5 h-5" /></a>
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="bg-brand-950 p-3 rounded-full hover:bg-brand-400 hover:text-brand-950 transition-colors"><Facebook className="w-5 h-5" /></a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-brand-neutral/10 flex items-center justify-center text-white hover:text-brand-accent hover:bg-brand-neutral/20 transition-all"><Instagram className="w-5 h-5" /></a>
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-brand-neutral/10 flex items-center justify-center text-white hover:text-brand-accent hover:bg-brand-neutral/20 transition-all"><Facebook className="w-5 h-5" /></a>
         </div>
       </div>
     </div>
-    <p className="text-center text-[10px] font-bold tracking-[0.5em] pt-12 border-t border-white/5">© 2026 DUNO CLÍNICA VETERINÁRIA. TODOS OS DIREITOS RESERVADOS.</p>
+    <p className="text-center text-[10px] font-bold tracking-[0.5em] pt-12 border-t border-white/15">© 2026 DUNO CLÍNICA VETERINÁRIA. TODOS OS DIREITOS RESERVADOS.</p>
   </footer>
 );
 
