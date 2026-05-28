@@ -564,6 +564,7 @@ const Footer = () => {
 export default function App() {
   return (
     <div className="bg-white min-h-screen">
+    <h1 className="text-center text-2xl text-black">Debug Test</h1>
       <ProgressBar />
       <Navbar />
       <Hero />
