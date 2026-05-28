@@ -1,448 +1,391 @@
-import React, { useState, useEffect } from 'react';
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import { motion, AnimatePresence, useScroll, useSpring, useTransform } from "motion/react";
 import { 
+  Stethoscope,
+  HeartPulse, 
+  Microscope,
   MapPin, 
   Phone, 
   Clock, 
+  Menu, 
+  X, 
+  Search,
+  ChevronRight, 
   Instagram, 
   Facebook, 
-  Plus, 
-  X,
-  Check,
-  Star,
-  ArrowRight,
-  Menu,
+  PawPrint,
   MessageCircle,
-  Dog,
-  Cat,
-  Bird,
-  Rabbit,
-  Shield,
-  Heart,
+  Plus,
+  Minus,
+  Quote,
+  ShieldCheck,
+  Zap,
   Award,
-  Activity
-} from 'lucide-react';
+  Activity,
+  Syringe,
+  Bone
+} from "lucide-react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import { useState, useEffect, useRef } from "react";
 
-const ProgressBar = () => {
-  const [scroll, setScroll] = React.useState(0);
-  React.useEffect(() => {
-    const onScroll = () => {
-      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      setScroll(scrolled);
-    };
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-  return <div className="fixed top-0 left-0 h-1 bg-brand-primary z-[100000]" style={{ width: `${scroll}%` }} />;
-};
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
-
-// Fix Leaflet icon issue
+// Fix for Leaflet marker icon issue
 // @ts-ignore
-import icon from 'leaflet/dist/images/marker-icon.png';
-// @ts-ignore
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
-
-let DefaultIcon = L.icon({
-  iconUrl: icon,
-  shadowUrl: iconShadow,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41]
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
+  iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
 });
-L.Marker.prototype.options.icon = DefaultIcon;
 
 const WHATSAPP_URL = "https://wa.me/5511992876219?text=Olá! Gostaria de agendar uma consulta na Duno.";
+
+const LoadingScreen = () => {
+  return (
+    <motion.div 
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.8 }}
+      className="fixed inset-0 z-[100] bg-brand-950 flex flex-col items-center justify-center"
+    >
+      <motion.div 
+        animate={{ scale: [1, 1.2, 1], rotate: [0, 10, -10, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="mb-8"
+      >
+        <PawPrint className="w-20 h-20 text-brand-400" />
+      </motion.div>
+      <h2 className="text-white text-3xl font-serif font-bold tracking-widest animate-pulse-soft">DUNO</h2>
+      <div className="mt-8 w-48 h-1 bg-brand-900 rounded-full overflow-hidden">
+        <motion.div 
+          initial={{ x: "-100%" }}
+          animate={{ x: "100%" }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+          className="w-full h-full bg-brand-400"
+        />
+      </div>
+    </motion.div>
+  );
+};
+
+const WhatsAppLogo = ({ className }: { className?: string }) => (
+  <svg 
+    viewBox="0 0 24 24" 
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+  </svg>
+);
+
+const WhatsAppButton = () => {
+  return (
+    <motion.a 
+      href={WHATSAPP_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      className="fixed bottom-8 right-8 z-[60] w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:shadow-[#25D366]/40 transition-shadow"
+    >
+      <WhatsAppLogo className="w-9 h-9 fill-current" />
+    </motion.a>
+  );
+};
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { name: "INÍCIO", href: "#home" },
-    { name: "SERVIÇOS", href: "#services" },
-    { name: "EQUIPE", href: "#equipe" },
-    { name: "ANTES E DEPOIS", href: "#cases" },
-    { name: "DEPOIMENTOS", href: "#depoimentos" },
-    { name: "FAQ", href: "#faq" }
+    { name: "Início", href: "#home" },
+    { name: "Serviços", href: "#services" },
+    { name: "Sobre", href: "#about" },
+    { name: "FAQ", href: "#faq" },
+    { name: "Contato", href: "#contact" },
   ];
 
   return (
-    <>
-      <nav className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${isScrolled ? "bg-[#0D0D0D] py-4 shadow-lg border-b border-white/5" : "bg-transparent py-6"}`}>
-        <div className="max-w-[1200px] mx-auto px-6 flex justify-between items-center">
-          <div className="text-logo cursor-pointer">
-            DUNO<span className="text-brand-primary">.</span>
-          </div>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "glass-morphism py-2 shadow-sm" : "bg-transparent py-4"}`}>
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+        <div className="flex items-center gap-2">
+          <PawPrint className="text-brand-600 w-8 h-8" />
+          <span className="text-2xl font-serif font-bold tracking-tight text-brand-950 uppercase">DUNO</span>
+        </div>
 
-          <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a 
-                key={link.name} 
-                href={link.href} 
-                className="text-white/80 hover:text-brand-primary font-medium text-[14px] transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-
-          <div className="hidden lg:block">
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bg-brand-primary text-white hover:bg-brand-600 transition-colors py-2.5 px-6 rounded text-[13px] font-bold uppercase tracking-wide">
-              AGENDAR
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a 
+              key={link.name} 
+              href={link.href} 
+              className="text-sm font-medium text-brand-950 hover:text-brand-600 transition-colors"
+            >
+              {link.name}
             </a>
-          </div>
+          ))}
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary py-2 px-6 text-sm flex items-center gap-2">
+            <WhatsAppLogo className="w-4 h-4 fill-current" /> Fale Conosco no WhatsApp
+          </a>
+        </div>
 
-          <button 
-            className="lg:hidden p-2 text-brand-primary" 
-            onClick={() => setIsMobileMenuOpen(true)}
+        {/* Mobile Toggle */}
+        <button 
+          className="md:hidden text-brand-950" 
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X /> : <Menu />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-full left-0 right-0 bg-white shadow-xl p-6 md:hidden flex flex-col gap-4"
           >
-            <Menu className="w-6 h-6" />
-          </button>
-        </div>
-      </nav>
-
-      {/* Floating WhatsApp Button */}
-      <a 
-        href={WHATSAPP_URL} 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="fixed bottom-6 right-6 bg-[#25D366] text-white p-4 rounded-full shadow-[0_4px_16px_rgba(37,211,102,0.3)] hover:bg-[#128C7E] transition-all duration-300 flex items-center justify-center z-[99999] hover:scale-110 active:scale-95"
-        title="Fale conosco no WhatsApp"
-      >
-        <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
-          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.528 2.01 14.07 1.006 11.72 1.005c-5.441 0-9.866 4.372-9.87 9.802 0 1.814.504 3.59 1.46 5.168L2.29 21.73l5.952-1.564z" />
-          <path d="M16.596 13.565c-.279-.14-.1.353-.627-.14-.26-.26-.814-.526-1.127-.682-.313-.157-.542-.236-.772.109-.23.344-.888 1.109-1.088 1.332-.2.223-.4.256-.679.116-.279-.14-1.178-.434-2.244-1.385-.829-.739-1.39-1.653-1.554-1.933-.163-.28-.018-.431.122-.57.125-.125.279-.328.42-.492.14-.164.187-.279.279-.465.093-.187.047-.35-.024-.492-.07-.14-.627-1.512-.859-2.071-.226-.543-.454-.47-.627-.478-.162-.008-.349-.01-.536-.01-.187 0-.492.07-.75.35-.258.28-.984.962-.984 2.345 0 1.383 1.007 2.717 1.147 2.903.14.187 1.982 3.026 4.8 4.237.67.289 1.192.462 1.6.592.673.214 1.285.184 1.768.112.539-.08 1.653-.676 1.885-1.332.23-.656.23-1.218.162-1.332-.068-.115-.246-.187-.525-.327z" />
-        </svg>
-      </a>
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-[#0D0D0D] z-[10000] flex flex-col p-6">
-          <div className="flex justify-between items-center mb-12">
-            <div className="text-white font-bold text-[20px]">DUNO<span className="text-brand-primary">.</span></div>
-            <button onClick={() => setIsMobileMenuOpen(false)} className="text-brand-primary p-2">
-              <X className="w-6 h-6" />
-            </button>
-          </div>
-              <div className="flex flex-col w-full border-2 border-brand-primary rounded-[12px] overflow-hidden">
             {navLinks.map((link) => (
               <a 
                 key={link.name} 
                 href={link.href} 
-                onClick={() => setIsMobileMenuOpen(false)} 
-                className="text-white text-xl font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-lg font-medium text-brand-950 border-b border-brand-100 pb-2"
               >
                 {link.name}
               </a>
             ))}
-            <a href={WHATSAPP_URL} className="bg-brand-primary text-white text-center py-4 rounded font-bold uppercase tracking-wide mt-4 w-full">
-              AGENDAR
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary w-full mt-4 text-center flex items-center justify-center gap-2">
+              <WhatsAppLogo className="w-4 h-4 fill-current" /> Fale Conosco no WhatsApp
             </a>
-          </div>
-        </div>
-      )}
-    </>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 };
 
 const Hero = () => {
   return (
-    <section id="home" className="relative h-screen flex flex-col justify-center bg-[#0D0D0D] overflow-hidden">
+    <section id="home" className="relative min-h-[85vh] flex items-center overflow-hidden pt-20">
+      {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/imagem/banner03.png" 
-          alt="Duno Clínica Veterinária" 
-          className="w-full h-full object-cover object-center"
+          src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?q=80&w=2070&auto=format&fit=crop" 
+          alt="Veterinarian with dog" 
+          className="w-full h-full object-cover"
+          referrerPolicy="no-referrer"
+          loading="eager"
         />
-        <div 
-          className="absolute inset-0"
-          style={{ background: 'linear-gradient(to right, rgba(13,13,13,0.92) 50%, rgba(13,13,13,0.3) 100%)' }}
-        ></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-950/80 via-transparent to-brand-950/20"></div>
       </div>
 
-      <div className="relative z-10 max-w-[1200px] w-full mx-auto px-6">
-        <div className="max-w-[600px] pt-12 md:pt-0">
-          <h1 className="text-white font-[800] text-[40px] md:text-[64px] leading-[1.1] mb-6">
-            Transforme a vida <br />
-            <span className="italic text-brand-primary">do seu pet.</span> <br />
-            Transforme sua <br />
-            família.
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-2xl text-white"
+        >
+          <span className="inline-block px-4 py-1 bg-brand-400/20 border border-brand-400/30 rounded-full text-brand-400 text-[10px] font-bold uppercase tracking-widest mb-4 backdrop-blur-sm">
+            Excelência Hospitalar Itaim Bibi
+          </span>
+          <h1 className="text-4xl md:text-6xl font-serif font-bold leading-tight mb-4 drop-shadow-lg">
+            A Saúde do <br /> <span className="text-brand-400 italic">Seu Pet é Arte.</span>
           </h1>
-          
-          <p className="text-white/70 text-[16px] leading-relaxed max-w-[480px] mb-10">
-            Lemos cada sinal do seu animal como ninguém. Em nossa clínica, cada consulta é personalizada, humanizada e realizada com os equipamentos mais modernos.
+          <p className="text-lg md:text-xl text-white/90 mb-0 leading-relaxed font-medium max-w-lg drop-shadow-md">
+            Referência em medicina avançada e atendimento humanizado na DUNO.
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary w-full sm:w-auto">
-              AGENDE SUA CONSULTA
-            </a>
-            <a href="#services" className="btn-outline w-full sm:w-auto sm:ml-4">
-              SAIBA MAIS
-            </a>
-          </div>
-        </div>
-      </div>
-      
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-60 animate-bounce">
-        <div className="w-[1px] h-12 bg-white/50 mb-2"></div>
+        </motion.div>
       </div>
     </section>
   );
 };
+
+const Stats = () => {
+  const stats = [
+    { icon: <HeartPulse className="w-5 h-5 text-brand-700" />, value: "22k+", label: "VIDAS SALVAS" },
+    { icon: <Stethoscope className="w-5 h-5 text-brand-700" />, value: "15+", label: "ESPECIALISTAS" },
+    { icon: <ShieldCheck className="w-5 h-5 text-brand-700" />, value: "24h", label: "SUPORTE VITAL" },
+    { icon: <Award className="w-5 h-5 text-brand-700" />, value: "100%", label: "PADRÃO ELITE" },
+  ];
+
+  return (
+    <section className="relative z-20 -mt-12 px-6">
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-6xl mx-auto bg-white rounded-[2.5rem] shadow-2xl p-8 md:p-12 grid grid-cols-2 lg:grid-cols-4 gap-6 border border-brand-50"
+      >
+        {stats.map((stat, index) => (
+          <motion.div 
+            key={index} 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.05 }}
+            className="flex flex-col items-center text-center group"
+          >
+            <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-brand-900 group-hover:text-white transition-all duration-500 rotate-3 group-hover:rotate-0">
+              {stat.icon}
+            </div>
+            <h3 className="text-3xl font-serif font-bold text-brand-950 mb-1 tracking-tighter">{stat.value}</h3>
+            <p className="text-[9px] font-bold text-brand-600 uppercase tracking-widest">{stat.label}</p>
+          </motion.div>
+        ))}
+      </motion.div>
+    </section>
+  );
+};
+
+function ServiceCard({ service, index }: any) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
+
+  return (
+    <motion.div 
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ delay: index * 0.1, duration: 0.8, ease: "easeOut" }}
+      className="relative aspect-square rounded-3xl overflow-hidden group cursor-pointer shadow-2xl border border-white/10"
+    >
+      {/* Background Image with Parallax */}
+      <motion.div 
+        style={{ y }}
+        className="absolute inset-0 z-0"
+      >
+        <img 
+          src={service.image} 
+          alt={service.title} 
+          className="w-full h-[130%] object-cover scale-110 group-hover:scale-125 transition-transform duration-[1500ms] ease-out"
+          referrerPolicy="no-referrer"
+          loading="lazy"
+        />
+        {/* Sophisticated Luxury Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-950/20 via-brand-950/50 to-brand-950/90"></div>
+      </motion.div>
+
+      {/* Content - Info */}
+      <div className="absolute inset-0 z-10 p-8 flex flex-col items-center justify-center text-center">
+        <h3 className="text-2xl md:text-3xl font-serif font-bold text-white mb-4 uppercase tracking-tighter leading-none drop-shadow-2xl">
+          {service.title}
+        </h3>
+        
+        <p className="text-brand-50/80 text-xs leading-relaxed max-w-[240px] mb-8 font-medium group-hover:text-white transition-colors duration-500">
+          {service.description}
+        </p>
+
+        <motion.a 
+          href={WHATSAPP_URL} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          whileHover={{ scale: 1.05, backgroundColor: "#fff", color: "#000" }}
+          whileTap={{ scale: 0.95 }}
+          className="px-8 py-3 bg-brand-400 text-brand-950 rounded-full text-[10px] font-bold tracking-[0.25em] uppercase flex items-center gap-3 transition-all shadow-2xl border border-brand-400/50"
+        >
+          <WhatsAppLogo className="w-4 h-4 fill-brand-950" /> AGENDAR CONSULTA
+        </motion.a>
+      </div>
+    </motion.div>
+  );
+}
 
 const Services = () => {
   const services = [
-    { title: "Clínica Geral", desc: "Atendimento completo com foco na saúde preventiva do seu pet.", image: "/imagem/Consulta veterinária.png" },
-    { title: "Vacinação", desc: "Protocolos vacinais atualizados e seguros para imunização.", image: "/imagem/Vacinação.jpg" },
-    { title: "Odontologia Veterinária", desc: "Saúde bucal avançada para qualidade de vida.", image: "/imagem/Exames laboratoriais.jpg" },
-    { title: "Dermatologia Animal", desc: "Diagnóstico e tratamento de condições de pele e alergias.", image: "/imagem/Cirurgias veterinárias.jpg" },
-    { title: "Endoscopia Clínica", desc: "Procedimentos minimamente invasivos.", image: "/imagem/internação.png" },
-    { title: "Cirurgia e Internação", desc: "Centro cirúrgico e monitoramento 24h.", image: "/imagem/atendimento emergencial.jpg" },
-    { title: "Exames de Imagem", desc: "Raio-X e ultrassom de alta resolução.", image: "/imagem/Banho e tosa.png" },
-    { title: "Prevenção & Bem-Estar", desc: "Acompanhamento geriátrico e nutricional.", image: "/imagem/Atendimento domiciliar.webp" }
-  ];
-
-  return (
-    <section id="services" className="section-padding bg-white">
-      <div className="mb-[56px]">
-        <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">NOSSOS SERVIÇOS</span>
-        <h2 className="text-[32px] md:text-[44px] font-[800] text-brand-text leading-[1.2]">
-          Tratamentos de <span className="text-brand-primary italic">Alta<br/>Performance</span>
-        </h2>
-        <p className="text-[#6B6B6B] text-[16px] mt-4 max-w-[600px] leading-[1.7]">
-          Nossos protocolos são desenhados para oferecer longevidade e conforto ao seu pet, com excelência clínica incomparável.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[24px]">
-        {services.map((service, index) => (
-          <div 
-            key={index} 
-            className="flex flex-col group cursor-pointer border-2 border-brand-primary/20 hover:border-brand-primary rounded-[12px] overflow-hidden p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 bg-white"
-          >
-            <div className="w-full h-[200px] shrink-0 mb-4 overflow-hidden rounded-[8px]">
-              <img 
-                src={service.image} 
-                alt={service.title} 
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-              />
-            </div>
-            <h3 className="font-[600] text-[16px] text-brand-text mb-2">
-              {service.title}
-            </h3>
-            <p className="text-[#6B6B6B] text-[14px] mb-4 leading-[1.7] flex-1">
-              {service.desc}
-            </p>
-            <a href={WHATSAPP_URL} className="text-brand-primary font-[600] text-[14px] flex items-center gap-1 hover:underline mt-auto">
-              Saiba Mais <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
-            </a>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-};
-
-const SuccessCases = () => {
-  const cases = [
-    { num: "01", name: "Max - Husky", desc: "Recuperação total após cirurgia ortopédica avançada e reabilitação.", img: "/imagem/pet01.jpg" },
-    { num: "02", name: "Kiwi - Papagaio", desc: "Tratamento de infecção respiratória com retorno do canto normal.", img: "/imagem/pet02.jpg" },
-    { num: "03", name: "Luna - Gato", desc: "Controle de doença renal crônica e melhora na qualidade de vida.", img: "/imagem/pet03.jpg" }
-  ];
-
-  return (
-    <section id="cases" className="py-20 px-6 bg-[#F7F7F7]">
-      <div className="max-w-[1200px] mx-auto">
-        <div className="mb-[56px] text-center md:text-left">
-          <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">GALERIA DE EXCELÊNCIA</span>
-          <h2 className="text-[32px] md:text-[44px] font-[800] text-brand-text leading-[1.2]">
-            Transformações <span className="text-brand-primary italic">Reais</span>
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
-          {cases.map((c, i) => (
-            <div 
-              key={i} 
-              className="flex flex-col w-full border-2 border-brand-primary/20 hover:border-brand-primary rounded-[12px] overflow-hidden p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 bg-white group cursor-pointer"
-            >
-              <div className="relative w-full aspect-[4/3] rounded-[8px] overflow-hidden mb-[16px]">
-                <img 
-                  src={c.img} 
-                  alt={c.name} 
-                  className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 ${c.name.includes("Papagaio") ? "object-top" : "object-center"}`} 
-                />
-              </div>
-              <h3 className="font-[700] text-[20px] text-brand-text mb-2">{c.name}</h3>
-              <p className="text-[#6B6B6B] text-[14px] leading-[1.7] mb-6 line-clamp-3">{c.desc}</p>
-            </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Infrastructure = () => {
-  const values = [
-    { 
-      title: "Excelência Médica", 
-      desc: "Práticas avançadas, precisão em diagnósticos e constante atualização da nossa equipe.", 
-      icon: Award 
+    {
+      title: "MEDICINA DIAGNÓSTICA",
+      description: "Laboratório próprio e imagens de alta resolução para diagnósticos imediatos.",
+      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop"
     },
-    { 
-      title: "Cuidado Humanizado", 
-      desc: "Empatia e carinho incondicional com cada paciente, tratando-os como membros da família.", 
-      icon: Heart 
+    {
+      title: "BLOCO CIRÚRGICO",
+      description: "Equipamentos de suporte à vida e anestesia inalatória monitorada de alta precisão.",
+      image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?q=80&w=2070&auto=format&fit=crop"
     },
-    { 
-      title: "Transparência", 
-      desc: "Conduta ética inabalável, preços justos e clareza total em cada diagnóstico.", 
-      icon: Shield 
+    {
+      title: "INTERNAÇÃO ELITE",
+      description: "Acomodações climatizadas e supervisão médica constante para recuperação segura.",
+      image: "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=1988&auto=format&fit=crop"
     },
-    { 
-      title: "Inovação Médica", 
-      desc: "Investimento constante em infraestrutura cirúrgica e técnicas inovadoras.", 
-      icon: Activity 
+    {
+      title: "VETERINÁRIA",
+      description: "Acompanhamento integral do desenvolvimento e nutrição de ponta para seu pet.",
+      image: "https://images.unsplash.com/photo-1596272875729-ed2ff7d6d9c5?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      title: "HIGIENE SÔNICA",
+      description: "Tratamentos para cálculo dentário e profilaxia bucal avançada com tecnologia.",
+      image: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?q=80&w=2071&auto=format&fit=crop"
+    },
+    {
+      title: "ESPECIALIDADES",
+      description: "Cardiologia, Fisioterapia e Ortopedia com especialistas de renome internacional.",
+      image: "https://images.unsplash.com/photo-1581888227599-779811939961?q=80&w=2070&auto=format&fit=crop"
     }
   ];
 
-  const species = [
-    { name: "Cães", desc: "Clínica médica geral, ortopedia, cardiologia e cirurgias avançadas.", icon: Dog },
-    { name: "Gatos", desc: "Ambiente exclusivo e atendimento especializado livre de estresse (Cat Friendly).", icon: Cat },
-    { name: "Aves", desc: "Atendimento clínico e cirúrgico para aves domésticas e silvestres.", icon: Bird },
-    { name: "Pequenos Mamíferos", desc: "Consultas, odontologia preventiva e orientações para roedores e coelhos.", icon: Rabbit },
-    { name: "Répteis", desc: "Acompanhamento clínico, nutricional e tratamento de patologias específicas.", icon: Shield },
-    { name: "Animais Exóticos", desc: "Cuidado clínico dedicado a animais silvestres e espécies exóticas.", icon: Star }
-  ];
-
   return (
-    <section className="py-[96px] px-6 bg-[#0D0D0D] border-t border-b border-white/5">
-      <div className="max-w-[1200px] mx-auto grid lg:grid-cols-[52%_48%] gap-16 items-start">
-        {/* Left Column: Mission & Values */}
-        <div>
-          <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">COMPROMISSO</span>
-          <h2 className="text-[32px] md:text-[44px] font-[800] text-white leading-[1.2] mb-6">
-            Nossa Missão & <span className="text-brand-primary italic">Valores</span>
-          </h2>
-          <div className="bg-[#1A1A1A] border-l-4 border-brand-primary p-6 rounded-r-[12px] mb-10">
-            <h3 className="text-white font-[700] text-[18px] mb-2">Missão da DUNO</h3>
-            <p className="text-white/70 text-[15px] leading-[1.7]">
-              Proporcionar excelência em medicina veterinária de alta performance, unindo tecnologia médica de ponta a um acolhimento profundamente humano para garantir saúde e bem-estar integral a cada pet.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {values.map((v, i) => {
-              const IconComp = v.icon;
-              return (
-                <div key={i} className="bg-[#161616] p-6 rounded-[12px] border border-white/5 hover:border-brand-primary/40 transition-all duration-300">
-                  <div className="w-10 h-10 bg-brand-primary/10 rounded-full flex items-center justify-center mb-4">
-                    <IconComp className="w-5 h-5 text-brand-primary" />
-                  </div>
-                  <h4 className="text-white font-[700] text-[16px] mb-2">{v.title}</h4>
-                  <p className="text-white/60 text-[13.5px] leading-[1.6]">{v.desc}</p>
-                </div>
-              );
-            })}
-          </div>
+    <section id="services" className="section-padding bg-[#FDFDFD] relative overflow-hidden">
+      <div className="absolute inset-0 bg-pattern opacity-[0.04] pointer-events-none"></div>
+      
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-20">
+          <motion.span 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-brand-600 font-bold uppercase tracking-[0.5em] text-[10px] mb-6 block"
+          >
+            Nossas Áreas de Atuação
+          </motion.span>
+          <motion.h2 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+            className="text-4xl md:text-6xl font-serif font-bold text-brand-950 mb-6 leading-none tracking-tighter"
+          >
+            MEDICINA DE <br /> <span className="text-brand-600 italic">ALTA PERFORMANCE.</span>
+          </motion.h2>
+          <motion.div 
+            initial={{ width: 0 }}
+            whileInView={{ width: 120 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.4 }}
+            className="h-[1px] bg-brand-200 mx-auto mt-10"
+          ></motion.div>
         </div>
 
-        {/* Right Column: Species Served */}
-        <div className="lg:pl-6">
-          <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">ESPECIALIDADES</span>
-          <h2 className="text-[32px] md:text-[44px] font-[800] text-white leading-[1.2] mb-6">
-            Espécies que <span className="text-brand-primary italic">Atendemos</span>
-          </h2>
-          <p className="text-white/65 text-[15px] leading-[1.7] mb-8">
-            Nossa estrutura hospitalar e corpo clínico altamente especializado estão preparados para prestar atendimento clínico e cirúrgico completo para:
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {species.map((s, i) => {
-              const IconComp = s.icon;
-              return (
-                <div 
-                  key={i} 
-                  className="flex gap-4 p-4 rounded-[12px] bg-[#161616] border border-white/5 hover:border-brand-primary/30 hover:shadow-[0_4px_20px_rgba(232,103,26,0.05)] hover:-translate-y-0.5 transition-all duration-300 cursor-pointer group"
-                >
-                  <div className="w-10 h-10 bg-white/5 rounded-[8px] flex items-center justify-center shrink-0 group-hover:bg-brand-primary/10 transition-colors">
-                    <IconComp className="w-5 h-5 text-white/70 group-hover:text-brand-primary transition-colors" />
-                  </div>
-                  <div>
-                    <h4 className="text-white font-[700] text-[15px] mb-1 group-hover:text-brand-primary transition-colors">{s.name}</h4>
-                    <p className="text-white/55 text-[12.5px] leading-[1.5]">{s.desc}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Team = () => {
-  const team = [
-    { name: "Dr. Carlos Eduardo", crmv: "CRMV-SP 12345", specialty: "Cirurgia Geral e Ortopedia", bio: "Especialista em cirurgias complexas e recuperação motora de cães de médio e grande porte.", img: "/imagem/veterinario_2.webp" },
-    { name: "Dra. Marina Silva", crmv: "CRMV-SP 54321", specialty: "Medicina Felina", bio: "Compreende a linguagem única dos felinos, tratando-os em ambientes livres de estresse.", img: "/imagem/veterinaria_1.webp" },
-    { name: "Dra. Juliana Mendes", crmv: "CRMV-SP 09876", specialty: "Anestesiologia Veterinária", bio: "Garante procedimentos 100% seguros com monitoramento contínuo durante e após as cirurgias.", img: "/imagem/veterinaria_3.webp" }
-  ];
-
-  return (
-    <section id="equipe" className="py-20 px-6 bg-white">
-      <div className="max-w-[1200px] mx-auto">
-        <div className="mb-[56px] text-center">
-          <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">NOSSA EQUIPE</span>
-          <h2 className="text-[32px] md:text-[44px] font-[800] text-brand-text leading-[1.2]">
-            Mentes brilhantes por trás de <span className="text-brand-primary italic">vidas</span><br/>
-            <span className="text-brand-primary italic">saudáveis.</span>
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {team.map((vet, i) => (
-            <div 
-              key={i} 
-              className="flex flex-col rounded-[16px] overflow-hidden border border-gray-100 hover:border-brand-primary/40 shadow-minimal hover:shadow-lg transition-all duration-300 hover:-translate-y-1.5 bg-white group"
-            >
-              {/* Profile Image Wrapper */}
-              <div className="w-full aspect-[4/5] overflow-hidden relative">
-                <img 
-                  src={vet.img} 
-                  alt={vet.name} 
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" 
-                />
-                {/* Visual Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
-              
-              {/* Details Container */}
-              <div className="p-6 flex flex-col items-start flex-grow">
-                <h3 className="font-[700] text-[20px] text-brand-text group-hover:text-brand-primary transition-colors duration-300">{vet.name}</h3>
-                <span className="text-brand-primary text-[10px] uppercase tracking-[2px] font-bold mt-1 mb-2">{vet.crmv}</span>
-                <p className="text-brand-text font-[600] text-[14px] mb-3">{vet.specialty}</p>
-                <p className="text-[#6B6B6B] text-[14px] leading-[1.7] mb-6 flex-grow">{vet.bio}</p>
-                
-                {/* Social Links & Divider */}
-                <div className="w-full border-t border-gray-100 pt-4 flex justify-between items-center mt-auto">
-                  <span className="text-brand-text/40 text-[12px] font-medium">Redes Sociais</span>
-                  <div className="flex gap-4">
-                    <a href="#" className="text-brand-text/75 hover:text-brand-primary hover:scale-110 transition-all"><Instagram className="w-[18px] h-[18px]" /></a>
-                    <a href="#" className="text-brand-text/75 hover:text-brand-primary hover:scale-110 transition-all"><Facebook className="w-[18px] h-[18px]" /></a>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {services.map((service, index) => (
+            <ServiceCard key={index} service={service} index={index} />
           ))}
         </div>
       </div>
@@ -450,45 +393,265 @@ const Team = () => {
   );
 };
 
+const PetGallery = () => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const images = [
+    { url: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2074&auto=format&fit=crop" },
+    { url: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=2043&auto=format&fit=crop" },
+    { url: "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=1988&auto=format&fit=crop" },
+    { url: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=2069&auto=format&fit=crop" },
+    { url: "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?q=80&w=1974&auto=format&fit=crop" },
+    { url: "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?q=80&w=2080&auto=format&fit=crop" },
+  ];
+
+  return (
+    <section className="py-10 bg-white overflow-hidden">
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-7xl mx-auto px-6 mb-8"
+      >
+        <div className="max-w-2xl text-center mx-auto">
+          <span className="text-brand-600 font-bold uppercase tracking-widest text-[10px] mb-4 block">Nossos Pacientes Felizes</span>
+          <h2 className="text-3xl md:text-5xl font-serif font-bold text-brand-950 leading-none">
+            VIDAS QUE <br /> <span className="text-brand-700 italic">TRANSFORMAMOS.</span>
+          </h2>
+        </div>
+      </motion.div>
+      
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 px-6">
+        {images.map((img, i) => (
+          <motion.div 
+            key={i}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.05 }}
+            onClick={() => setSelectedImage(img.url)}
+            className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer shadow-sm hover:shadow-lg transition-all duration-500"
+          >
+            <img 
+              src={img.url} 
+              alt="Happy Pet" 
+              className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
+              referrerPolicy="no-referrer"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-brand-900/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+              <div className="w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 transform scale-0 group-hover:scale-100 transition-transform duration-500">
+                <Search className="text-white w-4 h-4" />
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 z-[100] bg-brand-950/90 backdrop-blur-xl flex items-center justify-center p-4 md:p-12 cursor-zoom-out"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative max-w-5xl w-full max-h-full"
+            >
+              <img 
+                src={selectedImage} 
+                alt="Enlarged Pet" 
+                className="w-full h-full object-contain rounded-3xl"
+                referrerPolicy="no-referrer"
+              />
+              <button 
+                onClick={() => setSelectedImage(null)}
+                className="absolute top-4 right-4 w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+};
 
 const Testimonials = () => {
   const reviews = [
-    { name: "Mariana Silva", pet: "Bento", text: "A equipe salvou a vida do Bento após um trauma severo. O cuidado, a transparência e a estrutura são de primeiro mundo.", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop" },
-    { name: "Ricardo Oliveira", pet: "Luna", text: "Minha gata é super assustada, mas o atendimento Cat Friendly daqui fez toda a diferença. Ela ficou tranquila o tempo todo.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop" },
-    { name: "Ana Paula Costa", pet: "Thor", text: "Investigamos a alergia do Thor por anos sem sucesso. A dermatologista daqui resolveu em semanas. Só tenho a agradecer!", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop" }
+    { name: "Mariana Silva", pet: "Bento (Golden Retriever)", text: "A DUNO salvou a vida do Bento. O atendimento foi impecável e a equipe nos manteve informados o tempo todo." },
+    { name: "Ricardo Oliveira", pet: "Luna (Persa)", text: "O padrão de higiene e o cuidado com gatos é diferenciado. A Luna se sente em casa, sem o estresse comum de outras clínicas." },
+    { name: "Ana Paula Costa", pet: "Thor (Bulldog Francês)", text: "Especialistas de altíssimo nível. Resolvemos um problema dermatológico crônico que ninguém conseguia tratar." },
   ];
 
   return (
-    <section id="depoimentos" className="py-20 px-6 bg-[#0D0D0D]">
-      <div className="max-w-[1200px] mx-auto">
-        <div className="mb-[56px] text-center">
-          <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">PROVA SOCIAL</span>
-          <h2 className="text-[32px] md:text-[44px] font-[800] text-white leading-[1.2]">
-            A prova de nossa <span className="text-brand-primary italic">excelência</span>
-          </h2>
-        </div>
+    <section className="section-padding bg-brand-950 text-white relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-96 h-96 bg-brand-900/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
+      <div className="max-w-7xl mx-auto relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center mb-12"
+        >
+          <Quote className="w-12 h-12 text-brand-400 mx-auto mb-6 opacity-50" />
+          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4 uppercase tracking-tighter">RELATOS DE <span className="text-brand-400 italic">CONFIANÇA.</span></h2>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {reviews.map((r, i) => (
-            <div key={i} className="bg-[#1A1A1A] rounded-[16px] p-[32px] relative">
-              <div className="absolute top-6 right-8 text-[64px] font-serif leading-none text-brand-primary opacity-30">"</div>
-              <div className="flex gap-1 mb-4">
-                {[1,2,3,4,5].map(s => <Star key={s} className="w-[18px] h-[18px] fill-brand-primary text-brand-primary" />)}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {reviews.map((review, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="bg-brand-900/30 backdrop-blur-sm p-8 rounded-[2.5rem] border border-brand-800/50 flex flex-col justify-between"
+            >
+              <p className="text-lg text-brand-100/80 leading-relaxed italic mb-8">"{review.text}"</p>
+              <div>
+                <h4 className="text-base font-serif font-bold text-white uppercase tracking-tight">{review.name}</h4>
+                <p className="text-brand-400 text-[9px] font-bold uppercase tracking-widest mt-1">{review.pet}</p>
               </div>
-              <p className="text-white/80 text-[15px] leading-[1.8] relative z-10 mb-[20px] min-h-[100px]">
-                {r.text}
-              </p>
-              <div className="w-full h-[1px] bg-white/10 mb-[20px]"></div>
-              <div className="flex items-center gap-3">
-                <img src={r.img} alt={r.name} className="w-[44px] h-[44px] rounded-full object-cover" />
-                <div>
-                  <p className="text-white text-[14px] font-[600]">{r.name}</p>
-                  <p className="text-[#6B6B6B] text-[13px]">Tutor do {r.pet}</p>
-                </div>
-              </div>
-            </div>
+            </motion.div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+};
+
+const Standards = () => {
+  const items = [
+    { icon: <HeartPulse className="w-5 h-5" />, title: "CUIDADO INTEGRAL", desc: "Time médico de alta prontidão e centro cirúrgico ativo para sua tranquilidade." },
+    { icon: <MessageCircle className="w-5 h-5" />, title: "INTERNAÇÃO HUMANIZADA", desc: "Monitoramento intensivo com relatórios em vídeo no seu WhatsApp." },
+    { icon: <Microscope className="w-5 h-5" />, title: "EXCELÊNCIA DIAGNÓSTICA", desc: "Equipamentos de imagem e laboratoriais de padrão internacional." },
+  ];
+
+  return (
+    <section className="section-padding bg-brand-50 overflow-hidden">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative"
+        >
+          <div className="aspect-square rounded-[2.5rem] overflow-hidden shadow-xl border-[8px] border-white">
+            <img 
+              src="https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=2070&auto=format&fit=crop" 
+              alt="Golden Standards" 
+              className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
+              loading="lazy"
+            />
+          </div>
+          <div className="absolute -top-6 -right-6 w-32 h-32 bg-brand-700 rounded-full flex items-center justify-center text-white text-center p-4 shadow-xl rotate-12">
+            <p className="font-serif font-bold text-sm leading-tight">PADRÃO ELITE DE CUIDADO</p>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <span className="text-brand-600 font-bold uppercase tracking-widest text-[10px] mb-4 block">Por que escolher a Duno?</span>
+          <h2 className="text-4xl md:text-6xl font-serif font-bold text-brand-950 mb-8 leading-none tracking-tighter">
+            NOSSOS <br /> <span className="text-brand-700 italic">PADRÕES DE OURO.</span>
+          </h2>
+          
+          <div className="space-y-6">
+            {items.map((item, i) => (
+              <div key={i} className="flex gap-5">
+                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md shrink-0 text-brand-700">
+                  {item.icon}
+                </div>
+                <div>
+                  <h4 className="text-lg font-serif font-bold text-brand-950 mb-1 uppercase tracking-tight">{item.title}</h4>
+                  <p className="text-brand-800/60 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const About = () => {
+  return (
+    <section id="about" className="section-padding bg-white">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative"
+        >
+          <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-xl">
+            <img 
+              src="https://images.unsplash.com/photo-1581888227599-779811939961?q=80&w=2070&auto=format&fit=crop" 
+              alt="Veterinary Specialist" 
+              className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
+              loading="lazy"
+            />
+          </div>
+          <div className="absolute -bottom-6 -right-6 bg-brand-900 p-6 rounded-[1.5rem] shadow-xl hidden md:block max-w-[240px] text-white">
+            <h4 className="text-2xl font-serif font-bold mb-1">DUNO</h4>
+            <p className="text-xs font-medium text-brand-100/80">Excelência que seu pet merece, cuidado que ele sente.</p>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <span className="text-brand-600 font-bold uppercase tracking-widest text-[10px] mb-4 block">A Clínica</span>
+          <h2 className="text-3xl md:text-5xl font-serif font-bold text-brand-950 mb-6 leading-tight">
+            Ciência e <span className="text-brand-700 italic">Empatia</span> em cada atendimento.
+          </h2>
+          <div className="space-y-4 text-base text-brand-800/70 leading-relaxed">
+            <p>
+              Na DUNO, acreditamos que a medicina veterinária deve ser exercida com o mais alto rigor científico, sem nunca perder a ternura e o respeito pela vida animal.
+            </p>
+            <p>
+              Nossa estrutura foi planejada para oferecer um ambiente calmo e seguro, reduzindo o estresse dos pacientes e proporcionando uma experiência positiva para tutores e pets.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-6 mt-10">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-brand-50 rounded-full flex items-center justify-center shadow-sm text-brand-700">
+                <PawPrint className="w-5 h-5" />
+              </div>
+              <p className="font-bold text-brand-950 uppercase tracking-widest text-[9px]">Tecnologia Global</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-brand-50 rounded-full flex items-center justify-center shadow-sm text-brand-700">
+                <HeartPulse className="w-5 h-5" />
+              </div>
+              <p className="font-bold text-brand-950 uppercase tracking-widest text-[9px]">Cuidado Humanizado</p>
+            </div>
+          </div>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary mt-10 inline-flex items-center gap-3 py-3 px-8 text-sm">
+            <WhatsAppLogo className="w-4 h-4 fill-white" /> FALAR COM ESPECIALISTA NO WHATSAPP
+          </a>
+        </motion.div>
       </div>
     </section>
   );
@@ -496,111 +659,163 @@ const Testimonials = () => {
 
 const FAQ = () => {
   const faqs = [
-    { q: "Quais são os horários de atendimento?", a: "Segunda a Sexta: 08:00 às 20:00. Sábado: 08:00 às 18:00. Plantão emergencial 24 horas todos os dias." },
-    { q: "Preciso agendar consulta com antecedência?", a: "Recomendamos agendamento para consultas de rotina. Urgências são atendidas de imediato no plantão 24h." },
-    { q: "Quais formas de pagamento são aceitas?", a: "Cartões de crédito (até 10x dependendo do tratamento), débito, PIX e dinheiro." },
-    { q: "A clínica atende felinos em espaço separado?", a: "Sim, possuímos ambiente exclusivo e técnicas Cat Friendly para minimizar o estresse dos gatos." }
+    {
+      question: "Quais são os horários de atendimento?",
+      answer: "Funcionamos de segunda a sexta das 08h às 22h e sábados das 08h às 18h. No entanto, temos uma equipe de plantão 24h para emergências críticas."
+    },
+    {
+      question: "Preciso agendar consulta com antecedência?",
+      answer: "Para consultas de rotina e especialistas, recomendamos o agendamento prévio via WhatsApp para garantir sua vaga. Emergências são atendidas por ordem de chegada."
+    },
+    {
+      question: "A clínica atende animais silvestres?",
+      answer: "Sim! Temos especialistas em animais exóticos e silvestres em nossa equipe. Entre em contato para verificar a disponibilidade do especialista no dia."
+    },
+    {
+      question: "Quais formas de pagamento são aceitas?",
+      answer: "Aceitamos todos os cartões de crédito e débito (parcelamento em até 10x sem juros), PIX e dinheiro. Também trabalhamos com alguns planos de saúde pet."
+    }
   ];
 
-  const [activeIndex, setActiveIndex] = useState<number | null>(0);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="section-padding bg-white">
-      <div className="mb-[56px] text-center">
-        <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">DÚVIDAS FREQUENTES</span>
-        <h2 className="text-[32px] md:text-[44px] font-[800] text-brand-text leading-[1.2]">
-          Tudo o que você precisa <span className="text-brand-primary italic">saber.</span>
-        </h2>
-      </div>
+    <section id="faq" className="section-padding bg-brand-50">
+      <div className="max-w-4xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center mb-12"
+        >
+          <span className="text-brand-600 font-bold uppercase tracking-widest text-[10px] mb-4 block">Dúvidas Frequentes</span>
+          <h2 className="text-3xl md:text-5xl font-serif font-bold text-brand-950 uppercase tracking-tighter">PERGUNTAS <span className="text-brand-700 italic">COMUNS.</span></h2>
+        </motion.div>
 
-      <div className="max-w-[800px] mx-auto">
-        {faqs.map((faq, i) => (
-          <div key={i} className={`border-b border-[#E0E0E0] ${activeIndex === i ? 'border-l-[3px] border-l-brand-primary' : ''}`}>
-            <button 
-              onClick={() => setActiveIndex(activeIndex === i ? null : i)}
-              className="w-full py-[20px] px-[24px] flex justify-between items-center text-left"
-            >
-              <span className="font-[600] text-[16px] text-brand-text">{faq.q}</span>
-              {activeIndex === i ? <X className="w-6 h-6 text-brand-primary shrink-0" /> : <Plus className="w-6 h-6 text-brand-primary shrink-0" />}
-            </button>
-            {activeIndex === i && (
-              <div className="px-[24px] pb-[20px] pt-[12px] text-[#6B6B6B] text-[15px] leading-[1.7]">
-                {faq.a}
-              </div>
-            )}
-          </div>
-        ))}
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div key={index} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-brand-100">
+              <button 
+                onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+                className="w-full p-5 flex justify-between items-center bg-white hover:bg-brand-50 transition-colors"
+              >
+                <span className="text-sm md:text-base font-serif font-bold text-brand-950 text-left uppercase tracking-tight">{faq.question}</span>
+                {activeIndex === index ? <Minus className="text-brand-700 w-4 h-4" /> : <Plus className="text-brand-700 w-4 h-4" />}
+              </button>
+              <AnimatePresence>
+                {activeIndex === index && (
+                  <motion.div 
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="p-6 pt-0 text-brand-800/70 leading-relaxed text-base">
+                      {faq.answer}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
 };
 
-const Location = () => {
+const Contact = () => {
   return (
-    <section className="section-padding bg-white pt-0">
-      <div className="mb-[56px] text-center md:text-left">
-        <span className="uppercase text-brand-primary tracking-[3px] text-[11px] font-bold mb-4 block">COMO NOS ENCONTRAR</span>
-        <h2 className="text-[32px] md:text-[44px] font-[800] text-brand-text leading-[1.2]">
-          Venha nos <span className="text-brand-primary italic">Visitar</span>
-        </h2>
-      </div>
+    <section id="contact" className="section-padding bg-white">
+      <div className="max-w-7xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-10"
+        >
+          <div>
+            <span className="text-brand-600 font-bold uppercase tracking-widest text-[9px] mb-3 block">Onde Estamos</span>
+            <h2 className="text-4xl md:text-6xl font-serif font-bold text-brand-950 mb-6 leading-none tracking-tighter">
+              DUNO <br /> <span className="text-brand-700 italic uppercase">ITAIM BIBI</span>
+            </h2>
+            
+            <div className="space-y-5">
+              <div className="flex gap-3">
+                <div className="w-10 h-10 bg-brand-900 rounded-xl flex items-center justify-center text-white shrink-0">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-base font-serif font-bold text-brand-950 mb-0.5 uppercase tracking-tight">ENDEREÇO</h4>
+                  <p className="text-brand-800/60 text-sm">Av. Brigadeiro Faria Lima, 2000 - Itaim Bibi, SP</p>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <div className="w-10 h-10 bg-brand-900 rounded-xl flex items-center justify-center text-white shrink-0">
+                  <Clock className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-base font-serif font-bold text-brand-950 mb-0.5 uppercase tracking-tight">HORÁRIOS</h4>
+                  <p className="text-brand-800/60 text-sm">Seg-Sex: 08:00 - 20:00 | Sáb: 08:00 - 18:00</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-      <div className="grid lg:grid-cols-[40%_60%] gap-12">
-        <div className="flex flex-col gap-[32px] justify-center">
-          <div>
-            <div className="flex items-center gap-3 mb-2">
-              <MapPin className="w-6 h-6 text-brand-primary" />
-              <h3 className="font-[700] text-[16px] text-brand-text">Nossa Localização</h3>
-            </div>
-            <p className="text-[#6B6B6B] text-[15px] pl-9">
-              Av. Brigadeiro Faria Lima, 2000<br/>Itaim Bibi, São Paulo – SP
-            </p>
+          <div className="h-[350px] rounded-[2rem] overflow-hidden shadow-lg border-[6px] border-brand-50 z-0">
+            <MapContainer 
+              center={[-23.5899, -46.6815]} 
+              zoom={15} 
+              scrollWheelZoom={false} 
+              style={{ height: "100%", width: "100%" }}
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <Marker position={[-23.5899, -46.6815]}>
+                <Popup>
+                  <div className="text-brand-950 font-serif font-bold">DUNO</div>
+                  <div className="text-xs text-brand-800/70">Av. Brigadeiro Faria Lima, 2000</div>
+                </Popup>
+              </Marker>
+            </MapContainer>
           </div>
-          <div>
-            <div className="flex items-center gap-3 mb-2">
-              <Clock className="w-6 h-6 text-brand-primary" />
-              <h3 className="font-[700] text-[16px] text-brand-text">Horário de Atendimento</h3>
-            </div>
-            <p className="text-[#6B6B6B] text-[15px] pl-9">
-              Seg–Sex: 08:00 – 20:00<br/>
-              Sáb: 08:00 – 18:00<br/>
-              Emergência: 24 horas
-            </p>
-          </div>
-          <div className="mt-4">
-            <a href={WHATSAPP_URL} className="text-brand-primary font-[600] hover:underline flex items-center gap-2">
-              Chamar no WhatsApp <ArrowRight className="w-4 h-4" />
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const CTA = () => {
+  return (
+    <section className="py-10 bg-brand-50 relative overflow-hidden">
+      <div className="absolute inset-0 bg-pattern opacity-[0.05] pointer-events-none"></div>
+      <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl border border-brand-100"
+        >
+          <span className="text-brand-600 font-bold uppercase tracking-[0.4em] text-[9px] mb-4 block">Atendimento Imediato</span>
+          <h2 className="text-4xl md:text-6xl font-serif font-bold text-brand-950 mb-6 leading-tight tracking-tighter">
+            PRONTO PARA DAR O <br /> <span className="text-brand-700 italic">MELHOR AO SEU PET?</span>
+          </h2>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+            <a 
+              href={WHATSAPP_URL} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn-primary w-full md:w-auto flex items-center justify-center gap-3 px-10 py-4 text-base"
+            >
+              <WhatsAppLogo className="w-5 h-5 fill-white" /> AGENDAR NO WHATSAPP
             </a>
           </div>
-        </div>
-
-        <div className="w-full h-[400px] rounded-[16px] overflow-hidden shadow-minimal">
-          <MapContainer center={[-23.5899, -46.6815]} zoom={15} style={{ height: "100%", width: "100%", zIndex: 0 }}>
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <Marker position={[-23.5899, -46.6815]}>
-              <Popup>DUNO Clínica Veterinária</Popup>
-            </Marker>
-          </MapContainer>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const CTASection = () => {
-  return (
-    <section className="py-[96px] px-[24px] bg-[#0D0D0D] text-center">
-      <div className="max-w-[800px] mx-auto">
-        <h2 className="text-[40px] md:text-[52px] font-[800] text-white leading-[1.2] mb-6">
-          Garanta o melhor cuidado <br />
-          para quem você <span className="text-brand-primary italic">ama.</span>
-        </h2>
-        <p className="text-white/60 text-[16px] max-w-[520px] mx-auto mb-10 leading-[1.7]">
-          Nossa equipe de especialistas está pronta para receber o seu pet com tecnologia, segurança e carinho.
-        </p>
-        <a href={WHATSAPP_URL} className="inline-block bg-brand-primary hover:bg-[#D4580E] text-white px-[40px] py-[18px] rounded-[4px] font-[700] uppercase tracking-[1.5px] text-[13px] transition-colors">
-          MARQUE UMA CONSULTA
-        </a>
+        </motion.div>
       </div>
     </section>
   );
@@ -608,61 +823,62 @@ const CTASection = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-[#0D0D0D] pt-[96px] pb-[48px] px-[24px]">
-      <div className="max-w-[1200px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-[48px]">
-          <div>
-            <div className="text-white font-bold text-2xl tracking-tight mb-4">DUNO</div>
-            <p className="text-white/55 text-[14px] leading-[1.8] mb-6 max-w-[250px]">
-              Clínica Veterinária de excelência. Tecnologia médica de ponta unida ao cuidado humanizado.
+    <footer className="bg-brand-950 text-white pt-12 pb-6">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+          <div className="space-y-6">
+            <div className="flex items-center gap-2">
+              <PawPrint className="text-brand-400 w-8 h-8" />
+              <span className="text-3xl font-serif font-bold tracking-tighter uppercase">DUNO</span>
+            </div>
+            <p className="text-brand-300 text-base leading-relaxed font-medium">
+              ONDE A MEDICINA DE ELITE E O AMOR INCONDICIONAL TRANSFORMAM VIDAS EM PINHEIROS.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="text-white/50 hover:text-brand-primary transition-colors"><Instagram className="w-[18px] h-[18px]" /></a>
-              <a href="#" className="text-white/50 hover:text-brand-primary transition-colors"><Facebook className="w-[18px] h-[18px]" /></a>
+              <a href="#" className="w-10 h-10 border border-brand-800 rounded-full flex items-center justify-center hover:bg-brand-400 transition-colors">
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a href="#" className="w-10 h-10 border border-brand-800 rounded-full flex items-center justify-center hover:bg-brand-400 transition-colors">
+                <Facebook className="w-5 h-5" />
+              </a>
             </div>
           </div>
-          
+
           <div>
-            <h4 className="text-white font-[700] text-[13px] uppercase tracking-[1.5px] mb-6">NAVEGAÇÃO</h4>
-            <ul className="flex flex-col gap-2">
-              <li><a href="#home" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Início</a></li>
-              <li><a href="#services" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Tratamentos</a></li>
-              <li><a href="#cases" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Casos de Sucesso</a></li>
-              <li><a href="#equipe" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Corpo Clínico</a></li>
-              <li><a href="#depoimentos" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Depoimentos</a></li>
+            <h4 className="text-xl font-serif font-bold mb-6 uppercase tracking-widest">ESPECIALIDADES</h4>
+            <ul className="space-y-4 text-brand-300 font-bold text-xs tracking-widest">
+              <li><a href="#services" className="hover:text-brand-400 transition-colors">CIRURGIA AVANÇADA</a></li>
+              <li><a href="#services" className="hover:text-brand-400 transition-colors">EXAMES DIAGNÓSTICOS</a></li>
+              <li><a href="#services" className="hover:text-brand-400 transition-colors">INTERNAÇÃO VIP</a></li>
+              <li><a href="#services" className="hover:text-brand-400 transition-colors">CONSULTAS EXPERT</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white font-[700] text-[13px] uppercase tracking-[1.5px] mb-6">SERVIÇOS</h4>
-            <ul className="flex flex-col gap-2">
-              <li><a href="#" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Clínica Geral</a></li>
-              <li><a href="#" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Cirurgias</a></li>
-              <li><a href="#" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Odontologia</a></li>
-              <li><a href="#" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Exames Laboratoriais</a></li>
-              <li><a href="#" className="text-white/55 hover:text-white text-[14px] leading-[2.2] transition-colors">Plantão 24h</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-white font-[700] text-[13px] uppercase tracking-[1.5px] mb-6">CONTATO</h4>
-            <ul className="flex flex-col gap-2">
-              <li className="text-white/55 text-[14px] leading-[2.2]">(11) 99287-6219</li>
-              <li className="text-white/55 text-[14px] leading-[2.2]">contato@dunovet.com.br</li>
-              <li className="text-white/55 text-[14px] leading-[2.2] mt-2">
-                Av. Brigadeiro Faria Lima, 2000<br/>Itaim Bibi, São Paulo - SP
+            <h4 className="text-xl font-serif font-bold mb-6 uppercase tracking-widest">CONTATO</h4>
+            <ul className="space-y-6 text-brand-300">
+              <li className="flex gap-3">
+                <MapPin className="text-brand-400 shrink-0 w-5 h-5" />
+                <span className="font-bold text-xs tracking-widest">AV. BRIGADEIRO FARIA LIMA, 2000 - ITAIM BIBI, SP</span>
+              </li>
+              <li className="flex gap-3">
+                <Phone className="text-brand-400 shrink-0 w-5 h-5" />
+                <span className="font-bold text-xs tracking-widest">(11) 99287-6219</span>
+              </li>
+              <li className="flex gap-3">
+                <Clock className="text-brand-400 shrink-0 w-5 h-5" />
+                <span className="font-bold text-xs tracking-widest uppercase">ATENDIMENTO PERSONALIZADO</span>
               </li>
             </ul>
           </div>
         </div>
-
-        <div className="border-t border-white/10 pt-[24px] flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/30 text-[13px]">
-            &copy; 2026 DUNO Clínica Veterinária. Todos os direitos reservados.
-          </p>
-          <p className="text-white/30 text-[13px]">
-            Resp. Técnico: Dr. Carlos Eduardo CRMV-SP 12345
-          </p>
+        
+        <div className="pt-8 border-t border-brand-900 flex flex-col md:flex-row justify-between items-center gap-4 text-brand-500 text-[9px] font-bold tracking-[0.3em] uppercase">
+          <p>© 2026 DUNO. TODOS OS DIREITOS RESERVADOS.</p>
+          <div className="flex gap-8">
+            <a href="#" className="hover:text-brand-300 transition-colors">PRIVACIDADE</a>
+            <a href="#" className="hover:text-brand-300 transition-colors">TERMOS</a>
+          </div>
         </div>
       </div>
     </footer>
@@ -670,21 +886,36 @@ const Footer = () => {
 };
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="bg-white min-h-screen">
-    
-      <ProgressBar />
-      <Navbar />
-      <Hero />
-      <Services />
-      <SuccessCases />
-      <Infrastructure />
-      <Team />
-      <Testimonials />
-      <FAQ />
-      <Location />
-      <CTASection />
-      <Footer />
+    <div className="bg-white selection:bg-brand-200 selection:text-brand-900">
+      <AnimatePresence>
+        {isLoading && <LoadingScreen />}
+      </AnimatePresence>
+      
+      {!isLoading && (
+        <>
+          <Navbar />
+          <Hero />
+          <Stats />
+          <Services />
+          <PetGallery />
+          <Standards />
+          <Testimonials />
+          <About />
+          <FAQ />
+          <Contact />
+          <CTA />
+          <Footer />
+          <WhatsAppButton />
+        </>
+      )}
     </div>
   );
 }
