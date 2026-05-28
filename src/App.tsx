@@ -10,7 +10,8 @@ import {
   Check,
   Star,
   ArrowRight,
-  Menu
+  Menu,
+  MessageCircle
 } from 'lucide-react';
 
 const ProgressBar = () => {
