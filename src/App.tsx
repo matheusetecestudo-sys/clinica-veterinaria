@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { OptimizedImage } from "./components/OptimizedImage";
 import { 
   Heart, 
   MapPin, 
@@ -45,8 +46,9 @@ const WhatsAppLogo = ({ className }: { className?: string }) => (
     viewBox="0 0 24 24" 
     className={className}
     fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.859-4.407 9.862-9.83.001-2.628-1.01-5.1-2.861-6.956C16.61 1.96 14.137.95 11.516.95c-5.44 0-9.866 4.41-9.869 9.837-.001 1.83.479 3.619 1.391 5.2l-.372 1.36.376-.135 1.705.54z" />
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.455 5.703 1.458h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413" />
   </svg>
 );
 
@@ -59,14 +61,14 @@ const WhatsAppButton = () => {
       rel="noopener noreferrer"
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      whileHover={{ scale: 1.1 }}
+      whileHover={{ scale: 1.15 }}
       whileTap={{ scale: 0.9 }}
       transition={{ delay: 1, type: "spring", stiffness: 260, damping: 20 }}
-      className="fixed bottom-6 right-6 z-[99] bg-[#25d366] text-white p-4.5 rounded-full shadow-[0_10px_25px_rgba(37,211,102,0.4)] hover:bg-[#20ba5a] transition-all flex items-center justify-center cursor-pointer border border-[#25d366]/10"
+      className="fixed bottom-6 right-6 z-[99] bg-[#25d366] text-white p-4 rounded-full shadow-[0_12px_30px_rgba(37,211,102,0.5)] hover:bg-[#20ba5a] transition-all flex items-center justify-center cursor-pointer border border-white/20"
       title="Falar no WhatsApp"
       id="floating-whatsapp"
     >
-      <WhatsAppLogo className="w-8 h-8 fill-white" />
+      <WhatsAppLogo className="w-8 h-8 text-white" />
     </motion.a>
   );
 };
@@ -118,11 +120,8 @@ const Navbar = () => {
     { name: "INÍCIO", href: "#inicio" },
     { name: "SERVIÇOS", href: "#servicos" },
     { name: "RESULTADOS", href: "#resultados" },
-    { name: "DIFERENCIAIS", href: "#diferenciais" },
     { name: "CLÍNICA", href: "#about" },
     { name: "ESPECIALISTAS", href: "#equipe" },
-    { name: "DEPOIMENTOS", href: "#depoimentos" },
-    { name: "FAQ", href: "#faq" },
   ];
 
   return (
@@ -133,20 +132,20 @@ const Navbar = () => {
           <span className="text-xl md:text-2xl font-serif font-black text-[#f97316] tracking-[0.2em] uppercase transition-all duration-300 hover:scale-105">DUNO</span>
         </a>
 
-        {/* Unified Center Menu with lg: breakpoint for perfect alignment */}
-        <div className="hidden lg:flex items-center gap-5 xl:gap-8 justify-center">
+        {/* Unified Center Menu - streamlined and beautifully spaced */}
+        <div className="hidden lg:flex items-center gap-6 xl:gap-10 justify-center">
           {navLinks.map((link, index) => (
             <a 
               key={index} 
               href={link.href} 
-              className="text-white/80 hover:text-[#f97316] text-[10px] xl:text-[11px] font-bold tracking-[0.15em] transition-colors duration-300 uppercase whitespace-nowrap"
+              className="text-white/80 hover:text-[#f97316] text-[11px] font-bold tracking-[0.2em] transition-colors duration-300 uppercase whitespace-nowrap"
             >
               {link.name}
             </a>
           ))}
         </div>
 
-        {/* Unified Right Call Button (with phone link removed as requested) */}
+        {/* Unified Right Call Button - short, direct, extremely premium */}
         <div className="hidden lg:flex items-center shrink-0">
           <motion.a 
             href={WHATSAPP_URL}
@@ -154,10 +153,10 @@ const Navbar = () => {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 bg-[#f97316] hover:bg-[#ea580c] text-white text-[10px] font-bold tracking-[0.15em] rounded-full transition-all flex items-center gap-2.5 group/btn"
+            className="px-6 py-3 bg-[#f97316] hover:bg-[#ea580c] text-white text-[10px] font-bold tracking-[0.2em] rounded-full transition-all flex items-center gap-2.5 group/btn whitespace-nowrap"
           >
-            <span>AGENDAR CONSULTA DE ALTA PERFORMANCE</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+            <span>AGENDAR CONSULTA</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform shrink-0" />
           </motion.a>
         </div>
 
@@ -195,10 +194,10 @@ const Navbar = () => {
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-4 bg-[#f97316] hover:bg-[#ea580c] text-white font-bold text-center text-xs tracking-[0.2em] rounded-full transition-all flex items-center justify-center gap-2.5 group"
+                  className="w-full py-4 bg-[#f97316] hover:bg-[#ea580c] text-white font-bold text-center text-xs tracking-[0.2em] rounded-full transition-all flex items-center justify-center gap-2.5 group whitespace-nowrap"
                 >
-                  <span>AGENDAR ATENDIMENTO PRIORITÁRIO</span>
-                  <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1.5 transition-transform" />
+                  <span>AGENDAR CONSULTA</span>
+                  <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1.5 transition-transform shrink-0" />
                 </a>
               </div>
             </div>
@@ -212,43 +211,59 @@ const Navbar = () => {
 // Hero - copy layout of print: elegant, with orange subtitle accents and large typography
 const Hero = () => {
   return (
-    <section id="inicio" className="relative min-h-screen bg-black flex items-center justify-start overflow-hidden pt-24 pb-12">
-      {/* Background Image with sophisticated luxury overlay - Made brighter and vibrant as requested */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&q=80&w=2000" 
-          alt="Clínica Veterinária Duno de Alta Performance" 
-          className="w-full h-full object-cover opacity-65 object-center filter contrast-[1.05] brightness-95 transition-transform duration-[6000ms] scale-102"
-          referrerPolicy="no-referrer"
-        />
-        {/* Softened radial and linear dark templates on the left for maximum white text contrast while exposing the actual image colors */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent"></div>
+    <section id="inicio" className="relative min-h-[90vh] bg-black flex items-center justify-start overflow-hidden pt-20 pb-6 md:pt-24 md:pb-8">
+      {/* Background Image Wrapper - Full-screen coverage on all devices */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {/* Desktop Image */}
+        <div className="hidden md:block w-full h-full">
+          <OptimizedImage 
+            src="https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/ChatGPT%20Image%2028%20de%20mai.%20de%202026%2C%2018_35_29.png" 
+            alt="Clínica Veterinária Duno de Alta Performance" 
+            className="w-full h-full object-cover filter contrast-[1.04] brightness-90 transition-transform duration-[6000ms] scale-102"
+            containerClassName="w-full h-full"
+            priority
+            sizes="100vw"
+          />
+        </div>
+        {/* Mobile Image */}
+        <div className="block md:hidden w-full h-full">
+          <OptimizedImage 
+            src="https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/ChatGPT%20Image%2028%20de%20mai.%20de%202026%2C%2018_53_33.png" 
+            alt="Clínica Veterinária Duno de Alta Performance - Mobile" 
+            className="w-full h-full object-cover filter contrast-[1.04] brightness-90"
+            containerClassName="w-full h-full"
+            priority
+            sizes="100vw"
+          />
+        </div>
+        {/* Underlay / gradients for premium styling and text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/60 to-transparent"></div>
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
         <div className="lg:col-span-10 flex flex-col justify-center text-left">
           {/* Tag matches print */}
           <motion.div 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="flex items-center gap-2 mb-6"
+            className="flex items-center gap-2 mb-3 md:mb-4"
           >
             <div className="h-[2px] w-6 bg-[#f97316]"></div>
-            <span className="text-[#f97316] text-[10px] font-bold tracking-[0.4em] uppercase">TECNOLOGIA E ACOLHIMENTO DE EXCELÊNCIA</span>
+            <span className="text-[#f97316] text-[10px] font-bold tracking-[0.4em] uppercase">HOSPITAL VETERINÁRIO 24H</span>
           </motion.div>
 
-          {/* Title - replicating print template "Transforme seu sorriso. Transforme sua vida" */}
+          {/* Title - highly elegant and professional */}
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-[40px] md:text-[68px] font-serif font-bold text-white mb-6 leading-[1.1] tracking-tighter uppercase"
+            className="text-[36px] md:text-[68px] font-serif font-bold text-white mb-3 md:mb-4 leading-[1.1] tracking-tighter uppercase"
           >
-            Transforme a <br />
-            <span className="text-[#f97316] italic font-normal">saúde do seu pet.</span> <br />
-            Transforme sua vida.
+            Cuidado médico <br />
+            <span className="text-[#f97316] italic font-normal">de alta precisão</span> <br />
+            24 horas por dia.
           </motion.h1>
 
           {/* Description */}
@@ -256,40 +271,59 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-gray-300 text-sm md:text-base max-w-[580px] mb-10 leading-relaxed font-normal"
+            className="text-gray-300 text-sm md:text-base max-w-[580px] mb-4 md:mb-5 leading-relaxed font-normal"
           >
-            Profissionais de referência, exames diagnósticos de altíssima precisão e infraestrutura cirúrgica integrada 24h. Na Duno, a saúde de quem você ama é tratada com rigor científico e acolhimento de excelência.
+            Referência em diagnósticos complexos, cirurgias avançadas e atendimento humanizado. Na Duno, a saúde do seu pet é tratada com máximo rigor científico e carinho humano.
           </motion.p>
+
+          {/* Species treated badge row - Inform types of animals */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.25 }}
+            className="mb-5 flex flex-wrap gap-2.5 items-center border-t border-b border-white/10 py-3.5 max-w-[620px]"
+          >
+            <span className="text-[#f97316] text-[8.5px] font-bold tracking-[0.25em] uppercase mr-1">PACIENTES ATENDIDOS:</span>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { name: "Cão / Caninos", emoji: "🐶" },
+                { name: "Gato / Felinos", emoji: "🐱" },
+                { name: "Animais Silvestres", emoji: "🦜" },
+                { name: "Exóticos e Pets de Bolso", emoji: "🦎" }
+              ].map((species, i) => (
+                <span 
+                  key={i} 
+                  className="inline-flex items-center gap-1.5 bg-white/5 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-white/10 text-[10.5px] text-white font-medium hover:bg-white/10 transition-colors"
+                >
+                  <span>{species.emoji}</span>
+                  <span>{species.name}</span>
+                </span>
+              ))}
+            </div>
+          </motion.div>
 
           {/* Actions */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 mb-16"
+            className="flex flex-col sm:flex-row gap-3.5 mb-4 md:mb-6"
           >
             <a 
               href={WHATSAPP_URL} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="px-8 py-4 bg-[#f97316] text-white text-[11px] font-bold uppercase tracking-[0.2em] rounded-full transition-all hover:bg-[#ea580c] hover:shadow-[0_10px_30px_rgba(249,115,22,0.4)] active:scale-95 shadow-xl inline-flex items-center justify-center gap-2.5 group"
+              className="px-7 py-3.5 bg-[#f97316] text-white text-[11px] font-bold uppercase tracking-[0.2em] rounded-full transition-all hover:bg-[#ea580c] hover:shadow-[0_10px_30px_rgba(249,115,22,0.4)] active:scale-95 shadow-xl inline-flex items-center justify-center gap-2.5 group/btn whitespace-nowrap"
             >
-              <span>AGENDAR CONSULTA DE EXCELÊNCIA</span>
-              <ArrowRight className="w-4 h-4 text-white/90 group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a 
-              href="#servicos" 
-              className="border-2 border-white/20 text-white px-8 py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] transition-all hover:bg-white/10 active:scale-95 inline-flex items-center justify-center gap-2 group"
-            >
-              <span>CONHECER NOSSOS SERVIÇOS</span>
-              <ArrowRight className="w-4 h-4 text-white/60 group-hover:translate-x-1.5 transition-transform" />
+              <span>AGENDAR CONSULTA</span>
+              <ArrowRight className="w-4 h-4 text-white/90 group-hover/btn:translate-x-1 transition-transform shrink-0" />
             </a>
           </motion.div>
         </div>
       </div>
 
       {/* Explorer micro label mimicking print */}
-      <div className="absolute bottom-10 left-6 md:left-12 z-10 hidden md:flex items-center gap-4 text-white/30 text-[9px] font-mono tracking-[0.4em] uppercase">
+      <div className="absolute bottom-6 left-6 md:left-12 z-10 hidden md:flex items-center gap-4 text-white/30 text-[9px] font-mono tracking-[0.4em] uppercase">
         <span className="w-20 h-[1px] bg-white/20"></span>
         <span>ROLE PARA EXPLORAR</span>
       </div>
@@ -300,57 +334,63 @@ const Hero = () => {
 interface ServiceItem {
   title: string;
   description: string;
+  fullDescription?: string;
   image: string;
 }
 
-// Services Section styled exactly like the screenshot: white cards, rounded-3xl corners, light/gray saiba mais button pill with arrow, subtle shadow, light section background
+// Services Section styled exactly like the screenshot
 const Services = () => {
   const servicesList: ServiceItem[] = [
     {
-      title: "Pronto Socorro 24h",
-      description: "Instalação hospitalar de pronto atendimento completo e triagem médica imediata em qualquer dia/horário.",
-      image: "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&q=80&w=800"
+      title: "Consulta Veterinária",
+      description: "Consulta geral, diagnósticos precisos e prevenção para o seu pet.",
+      fullDescription: "Avaliação físico-clínica completa, orientação vacinal personalizada e exames preliminares minuciosos para garantir a prevenção de patologias e a saúde integral do seu animal de estimação.",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/Consulta%20veterin%C3%A1ria.png"
     },
     {
-      title: "Cirurgia Complexa",
-      description: "Procedimentos de altíssima segurança sob anestesia inalatória e monitoramento multiparamétrico de ponta.",
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800"
+      title: "Atendimento Emergencial",
+      description: "Pronto atendimento e socorro imediato 24 horas por dia.",
+      fullDescription: "Equipe de médicos-veterinários intensivistas de plantão 24 horas para socorrer qualquer urgência crítica imediata, amparada por suporte de oxigenio, UTI e monitoramento eletrônico contínuo.",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/atendimento%20emergencial.jpg"
     },
     {
-      title: "Ultrassonografia & Raio-X",
-      description: "Diagnóstico imediato e preciso de tecidos moles e ossos através de radiologia e imagem ultrassonográfica digital.",
-      image: "https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&q=80&w=800"
+      title: "Cirurgias Veterinárias",
+      description: "Procedimentos cirúrgicos seguros com anestesia moderna.",
+      fullDescription: "Complexo cirúrgico equipado com alta tecnologia cirúrgica estéril, controle anestésico inalatório computadorizado e protocolos rigorosos de controle de dor pós-operatória.",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/Cirurgias%20veterin%C3%A1rias.jpg"
     },
     {
-      title: "Fisioterapia Vet",
-      description: "Reabilitação rápida de lesões ou pós-operatórios com equipe especializada em fisiatria motora canina e felina.",
-      image: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=800"
+      title: "Exames Laboratoriais",
+      description: "Análises clínicas minuciosas e diagnósticos confiáveis.",
+      fullDescription: "Processamento ágil e preciso de painéis hematológicos, bioquímicos, urinálise e citologias para guiar e validar a conduta terapêutica ideal com máxima segurança científica.",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/Exames%20laboratoriais.jpg"
     },
     {
-      title: "Cardiologia Especializada",
-      description: "Análise eletrocardiográfica preventiva e exames Ecodoppler para acompanhar o coração do seu companheiro.",
-      image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=800"
+      title: "Vacinação",
+      description: "Proteção vacinal de qualidade com vacinas importadas.",
+      fullDescription: "Imunização estratégica utilizando exclusivamente vacinas importadas de laboratórios líderes globais, oferecendo proteção robusta e segura contra as principais zoonoses e infecções.",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/Vacina%C3%A7%C3%A3o.jpg"
     },
     {
-      title: "Odontologia de Prevenção",
-      description: "Remoção de tártaros, tratamento de gengivas e cirurgias periodontais de excelência para a boca do pet.",
-      image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      title: "Vacinação Importada",
-      description: "Esquema vacinal seguro de alto rigor com vacinas europeias e americanas para estabilização de imunidade.",
-      image: "https://images.unsplash.com/photo-1596499717302-34d64718e24f?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      title: "UTI Veterinária",
-      description: "Equipe intensiva de alto nível e leitos hospitalares monitorados segundo a segundo para reabilitação séria.",
-      image: "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=800"
+      title: "Internação",
+      description: "Espaço confortável com monitoramento constante 24 horas.",
+      fullDescription: "Acomodações individuais limpas e climatizadas para cães e gatos de forma separada, aliadas à vigilância assistencial veterinária ininterrupta para plena recuperação e bem-estar do pet.",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/interna%C3%A7%C3%A3o.png"
     }
   ];
 
   return (
-    <section id="servicos" className="py-24 px-6 md:px-12 lg:px-20 bg-[#F8F9FA] relative">
-      <div className="max-w-7xl mx-auto">
+    <section id="servicos" className="py-8 md:py-10 px-6 md:px-12 lg:px-20 bg-neutral-50/50 relative overflow-hidden">
+      {/* Decorative subtle grid background */}
+      <div className="absolute inset-0 bg-grid-neutral-100 [mask-image:radial-gradient(ellipse_at_center,white,transparent)] pointer-events-none opacity-50" />
+      
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-7xl mx-auto relative z-10"
+      >
         
         {/* Section Header */}
         <motion.div 
@@ -358,29 +398,32 @@ const Services = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-16 md:mb-20"
+          className="text-center mb-6 md:mb-8"
         >
-          <span className="text-[#f97316] font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">
-            NOSSOS SERVIÇOS
-          </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-black mb-6 leading-tight tracking-tighter">
-            Tratamentos de <br />
-            <span className="text-[#f97316] italic font-normal">Alta Performance.</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#f97316]/10 rounded-full mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#f97316] animate-pulse"></span>
+            <span className="text-[#f97316] font-bold uppercase tracking-[0.3em] text-[9px] block">
+              NOSSOS SERVIÇOS 24H
+            </span>
+          </div>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-neutral-900 mb-4 leading-tight tracking-tighter uppercase">
+            Medicina Veterinária <br />
+            <span className="text-[#f97316] italic font-normal font-serif">de Alta Performance.</span>
           </h2>
-          <p className="text-gray-500 text-sm max-w-[620px] mx-auto leading-relaxed">
-            Tecnologia de ponta e zelo científico para cuidar da saúde do seu animal e elevar sua qualidade de vida a um novo patamar de estabilização.
+          <p className="text-gray-550 text-xs md:text-sm max-w-[620px] mx-auto leading-relaxed">
+            Tecnologia de ponta e zelo científico sob os mais rigorosos padrões médico-veterinários do país, garantindo máximo reestabelecimento e bem-estar.
           </p>
           <motion.div 
             initial={{ width: 0 }}
             whileInView={{ width: 80 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-[2px] bg-[#f97316]/30 mx-auto mt-8"
+            className="h-[2px] bg-[#f97316] mx-auto mt-4"
           ></motion.div>
         </motion.div>
 
-        {/* Services Grid layout made responsive (4x2 on desktop, 2x4 on mobile) with custom responsive padding */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+        {/* Services Grid layout made responsive with orange cards borders */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
           {servicesList.map((service, index) => (
             <motion.div 
               key={index}
@@ -388,47 +431,59 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05, duration: 0.6, ease: "easeOut" }}
-              className="bg-white rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-neutral-100 shadow-[0_8px_30px_rgba(0,0,0,0.03)] flex flex-col justify-between hover:shadow-[0_15px_35px_rgba(0,0,0,0.06)] hover:border-neutral-200 transition-all duration-300 group"
+              className="bg-white rounded-[1.25rem] sm:rounded-[2rem] overflow-hidden border-2 border-[#f97316]/85 md:border-[#f97316]/30 shadow-[0_20px_40px_rgba(249,115,22,0.08)] md:shadow-[0_4px_20px_rgba(0,0,0,0.01)] md:hover:shadow-[0_20px_40px_rgba(249,115,22,0.08)] md:hover:border-[#f97316]/85 transition-all duration-500 flex flex-col group p-3 xs:p-4.5 lg:p-5 relative h-full"
               id={`service-card-${index}`}
             >
-              {/* Card Image */}
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
-                <img 
+              {/* Top accent line on hover and permanently on mobile */}
+              <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-[#f97316] to-[#ea580c] transform scale-x-100 md:scale-x-0 md:group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+
+              {/* Card Image using precise aspect ratio matching success cases */}
+              <div className="aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden mb-3 sm:mb-4.5 relative bg-neutral-100">
+                <OptimizedImage 
                   src={service.image} 
                   alt={service.title} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                  referrerPolicy="no-referrer"
-                  loading="lazy"
+                  className="scale-105 md:scale-100 md:group-hover:scale-108 transition-transform duration-700 ease-out filter contrast-[1.02]"
+                  containerClassName="w-full h-full"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
               </div>
 
-              {/* Text & Action content dynamically sized for 2 columns view */}
-              <div className="p-4 sm:p-6 md:p-8 flex flex-col flex-grow justify-between">
-                <div>
-                  <h3 className="font-sans text-xs sm:text-sm md:text-base lg:text-lg font-bold text-neutral-900 mb-2 md:mb-3 tracking-tight text-left uppercase">
+              {/* Text & Action content content-to-button margins optimized to equal success cases */}
+              <div className="flex-grow flex flex-col justify-between p-1 sm:p-2">
+                <div className="mb-3.5 sm:mb-5 text-center">
+                  <h3 className="font-sans text-[11px] xs:text-[13px] sm:text-base md:text-lg font-bold text-[#f97316] mb-1 sm:mb-2 leading-tight uppercase text-center">
                     {service.title}
                   </h3>
                   
-                  <p className="text-neutral-500 text-[10px] sm:text-[11px] md:text-xs leading-relaxed mb-4 md:mb-6 text-left font-normal line-clamp-3">
+                  {/* Mobile Description */}
+                  <p className="block md:hidden text-neutral-900 leading-normal sm:leading-relaxed font-semibold text-center text-[10px] xs:text-[11.5px] sm:text-[13px] md:text-[12.5px]">
                     {service.description}
+                  </p>
+                  
+                  {/* Desktop Description */}
+                  <p className="hidden md:block text-neutral-800 leading-relaxed font-semibold text-center text-[12.5px]">
+                    {service.fullDescription || service.description}
                   </p>
                 </div>
 
-                {/* Pill Button scaled nicely for smaller screen widths in grid-cols-2 display */}
                 <a 
                   href={WHATSAPP_URL} 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-2 px-3 sm:py-3.5 sm:px-5 bg-[#F8F9FA] hover:bg-[#F1F3F5] rounded-xl sm:rounded-2xl flex items-center justify-between text-[10px] sm:text-xs font-bold text-neutral-900 tracking-wide transition-all"
+                  className="w-full py-2.5 sm:py-3.5 md:py-4 bg-[#f97316] hover:bg-[#ea580c] text-white rounded-full font-bold text-center text-[8.5px] xs:text-[10px] tracking-wider uppercase flex items-center justify-center gap-1.5 sm:gap-2 transition-all duration-300 hover:shadow-[0_4px_15px_rgba(249,115,22,0.3)] border-none whitespace-nowrap group/btn"
                 >
-                  <span className="text-[9px] sm:text-[11px] font-bold text-neutral-900">Saiba Mais</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-neutral-800 group-hover:translate-x-0.5 transition-transform" />
+                  <span>
+                    <span className="inline md:hidden">AGENDAR</span>
+                    <span className="hidden md:inline">AGENDAR CONSULTA</span>
+                  </span>
+                  <ArrowRight className="w-4 h-4 text-white group-hover/btn:translate-x-1.5 transition-transform shrink-0" />
                 </a>
               </div>
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
@@ -437,49 +492,183 @@ const Services = () => {
 const Gallery = () => {
   const cases = [
     {
-      tag: "ORTOPEDIA DE SUCESSO",
-      title: "Reconstituição do Fêmur do Max",
-      desc: "O Golden Max sofreu uma ruptura traumática crítica de ligamento e osso. Passou por cirurgia corretiva e voltou a correr alegremente em poucas semanas.",
-      image: "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=800"
+      tag: "ROTINA EXCELÊNCIA (CÃO)",
+      title: "Check-up Geral do Husky Luke",
+      desc: "Avaliação preventiva completa do Husky de olhos azuis em consulta de rotina domiciliar para manutenção de bem-estar absoluto.",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/pet01.jpg",
+      objectPosition: "object-center"
     },
     {
-      tag: "MEDICINA CARDIOLÓGICA",
-      title: "Estabilização Coronária de Amora",
-      desc: "A Gata Amora foi diagnosticada a tempo com cardiomiopatia congênita severa. Através de controle terapêutico rigoroso, recuperou total disposição ativa.",
-      image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=800"
+      tag: "ANIMAIS SILVESTRES (AVE)",
+      title: "Medicina Preventiva do Papagaio Fred",
+      desc: "Monitoramento clínico geral e acompanhamento nutricional detalhado para excelente qualidade de vida e imunidade de aves exóticas.",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/pet02.jpg",
+      objectPosition: "object-top"
     },
     {
-      tag: "ONCOLOGIA & VIDA",
-      title: "Vigilância do Bulldog Oliver",
-      desc: "Oliver passou por intervenções oncológicas delicadas e quimioterapia orientada. Hoje, o quadro é estável e segue em monitoramento livre de dor.",
-      image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=800"
+      tag: "CHECK-UP COMPLETO (GATO)",
+      title: "Saúde Integrativa do Gato Pipoca",
+      desc: "Diagnóstico precoce e acompanhamento dermatológico, auditivo e oftalmológico de felino SRD para vitalidade plena.",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/pet03.jpg",
+      objectPosition: "object-center"
     }
   ];
 
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  const nextSlide = () => {
+    setActiveSlide((prev) => (prev + 1) % cases.length);
+  };
+
+  const prevSlide = () => {
+    setActiveSlide((prev) => (prev - 1 + cases.length) % cases.length);
+  };
+
   return (
-    <section id="resultados" className="py-24 px-6 md:px-12 lg:px-20 bg-neutral-50 relative border-t border-neutral-100">
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section id="resultados" className="py-8 md:py-10 px-6 md:px-12 lg:px-20 bg-neutral-100 relative border-t border-neutral-200">
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-7xl mx-auto relative z-10"
+      >
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-16"
+          className="text-center mb-6 md:mb-8"
         >
-          <span className="text-[#f97316] font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">
-            GALERIA DE EXCELÊNCIA
+          <span className="text-[#f97316] font-bold uppercase tracking-[0.4em] text-[10px] mb-3 block">
+            GALERIA DE EXCELÊNCIA VET
           </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-black mb-4 uppercase tracking-tighter">
-            Transformações <span className="text-[#f97316] italic font-normal">Reais.</span>
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-neutral-900 mb-4 uppercase tracking-tighter">
+            CASOS CLÍNICOS E <span className="text-[#f97316] italic font-normal">RESULTADOS REAIS.</span>
           </h2>
-          <p className="text-gray-500 text-sm max-w-2xl mx-auto leading-relaxed">
-            Resultados reais de pacientes que recuperaram a saúde e o vigor sob nossos cuidados especializados. Cada tratamento é planejado no detalhe e executado com carinho absoluto.
+          <p className="text-neutral-800 text-sm md:text-base max-w-2xl mx-auto leading-relaxed font-medium">
+            Conheça as histórias reais de superação de pacientes complexos que recuperaram vitalidade e bem-estar em nosso hospital 24h. Cada tratamento é planejado no detalhe.
           </p>
         </motion.div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Modern Medical Stats under the header for elite presentation */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto mb-6 md:mb-8">
+          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-neutral-200/60 shadow-sm flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-xl bg-[#f97316]/10 flex items-center justify-center text-[#f97316] shrink-0">
+              <Activity className="w-5 h-5" />
+            </div>
+            <div className="text-left">
+              <span className="block text-xl font-bold text-neutral-900 tracking-tight font-sans">98.4%</span>
+              <span className="block text-[10px] text-neutral-800 font-bold uppercase tracking-wider">Sucesso Cirúrgico</span>
+            </div>
+          </div>
+          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-neutral-200/60 shadow-sm flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-600 shrink-0">
+              <Shield className="w-5 h-5" />
+            </div>
+            <div className="text-left">
+              <span className="block text-xl font-bold text-neutral-900 tracking-tight font-sans">UTI 24H</span>
+              <span className="block text-[10px] text-neutral-800 font-bold uppercase tracking-wider">Cuidado Intensivo</span>
+            </div>
+          </div>
+          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-neutral-200/60 shadow-sm flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-xl bg-[#f97316]/10 flex items-center justify-center text-[#f97316] shrink-0">
+              <Heart className="w-5 h-5" />
+            </div>
+            <div className="text-left">
+              <span className="block text-xl font-bold text-neutral-900 tracking-tight font-sans">+25 mil</span>
+              <span className="block text-[10px] text-neutral-800 font-bold uppercase tracking-wider">Pets Reabilitados</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Carousel for Mobile only */}
+        <div className="block md:hidden relative mt-4">
+          <div className="overflow-hidden px-1">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeSlide}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white rounded-[1.25rem] sm:rounded-[2rem] overflow-hidden border-2 border-[#f97316]/85 flex flex-col p-3 xs:p-4.5 lg:p-6 relative text-center shadow-[0_20px_40px_rgba(249,115,22,0.08)] animate-fade-in"
+              >
+                {/* Top Accent Line permanently displayed on mobile */}
+                <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-[#f97316] to-[#ea580c] transform scale-x-100 transition-transform duration-500 origin-left" />
+
+                <div className="aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden mb-3 sm:mb-5 relative bg-neutral-100">
+                  <OptimizedImage 
+                    src={cases[activeSlide].image} 
+                    alt={cases[activeSlide].title} 
+                    className={`w-full h-full object-cover scale-105 ${cases[activeSlide].objectPosition || "object-center"}`}
+                    containerClassName="w-full h-full"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                </div>
+
+                <div className="flex-grow flex flex-col justify-between p-1 sm:p-2">
+                  <div className="mb-3.5 sm:mb-5 text-center">
+                    <span className="text-neutral-500 text-[9px] sm:text-[10px] font-bold tracking-widest uppercase block mb-1">
+                      {cases[activeSlide].tag}
+                    </span>
+                    <h3 className="font-sans text-[11px] xs:text-[13px] sm:text-base md:text-lg font-bold text-[#f97316] mb-1 sm:mb-2 leading-tight uppercase text-center">
+                       {cases[activeSlide].title}
+                    </h3>
+                    <p className="text-neutral-900 leading-normal sm:leading-relaxed font-semibold text-center text-[10px] xs:text-[11.5px] sm:text-[13px] md:text-[12.5px]">
+                      {cases[activeSlide].desc}
+                    </p>
+                  </div>
+
+                  <a 
+                    href={WHATSAPP_URL} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 sm:py-3.5 md:py-4 bg-[#f97316] hover:bg-[#ea580c] text-white rounded-full font-bold text-center text-[8.5px] xs:text-[10px] tracking-wider uppercase flex items-center justify-center gap-1.5 sm:gap-2 transition-all duration-300 hover:shadow-[0_4px_15px_rgba(249,115,22,0.3)] border-none whitespace-nowrap group/btn"
+                  >
+                    <span>FALE AGORA</span>
+                    <ArrowRight className="w-4 h-4 text-white shrink-0" />
+                  </a>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Controls */}
+          <div className="flex items-center justify-between mt-6 px-4">
+            <button 
+              onClick={prevSlide}
+              className="w-10 h-10 rounded-full flex items-center justify-center bg-[#f97316] hover:bg-[#ea580c] text-white transition-colors shadow-sm cursor-pointer border-none"
+              aria-label="Caso anterior"
+            >
+              <ChevronRight className="w-5 h-5 rotate-180" />
+            </button>
+            
+            {/* Dots */}
+            <div className="flex gap-2">
+              {cases.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveSlide(idx)}
+                  className={`h-2 rounded-full transition-all duration-300 ${activeSlide === idx ? "w-6 bg-[#f97316]" : "w-2 bg-neutral-300"}`}
+                  aria-label={`Ir para slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+
+            <button 
+              onClick={nextSlide}
+              className="w-10 h-10 rounded-full flex items-center justify-center bg-[#f97316] hover:bg-[#ea580c] text-white transition-colors shadow-sm cursor-pointer border-none"
+              aria-label="Próximo caso"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Grid for Desktop/Tablet */}
+        <div className="hidden md:grid grid-cols-3 gap-8">
           {cases.map((cs, i) => (
             <motion.div 
               key={i}
@@ -487,27 +676,30 @@ const Gallery = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="bg-white rounded-3xl overflow-hidden border border-neutral-200 flex flex-col group p-4 hover:shadow-2xl transition-all duration-500"
+              className="bg-white rounded-[1.25rem] sm:rounded-[2rem] overflow-hidden border-2 border-[#f97316]/85 md:border-[#f97316]/30 shadow-[0_20px_40px_rgba(249,115,22,0.08)] md:shadow-[0_4px_20px_rgba(0,0,0,0.01)] md:hover:shadow-[0_20px_40px_rgba(249,115,22,0.08)] md:hover:border-[#f97316]/85 transition-all duration-500 flex flex-col group p-3 xs:p-4.5 lg:p-6 relative h-full"
             >
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-6 relative">
-                <img 
+              {/* Top Accent Light Block permanently on mobile / hover on desktop */}
+              <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-[#f97316] to-[#ea580c] transform scale-x-100 md:scale-x-0 md:group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+
+              <div className="aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden mb-3 sm:mb-5 relative bg-neutral-100">
+                <OptimizedImage 
                   src={cs.image} 
                   alt={cs.title} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  referrerPolicy="no-referrer"
-                  loading="lazy"
+                  className={`scale-105 md:scale-100 md:group-hover:scale-105 transition-transform duration-700 ${cs.objectPosition || "object-center"}`}
+                  containerClassName="w-full h-full"
+                  sizes="(max-width: 768px) 100vw, 33vw"
                 />
-                <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[8.5px] font-bold text-[#f97316] tracking-widest uppercase">
-                  {cs.tag}
-                </div>
               </div>
 
-              <div className="flex-grow flex flex-col justify-between p-2">
-                <div className="mb-6">
-                  <h3 className="font-sans text-lg font-bold text-neutral-900 mb-2 leading-tight uppercase">
+              <div className="flex-grow flex flex-col justify-between p-0.5 sm:p-1.5">
+                <div className="mb-3 sm:mb-5 text-center">
+                  <span className="text-neutral-500 text-[10px] font-bold tracking-widest uppercase block mb-1">
+                    {cs.tag}
+                  </span>
+                  <h3 className="font-sans text-base md:text-lg font-bold text-[#f97316] mb-1 sm:mb-1.5 leading-tight uppercase text-center">
                     {cs.title}
                   </h3>
-                  <p className="text-gray-500 text-[12px] leading-relaxed font-normal">
+                  <p className="text-neutral-900 text-[13px] md:text-[12.5px] leading-relaxed font-semibold text-center">
                     {cs.desc}
                   </p>
                 </div>
@@ -516,16 +708,16 @@ const Gallery = () => {
                   href={WHATSAPP_URL} 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-4 bg-black text-white rounded-full font-bold hover:bg-[#f97316] hover:text-white hover:shadow-lg text-center text-[10px] tracking-widest uppercase transition-all duration-300 inline-flex items-center justify-center gap-2.5 group"
+                  className="w-full py-2.5 sm:py-3.5 md:py-4 bg-[#f97316] hover:bg-[#ea580c] text-white rounded-full font-bold text-center text-[8.5px] xs:text-[10px] sm:text-[10px] tracking-wider uppercase flex items-center justify-center gap-1.5 sm:gap-2 transition-all duration-300 hover:shadow-[0_4px_15px_rgba(249,115,22,0.3)] border-none whitespace-nowrap group/btn"
                 >
-                  <span>CONSULTAR AVALIAÇÃO DO CASO CLÍNICO</span>
-                  <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
+                  <span>FALE AGORA</span>
+                  <ArrowRight className="w-4 h-4 text-white group-hover/btn:translate-x-1.5 transition-transform shrink-0" />
                 </a>
               </div>
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
@@ -533,68 +725,79 @@ const Gallery = () => {
 // Por que escolher a Duno? (Golden standards of Duno - kept exactly as requested)
 const Standards = () => {
   const items = [
-    { icon: <Heart className="w-5 h-5 animate-pulse text-[#f97316]" />, title: "CUIDADO INTEGRAL 24H", desc: "Corpo clínico multidisciplinar trabalhando em sintonia para restabelecer a estabilidade e a felicidade do pet." },
-    { icon: <Shield className="w-5 h-5 text-[#f97316]" />, title: "EMPATIA E SEGURANÇA", desc: "Abordagem livre do medo, acolhimento diferenciado, monitoramento por câmeras e respostas rápidas." },
-    { icon: <Stethoscope className="w-5 h-5 text-[#f97316]" />, title: "PADRÃO HOSPITALAR ELITE", desc: "Equipamentos cirúrgicos esterilizados sob rígidas rotinas humanas e laboratório de análise integrado de pronto socorro." },
+    { 
+      num: "01",
+      icon: <Heart className="w-5 h-5 animate-pulse text-[#f97316]" />, 
+      title: "CUIDADO INTEGRAL 24H", 
+      desc: "Corpo clínico multidisciplinar trabalhando em sintonia para restabelecer a estabilidade e a felicidade do pet." 
+    },
+    { 
+      num: "02",
+      icon: <Shield className="w-5 h-5 text-[#f97316]" />, 
+      title: "EMPATIA E SEGURANÇA", 
+      desc: "Abordagem livre do medo, acolhimento diferenciado, monitoramento por câmeras e respostas rápidas." 
+    },
+    { 
+      num: "03",
+      icon: <Stethoscope className="w-5 h-5 text-[#f97316]" />, 
+      title: "PADRÃO HOSPITALAR ELITE", 
+      desc: "Equipamentos cirúrgicos esterilizados sob rígidas rotinas humanas e laboratório de análise integrado de pronto socorro." 
+    },
   ];
 
   return (
-    <section id="diferenciais" className="py-24 px-6 md:px-12 lg:px-20 bg-white overflow-hidden border-t border-neutral-100">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <motion.div 
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative"
-        >
-          <div className="aspect-square rounded-[3rem] overflow-hidden shadow-xl border-[8px] border-neutral-50">
-            <img 
-              src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2070&auto=format&fit=crop" 
-              alt="Veterinary Clinical Excellence" 
-              className="w-full h-full object-cover filter brightness-95"
-              referrerPolicy="no-referrer"
-              loading="lazy"
-            />
-          </div>
-          <div className="absolute -top-6 -right-6 w-32 h-32 bg-[#f97316] rounded-full flex items-center justify-center text-white text-center p-4 shadow-xl rotate-12">
-            <p className="font-serif font-bold text-[10px] leading-tight uppercase tracking-wider">PADRÃO ELITE DE MEDICINA VET</p>
-          </div>
-        </motion.div>
+    <section id="diferenciais" className="py-8 md:py-10 px-6 md:px-12 lg:px-20 bg-white overflow-hidden border-t border-neutral-100 relative">
+      {/* Subtle decorative grid background for high-end feel */}
+      <div className="absolute inset-0 bg-grid-neutral-100 [mask-image:radial-gradient(ellipse_at_center,white,transparent)] pointer-events-none opacity-40" />
 
-        <motion.div 
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <span className="text-[#f97316] font-bold uppercase tracking-widest text-[10px] mb-4 block">Por que escolher a Duno?</span>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-8 leading-tight tracking-tighter uppercase">
-              Nossos <br /> <span className="text-[#f97316] italic uppercase font-normal">Padrões de Ouro.</span>
-            </h2>
-          </motion.div>
-          
-          <div className="space-y-6">
-            {items.map((item, i) => (
-              <div key={i} className="flex gap-5">
-                <div className="w-12 h-12 bg-neutral-50 rounded-full flex items-center justify-center shadow-sm shrink-0 text-[#f97316]">
-                  {item.icon}
-                </div>
-                <div>
-                  <h4 className="text-base font-serif font-bold text-neutral-900 mb-1 uppercase tracking-tight">{item.title}</h4>
-                  <p className="text-gray-500 text-xs leading-relaxed">{item.desc}</p>
-                </div>
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-7xl mx-auto relative z-10"
+      >
+        {/* Header centered beautifully */}
+        <div className="text-center mb-6 md:mb-8">
+          <span className="text-[#f97316] font-bold uppercase tracking-widest text-[10px] mb-3 block font-sans">Por que escolher a Duno?</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gray-900 leading-none uppercase tracking-tighter">
+            NOSSOS PADRÕES <span className="text-[#f97316] italic font-normal">DE OURO.</span>
+          </h2>
+          <div className="h-[2px] w-20 bg-[#f97316] mx-auto mt-4"></div>
+        </div>
+        
+        {/* Full-width cards with orange border exactly like services */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          {items.map((item, i) => (
+            <div 
+              key={i} 
+              className="bg-white rounded-[1.25rem] sm:rounded-[2rem] border-2 border-[#f97316]/85 md:border-[#f97316]/30 shadow-[0_20px_40px_rgba(249,115,22,0.08)] md:shadow-[0_4px_20px_rgba(0,0,0,0.01)] md:hover:shadow-[0_20px_40px_rgba(249,115,22,0.08)] md:hover:border-[#f97316]/85 transition-all duration-500 bg-neutral-50/50 p-6 xs:p-7 md:p-6 relative overflow-hidden group min-h-[220px] flex flex-col items-center justify-between text-center"
+            >
+              {/* Top Accent line */}
+              <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-[#f97316] to-[#ea580c] transform scale-x-100 md:scale-x-0 md:group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+
+              {/* Light Watermark Number */}
+              <div className="absolute top-6 right-8 font-serif font-bold text-4xl text-[#f97316]/10 md:text-neutral-100 md:group-hover:text-[#f97316]/10 transition-colors duration-300 select-none">
+                {item.num}
               </div>
-            ))}
-          </div>
-        </motion.div>
-      </div>
+
+              {/* Icon Container */}
+              <div className="w-12 h-12 bg-[#f97316]/10 md:bg-white rounded-full flex items-center justify-center shadow-sm shrink-0 text-[#f97316] scale-110 md:scale-100 md:group-hover:scale-110 md:group-hover:bg-[#f97316]/10 transition-all duration-300 mb-4 mx-auto">
+                {item.icon}
+              </div>
+
+              <div>
+                <h4 className="text-sm font-sans font-extrabold text-[#f97316] mb-2 uppercase tracking-tight text-center">
+                  {item.title}
+                </h4>
+                <p className="text-neutral-900 text-[13.5px] md:text-xs leading-relaxed font-semibold text-center">
+                  {item.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 };
@@ -602,8 +805,14 @@ const Standards = () => {
 // A clínica como está (About section - kept exactly as requested)
 const About = () => {
   return (
-    <section id="about" className="py-24 px-6 md:px-12 lg:px-20 bg-black text-white relative">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section id="about" className="py-8 md:py-10 px-6 md:px-12 lg:px-20 bg-black text-white relative">
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+      >
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -611,19 +820,19 @@ const About = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="relative"
         >
-          <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-neutral-900">
-            <img 
+          <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-neutral-900 relative">
+            <OptimizedImage 
               src="https://images.unsplash.com/photo-1581888227599-779811939961?q=80&w=2070&auto=format&fit=crop" 
               alt="Clínica Veterinária Duno Carinho e Conforto" 
-              className="w-full h-full object-cover filter brightness-75 contrast-105"
-              referrerPolicy="no-referrer"
-              loading="lazy"
+              className="filter brightness-75 contrast-105"
+              containerClassName="absolute inset-0"
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
           {/* Subtle logo badge from print */}
           <div className="absolute -bottom-6 -right-6 bg-neutral-950 border border-neutral-800 p-6 rounded-[1.5rem] shadow-2xl hidden md:block max-w-[240px] text-white">
             <h4 className="text-xl font-serif font-bold tracking-widest text-[#f97316] mb-1">DUNO</h4>
-            <p className="text-[11px] font-medium text-gray-400">Excelência técnica de alto nível técnico unida a confortos modernos.</p>
+            <p className="text-[11px] font-bold text-neutral-200">Excelência técnica de alto nível técnico unida a confortos modernos.</p>
           </div>
         </motion.div>
 
@@ -639,14 +848,14 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <span className="text-[#f97316] font-bold uppercase tracking-widest text-[10px] mb-4 block">A Clínica</span>
-            <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-6 leading-tight uppercase">
+            <span className="text-[#f97316] font-bold uppercase tracking-widest text-[10px] mb-3 block">A Clínica</span>
+            <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4 leading-tight uppercase">
               Tecnologia de ponta. <br />
               <span className="text-[#f97316] italic font-normal">Conforto absoluto.</span>
             </h2>
           </motion.div>
           
-          <div className="space-y-4 text-xs md:text-sm text-gray-400 leading-relaxed font-normal">
+          <div className="space-y-4 text-xs md:text-sm text-neutral-200 leading-relaxed font-semibold">
             <p>
               Unimos a precisão cirúrgica de um hospital de ponta com a ternura de um atendimento acolhedor. Nossa clínica funciona de forma integrada, agilizando diagnósticos minuciosos.
             </p>
@@ -655,23 +864,23 @@ const About = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
-            <div className="flex items-center gap-3 bg-neutral-900/60 p-4 rounded-2xl border border-white/5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+            <div className="flex items-center gap-3 bg-neutral-900 border border-[#f97316]/30 md:border-white/5 p-4 rounded-2xl md:hover:border-[#f97316]/30 transition-all duration-300">
               <Smile className="w-5 h-5 text-[#f97316]" />
               <p className="font-bold text-white uppercase tracking-widest text-[9px]">Acolhimento Premium</p>
             </div>
-            <div className="flex items-center gap-3 bg-neutral-900/60 p-4 rounded-2xl border border-white/5">
+            <div className="flex items-center gap-3 bg-neutral-900 border border-[#f97316]/30 md:border-white/5 p-4 rounded-2xl md:hover:border-[#f97316]/30 transition-all duration-300">
               <Activity className="w-5 h-5 text-[#f97316]" />
               <p className="font-bold text-white uppercase tracking-widest text-[9px]">Monitoramento 24h</p>
             </div>
           </div>
 
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="mt-10 inline-flex items-center gap-2.5 py-4 px-8 bg-[#f97316] text-white hover:bg-[#ea580c] font-bold text-[10px] tracking-widest uppercase rounded-full transition-all duration-300 group">
-            <span>FALAR COM NOSSO CONCIERGE</span>
-            <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1.5 transition-transform" />
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center gap-2 py-4 px-8 bg-[#f97316] text-white hover:bg-[#ea580c] font-bold text-[10px] tracking-widest uppercase rounded-full transition-all duration-300 group whitespace-nowrap shrink-0">
+            <span>FALE AGORA</span>
+            <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform shrink-0" />
           </a>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };
@@ -680,45 +889,143 @@ const About = () => {
 const Authority = () => {
   const doctors = [
     {
+      name: "Dra. Viviane Rocha",
+      cro: "CRMV/SP 12431",
+      specialty: "ANESTESIOLOGIA & ODONTOLOGIA VET",
+      desc: "Pós-graduada e especialista em anestesiologia de alta segurança e suporte vital em procedimentos de reconstrução e assepsia.",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/vt01.png"
+    },
+    {
       name: "Dr. Alexandre Silva",
       cro: "CRMV/SP 43212",
       specialty: "MEDICINA INTENSIVA & CIRURGIÃO CHEFE",
-      desc: "Mestre em cirurgia de pequenos animais na USP, com especialidade em técnicas reconstrutivas complexas.",
-      image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600"
+      desc: "Mestre em cirurgia pela USP, com ampla atuação em triagem, anestesiologia e procedimentos reconstrutivos complexos de alta performance.",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/vt02.png"
     },
     {
       name: "Dra. Beatriz Santos",
       cro: "CRMV/SP 87629",
       specialty: "CARDIOLOGIA & EXAMES DIAGNÓSTICOS",
-      desc: "Especialista em cardiopatias caninas de alta complexidade com rigor e tratamentos medicamentosos avançados.",
-      image: "https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&q=80&w=600"
-    },
-    {
-      name: "Dr. Vinícius Rocha",
-      cro: "CRMV/SP 12431",
-      specialty: "ANESTESIOLOGIA & ODONTOLOGIA VET",
-      desc: "Pós-graduado com foco prioritário em assepsia, suporte vital monitorado e intervenção dentária segura.",
-      image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=600"
+      desc: "Especialista em cardiologia veterinária de alta complexidade, diagnósticos rápidos e desenvolvimento de tratamentos preventivos avançados.",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/vt03.png"
     }
   ];
 
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  const nextSlide = () => {
+    setActiveSlide((prev) => (prev + 1) % doctors.length);
+  };
+
+  const prevSlide = () => {
+    setActiveSlide((prev) => (prev - 1 + doctors.length) % doctors.length);
+  };
+
   return (
-    <section id="equipe" className="py-24 px-6 md:px-12 lg:px-20 bg-neutral-100 border-t border-neutral-200">
-      <div className="max-w-7xl mx-auto">
+    <section id="equipe" className="py-8 md:py-10 px-6 md:px-12 lg:px-20 bg-neutral-100 border-t border-neutral-200">
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-7xl mx-auto font-sans z-10 relative"
+      >
         {/* Section Header */}
-        <div className="text-center mb-16 md:mb-20">
-          <span className="text-[#f97316] font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">NOSSA AUTORIDADE MÉDICA</span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 leading-tight uppercase tracking-tighter">
-            Mentes brilhantes por trás de<br />
+        <div className="text-center mb-6 md:mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#f97316]/10 rounded-full mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#f97316] animate-pulse"></span>
+            <span className="text-[#f97316] font-bold uppercase tracking-[0.3em] text-[9px] block">CORPO CLÍNICO DUNO</span>
+          </div>
+          <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900 leading-tight uppercase tracking-tighter">
+            Especialistas em <br />
             <span className="text-[#f97316] italic font-normal font-serif">vidas salvas.</span>
           </h2>
-          <p className="text-gray-500 text-sm max-w-[620px] mx-auto mt-4 leading-relaxed">
-            Profissionais dedicados de amplo saber acadêmico. Oferecemos as melhores condutas com base em evidências científicas sólidas.
+          <p className="text-gray-550 text-xs md:text-sm max-w-[620px] mx-auto mt-3 leading-relaxed">
+            Profissionais dedicados de amplo saber acadêmico. Oferecemos as melhores condutas com base no mais rígido rigor científico do país.
           </p>
         </div>
 
-        {/* Doctors Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Carousel for Tablet & Mobile (under lg width) */}
+        <div className="block lg:hidden relative">
+          <div className="overflow-hidden px-1">
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={activeSlide}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white rounded-3xl overflow-hidden border border-[#f97316]/40 p-4 xs:p-5 md:p-6 relative cursor-pointer group shadow-[0_25px_50px_rgba(249,115,22,0.08)] min-h-[440px] flex flex-col justify-between"
+              >
+                {/* Top Accent Line permanently displayed on mobile */}
+                <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#f97316] to-transparent transform scale-x-100 transition-transform duration-500" />
+
+                <div>
+                  <div className="aspect-[4/5] rounded-2xl overflow-hidden mb-4 relative bg-neutral-50 max-h-[340px]">
+                    <OptimizedImage 
+                      src={doctors[activeSlide].image} 
+                      alt={doctors[activeSlide].name} 
+                      className="filter contrast-[1.03] scale-105"
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                    />
+                    <div className="absolute top-4 left-4 bg-emerald-500 text-white px-2.5 py-1 rounded-full text-[8.5px] font-bold tracking-widest uppercase shadow-sm">
+                      ✓ PLANTÃO ATIVO
+                    </div>
+                    <div className="absolute bottom-4 left-4 bg-black/85 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-full text-[8px] font-mono font-bold text-white tracking-widest">
+                      {doctors[activeSlide].cro}
+                    </div>
+                  </div>
+
+                  <div className="p-1 text-center">
+                    <span className="text-[#f97316] text-[10px] sm:text-[10.5px] font-bold tracking-[0.2em] uppercase block mb-1 text-center">
+                      {doctors[activeSlide].specialty}
+                    </span>
+                    <h3 className="font-sans text-lg sm:text-xl font-bold text-[#f97316] mb-1.5 uppercase tracking-tight text-center">
+                      {doctors[activeSlide].name}
+                    </h3>
+                    <p className="text-neutral-900 text-[13px] sm:text-[13.5px] leading-relaxed font-semibold text-center">
+                      {doctors[activeSlide].desc}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Controls */}
+          <div className="flex items-center justify-between mt-6 px-4">
+            <button 
+              onClick={prevSlide}
+              className="w-10 h-10 rounded-full flex items-center justify-center bg-[#f97316] hover:bg-[#ea580c] text-white transition-colors shadow-sm cursor-pointer border-none"
+              aria-label="Especialista anterior"
+            >
+              <ChevronRight className="w-5 h-5 rotate-180" />
+            </button>
+            
+            {/* Dots */}
+            <div className="flex gap-2">
+              {doctors.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveSlide(idx)}
+                  className={`h-2 rounded-full transition-all duration-300 ${activeSlide === idx ? "w-6 bg-[#f97316]" : "w-2 bg-neutral-300"}`}
+                  aria-label={`Ir para slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+
+            <button 
+              onClick={nextSlide}
+              className="w-10 h-10 rounded-full flex items-center justify-center bg-[#f97316] hover:bg-[#ea580c] text-white transition-colors shadow-sm cursor-pointer border-none"
+              aria-label="Próximo especialista"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Doctors Grid for Desktop (lg and up) - LARGER AND MORE MAJESTIC */}
+        <div className="hidden lg:grid grid-cols-3 gap-8">
           {doctors.map((dr, index) => (
             <motion.div 
               key={index}
@@ -726,36 +1033,43 @@ const Authority = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
-              className="bg-white rounded-3xl overflow-hidden shadow-sm border border-neutral-200 hover:shadow-xl transition-all p-4 duration-500 cursor-pointer"
+              className="bg-white rounded-[2.5rem] overflow-hidden border border-neutral-200/80 hover:shadow-[0_30px_60px_rgba(249,115,22,0.1)] hover:border-[#f97316]/50 transition-all p-4 xs:p-5 md:p-6 duration-500 cursor-pointer group relative flex flex-col justify-between"
             >
-              <div className="aspect-[3/4] rounded-2xl overflow-hidden mb-6 relative">
-                <img 
-                  src={dr.image} 
-                  alt={dr.name} 
-                  className="w-full h-full object-cover filter contrast-[1.05] brightness-95"
-                  loading="lazy"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-full text-[9px] font-mono font-bold text-white tracking-widest">
-                  {dr.cro}
-                </div>
-              </div>
+              {/* Top Accent line on hover */}
+              <div className="absolute top-0 inset-x-0 h-[3px] bg-[#f97316] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
 
-              <div className="p-2">
-                <span className="text-[#f97316] text-[9px] font-bold tracking-[0.25em] uppercase block mb-1">
-                  {dr.specialty}
-                </span>
-                <h3 className="font-sans text-xl font-bold text-gray-900 mb-3 tracking-tight">
-                  {dr.name}
-                </h3>
-                <p className="text-gray-550 text-xs leading-relaxed font-normal mb-6">
-                  {dr.desc}
-                </p>
+              <div>
+                <div className="aspect-[4/5] rounded-3xl overflow-hidden mb-4 relative bg-neutral-50 shadow-inner">
+                  <OptimizedImage 
+                    src={dr.image} 
+                    alt={dr.name} 
+                    className="filter contrast-[1.03] group-hover:scale-106 transition-transform duration-700 ease-out"
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                  />
+                  <div className="absolute top-5 left-5 bg-emerald-500 text-white px-3 py-1.5 rounded-full text-[9px] font-bold tracking-widest uppercase shadow-md">
+                    ✓ PLANTÃO ATIVO
+                  </div>
+                  <div className="absolute bottom-5 left-5 bg-black/85 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full text-[10px] font-mono font-bold text-white tracking-widest leading-none shadow-md">
+                    {dr.cro}
+                  </div>
+                </div>
+
+                <div className="px-1 pt-1 pb-3 text-center">
+                  <span className="text-[#f97316] text-[11px] font-bold tracking-[0.2em] uppercase block mb-1.5 text-center">
+                    {dr.specialty}
+                  </span>
+                  <h3 className="font-sans text-2xl font-bold text-[#f97316] mb-1.5 tracking-tight uppercase text-center">
+                    {dr.name}
+                  </h3>
+                  <p className="text-neutral-900 text-sm leading-relaxed font-semibold text-center">
+                    {dr.desc}
+                  </p>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
@@ -764,41 +1078,137 @@ const Authority = () => {
 const Testimonials = () => {
   const reviews = [
     { 
-      name: "Mariana L. - Empresária", 
+      name: "Mariana L.", 
       role: "Tutora do Golden Max", 
-      text: "Eu estava desesperada quando o Max rompeu o fêmur. Na Duno eles realizaram um atendimento cirúrgico impecável e muito carinhoso. Hoje ele corre feliz como se nada tivesse acontecido." 
+      text: "No momento em que o Max rompeu o fêmur, o atendimento cirúrgico rápido e impecável da Duno salvou a vida dele.",
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200"
     },
     { 
-      name: "Rodrigo F. - Arquiteto", 
+      name: "Rodrigo F.", 
       role: "Tutor do Oliver", 
-      text: "O atendimento de emergência correu super rápido e com transparência absoluta. Fui mantido informado sobre o estado da internação do Oliver o tempo todo no WhatsApp." 
+      text: "Suporte de emergência ágil com comunicação transparente pelo WhatsApp durante todo o tratamento do Oliver.",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200"
     },
     { 
-      name: "Juliana Mendes - Autônoma", 
+      name: "Juliana Mendes", 
       role: "Tutora da Gatinha Amora", 
-      text: "A equipe de cardiologia foi maravilhosa. O consultório específico para gatos manteve a Amora calminha e sem estresse ambiental durante todos os exames." 
+      text: "Excelente cardiologia. O consultório exclusivo para felinos manteve a Amora sem estresse ambiental.",
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200"
     },
   ];
 
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  const nextSlide = () => {
+    setActiveSlide((prev) => (prev + 1) % reviews.length);
+  };
+
+  const prevSlide = () => {
+    setActiveSlide((prev) => (prev - 1 + reviews.length) % reviews.length);
+  };
+
   return (
-    <section id="depoimentos" className="py-24 px-6 md:px-12 lg:px-20 bg-black text-white relative overflow-hidden border-t border-white/5">
+    <section id="depoimentos" className="py-8 md:py-10 px-6 md:px-12 lg:px-20 bg-black text-white relative overflow-hidden border-t border-white/5">
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#f97316]/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
-      <div className="max-w-7xl mx-auto relative z-10">
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-7xl mx-auto relative z-10"
+      >
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-16"
+          className="text-center mb-6 md:mb-8"
         >
-          <Quote className="w-12 h-12 text-[#f97316] mx-auto mb-6 opacity-40 animate-pulse" />
-          <span className="text-gray-400 font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">O QUE DIZEM DE NÓS</span>
+          <Quote className="w-10 h-10 text-[#f97316] mx-auto mb-3 opacity-40" />
+          <span className="text-neutral-300 font-bold uppercase tracking-[0.4em] text-[10px] mb-3 block">O QUE DIZEM DE NÓS</span>
           <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 uppercase tracking-tighter">
             A prova de nossa <span className="text-[#f97316] italic font-normal font-serif">excelência.</span>
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Carousel for Mobile only */}
+        <div className="block md:hidden relative mt-4">
+          <div className="overflow-hidden px-1">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeSlide}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.3 }}
+                className="bg-neutral-900 p-4 xs:p-5 rounded-[2rem] border border-[#f97316]/40 flex flex-col justify-between min-h-[250px] shadow-[0_25px_50px_rgba(249,115,22,0.04)] relative"
+              >
+                {/* Top Accent Line permanently displayed on mobile */}
+                <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#f97316]/80 to-transparent transform scale-x-100 transition-transform duration-500" />
+
+                <div>
+                  <div className="flex gap-1 mb-4 text-[#f97316] justify-center">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-current text-[#f97316]" />
+                    ))}
+                  </div>
+                  <p className="text-sm text-neutral-100 leading-relaxed italic mb-4 font-semibold text-center">
+                    "{reviews[activeSlide].text}"
+                  </p>
+                </div>
+                <div className="flex flex-col items-center gap-1.5 border-t border-white/5 pt-4 text-center">
+                  <div className="w-11 h-11 rounded-full overflow-hidden border border-white/15 bg-neutral-850 flex items-center justify-center font-bold font-serif text-white text-base relative">
+                    <OptimizedImage 
+                      src={reviews[activeSlide].image} 
+                      alt={reviews[activeSlide].name} 
+                      className="w-full h-full object-cover animate-fade-in" 
+                      containerClassName="absolute inset-0"
+                      sizes="44px"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-serif font-bold text-[#f97316] uppercase tracking-tight text-center">{reviews[activeSlide].name}</h4>
+                    <p className="text-[#f97316] text-[9px] font-bold uppercase tracking-widest mt-0.5 text-center">{reviews[activeSlide].role}</p>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Controls */}
+          <div className="flex items-center justify-between mt-6 px-4">
+            <button 
+              onClick={prevSlide}
+              className="w-10 h-10 rounded-full flex items-center justify-center bg-[#f97316] hover:bg-[#ea580c] text-white transition-colors shadow-sm cursor-pointer border-none"
+              aria-label="Depoimento anterior"
+            >
+              <ChevronRight className="w-5 h-5 rotate-180" />
+            </button>
+            
+            {/* Dots */}
+            <div className="flex gap-2">
+              {reviews.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveSlide(idx)}
+                  className={`h-2 rounded-full transition-all duration-300 ${activeSlide === idx ? "w-6 bg-[#f97316]" : "w-2 bg-neutral-700"}`}
+                  aria-label={`Ir para slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+
+            <button 
+              onClick={nextSlide}
+              className="w-10 h-10 rounded-full flex items-center justify-center bg-[#f97316] hover:bg-[#ea580c] text-white transition-colors shadow-sm cursor-pointer border-none"
+              aria-label="Próximo depoimento"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Grid for Desktop / Tablet */}
+        <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-8">
           {reviews.map((review, i) => (
             <motion.div 
               key={i}
@@ -806,31 +1216,37 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-neutral-900/60 backdrop-blur-sm p-8 rounded-[2rem] border border-white/5 flex flex-col justify-between hover:border-[#f97316]/30 transition-all duration-300"
+              className="bg-neutral-900/60 backdrop-blur-sm p-6 lg:p-7 rounded-[2rem] border border-white/5 flex flex-col justify-between hover:border-[#f97316]/30 transition-all duration-300"
             >
               <div>
-                <div className="flex gap-1 mb-6 text-[#f97316]">
+                <div className="flex gap-1 mb-4 text-[#f97316] justify-center">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-current text-[#f97316]" />
                   ))}
                 </div>
-                <p className="text-sm md:text-base text-gray-300 leading-relaxed italic mb-8 font-normal">
+                <p className="text-sm md:text-base text-neutral-100 leading-relaxed italic mb-5 font-semibold text-center">
                   "{review.text}"
                 </p>
               </div>
-              <div className="flex items-center gap-4 border-t border-white/5 pt-5">
-                <div className="w-11 h-11 rounded-full bg-neutral-800 flex items-center justify-center font-bold font-serif text-white text-base">
-                  {review.name[0]}
+              <div className="flex flex-col items-center gap-1.5 border-t border-white/5 pt-4 text-center">
+                <div className="w-11 h-11 rounded-full overflow-hidden border border-white/15 bg-neutral-850 flex items-center justify-center font-bold font-serif text-white text-base relative">
+                  <OptimizedImage 
+                    src={review.image} 
+                    alt={review.name} 
+                    className="w-full h-full object-cover" 
+                    containerClassName="absolute inset-0"
+                    sizes="44px"
+                  />
                 </div>
                 <div>
-                  <h4 className="text-sm font-serif font-bold text-white uppercase tracking-tight">{review.name}</h4>
-                  <p className="text-[#f97316] text-[9px] font-bold uppercase tracking-widest mt-0.5">{review.role}</p>
+                  <h4 className="text-sm font-serif font-bold text-[#f97316] uppercase tracking-tight text-center">{review.name}</h4>
+                  <p className="text-[#f97316] text-[9px] font-bold uppercase tracking-widest mt-0.5 text-center">{review.role}</p>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
@@ -853,22 +1269,44 @@ const FAQ = () => {
     {
       question: "Como sou atualizado sobre as cirurgias do meu pet?",
       answer: "Nossa equipe envia boletins informativos e fotos do pet em cada transição para garantir conforto e total monitoramento aos tutores no WhatsApp."
+    },
+    {
+      question: "Vocês atendem planos de saúde veterinários?",
+      answer: "No momento operamos apenas de forma particular para garantir insumos de alta qualidade e dedicação exclusiva sem limitações operacionais, mas emitimos notas fiscais completas e laudos técnicos para que você solicite o reembolso junto ao seu convênio."
+    },
+    {
+      question: "Quais as formas de pagamento disponíveis?",
+      answer: "Oferecemos condições flexíveis, com pagamento à vista via Pix, além de parcelamento facilitado em até 10x sem juros em todos os cartões de crédito para consultas, cirurgias e internações."
+    },
+    {
+      question: "Como funcionam as visitas ao pet internado?",
+      answer: "As visitas são incentivadas diariamente em horários pré-determinados para que o tutor acompanhe de perto o amor e a evolução do paciente. Entendemos que o carinho da família é terapêutico."
+    },
+    {
+      question: "Como garantem a segurança anestésica nas cirurgias?",
+      answer: "Utilizamos anestesia inalatória de última geração acompanhada de monitoramento cardiorrespiratório contínuo, eletrocardiograma e pressão não invasiva, com acompanhamento de um anestesista qualificado em sala durante todo o procedimento."
     }
   ];
 
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-24 px-6 md:px-12 lg:px-20 bg-white relative">
-      <div className="max-w-4xl mx-auto">
+    <section id="faq" className="py-8 md:py-10 px-6 md:px-12 lg:px-20 bg-white relative">
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-4xl mx-auto z-10 relative"
+      >
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-16"
+          className="text-center mb-6 md:mb-8"
         >
-          <span className="text-[#f97316] font-bold uppercase tracking-widest text-[10px] mb-4 block font-sans">DÚVIDAS FREQUENTES</span>
+          <span className="text-[#f97316] font-bold uppercase tracking-widest text-[10px] mb-3 block font-sans">DÚVIDAS FREQUENTES</span>
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 leading-tight uppercase">
             Tudo o que você <br />
             <span className="text-[#f97316] italic font-normal">precisa saber.</span>
@@ -877,13 +1315,13 @@ const FAQ = () => {
 
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div key={index} className="bg-neutral-50 rounded-[1.8rem] overflow-hidden border border-neutral-100 transition-all duration-300">
+            <div key={index} className={`bg-neutral-50 rounded-[1.8rem] overflow-hidden border ${activeIndex === index ? "border-[#f97316]/55 shadow-[0_8px_30px_rgba(249,115,22,0.04)]" : "border-[#f97316]/25 md:border-neutral-100"} transition-all duration-300`}>
               <button 
                 onClick={() => setActiveIndex(activeIndex === index ? null : index)}
-                className="w-full p-6 flex justify-between items-center text-left hover:bg-neutral-100/50 transition-colors"
+                className="w-full p-4 md:p-5 flex justify-between items-center text-left hover:bg-neutral-100/50 transition-colors"
                 id={`faq-btn-${index}`}
               >
-                <span className="text-sm md:text-base font-bold text-gray-900 uppercase tracking-tight select-none">{faq.question}</span>
+                <span className={`text-sm md:text-base font-bold ${activeIndex === index ? "text-[#f97316]" : "text-gray-900"} uppercase tracking-tight select-none min-w-0 whitespace-normal block pr-4 flex-1`}>{faq.question}</span>
                 {activeIndex === index ? <Minus className="text-[#f97316] w-4.5 h-4.5 shrink-0" /> : <Plus className="text-[#f97316] w-4.5 h-4.5 shrink-0" />}
               </button>
               <AnimatePresence>
@@ -892,9 +1330,9 @@ const FAQ = () => {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    className="overflow-hidden border-t border-neutral-100"
+                    className="overflow-hidden border-t border-neutral-100 bg-white"
                   >
-                    <div className="p-6 text-gray-500 font-normal leading-relaxed text-sm">
+                    <div className="p-4 md:p-5 text-neutral-800 font-semibold leading-relaxed text-sm">
                       {faq.answer}
                     </div>
                   </motion.div>
@@ -903,7 +1341,7 @@ const FAQ = () => {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
@@ -911,16 +1349,19 @@ const FAQ = () => {
 // Onde Estamos / Contact Section
 const Contact = () => {
   return (
-    <section id="contato" className="py-24 px-6 md:px-12 lg:px-20 bg-neutral-50 border-t border-neutral-200">
-      <div className="max-w-7xl mx-auto">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch"
-        >
+    <section id="contato" className="py-8 md:py-10 px-6 md:px-12 lg:px-20 bg-neutral-50 border-t border-neutral-200">
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-7xl mx-auto z-10 relative"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
           {/* Location Box Left */}
-          <div className="lg:col-span-5 bg-white p-8 md:p-10 rounded-[2rem] border border-neutral-200 flex flex-col justify-between shadow-sm">
+          <div className="lg:col-span-5 bg-white p-5 md:p-7 rounded-[2rem] border border-[#f97316]/40 md:border-neutral-200 flex flex-col justify-between shadow-[0_25px_50px_rgba(249,115,22,0.04)] md:shadow-sm md:hover:border-[#f97316]/40 md:hover:shadow-[0_25px_50px_rgba(249,115,22,0.04)] transition-all duration-300 relative group overflow-hidden">
+            {/* Top Accent line */}
+            <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-[#f97316] to-transparent transform scale-x-100 md:scale-x-0 md:group-hover:scale-x-100 transition-transform duration-500 rounded-t-[2rem]" />
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 25 }}
@@ -929,20 +1370,20 @@ const Contact = () => {
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
                 <span className="text-[#f97316] font-bold uppercase tracking-widest text-[9px] mb-3 block">ONDE ESTAMOS</span>
-                <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-8 leading-tight uppercase">
+                <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-5 leading-tight uppercase">
                   Venha nos <br />
                   <span className="text-[#f97316] italic font-normal">visitar.</span>
                 </h2>
               </motion.div>
               
-              <div className="space-y-6">
+              <div className="space-y-4 font-sans">
                 <div className="flex gap-4">
                   <div className="w-11 h-11 bg-[#f97316]/10 rounded-2xl flex items-center justify-center text-[#f97316] shrink-0">
-                    <MapPin className="w-5 h-5" />
+                    <MapPin className="w-5 h-5 animate-pulse" />
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-gray-900 uppercase tracking-tight mb-1">Nossa Localização</h4>
-                    <p className="text-gray-500 text-xs leading-relaxed">Av. Paulista, 1000 - Bela Vista - São Paulo - SP, 01310-100</p>
+                    <p className="text-neutral-850 text-xs leading-relaxed font-semibold">Av. Paulista, 1000 - Bela Vista - São Paulo - SP, 01310-100</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
@@ -951,7 +1392,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-gray-900 uppercase tracking-tight mb-1">Horário de Funcionamento</h4>
-                    <p className="text-gray-500 text-xs leading-relaxed">
+                    <p className="text-neutral-850 text-xs leading-relaxed font-semibold">
                       Emergência e Triagem 24/7 permanente.<br />
                       Exames Laboratoriais: Seg a Sáb, 08h às 19h
                     </p>
@@ -960,13 +1401,13 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-neutral-100 flex items-center justify-between">
-              <div>
-                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Triagem no WhatsApp 24h</p>
-                <p className="text-lg font-mono font-bold text-gray-900 mt-1">(11) 99287-6219</p>
+            <div className="mt-6 pt-5 border-t border-neutral-100 flex items-center justify-between">
+              <div className="whitespace-nowrap shrink-0 text-left">
+                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest leading-none">Triagem no WhatsApp 24h</p>
+                <p className="text-lg font-mono font-bold text-gray-900 mt-1 pb-1 leading-none">(11) 99287-6219</p>
               </div>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="p-3.5 bg-neutral-100 hover:bg-[#f97316] hover:text-white rounded-full transition-all duration-300 text-neutral-900">
-                <ArrowRight className="w-5 h-5" />
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="p-3.5 bg-[#f97316] hover:bg-[#ea580c] text-white rounded-full transition-all duration-300 shrink-0 select-none flex items-center justify-center shadow-md">
+                <ArrowRight className="w-5 h-5 shrink-0" />
               </a>
             </div>
           </div>
@@ -991,8 +1432,8 @@ const Contact = () => {
               </Marker>
             </MapContainer>
           </div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </section>
   );
 };
@@ -1000,7 +1441,7 @@ const Contact = () => {
 // Bottom CTA before footer
 const CTA = () => {
   return (
-    <section className="py-20 bg-black relative overflow-hidden border-t border-white/5">
+    <section className="py-8 md:py-10 bg-black relative overflow-hidden border-t border-white/5">
       <div className="absolute inset-0 bg-pattern opacity-[0.01] pointer-events-none"></div>
       <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
         <motion.div
@@ -1008,14 +1449,14 @@ const CTA = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="bg-neutral-900/60 rounded-[3rem] p-8 md:p-14 border border-white/5 shadow-2xl backdrop-blur-xl"
+          className="bg-neutral-900/60 rounded-[3rem] p-6 md:p-10 border border-white/5 shadow-2xl backdrop-blur-xl"
         >
-          <span className="text-[#f97316] font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">ATENDIMENTO IMEDIATO</span>
-          <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-6 leading-tight tracking-tighter uppercase">
+          <span className="text-[#f97316] font-bold uppercase tracking-[0.4em] text-[10px] mb-3 block font-sans">ATENDIMENTO IMEDIATO</span>
+          <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4 leading-tight tracking-tighter uppercase">
             Seu pet sob proteção máxima a <br />
             <span className="text-[#f97316] italic font-normal font-serif">um clique de distância.</span>
           </h2>
-          <p className="text-gray-300 text-sm max-w-xl mx-auto mb-10 leading-relaxed font-normal">
+          <p className="text-gray-300 text-sm max-w-xl mx-auto mb-6 leading-relaxed font-normal">
             Fale diretamente com nossa recepção pelo WhatsApp. Nossa equipe médica de plantão está pronta para tirar suas dúvidas emergenciais e agendar.
           </p>
           
@@ -1024,12 +1465,12 @@ const CTA = () => {
               href={WHATSAPP_URL} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="w-full sm:w-auto bg-[#f97316] text-white px-10 py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-[#ea580c] transition-all hover:scale-105 active:scale-95 duration-350 inline-flex items-center justify-center gap-2.5 shadow-xl group"
+              className="w-full sm:w-auto bg-[#f97316] text-white px-10 py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-[#ea580c] transition-all hover:scale-105 active:scale-95 duration-350 inline-flex items-center justify-center gap-2 group whitespace-nowrap shrink-0"
             >
-              <span>GARANTIR DIRETRIZES DE TRATAMENTO PRIORITÁRIO</span>
-              <ArrowRight className="w-4.5 h-4.5 text-white group-hover:translate-x-1.5 transition-transform" />
+              <span className="whitespace-nowrap">AGENDAR CONSULTA</span>
+              <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1.5 transition-transform shrink-0" />
             </a>
-            <span className="text-white/30 text-[9px] font-mono tracking-[0.25em] uppercase">SEGURO • SEM BUROCRACIA • RESPOSTA EM MENOS DE 5 MINUTOS</span>
+            <span className="text-white/30 text-[9px] font-mono tracking-[0.25em] uppercase">RÁPIDO • HUMANIZADO • RETORNO EM POUCOS MINUTOS</span>
           </div>
         </motion.div>
       </div>
@@ -1040,7 +1481,7 @@ const CTA = () => {
 // Footer - Duno only logs
 const Footer = () => {
   return (
-    <footer className="bg-black text-white pt-16 pb-8 border-t border-white/5">
+    <footer className="bg-black text-white pt-12 pb-6 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-12">
           {/* Logo & Desc */}
@@ -1089,9 +1530,9 @@ const Footer = () => {
               href={WHATSAPP_URL} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="w-full py-3 bg-[#f97316] hover:bg-[#ea580c] text-white text-[10px] font-bold tracking-[0.2em] rounded-full text-center transition-all flex items-center justify-center gap-2.5 group"
+              className="w-full py-3 bg-[#f97316] hover:bg-[#ea580c] text-white text-[10px] font-bold tracking-[0.2em] rounded-full text-center transition-all flex items-center justify-center gap-2 group"
             >
-              <span>CONSULTAR NOSSO PLANTÃO MÉDICO 24H</span>
+              <span>PLANTÃO 24H</span>
               <ArrowRight className="w-3.5 h-3.5 text-white group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
