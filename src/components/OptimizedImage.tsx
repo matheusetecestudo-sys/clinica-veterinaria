@@ -134,6 +134,8 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
 
   const srcSet = isUnsplash ? getUnsplashSrcSet(activeSrc, srcsetWidths, quality) : undefined;
 
+  const hasObjectFit = className.includes("object-");
+
   return (
     <div className={`relative overflow-hidden w-full h-full ${containerClassName}`}>
       {/* Blur-up Placeholder */}
@@ -141,7 +143,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
         <img
           src={placeholderUrl}
           alt={alt}
-          className={`absolute inset-0 w-full h-full object-cover filter blur-md transform scale-105 pointer-events-none z-10 duration-500 ease-out transition-opacity ${className}`}
+          className={`absolute inset-0 w-full h-full ${hasObjectFit ? "" : "object-cover"} filter blur-md transform scale-105 pointer-events-none z-10 duration-500 ease-out transition-opacity ${className}`}
           aria-hidden="true"
           referrerPolicy="no-referrer"
         />
@@ -157,7 +159,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
           loading={priority ? "eager" : "lazy"}
           onLoad={() => setIsLoaded(true)}
           onError={() => setError(true)}
-          className={`w-full h-full object-cover transition-all duration-700 ease-out ${
+          className={`w-full h-full ${hasObjectFit ? "" : "object-cover"} transition-all duration-700 ease-out ${
             isLoaded 
               ? "opacity-100 scale-100 filter-none" 
               : "opacity-0 scale-98 blur-[2px]"

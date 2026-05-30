@@ -955,17 +955,17 @@ const Authority = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.3 }}
-                className="bg-white rounded-3xl overflow-hidden border border-[#f97316]/40 p-4 xs:p-5 md:p-6 relative cursor-pointer group shadow-[0_25px_50px_rgba(249,115,22,0.08)] min-h-[440px] flex flex-col justify-between"
+                className="bg-white rounded-3xl overflow-hidden border border-[#f97316]/30 p-4 xs:p-5 md:p-6 relative cursor-pointer group shadow-[0_25px_50px_rgba(249,115,22,0.08)] min-h-[480px] flex flex-col justify-between"
               >
                 {/* Top Accent Line permanently displayed on mobile */}
-                <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#f97316] to-transparent transform scale-x-100 transition-transform duration-500" />
+                <div className="absolute top-0 inset-x-0 h-[2.5px] bg-[#f97316] transform scale-x-100" />
 
-                <div>
-                  <div className="aspect-[4/5] rounded-2xl overflow-hidden mb-4 relative bg-neutral-50 max-h-[340px]">
+                <div className="flex flex-col h-full justify-between gap-4">
+                  <div className="aspect-[4/5] rounded-2xl overflow-hidden relative bg-gradient-to-b from-neutral-50 via-neutral-100 to-neutral-200/50 flex items-end justify-center min-h-[260px] xs:min-h-[290px] max-h-[340px] shadow-inner">
                     <OptimizedImage 
                       src={doctors[activeSlide].image} 
                       alt={doctors[activeSlide].name} 
-                      className="filter contrast-[1.03] scale-105"
+                      className="filter contrast-[1.03] object-contain object-bottom w-full h-full max-h-full"
                       sizes="(max-width: 1024px) 100vw, 33vw"
                     />
                     <div className="absolute top-4 left-4 bg-emerald-500 text-white px-2.5 py-1 rounded-full text-[8.5px] font-bold tracking-widest uppercase shadow-sm">
@@ -977,13 +977,13 @@ const Authority = () => {
                   </div>
 
                   <div className="p-1 text-center">
-                    <span className="text-[#f97316] text-[10px] sm:text-[10.5px] font-bold tracking-[0.2em] uppercase block mb-1 text-center">
+                    <span className="text-[#f97316] text-[10px] sm:text-[10.5px] font-bold tracking-[0.25em] uppercase block mb-1.5 text-center">
                       {doctors[activeSlide].specialty}
                     </span>
-                    <h3 className="font-sans text-lg sm:text-xl font-bold text-[#f97316] mb-1.5 uppercase tracking-tight text-center">
+                    <h3 className="font-sans text-xl sm:text-2xl font-bold text-neutral-900 mb-2 uppercase tracking-tight text-center">
                       {doctors[activeSlide].name}
                     </h3>
-                    <p className="text-neutral-900 text-[13px] sm:text-[13.5px] leading-relaxed font-semibold text-center">
+                    <p className="text-neutral-600 text-[13px] sm:text-sm leading-relaxed font-normal text-center">
                       {doctors[activeSlide].desc}
                     </p>
                   </div>
@@ -1038,12 +1038,12 @@ const Authority = () => {
               {/* Top Accent line on hover */}
               <div className="absolute top-0 inset-x-0 h-[3px] bg-[#f97316] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
 
-              <div>
-                <div className="aspect-[4/5] rounded-3xl overflow-hidden mb-4 relative bg-neutral-50 shadow-inner">
+              <div className="flex flex-col h-full justify-between gap-5">
+                <div className="aspect-[4/5] rounded-3xl overflow-hidden relative bg-gradient-to-b from-neutral-50 via-neutral-100 to-neutral-200/50 flex items-end justify-center shadow-inner">
                   <OptimizedImage 
                     src={dr.image} 
                     alt={dr.name} 
-                    className="filter contrast-[1.03] group-hover:scale-106 transition-transform duration-700 ease-out"
+                    className="filter contrast-[1.03] object-contain object-bottom w-full h-full max-h-full group-hover:scale-102 transition-transform duration-700 ease-out"
                     sizes="(max-width: 1024px) 100vw, 33vw"
                   />
                   <div className="absolute top-5 left-5 bg-emerald-500 text-white px-3 py-1.5 rounded-full text-[9px] font-bold tracking-widest uppercase shadow-md">
@@ -1055,13 +1055,13 @@ const Authority = () => {
                 </div>
 
                 <div className="px-1 pt-1 pb-3 text-center">
-                  <span className="text-[#f97316] text-[11px] font-bold tracking-[0.2em] uppercase block mb-1.5 text-center">
+                  <span className="text-[#f97316] text-[11px] font-bold tracking-[0.25em] uppercase block mb-1.5 text-center">
                     {dr.specialty}
                   </span>
-                  <h3 className="font-sans text-2xl font-bold text-[#f97316] mb-1.5 tracking-tight uppercase text-center">
+                  <h3 className="font-sans text-2xl font-bold text-slate-900 mb-2 tracking-tight uppercase text-center">
                     {dr.name}
                   </h3>
-                  <p className="text-neutral-900 text-sm leading-relaxed font-semibold text-center">
+                  <p className="text-neutral-600 text-sm leading-relaxed font-normal text-center">
                     {dr.desc}
                   </p>
                 </div>
