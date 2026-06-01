@@ -26,7 +26,7 @@ import {
   Check,
   ChevronDown
 } from "lucide-react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import L from "leaflet";
 
 // Fix for Leaflet marker icon issue
@@ -120,8 +120,11 @@ const Navbar = () => {
     { name: "INÍCIO", href: "#inicio" },
     { name: "SERVIÇOS", href: "#servicos" },
     { name: "RESULTADOS", href: "#resultados" },
-    { name: "CLÍNICA", href: "#about" },
+    { name: "DIFERENCIAIS", href: "#diferenciais" },
+    { name: "A CLÍNICA", href: "#about" },
     { name: "ESPECIALISTAS", href: "#equipe" },
+    { name: "FAQ", href: "#faq" },
+    { name: "CONTATO", href: "#contato" },
   ];
 
   return (
@@ -133,7 +136,7 @@ const Navbar = () => {
         </a>
 
         {/* Unified Center Menu - streamlined and beautifully spaced */}
-        <div className="hidden lg:flex items-center gap-6 xl:gap-10 justify-center">
+        <div className="hidden lg:flex items-center gap-4 xl:gap-6 justify-center">
           {navLinks.map((link, index) => (
             <a 
               key={index} 
@@ -1330,11 +1333,27 @@ const FAQ = () => {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
+                    transition={{
+                      height: {
+                        duration: 0.45,
+                        ease: [0.16, 1, 0.3, 1]
+                      },
+                      opacity: {
+                        duration: 0.3,
+                        ease: "linear"
+                      }
+                    }}
                     className="overflow-hidden border-t border-neutral-100 bg-white"
                   >
-                    <div className="p-4 md:p-5 text-neutral-800 font-semibold leading-relaxed text-sm">
+                    <motion.div 
+                      initial={{ y: -10, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -10, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: "easeOut" }}
+                      className="p-4 md:p-5 text-neutral-800 font-semibold leading-relaxed text-sm"
+                    >
                       {faq.answer}
-                    </div>
+                    </motion.div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -1346,8 +1365,20 @@ const FAQ = () => {
   );
 };
 
+// Helper component to capture map clicks
+const MapClickTracker = ({ onClick }: { onClick: (latlng: { lat: number; lng: number }) => void }) => {
+  useMapEvents({
+    click(e) {
+      onClick({ lat: e.latlng.lat, lng: e.latlng.lng });
+    }
+  });
+  return null;
+};
+
 // Onde Estamos / Contact Section
 const Contact = () => {
+  const [tempMarker, setTempMarker] = useState<{ lat: number; lng: number } | null>(null);
+
   return (
     <section id="contato" className="py-8 md:py-10 px-6 md:px-12 lg:px-20 bg-neutral-50 border-t border-neutral-200">
       <motion.div 
@@ -1398,6 +1429,40 @@ const Contact = () => {
                     </p>
                   </div>
                 </div>
+
+                {/* Map Click interactive info panel */}
+                <div className="mt-4 p-4 rounded-2xl bg-neutral-50/80 border border-neutral-100 text-xs text-neutral-500">
+                  <p className="font-medium text-neutral-700 mb-1 flex items-center gap-1.5">
+                    <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#f97316] animate-pulse" />
+                    Interação com o Mapa
+                  </p>
+                  <p className="leading-relaxed">
+                    Clique em qualquer ponto do mapa para criar um marcador temporário com as coordenadas exatas da sua localização.
+                  </p>
+                  
+                  <AnimatePresence>
+                    {tempMarker && (
+                      <motion.div 
+                        initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                        animate={{ opacity: 1, height: "auto", marginTop: 12 }}
+                        exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                        className="overflow-hidden border-t border-neutral-200/60 pt-3"
+                      >
+                        <p className="font-bold text-[#f97316] uppercase tracking-wider text-[10px] mb-1.5">Marcador Criado</p>
+                        <div className="flex justify-between items-center bg-white border border-neutral-200/50 rounded-xl p-2.5 font-mono text-[11px] text-neutral-850">
+                          <span>Lat: {tempMarker.lat.toFixed(5)}</span>
+                          <span>Lng: {tempMarker.lng.toFixed(5)}</span>
+                        </div>
+                        <button 
+                          onClick={() => setTempMarker(null)}
+                          className="text-red-500 hover:text-red-700 font-semibold underline text-[11px] mt-2 block"
+                        >
+                          Limpar marcador
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
             </div>
 
@@ -1424,12 +1489,35 @@ const Contact = () => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
+              <MapClickTracker onClick={(latlng) => setTempMarker(latlng)} />
+
               <Marker position={[-23.5615, -46.656]}>
                 <Popup>
                   <div className="text-black font-serif font-bold text-sm uppercase">DUNO</div>
                   <div className="text-xs text-gray-500">Av. Paulista, 1000 - Pronto Atendimento 24h</div>
                 </Popup>
               </Marker>
+
+              {tempMarker && (
+                <Marker position={[tempMarker.lat, tempMarker.lng]}>
+                  <Popup>
+                    <div className="text-black font-sans text-xs p-1">
+                      <div className="font-bold text-[#f97316] uppercase tracking-wider text-[10px] mb-1">Local Marcado</div>
+                      <div className="font-mono text-[11px] mb-1">Lat: {tempMarker.lat.toFixed(5)}</div>
+                      <div className="font-mono text-[11px] mb-2">Lng: {tempMarker.lng.toFixed(5)}</div>
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setTempMarker(null);
+                        }}
+                        className="text-[10px] text-red-500 hover:text-red-700 underline font-semibold mt-1 block"
+                      >
+                        Remover marcador
+                      </button>
+                    </div>
+                  </Popup>
+                </Marker>
+              )}
             </MapContainer>
           </div>
         </div>
@@ -1502,11 +1590,16 @@ const Footer = () => {
           {/* Links Quick */}
           <div>
             <h4 className="text-xs font-bold font-mono tracking-[0.3em] uppercase text-[#f97316] mb-6">Navegação</h4>
-            <ul className="space-y-3 text-xs text-gray-400 font-normal">
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-3 lg:grid-cols-1 lg:space-y-3 lg:gap-0 text-xs text-gray-400 font-normal">
               <li><a href="#inicio" className="hover:text-white transition-colors">Início</a></li>
               <li><a href="#servicos" className="hover:text-white transition-colors">Serviços</a></li>
               <li><a href="#resultados" className="hover:text-white transition-colors">Resultados</a></li>
-              <li><a href="#diferenciais" className="hover:text-white transition-colors">Por Que Nós</a></li>
+              <li><a href="#diferenciais" className="hover:text-white transition-colors">Diferenciais</a></li>
+              <li><a href="#about" className="hover:text-white transition-colors">A Clínica</a></li>
+              <li><a href="#equipe" className="hover:text-white transition-colors">Especialistas</a></li>
+              <li><a href="#depoimentos" className="hover:text-white transition-colors">Depoimentos</a></li>
+              <li><a href="#faq" className="hover:text-white transition-colors">Dúvidas (FAQ)</a></li>
+              <li><a href="#contato" className="hover:text-white transition-colors">Contato</a></li>
             </ul>
           </div>
 
@@ -1514,9 +1607,10 @@ const Footer = () => {
           <div>
             <h4 className="text-xs font-bold font-mono tracking-[0.3em] uppercase text-[#f97316] mb-6">Informações</h4>
             <ul className="space-y-3 text-xs text-gray-400 font-normal">
-              <li><span className="block text-[11px] font-bold text-white uppercase">Emergência:</span> Pronto Atendimento Permanente 24h</li>
-              <li><span className="block text-[11px] font-bold text-white uppercase">Vacinação:</span> Protocolo de excelência</li>
-              <li><span className="block text-[11px] font-bold text-white uppercase">Local:</span> Av. Paulista, 1000 - São Paulo</li>
+              <li><span className="block text-[11px] font-bold text-white uppercase">Atendimento:</span> Emergência & Triagem 24/7</li>
+              <li><span className="block text-[11px] font-bold text-white uppercase">Exames & Rotina:</span> Seg a Sáb, 08h às 19h</li>
+              <li><span className="block text-[11px] font-bold text-white uppercase">WhatsApp 24h:</span> (11) 99287-6219</li>
+              <li><span className="block text-[11px] font-bold text-white uppercase">Local:</span> Av. Paulista, 1000 - Bela Vista, SP</li>
             </ul>
           </div>
 
@@ -1542,11 +1636,6 @@ const Footer = () => {
           <p className="text-[10px] text-gray-500 font-normal tracking-wide">
             © {new Date().getFullYear()} Duno Clínica Veterinária Ltda. Todos os direitos reservados. CRMV/SP 100293.
           </p>
-          <div className="flex gap-6 text-[10px] text-gray-500 font-mono tracking-widest uppercase">
-            <span className="text-[#f97316] font-bold">• LARANJA</span>
-            <span>• PRETO</span>
-            <span>• BRANCO</span>
-          </div>
         </div>
       </div>
     </footer>
