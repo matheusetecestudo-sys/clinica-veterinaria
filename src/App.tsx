@@ -348,37 +348,37 @@ const Services = () => {
       title: "Consulta Veterinária",
       description: "Consulta geral, diagnósticos precisos e prevenção para o seu pet.",
       fullDescription: "Avaliação físico-clínica completa, orientação vacinal personalizada e exames preliminares minuciosos para garantir a prevenção de patologias e a saúde integral do seu animal de estimação.",
-      image: "/imagens/Consulta veterinária.png"
+      image: "/imagens/consulta_veterinaria.png"
     },
     {
       title: "Atendimento Emergencial",
       description: "Pronto atendimento e socorro imediato 24 horas por dia.",
       fullDescription: "Equipe de médicos-veterinários intensivistas de plantão 24 horas para socorrer qualquer urgência crítica imediata, amparada por suporte de oxigenio, UTI e monitoramento eletrônico contínuo.",
-      image: "/imagens/atendimento emergencial.jpg"
+      image: "/imagens/atendimento_emergencial.jpg"
     },
     {
       title: "Cirurgias Veterinárias",
       description: "Procedimentos cirúrgicos seguros com anestesia moderna.",
       fullDescription: "Complexo cirúrgico equipado com alta tecnologia cirúrgica estéril, controle anestésico inalatório computadorizado e protocolos rigorosos de controle de dor pós-operatória.",
-      image: "/imagens/Cirurgias veterinárias.jpg"
+      image: "/imagens/cirurgias_veterinarias.jpg"
     },
     {
       title: "Exames Laboratoriais",
       description: "Análises clínicas minuciosas e diagnósticos confiáveis.",
       fullDescription: "Processamento ágil e preciso de painéis hematológicos, bioquímicos, urinálise e citologias para guiar e validar a conduta terapêutica ideal com máxima segurança científica.",
-      image: "/imagens/Exames laboratoriais.jpg"
+      image: "/imagens/exames_laboratoriais.jpg"
     },
     {
       title: "Vacinação",
       description: "Proteção vacinal de qualidade com vacinas importadas.",
       fullDescription: "Imunização estratégica utilizando exclusivamente vacinas importadas de laboratórios líderes globais, oferecendo proteção robusta e segura contra as principais zoonoses e infecções.",
-      image: "/imagens/Vacinação.jpg"
+      image: "/imagens/vacinacao.jpg"
     },
     {
       title: "Internação",
       description: "Espaço confortável com monitoramento constante 24 horas.",
       fullDescription: "Acomodações individuais limpas e climatizadas para cães e gatos de forma separada, aliadas à vigilância assistencial veterinária ininterrupta para plena recuperação e bem-estar do pet.",
-      image: "/imagens/internação.png"
+      image: "/imagens/internacao.png"
     }
   ];
 

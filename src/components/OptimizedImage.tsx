@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src: string;
@@ -114,6 +114,12 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
 
+  // Reset loading and error states when the src prop changes
+  useEffect(() => {
+    setIsLoaded(false);
+    setError(false);
+  }, [src]);
+
   // Use the active source (fallback if there's an error or it's a known failing raw github source)
   const activeSrc = error ? getFallbackImageUrl(src, alt) : src;
 
@@ -139,7 +145,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   return (
     <div className={`relative overflow-hidden w-full h-full ${containerClassName}`}>
       {/* Blur-up Placeholder */}
-      {(!isLoaded || error) && activeSrc && (
+      {!isLoaded && activeSrc && (
         <img
           src={placeholderUrl}
           alt={alt}
