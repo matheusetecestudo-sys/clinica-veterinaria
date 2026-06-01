@@ -121,7 +121,9 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
     setError(false);
   }, [src]);
 
-  // Use the active source (fallback if there's an error or it's a known failing raw github source)
+  const isLocal = src && (src.startsWith("/") || src.startsWith(".") || !src.includes("://") || src.includes("raw.githubusercontent.com"));
+
+  // Use the active source (fallback if there's an error or it's a known failing source)
   const activeSrc = error ? getFallbackImageUrl(src, alt) : src;
 
   // Reset loading state when the active src changes (transitioning to fallback)
@@ -132,9 +134,10 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const isUnsplash = activeSrc && activeSrc.includes("images.unsplash.com");
   
   // Create a cheap, light, blur placeholder: ~60px width, low quality, high blur
+  // For local files, we don't render a double-load placeholder of the same big file to preserve performance
   const placeholderUrl = isUnsplash 
     ? getUnsplashUrl(activeSrc, 60, 20, 10)
-    : activeSrc;
+    : "";
 
   const quality = priority ? 85 : 75;
   const mainSrc = isUnsplash ? getUnsplashUrl(activeSrc, priority ? 1600 : 1000, quality) : activeSrc;
@@ -151,14 +154,14 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   return (
     <div className={`relative overflow-hidden w-full h-full ${containerClassName}`}>
       {/* Blur-up Placeholder */}
-      {!isLoaded && activeSrc && (
+      {!isLoaded && activeSrc && placeholderUrl && (
         <img
           key={`placeholder-${activeSrc}`}
           src={placeholderUrl}
           alt={alt}
           className={`absolute inset-0 w-full h-full ${hasObjectFit ? "" : "object-cover"} filter blur-md transform scale-105 pointer-events-none z-10 duration-500 ease-out transition-opacity ${className}`}
           aria-hidden="true"
-          referrerPolicy="no-referrer"
+          referrerPolicy={isLocal ? undefined : "no-referrer"}
         />
       )}
 
@@ -178,7 +181,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
               ? "opacity-100 scale-100 filter-none" 
               : "opacity-0 scale-98 blur-[2px]"
           } ${className}`}
-          referrerPolicy="no-referrer"
+          referrerPolicy={isLocal ? undefined : "no-referrer"}
           {...props}
         />
       )}

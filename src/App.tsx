@@ -220,7 +220,7 @@ const Hero = () => {
         {/* Desktop Image */}
         <div className="hidden md:block w-full h-full">
           <OptimizedImage 
-            src="/imagens/bannerdesktop.png" 
+            src="https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/bannerdesktop.png" 
             alt="Clínica Veterinária Duno de Alta Performance" 
             className="w-full h-full object-cover filter contrast-[1.04] brightness-90 transition-transform duration-[6000ms] scale-102"
             containerClassName="w-full h-full"
@@ -231,7 +231,7 @@ const Hero = () => {
         {/* Mobile Image */}
         <div className="block md:hidden w-full h-full">
           <OptimizedImage 
-            src="/imagens/bannermobile.png" 
+            src="https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/bannermobile.png" 
             alt="Clínica Veterinária Duno de Alta Performance - Mobile" 
             className="w-full h-full object-cover filter contrast-[1.04] brightness-90"
             containerClassName="w-full h-full"
@@ -348,37 +348,37 @@ const Services = () => {
       title: "Consulta Veterinária",
       description: "Consulta geral, diagnósticos precisos e prevenção para o seu pet.",
       fullDescription: "Avaliação físico-clínica completa, orientação vacinal personalizada e exames preliminares minuciosos para garantir a prevenção de patologias e a saúde integral do seu animal de estimação.",
-      image: "/imagens/consulta_veterinaria.png"
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/consulta_veterinaria.png"
     },
     {
       title: "Atendimento Emergencial",
       description: "Pronto atendimento e socorro imediato 24 horas por dia.",
       fullDescription: "Equipe de médicos-veterinários intensivistas de plantão 24 horas para socorrer qualquer urgência crítica imediata, amparada por suporte de oxigenio, UTI e monitoramento eletrônico contínuo.",
-      image: "/imagens/atendimento_emergencial.jpg"
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/atendimento_emergencial.jpg"
     },
     {
       title: "Cirurgias Veterinárias",
       description: "Procedimentos cirúrgicos seguros com anestesia moderna.",
       fullDescription: "Complexo cirúrgico equipado com alta tecnologia cirúrgica estéril, controle anestésico inalatório computadorizado e protocolos rigorosos de controle de dor pós-operatória.",
-      image: "/imagens/cirurgias_veterinarias.jpg"
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/cirurgias_veterinarias.jpg"
     },
     {
       title: "Exames Laboratoriais",
       description: "Análises clínicas minuciosas e diagnósticos confiáveis.",
-      fullDescription: "Processamento ágil e preciso de painéis hematológicos, bioquímicos, urinálise e citologias para guiar e validar a conduta terapêutica ideal com máxima segurança científica.",
-      image: "/imagens/exames_laboratoriais.jpg"
+      fullDescription: "Processamento ágil e preciso de painéis hematológicos, bioquímicos, urinálise e citologias para guiar e voltar a conduta terapêutica ideal com máxima segurança científica.",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/exames_laboratoriais.jpg"
     },
     {
       title: "Vacinação",
       description: "Proteção vacinal de qualidade com vacinas importadas.",
       fullDescription: "Imunização estratégica utilizando exclusivamente vacinas importadas de laboratórios líderes globais, oferecendo proteção robusta e segura contra as principais zoonoses e infecções.",
-      image: "/imagens/vacinacao.jpg"
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/vacinacao.jpg"
     },
     {
       title: "Internação",
       description: "Espaço confortável com monitoramento constante 24 horas.",
       fullDescription: "Acomodações individuais limpas e climatizadas para cães e gatos de forma separada, aliadas à vigilância assistencial veterinária ininterrupta para plena recuperação e bem-estar do pet.",
-      image: "/imagens/internacao.png"
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/internacao.png"
     }
   ];
 
@@ -498,21 +498,21 @@ const Gallery = () => {
       tag: "ROTINA EXCELÊNCIA (CÃO)",
       title: "Check-up Geral do Husky Luke",
       desc: "Avaliação preventiva completa do Husky de olhos azuis em consulta de rotina domiciliar para manutenção de bem-estar absoluto.",
-      image: "/imagens/pet01.jpg",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/pet01.jpg",
       objectPosition: "object-center"
     },
     {
       tag: "ANIMAIS SILVESTRES (AVE)",
       title: "Medicina Preventiva do Papagaio Fred",
       desc: "Monitoramento clínico geral e acompanhamento nutricional detalhado para excelente qualidade de vida e imunidade de aves exóticas.",
-      image: "/imagens/pet02.jpg",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/pet02.jpg",
       objectPosition: "object-top"
     },
     {
       tag: "CHECK-UP COMPLETO (GATO)",
       title: "Saúde Integrativa do Gato Pipoca",
       desc: "Diagnóstico precoce e acompanhamento dermatológico, auditivo e oftalmológico de felino SRD para vitalidade plena.",
-      image: "/imagens/pet03.jpg",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/pet03.jpg",
       objectPosition: "object-center"
     }
   ];
@@ -896,21 +896,21 @@ const Authority = () => {
       cro: "CRMV/SP 12431",
       specialty: "ANESTESIOLOGIA & ODONTOLOGIA VET",
       desc: "Pós-graduada e especialista em anestesiologia de alta segurança e suporte vital em procedimentos de reconstrução e assepsia.",
-      image: "/imagens/vt01.png"
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/vt01.png"
     },
     {
       name: "Dr. Alexandre Silva",
       cro: "CRMV/SP 43212",
       specialty: "MEDICINA INTENSIVA & CIRURGIÃO CHEFE",
       desc: "Mestre em cirurgia pela USP, com ampla atuação em triagem, anestesiologia e procedimentos reconstrutivos complexos de alta performance.",
-      image: "/imagens/vt02.png"
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/vt02.png"
     },
     {
       name: "Dra. Beatriz Santos",
       cro: "CRMV/SP 87629",
       specialty: "CARDIOLOGIA & EXAMES DIAGNÓSTICOS",
       desc: "Especialista em cardiologia veterinária de alta complexidade, diagnósticos rápidos e desenvolvimento de tratamentos preventivos avançados.",
-      image: "/imagens/vt03.png"
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/vt03.png"
     }
   ];
 
