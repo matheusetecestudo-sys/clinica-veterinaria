@@ -220,7 +220,7 @@ const Hero = () => {
         {/* Desktop Image */}
         <div className="hidden md:block w-full h-full">
           <OptimizedImage 
-            src="https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/bannerdesktop.png" 
+            src="https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/bannerdesktop.png" 
             alt="Clínica Veterinária Duno de Alta Performance" 
             className="w-full h-full object-cover filter contrast-[1.04] brightness-90 transition-transform duration-[6000ms] scale-102"
             containerClassName="w-full h-full"
@@ -231,7 +231,7 @@ const Hero = () => {
         {/* Mobile Image */}
         <div className="block md:hidden w-full h-full">
           <OptimizedImage 
-            src="https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/bannermobile.png" 
+            src="https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/bannermobile.png" 
             alt="Clínica Veterinária Duno de Alta Performance - Mobile" 
             className="w-full h-full object-cover filter contrast-[1.04] brightness-90"
             containerClassName="w-full h-full"
@@ -348,37 +348,37 @@ const Services = () => {
       title: "Consulta Veterinária",
       description: "Consulta geral, diagnósticos precisos e prevenção para o seu pet.",
       fullDescription: "Avaliação físico-clínica completa, orientação vacinal personalizada e exames preliminares minuciosos para garantir a prevenção de patologias e a saúde integral do seu animal de estimação.",
-      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/consulta_veterinaria.png"
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/Consulta%20veterin%C3%A1ria.png"
     },
     {
       title: "Atendimento Emergencial",
       description: "Pronto atendimento e socorro imediato 24 horas por dia.",
       fullDescription: "Equipe de médicos-veterinários intensivistas de plantão 24 horas para socorrer qualquer urgência crítica imediata, amparada por suporte de oxigenio, UTI e monitoramento eletrônico contínuo.",
-      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/atendimento_emergencial.jpg"
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/atendimento%20emergencial.jpg"
     },
     {
       title: "Cirurgias Veterinárias",
       description: "Procedimentos cirúrgicos seguros com anestesia moderna.",
       fullDescription: "Complexo cirúrgico equipado com alta tecnologia cirúrgica estéril, controle anestésico inalatório computadorizado e protocolos rigorosos de controle de dor pós-operatória.",
-      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/cirurgias_veterinarias.jpg"
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/Cirurgias%20veterin%C3%A1rias.jpg"
     },
     {
       title: "Exames Laboratoriais",
       description: "Análises clínicas minuciosas e diagnósticos confiáveis.",
       fullDescription: "Processamento ágil e preciso de painéis hematológicos, bioquímicos, urinálise e citologias para guiar e voltar a conduta terapêutica ideal com máxima segurança científica.",
-      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/exames_laboratoriais.jpg"
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/Exames%20laboratoriais.jpg"
     },
     {
       title: "Vacinação",
       description: "Proteção vacinal de qualidade com vacinas importadas.",
       fullDescription: "Imunização estratégica utilizando exclusivamente vacinas importadas de laboratórios líderes globais, oferecendo proteção robusta e segura contra as principais zoonoses e infecções.",
-      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/vacinacao.jpg"
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/Vacina%C3%A7%C3%A3o.jpg"
     },
     {
       title: "Internação",
       description: "Espaço confortável com monitoramento constante 24 horas.",
       fullDescription: "Acomodações individuais limpas e climatizadas para cães e gatos de forma separada, aliadas à vigilância assistencial veterinária ininterrupta para plena recuperação e bem-estar do pet.",
-      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/internacao.png"
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/interna%C3%A7%C3%A3o.png"
     }
   ];
 
@@ -426,7 +426,7 @@ const Services = () => {
         </motion.div>
 
         {/* Services Grid layout made responsive with orange cards borders */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
           {servicesList.map((service, index) => (
             <motion.div 
               key={index}
@@ -434,53 +434,51 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05, duration: 0.6, ease: "easeOut" }}
-              className="bg-white rounded-[1.25rem] sm:rounded-[2rem] overflow-hidden border-2 border-[#f97316]/85 md:border-[#f97316]/30 shadow-[0_20px_40px_rgba(249,115,22,0.08)] md:shadow-[0_4px_20px_rgba(0,0,0,0.01)] md:hover:shadow-[0_20px_40px_rgba(249,115,22,0.08)] md:hover:border-[#f97316]/85 transition-all duration-500 flex flex-col group p-3 xs:p-4.5 lg:p-5 relative h-full"
+              className="bg-white rounded-[1.25rem] sm:rounded-[1.5rem] overflow-hidden border-2 border-[#f97316]/85 md:border-[#f97316]/30 shadow-[0_15px_30px_rgba(249,115,22,0.06)] md:shadow-[0_4px_15px_rgba(0,0,0,0.01)] md:hover:shadow-[0_15px_30px_rgba(249,115,22,0.06)] md:hover:border-[#f97316]/85 transition-all duration-500 flex flex-col justify-between group p-3 xs:p-4 sm:p-5 relative h-[380px] xs:h-[420px] sm:h-[410px] md:h-[430px]"
               id={`service-card-${index}`}
             >
               {/* Top accent line on hover and permanently on mobile */}
               <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-[#f97316] to-[#ea580c] transform scale-x-100 md:scale-x-0 md:group-hover:scale-x-100 transition-transform duration-500 origin-left" />
 
-              {/* Card Image using precise aspect ratio matching success cases */}
-              <div className="aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden mb-3 sm:mb-4.5 relative bg-neutral-100">
+              {/* 60% Card Image */}
+              <div className="h-[60%] rounded-lg sm:rounded-xl overflow-hidden relative bg-neutral-100 shrink-0">
                 <OptimizedImage 
                   src={service.image} 
                   alt={service.title} 
-                  className="scale-105 md:scale-100 md:group-hover:scale-108 transition-transform duration-700 ease-out filter contrast-[1.02]"
+                  className="w-full h-full object-cover scale-105 md:scale-100 md:group-hover:scale-108 transition-transform duration-700 ease-out filter contrast-[1.02]"
                   containerClassName="w-full h-full"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
               </div>
 
-              {/* Text & Action content content-to-button margins optimized to equal success cases */}
-              <div className="flex-grow flex flex-col justify-between p-1 sm:p-2">
-                <div className="mb-3.5 sm:mb-5 text-center">
-                  <h3 className="font-sans text-[11px] xs:text-[13px] sm:text-base md:text-lg font-bold text-[#f97316] mb-1 sm:mb-2 leading-tight uppercase text-center">
-                    {service.title}
-                  </h3>
-                  
-                  {/* Mobile Description */}
-                  <p className="block md:hidden text-neutral-900 leading-normal sm:leading-relaxed font-semibold text-center text-[10px] xs:text-[11.5px] sm:text-[13px] md:text-[12.5px]">
-                    {service.description}
-                  </p>
-                  
-                  {/* Desktop Description */}
-                  <p className="hidden md:block text-neutral-800 leading-relaxed font-semibold text-center text-[12.5px]">
-                    {service.fullDescription || service.description}
-                  </p>
-                </div>
+              {/* 28% text: Title and Description */}
+              <div className="h-[28%] flex flex-col justify-center text-center px-1 overflow-hidden">
+                <h3 className="font-sans text-[12px] xs:text-[14px] sm:text-base font-bold text-[#f97316] mb-1 leading-tight uppercase line-clamp-1">
+                  {service.title}
+                </h3>
+                
+                {/* Mobile Description */}
+                <p className="block md:hidden text-neutral-900 leading-relaxed font-semibold text-[10.5px] xs:text-[12px] sm:text-[12.5px] line-clamp-2">
+                  {service.description}
+                </p>
+                
+                {/* Desktop Description */}
+                <p className="hidden md:block text-neutral-800 leading-relaxed font-semibold text-[12px] lg:text-[12.5px] line-clamp-2">
+                  {service.fullDescription || service.description}
+                </p>
+              </div>
 
+              {/* 12% Button wrapper */}
+              <div className="h-[12%] w-full flex items-center shrink-0">
                 <a 
                   href={WHATSAPP_URL} 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-2.5 sm:py-3.5 md:py-4 bg-[#f97316] hover:bg-[#ea580c] text-white rounded-full font-bold text-center text-[8.5px] xs:text-[10px] tracking-wider uppercase flex items-center justify-center gap-1.5 sm:gap-2 transition-all duration-300 hover:shadow-[0_4px_15px_rgba(249,115,22,0.3)] border-none whitespace-nowrap group/btn"
+                  className="w-full h-full bg-[#f97316] hover:bg-[#ea580c] text-white rounded-full font-bold text-center text-[10px] xs:text-[11.5px] tracking-wider uppercase flex items-center justify-center gap-1.5 sm:gap-2 transition-all duration-300 hover:shadow-[0_4px_15px_rgba(249,115,22,0.3)] border-none whitespace-nowrap group/btn"
                 >
-                  <span>
-                    <span className="inline md:hidden">AGENDAR</span>
-                    <span className="hidden md:inline">AGENDAR CONSULTA</span>
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-white group-hover/btn:translate-x-1.5 transition-transform shrink-0" />
+                  <span>SAIBA MAIS</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-white group-hover/btn:translate-x-1 transition-transform shrink-0" />
                 </a>
               </div>
             </motion.div>
@@ -498,21 +496,21 @@ const Gallery = () => {
       tag: "ROTINA EXCELÊNCIA (CÃO)",
       title: "Check-up Geral do Husky Luke",
       desc: "Avaliação preventiva completa do Husky de olhos azuis em consulta de rotina domiciliar para manutenção de bem-estar absoluto.",
-      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/pet01.jpg",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/pet01.jpg",
       objectPosition: "object-center"
     },
     {
       tag: "ANIMAIS SILVESTRES (AVE)",
       title: "Medicina Preventiva do Papagaio Fred",
       desc: "Monitoramento clínico geral e acompanhamento nutricional detalhado para excelente qualidade de vida e imunidade de aves exóticas.",
-      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/pet02.jpg",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/pet02.jpg",
       objectPosition: "object-top"
     },
     {
       tag: "CHECK-UP COMPLETO (GATO)",
       title: "Saúde Integrativa do Gato Pipoca",
       desc: "Diagnóstico precoce e acompanhamento dermatológico, auditivo e oftalmológico de felino SRD para vitalidade plena.",
-      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/pet03.jpg",
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/pet03.jpg",
       objectPosition: "object-center"
     }
   ];
@@ -896,21 +894,21 @@ const Authority = () => {
       cro: "CRMV/SP 12431",
       specialty: "ANESTESIOLOGIA & ODONTOLOGIA VET",
       desc: "Pós-graduada e especialista em anestesiologia de alta segurança e suporte vital em procedimentos de reconstrução e assepsia.",
-      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/vt01.png"
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/vt01.png"
     },
     {
       name: "Dr. Alexandre Silva",
       cro: "CRMV/SP 43212",
       specialty: "MEDICINA INTENSIVA & CIRURGIÃO CHEFE",
       desc: "Mestre em cirurgia pela USP, com ampla atuação em triagem, anestesiologia e procedimentos reconstrutivos complexos de alta performance.",
-      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/vt02.png"
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/vt02.png"
     },
     {
       name: "Dra. Beatriz Santos",
       cro: "CRMV/SP 87629",
       specialty: "CARDIOLOGIA & EXAMES DIAGNÓSTICOS",
       desc: "Especialista em cardiologia veterinária de alta complexidade, diagnósticos rápidos e desenvolvimento de tratamentos preventivos avançados.",
-      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/imagens/vt03.png"
+      image: "https://raw.githubusercontent.com/matheusetecestudo-sys/clinica-veterinaria/main/public/vt03.png"
     }
   ];
 
@@ -968,7 +966,7 @@ const Authority = () => {
                     <OptimizedImage 
                       src={doctors[activeSlide].image} 
                       alt={doctors[activeSlide].name} 
-                      className="filter contrast-[1.03] object-contain object-bottom w-full h-full max-h-full"
+                      className="filter contrast-[1.03] object-cover object-center w-full h-full"
                       sizes="(max-width: 1024px) 100vw, 33vw"
                     />
                     <div className="absolute top-4 left-4 bg-emerald-500 text-white px-2.5 py-1 rounded-full text-[8.5px] font-bold tracking-widest uppercase shadow-sm">
@@ -1046,7 +1044,7 @@ const Authority = () => {
                   <OptimizedImage 
                     src={dr.image} 
                     alt={dr.name} 
-                    className="filter contrast-[1.03] object-contain object-bottom w-full h-full max-h-full group-hover:scale-102 transition-transform duration-700 ease-out"
+                    className="filter contrast-[1.03] object-cover object-center w-full h-full group-hover:scale-102 transition-transform duration-700 ease-out"
                     sizes="(max-width: 1024px) 100vw, 33vw"
                   />
                   <div className="absolute top-5 left-5 bg-emerald-500 text-white px-3 py-1.5 rounded-full text-[9px] font-bold tracking-widest uppercase shadow-md">
