@@ -14,10 +14,11 @@ const getFallbackImageUrl = (src: string, alt: string): string => {
   const lowerSrc = (src || "").toLowerCase();
   const lowerAlt = (alt || "").toLowerCase();
 
-  // 1. Hero / General Clinic Team/Interior
+  // 1. Hero / General Clinic Team/Interior / Banners
   if (
     lowerSrc.includes("18_35_29") || 
     lowerSrc.includes("18_53_33") || 
+    lowerSrc.includes("banner") || 
     lowerAlt.includes("inicio") || 
     lowerAlt.includes("hero") || 
     lowerAlt.includes("alta performance") ||
@@ -123,6 +124,11 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   // Use the active source (fallback if there's an error or it's a known failing raw github source)
   const activeSrc = error ? getFallbackImageUrl(src, alt) : src;
 
+  // Reset loading state when the active src changes (transitioning to fallback)
+  useEffect(() => {
+    setIsLoaded(false);
+  }, [activeSrc]);
+
   const isUnsplash = activeSrc && activeSrc.includes("images.unsplash.com");
   
   // Create a cheap, light, blur placeholder: ~60px width, low quality, high blur
@@ -147,6 +153,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
       {/* Blur-up Placeholder */}
       {!isLoaded && activeSrc && (
         <img
+          key={`placeholder-${activeSrc}`}
           src={placeholderUrl}
           alt={alt}
           className={`absolute inset-0 w-full h-full ${hasObjectFit ? "" : "object-cover"} filter blur-md transform scale-105 pointer-events-none z-10 duration-500 ease-out transition-opacity ${className}`}
@@ -158,6 +165,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
       {/* Main Image */}
       {activeSrc && (
         <img
+          key={`main-${activeSrc}`}
           src={mainSrc}
           srcSet={srcSet}
           sizes={sizes}
