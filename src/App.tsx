@@ -423,13 +423,13 @@ const Services = () => {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#f97316]/10 rounded-full mb-3">
             <span className="w-1.5 h-1.5 rounded-full bg-[#f97316] animate-pulse"></span>
-            <span className="text-[#f97316] font-bold uppercase tracking-[0.3em] text-[9px] block">NOSSOS SERVIÇOS 24H</span>
+            <span className="section-subtitle !mb-0">NOSSOS SERVIÇOS 24H</span>
           </div>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-neutral-900 mb-4 leading-tight tracking-tighter uppercase">
+          <h2 className="section-title">
             Medicina Veterinária <br />
             <span className="text-[#f97316] italic font-normal font-serif">de Alta Performance.</span>
           </h2>
-          <p className="text-gray-500 text-xs md:text-sm max-w-[560px] mx-auto leading-relaxed">
+          <p className="section-desc">
             Tecnologia de ponta e rigor científico para garantir o bem-estar do seu pet.
           </p>
           <motion.div 
@@ -441,7 +441,7 @@ const Services = () => {
           ></motion.div>
         </motion.div>
 
-        {/* Services Grid – always-active hover effects */}
+        {/* Services Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-7">
           {servicesList.map((service, index) => (
             <motion.div 
@@ -450,15 +450,11 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.07, duration: 0.6, ease: "easeOut" }}
-              whileHover={{ y: -6, transition: { duration: 0.3 } }}
-              className="bg-white rounded-2xl overflow-hidden border-2 border-[#f97316]/70 shadow-[0_8px_24px_rgba(249,115,22,0.12)] flex flex-col group relative cursor-pointer"
+              className="print1-card"
               id={`service-card-${index}`}
             >
-              {/* Always-active top accent */}
-              <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-[#f97316] to-[#ea580c]" />
-
-              {/* Image – always zoomed slightly, more on hover */}
-              <div className="h-52 md:h-48 lg:h-52 overflow-hidden relative bg-neutral-100">
+              {/* Image – inside the card padding, rounded */}
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden relative bg-neutral-100 mb-4">
                 <OptimizedImage 
                   src={service.image} 
                   alt={service.title} 
@@ -466,26 +462,18 @@ const Services = () => {
                   containerClassName="w-full h-full"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
-                {/* Always-active gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
-                {/* Service title overlay on image bottom */}
-                <div className="absolute bottom-0 inset-x-0 p-3">
-                  <h3 className="font-sans text-[13px] md:text-sm font-extrabold text-white uppercase tracking-wide drop-shadow-md">
-                    {service.title}
-                  </h3>
-                </div>
               </div>
 
               {/* Content */}
-              <div className="flex flex-col flex-1 p-4 gap-3">
-                <p className="text-neutral-600 text-[12px] md:text-[12.5px] leading-relaxed font-medium flex-1">
-                  {service.description}
-                </p>
+              <div className="flex flex-col flex-1 gap-2 text-center">
+                <span className="card-tag">SERVIÇO ESPECIALIZADO</span>
+                <h3 className="card-title">{service.title}</h3>
+                <p className="card-desc mb-4">{service.description}</p>
                 <a 
                   href={WHATSAPP_URL} 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-2.5 bg-[#f97316] hover:bg-[#ea580c] text-white rounded-full font-bold text-center text-[10.5px] tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-[0_4px_15px_rgba(249,115,22,0.4)] group/btn"
+                  className="w-full py-2.5 bg-[#f97316] hover:bg-[#ea580c] text-white rounded-full font-bold text-center text-[10.5px] tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-[0_4px_15px_rgba(249,115,22,0.4)] group/btn mt-auto"
                 >
                   <span>SAIBA MAIS</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform shrink-0" />
@@ -552,13 +540,13 @@ const Gallery = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center mb-6 md:mb-8"
         >
-          <span className="text-[#f97316] font-bold uppercase tracking-[0.4em] text-[10px] mb-3 block">
+          <span className="section-subtitle">
             GALERIA DE EXCELÊNCIA VET
           </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-neutral-900 mb-4 uppercase tracking-tighter">
+          <h2 className="section-title">
             CASOS CLÍNICOS E <span className="text-[#f97316] italic font-normal">RESULTADOS REAIS.</span>
           </h2>
-          <p className="text-neutral-800 text-sm md:text-base max-w-2xl mx-auto leading-relaxed font-medium">
+          <p className="section-desc">
             Conheça as histórias reais de superação de pacientes complexos que recuperaram vitalidade e bem-estar em nosso hospital 24h. Cada tratamento é planejado no detalhe.
           </p>
         </motion.div>
@@ -604,12 +592,9 @@ const Gallery = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.3 }}
-                className="bg-white rounded-[1.25rem] sm:rounded-[2rem] overflow-hidden border-2 border-[#f97316]/85 flex flex-col p-3 xs:p-4.5 lg:p-6 relative text-center shadow-[0_20px_40px_rgba(249,115,22,0.08)] animate-fade-in"
+                className="print1-card text-center animate-fade-in"
               >
-                {/* Top Accent Line permanently displayed on mobile */}
-                <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-[#f97316] to-[#ea580c] transform scale-x-100 transition-transform duration-500 origin-left" />
-
-                <div className="aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden mb-3 sm:mb-5 relative bg-neutral-100">
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-4 relative bg-neutral-100">
                   <OptimizedImage 
                     src={cases[activeSlide].image} 
                     alt={cases[activeSlide].title} 
@@ -619,15 +604,15 @@ const Gallery = () => {
                   />
                 </div>
 
-                <div className="flex-grow flex flex-col justify-between p-1 sm:p-2">
-                  <div className="mb-3.5 sm:mb-5 text-center">
-                    <span className="text-neutral-500 text-[9px] sm:text-[10px] font-bold tracking-widest uppercase block mb-1">
+                <div className="flex-grow flex flex-col justify-between">
+                  <div className="mb-4 text-center">
+                    <span className="card-tag">
                       {cases[activeSlide].tag}
                     </span>
-                    <h3 className="font-sans text-[11px] xs:text-[13px] sm:text-base md:text-lg font-bold text-[#f97316] mb-1 sm:mb-2 leading-tight uppercase text-center">
+                    <h3 className="card-title">
                        {cases[activeSlide].title}
                     </h3>
-                    <p className="text-neutral-900 leading-normal sm:leading-relaxed font-semibold text-center text-[10px] xs:text-[11.5px] sm:text-[13px] md:text-[12.5px]">
+                    <p className="card-desc mb-4">
                       {cases[activeSlide].desc}
                     </p>
                   </div>
@@ -687,12 +672,9 @@ const Gallery = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="bg-white rounded-[1.25rem] sm:rounded-[2rem] overflow-hidden border-2 border-[#f97316]/85 md:border-[#f97316]/30 shadow-[0_20px_40px_rgba(249,115,22,0.08)] md:shadow-[0_4px_20px_rgba(0,0,0,0.01)] md:hover:shadow-[0_20px_40px_rgba(249,115,22,0.08)] md:hover:border-[#f97316]/85 transition-all duration-500 flex flex-col group p-3 xs:p-4.5 lg:p-6 relative h-full"
+              className="print1-card h-full"
             >
-              {/* Top Accent Light Block permanently on mobile / hover on desktop */}
-              <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-[#f97316] to-[#ea580c] transform scale-x-100 md:scale-x-0 md:group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-
-              <div className="aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden mb-3 sm:mb-5 relative bg-neutral-100">
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-4 relative bg-neutral-100">
                 <OptimizedImage 
                   src={cs.image} 
                   alt={cs.title} 
@@ -702,15 +684,15 @@ const Gallery = () => {
                 />
               </div>
 
-              <div className="flex-grow flex flex-col justify-between p-0.5 sm:p-1.5">
-                <div className="mb-3 sm:mb-5 text-center">
-                  <span className="text-neutral-500 text-[10px] font-bold tracking-widest uppercase block mb-1">
+              <div className="flex-grow flex flex-col justify-between">
+                <div className="mb-4 text-center">
+                  <span className="card-tag">
                     {cs.tag}
                   </span>
-                  <h3 className="font-sans text-base md:text-lg font-bold text-[#f97316] mb-1 sm:mb-1.5 leading-tight uppercase text-center">
+                  <h3 className="card-title">
                     {cs.title}
                   </h3>
-                  <p className="text-neutral-900 text-[13px] md:text-[12.5px] leading-relaxed font-semibold text-center">
+                  <p className="card-desc mb-4 flex-grow">
                     {cs.desc}
                   </p>
                 </div>
@@ -719,7 +701,7 @@ const Gallery = () => {
                   href={WHATSAPP_URL} 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-2.5 sm:py-3.5 md:py-4 bg-[#f97316] hover:bg-[#ea580c] text-white rounded-full font-bold text-center text-[8.5px] xs:text-[10px] sm:text-[10px] tracking-wider uppercase flex items-center justify-center gap-1.5 sm:gap-2 transition-all duration-300 hover:shadow-[0_4px_15px_rgba(249,115,22,0.3)] border-none whitespace-nowrap group/btn"
+                  className="w-full py-2.5 sm:py-3.5 md:py-4 bg-[#f97316] hover:bg-[#ea580c] text-white rounded-full font-bold text-center text-[8.5px] xs:text-[10px] sm:text-[10px] tracking-wider uppercase flex items-center justify-center gap-1.5 sm:gap-2 transition-all duration-300 hover:shadow-[0_4px_15px_rgba(249,115,22,0.3)] border-none whitespace-nowrap group/btn mt-auto"
                 >
                   <span>FALE AGORA</span>
                   <ArrowRight className="w-4 h-4 text-white group-hover/btn:translate-x-1.5 transition-transform shrink-0" />
@@ -770,8 +752,8 @@ const Standards = () => {
       >
         {/* Header centered beautifully */}
         <div className="text-center mb-6 md:mb-8">
-          <span className="text-[#f97316] font-bold uppercase tracking-widest text-[10px] mb-3 block font-sans">Por que escolher a Duno?</span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gray-900 leading-none uppercase tracking-tighter">
+          <span className="section-subtitle">Por que escolher a Duno?</span>
+          <h2 className="section-title">
             NOSSOS PADRÕES <span className="text-[#f97316] italic font-normal">DE OURO.</span>
           </h2>
           <div className="h-[2px] w-20 bg-[#f97316] mx-auto mt-4"></div>
@@ -782,13 +764,10 @@ const Standards = () => {
           {items.map((item, i) => (
             <div 
               key={i} 
-              className="bg-white rounded-[1.25rem] sm:rounded-[2rem] border-2 border-[#f97316]/85 md:border-[#f97316]/30 shadow-[0_20px_40px_rgba(249,115,22,0.08)] md:shadow-[0_4px_20px_rgba(0,0,0,0.01)] md:hover:shadow-[0_20px_40px_rgba(249,115,22,0.08)] md:hover:border-[#f97316]/85 transition-all duration-500 bg-neutral-50/50 p-6 xs:p-7 md:p-6 relative overflow-hidden group min-h-[220px] flex flex-col items-center justify-between text-center"
+              className="print1-card min-h-[220px] flex flex-col items-center justify-between text-center relative overflow-hidden group"
             >
-              {/* Top Accent line */}
-              <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-[#f97316] to-[#ea580c] transform scale-x-100 md:scale-x-0 md:group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-
               {/* Light Watermark Number */}
-              <div className="absolute top-6 right-8 font-serif font-bold text-4xl text-[#f97316]/10 md:text-neutral-100 md:group-hover:text-[#f97316]/10 transition-colors duration-300 select-none">
+              <div className="absolute top-6 right-8 font-serif font-bold text-4xl text-[#f97316]/10 md:text-neutral-100/50 md:group-hover:text-[#f97316]/10 transition-colors duration-300 select-none">
                 {item.num}
               </div>
 
@@ -798,10 +777,10 @@ const Standards = () => {
               </div>
 
               <div>
-                <h4 className="text-sm font-sans font-extrabold text-[#f97316] mb-2 uppercase tracking-tight text-center">
+                <h4 className="card-title">
                   {item.title}
                 </h4>
-                <p className="text-neutral-900 text-[13.5px] md:text-xs leading-relaxed font-semibold text-center">
+                <p className="card-desc">
                   {item.desc}
                 </p>
               </div>
@@ -859,8 +838,8 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <span className="text-[#f97316] font-bold uppercase tracking-widest text-[10px] mb-3 block">A Clínica</span>
-            <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4 leading-tight uppercase">
+            <span className="section-subtitle">A Clínica</span>
+            <h2 className="section-title !text-white mb-4 leading-tight">
               Tecnologia de ponta. <br />
               <span className="text-[#f97316] italic font-normal">Conforto absoluto.</span>
             </h2>
@@ -945,13 +924,13 @@ const Authority = () => {
         <div className="text-center mb-6 md:mb-8">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#f97316]/10 rounded-full mb-3">
             <span className="w-1.5 h-1.5 rounded-full bg-[#f97316] animate-pulse"></span>
-            <span className="text-[#f97316] font-bold uppercase tracking-[0.3em] text-[9px] block">CORPO CLÍNICO DUNO</span>
+            <span className="section-subtitle !mb-0">CORPO CLÍNICO DUNO</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900 leading-tight uppercase tracking-tighter">
+          <h2 className="section-title">
             Especialistas em <br />
             <span className="text-[#f97316] italic font-normal font-serif">vidas salvas.</span>
           </h2>
-          <p className="text-gray-550 text-xs md:text-sm max-w-[620px] mx-auto mt-3 leading-relaxed">
+          <p className="section-desc mt-3">
             Profissionais dedicados de amplo saber acadêmico. Oferecemos as melhores condutas com base no mais rígido rigor científico do país.
           </p>
         </div>
@@ -966,13 +945,10 @@ const Authority = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.3 }}
-                className="bg-white rounded-3xl overflow-hidden border border-[#f97316]/30 p-4 xs:p-5 md:p-6 relative cursor-pointer group shadow-[0_25px_50px_rgba(249,115,22,0.08)] min-h-[480px] flex flex-col justify-between"
+                className="print1-card min-h-[480px] flex flex-col justify-between cursor-pointer group text-center"
               >
-                {/* Top Accent Line permanently displayed on mobile */}
-                <div className="absolute top-0 inset-x-0 h-[2.5px] bg-[#f97316] transform scale-x-100" />
-
-                <div className="flex flex-col h-full justify-between gap-4">
-                  <div className="aspect-[4/5] rounded-2xl overflow-hidden relative bg-gradient-to-b from-neutral-50 via-neutral-100 to-neutral-200/50 flex items-end justify-center min-h-[260px] xs:min-h-[290px] max-h-[340px] shadow-inner">
+                <div className="flex flex-col h-full justify-between">
+                  <div className="aspect-[4/5] rounded-2xl overflow-hidden relative bg-gradient-to-b from-neutral-50 via-neutral-100 to-neutral-200/50 flex items-end justify-center min-h-[260px] xs:min-h-[290px] max-h-[340px] shadow-inner mb-4">
                     <OptimizedImage 
                       src={doctors[activeSlide].image} 
                       alt={doctors[activeSlide].name} 
@@ -987,14 +963,14 @@ const Authority = () => {
                     </div>
                   </div>
 
-                  <div className="p-1 text-center">
-                    <span className="text-[#f97316] text-[10px] sm:text-[10.5px] font-bold tracking-[0.25em] uppercase block mb-1.5 text-center">
+                  <div>
+                    <span className="card-tag">
                       {doctors[activeSlide].specialty}
                     </span>
-                    <h3 className="font-sans text-xl sm:text-2xl font-bold text-neutral-900 mb-2 uppercase tracking-tight text-center">
+                    <h3 className="card-title">
                       {doctors[activeSlide].name}
                     </h3>
-                    <p className="text-neutral-600 text-[13px] sm:text-sm leading-relaxed font-normal text-center">
+                    <p className="card-desc mb-2">
                       {doctors[activeSlide].desc}
                     </p>
                   </div>
@@ -1044,13 +1020,10 @@ const Authority = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
-              className="bg-white rounded-[2.5rem] overflow-hidden border border-neutral-200/80 hover:shadow-[0_30px_60px_rgba(249,115,22,0.1)] hover:border-[#f97316]/50 transition-all p-4 xs:p-5 md:p-6 duration-500 cursor-pointer group relative flex flex-col justify-between"
+              className="print1-card h-full"
             >
-              {/* Top Accent line on hover */}
-              <div className="absolute top-0 inset-x-0 h-[3px] bg-[#f97316] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-
-              <div className="flex flex-col h-full justify-between gap-5">
-                <div className="aspect-[4/5] rounded-3xl overflow-hidden relative bg-gradient-to-b from-neutral-50 via-neutral-100 to-neutral-200/50 flex items-end justify-center shadow-inner">
+              <div className="flex flex-col h-full justify-between">
+                <div className="aspect-[4/5] rounded-[1.5rem] overflow-hidden relative bg-gradient-to-b from-neutral-50 via-neutral-100 to-neutral-200/50 flex items-end justify-center shadow-inner mb-4">
                   <OptimizedImage 
                     src={dr.image} 
                     alt={dr.name} 
@@ -1065,14 +1038,14 @@ const Authority = () => {
                   </div>
                 </div>
 
-                <div className="px-1 pt-1 pb-3 text-center">
-                  <span className="text-[#f97316] text-[11px] font-bold tracking-[0.25em] uppercase block mb-1.5 text-center">
+                <div className="text-center">
+                  <span className="card-tag">
                     {dr.specialty}
                   </span>
-                  <h3 className="font-sans text-2xl font-bold text-slate-900 mb-2 tracking-tight uppercase text-center">
+                  <h3 className="card-title">
                     {dr.name}
                   </h3>
-                  <p className="text-neutral-600 text-sm leading-relaxed font-normal text-center">
+                  <p className="card-desc">
                     {dr.desc}
                   </p>
                 </div>
@@ -1136,8 +1109,8 @@ const Testimonials = () => {
           className="text-center mb-6 md:mb-8"
         >
           <Quote className="w-10 h-10 text-[#f97316] mx-auto mb-3 opacity-40" />
-          <span className="text-neutral-300 font-bold uppercase tracking-[0.4em] text-[10px] mb-3 block">O QUE DIZEM DE NÓS</span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 uppercase tracking-tighter">
+          <span className="section-subtitle !text-neutral-300">O QUE DIZEM DE NÓS</span>
+          <h2 className="section-title !text-white">
             A prova de nossa <span className="text-[#f97316] italic font-normal font-serif">excelência.</span>
           </h2>
         </motion.div>
@@ -1152,11 +1125,8 @@ const Testimonials = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.3 }}
-                className="bg-neutral-900 p-4 xs:p-5 rounded-[2rem] border border-[#f97316]/40 flex flex-col justify-between min-h-[250px] shadow-[0_25px_50px_rgba(249,115,22,0.04)] relative"
+                className="bg-neutral-900 p-4 xs:p-5 rounded-[2rem] border-2 border-[#f97316] flex flex-col justify-between min-h-[250px] shadow-[0_25px_50px_rgba(249,115,22,0.04)] relative"
               >
-                {/* Top Accent Line permanently displayed on mobile */}
-                <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#f97316]/80 to-transparent transform scale-x-100 transition-transform duration-500" />
-
                 <div>
                   <div className="flex gap-1 mb-4 text-[#f97316] justify-center">
                     {[...Array(5)].map((_, i) => (
@@ -1178,8 +1148,8 @@ const Testimonials = () => {
                     />
                   </div>
                   <div>
-                    <h4 className="text-sm font-serif font-bold text-[#f97316] uppercase tracking-tight text-center">{reviews[activeSlide].name}</h4>
-                    <p className="text-[#f97316] text-[9px] font-bold uppercase tracking-widest mt-0.5 text-center">{reviews[activeSlide].role}</p>
+                    <h4 className="card-title text-xs md:text-sm">{reviews[activeSlide].name}</h4>
+                    <p className="card-tag !text-[#f97316] mt-0.5">{reviews[activeSlide].role}</p>
                   </div>
                 </div>
               </motion.div>
@@ -1200,7 +1170,7 @@ const Testimonials = () => {
             <div className="flex gap-2">
               {reviews.map((_, idx) => (
                 <button
-                  key={idx}
+                   key={idx}
                   onClick={() => setActiveSlide(idx)}
                   className={`h-2 rounded-full transition-all duration-300 ${activeSlide === idx ? "w-6 bg-[#f97316]" : "w-2 bg-neutral-700"}`}
                   aria-label={`Ir para slide ${idx + 1}`}
@@ -1227,7 +1197,7 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-neutral-900/60 backdrop-blur-sm p-6 lg:p-7 rounded-[2rem] border border-white/5 flex flex-col justify-between hover:border-[#f97316]/30 transition-all duration-300"
+              className="bg-neutral-900/60 backdrop-blur-sm p-6 lg:p-7 rounded-[2rem] border-2 border-[#f97316] flex flex-col justify-between hover:scale-102 transition-all duration-300 shadow-[0_8px_24px_rgba(249,115,22,0.08)]"
             >
               <div>
                 <div className="flex gap-1 mb-4 text-[#f97316] justify-center">
@@ -1250,8 +1220,8 @@ const Testimonials = () => {
                   />
                 </div>
                 <div>
-                  <h4 className="text-sm font-serif font-bold text-[#f97316] uppercase tracking-tight text-center">{review.name}</h4>
-                  <p className="text-[#f97316] text-[9px] font-bold uppercase tracking-widest mt-0.5 text-center">{review.role}</p>
+                  <h4 className="card-title text-xs md:text-sm">{review.name}</h4>
+                  <p className="card-tag !text-[#f97316] mt-0.5">{review.role}</p>
                 </div>
               </div>
             </motion.div>
@@ -1317,8 +1287,8 @@ const FAQ = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center mb-6 md:mb-8"
         >
-          <span className="text-[#f97316] font-bold uppercase tracking-widest text-[10px] mb-3 block font-sans">DÚVIDAS FREQUENTES</span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 leading-tight uppercase">
+          <span className="section-subtitle">DÚVIDAS FREQUENTES</span>
+          <h2 className="section-title">
             Tudo o que você <br />
             <span className="text-[#f97316] italic font-normal">precisa saber.</span>
           </h2>
@@ -1398,9 +1368,7 @@ const Contact = () => {
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
           {/* Location Box Left */}
-          <div className="lg:col-span-5 bg-white p-5 md:p-7 rounded-[2rem] border border-[#f97316]/40 md:border-neutral-200 flex flex-col justify-between shadow-[0_25px_50px_rgba(249,115,22,0.04)] md:shadow-sm md:hover:border-[#f97316]/40 md:hover:shadow-[0_25px_50px_rgba(249,115,22,0.04)] transition-all duration-300 relative group overflow-hidden">
-            {/* Top Accent line */}
-            <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-[#f97316] to-transparent transform scale-x-100 md:scale-x-0 md:group-hover:scale-x-100 transition-transform duration-500 rounded-t-[2rem]" />
+          <div className="lg:col-span-5 print1-card flex flex-col justify-between">
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 25 }}
@@ -1408,8 +1376,8 @@ const Contact = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
-                <span className="text-[#f97316] font-bold uppercase tracking-widest text-[9px] mb-3 block">ONDE ESTAMOS</span>
-                <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-5 leading-tight uppercase">
+                <span className="section-subtitle">ONDE ESTAMOS</span>
+                <h2 className="section-title mb-5">
                   Venha nos <br />
                   <span className="text-[#f97316] italic font-normal">visitar.</span>
                 </h2>
@@ -1547,10 +1515,10 @@ const CTA = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="bg-neutral-900/60 rounded-[3rem] p-6 md:p-10 border border-white/5 shadow-2xl backdrop-blur-xl"
         >
-          <span className="text-[#f97316] font-bold uppercase tracking-[0.4em] text-[10px] mb-3 block font-sans">ATENDIMENTO IMEDIATO</span>
-          <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4 leading-tight tracking-tighter uppercase">
+          <span className="section-subtitle">ATENDIMENTO IMEDIATO</span>
+          <h2 className="section-title !text-white mb-4 leading-tight tracking-tighter">
             Seu pet sob proteção máxima a <br />
-            <span className="text-[#f97316] italic font-normal font-serif">um clique de distância.</span>
+            <span className="text-[#f97316] italic font-normal">um clique de distância.</span>
           </h2>
           <p className="text-gray-300 text-sm max-w-xl mx-auto mb-6 leading-relaxed font-normal">
             Fale diretamente com nossa recepção pelo WhatsApp. Nossa equipe médica de plantão está pronta para tirar suas dúvidas emergenciais e agendar.
