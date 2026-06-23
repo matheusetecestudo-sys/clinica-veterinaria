@@ -52,24 +52,44 @@ const WhatsAppLogo = ({ className }: { className?: string }) => (
   </svg>
 );
 
-// Green Floating WhatsApp Button with pure logo matching the User prompt print exactly
+// Green Floating WhatsApp Button – eye-catching with pulse ring + label
 const WhatsAppButton = () => {
   return (
-    <motion.a 
-      href={WHATSAPP_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ scale: 0, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      whileHover={{ scale: 1.15 }}
-      whileTap={{ scale: 0.9 }}
-      transition={{ delay: 1, type: "spring", stiffness: 260, damping: 20 }}
-      className="fixed bottom-6 right-6 z-[99] bg-[#25d366] text-white p-4 rounded-full shadow-[0_12px_30px_rgba(37,211,102,0.5)] hover:bg-[#20ba5a] transition-all flex items-center justify-center cursor-pointer border border-white/20"
-      title="Falar no WhatsApp"
-      id="floating-whatsapp"
-    >
-      <WhatsAppLogo className="w-8 h-8 text-white" />
-    </motion.a>
+    <div className="fixed bottom-6 right-6 z-[99] flex items-center gap-3 group/wa">
+      {/* Label tooltip */}
+      <motion.span
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 2, duration: 0.4 }}
+        className="hidden sm:block bg-black/90 text-white text-[11px] font-bold tracking-wide px-3 py-1.5 rounded-full shadow-lg pointer-events-none opacity-0 group-hover/wa:opacity-100 transition-opacity duration-300 whitespace-nowrap"
+      >
+        Fale no WhatsApp
+      </motion.span>
+
+      {/* Button with pulse rings */}
+      <div className="relative flex items-center justify-center">
+        {/* Outer pulse ring */}
+        <span className="absolute inline-flex h-full w-full rounded-full bg-[#25d366] opacity-40 animate-ping" />
+        {/* Inner pulse ring */}
+        <span className="absolute inline-flex h-[calc(100%+12px)] w-[calc(100%+12px)] rounded-full bg-[#25d366] opacity-20 animate-ping [animation-delay:0.4s]" />
+
+        <motion.a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          whileHover={{ scale: 1.12 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ delay: 1, type: "spring", stiffness: 260, damping: 20 }}
+          className="relative z-10 bg-[#25d366] hover:bg-[#20ba5a] text-white p-4 rounded-full shadow-[0_12px_40px_rgba(37,211,102,0.65)] transition-all flex items-center justify-center cursor-pointer border-2 border-white/30"
+          title="Falar no WhatsApp"
+          id="floating-whatsapp"
+        >
+          <WhatsAppLogo className="w-8 h-8 text-white" />
+        </motion.a>
+      </div>
+    </div>
   );
 };
 
@@ -341,50 +361,49 @@ interface ServiceItem {
   image: string;
 }
 
-// Services Section styled exactly like the screenshot
+// Services Section – redesigned with always-active effects and short descriptions
 const Services = () => {
   const servicesList: ServiceItem[] = [
     {
       title: "Consulta Veterinária",
-      description: "Consulta geral, diagnósticos precisos e prevenção para o seu pet.",
-      fullDescription: "Avaliação físico-clínica completa, orientação vacinal personalizada e exames preliminares minuciosos para garantir a prevenção de patologias e a saúde integral do seu animal de estimação.",
+      description: "Diagnósticos precisos e cuidado preventivo para o seu pet.",
+      fullDescription: "Diagnósticos precisos e cuidado preventivo para o seu pet.",
       image: "/consulta_veterinaria.png"
     },
     {
       title: "Atendimento Emergencial",
-      description: "Pronto atendimento e socorro imediato 24 horas por dia.",
-      fullDescription: "Equipe de médicos-veterinários intensivistas de plantão 24 horas para socorrer qualquer urgência crítica imediata, amparada por suporte de oxigenio, UTI e monitoramento eletrônico contínuo.",
+      description: "Pronto-socorro veterinário 24 horas por dia.",
+      fullDescription: "Pronto-socorro veterinário 24 horas por dia.",
       image: "/atendimento_emergencial.jpg"
     },
     {
       title: "Cirurgias Veterinárias",
       description: "Procedimentos cirúrgicos seguros com anestesia moderna.",
-      fullDescription: "Complexo cirúrgico equipado com alta tecnologia cirúrgica estéril, controle anestésico inalatório computadorizado e protocolos rigorosos de controle de dor pós-operatória.",
+      fullDescription: "Procedimentos cirúrgicos seguros com anestesia moderna.",
       image: "/cirurgias_veterinarias.jpg"
     },
     {
       title: "Exames Laboratoriais",
-      description: "Análises clínicas minuciosas e diagnósticos confiáveis.",
-      fullDescription: "Processamento ágil e preciso de painéis hematológicos, bioquímicos, urinálise e citologias para guiar e voltar a conduta terapêutica ideal com máxima segurança científica.",
+      description: "Análises clínicas rápidas e resultados confiáveis.",
+      fullDescription: "Análises clínicas rápidas e resultados confiáveis.",
       image: "/exames_laboratoriais.jpg"
     },
     {
       title: "Vacinação",
-      description: "Proteção vacinal de qualidade com vacinas importadas.",
-      fullDescription: "Imunização estratégica utilizando exclusivamente vacinas importadas de laboratórios líderes globais, oferecendo proteção robusta e segura contra as principais zoonoses e infecções.",
+      description: "Proteção com vacinas importadas de alta eficácia.",
+      fullDescription: "Proteção com vacinas importadas de alta eficácia.",
       image: "/vacinacao.jpg"
     },
     {
       title: "Internação",
-      description: "Espaço confortável com monitoramento constante 24 horas.",
-      fullDescription: "Acomodações individuais limpas e climatizadas para cães e gatos de forma separada, aliadas à vigilância assistencial veterinária ininterrupta para plena recuperação e bem-estar do pet.",
+      description: "Monitoramento constante 24h em ambiente confortável.",
+      fullDescription: "Monitoramento constante 24h em ambiente confortável.",
       image: "/internacao.png"
     }
   ];
 
   return (
-    <section id="servicos" className="py-8 md:py-10 px-6 md:px-12 lg:px-20 bg-neutral-50/50 relative overflow-hidden">
-      {/* Decorative subtle grid background */}
+    <section id="servicos" className="py-10 md:py-16 px-6 md:px-12 lg:px-20 bg-neutral-50 relative overflow-hidden">
       <div className="absolute inset-0 bg-grid-neutral-100 [mask-image:radial-gradient(ellipse_at_center,white,transparent)] pointer-events-none opacity-50" />
       
       <motion.div 
@@ -394,27 +413,24 @@ const Services = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="max-w-7xl mx-auto relative z-10"
       >
-        
         {/* Section Header */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-6 md:mb-8"
+          className="text-center mb-8 md:mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#f97316]/10 rounded-full mb-3">
             <span className="w-1.5 h-1.5 rounded-full bg-[#f97316] animate-pulse"></span>
-            <span className="text-[#f97316] font-bold uppercase tracking-[0.3em] text-[9px] block">
-              NOSSOS SERVIÇOS 24H
-            </span>
+            <span className="text-[#f97316] font-bold uppercase tracking-[0.3em] text-[9px] block">NOSSOS SERVIÇOS 24H</span>
           </div>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-neutral-900 mb-4 leading-tight tracking-tighter uppercase">
             Medicina Veterinária <br />
             <span className="text-[#f97316] italic font-normal font-serif">de Alta Performance.</span>
           </h2>
-          <p className="text-gray-550 text-xs md:text-sm max-w-[620px] mx-auto leading-relaxed">
-            Tecnologia de ponta e zelo científico sob os mais rigorosos padrões médico-veterinários do país, garantindo máximo reestabelecimento e bem-estar.
+          <p className="text-gray-500 text-xs md:text-sm max-w-[560px] mx-auto leading-relaxed">
+            Tecnologia de ponta e rigor científico para garantir o bem-estar do seu pet.
           </p>
           <motion.div 
             initial={{ width: 0 }}
@@ -425,60 +441,54 @@ const Services = () => {
           ></motion.div>
         </motion.div>
 
-        {/* Services Grid layout made responsive with orange cards borders */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+        {/* Services Grid – always-active hover effects */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-7">
           {servicesList.map((service, index) => (
             <motion.div 
               key={index}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.05, duration: 0.6, ease: "easeOut" }}
-              className="bg-white rounded-[1.25rem] sm:rounded-[1.5rem] overflow-hidden border-2 border-[#f97316]/85 md:border-[#f97316]/30 shadow-[0_15px_30px_rgba(249,115,22,0.06)] md:shadow-[0_4px_15px_rgba(0,0,0,0.01)] md:hover:shadow-[0_15px_30px_rgba(249,115,22,0.06)] md:hover:border-[#f97316]/85 transition-all duration-500 flex flex-col justify-between group p-3 xs:p-4 sm:p-5 relative h-[380px] xs:h-[420px] sm:h-[410px] md:h-[430px]"
+              transition={{ delay: index * 0.07, duration: 0.6, ease: "easeOut" }}
+              whileHover={{ y: -6, transition: { duration: 0.3 } }}
+              className="bg-white rounded-2xl overflow-hidden border-2 border-[#f97316]/70 shadow-[0_8px_24px_rgba(249,115,22,0.12)] flex flex-col group relative cursor-pointer"
               id={`service-card-${index}`}
             >
-              {/* Top accent line on hover and permanently on mobile */}
-              <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-[#f97316] to-[#ea580c] transform scale-x-100 md:scale-x-0 md:group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+              {/* Always-active top accent */}
+              <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-[#f97316] to-[#ea580c]" />
 
-              {/* 60% Card Image */}
-              <div className="h-[60%] rounded-lg sm:rounded-xl overflow-hidden relative bg-neutral-100 shrink-0">
+              {/* Image – always zoomed slightly, more on hover */}
+              <div className="h-52 md:h-48 lg:h-52 overflow-hidden relative bg-neutral-100">
                 <OptimizedImage 
                   src={service.image} 
                   alt={service.title} 
-                  className="w-full h-full object-cover scale-105 md:scale-100 md:group-hover:scale-108 transition-transform duration-700 ease-out filter contrast-[1.02]"
+                  className="w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-700 ease-out"
                   containerClassName="w-full h-full"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Always-active gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
+                {/* Service title overlay on image bottom */}
+                <div className="absolute bottom-0 inset-x-0 p-3">
+                  <h3 className="font-sans text-[13px] md:text-sm font-extrabold text-white uppercase tracking-wide drop-shadow-md">
+                    {service.title}
+                  </h3>
+                </div>
               </div>
 
-              {/* 28% text: Title and Description */}
-              <div className="h-[28%] flex flex-col justify-center text-center px-1 overflow-hidden">
-                <h3 className="font-sans text-[12px] xs:text-[14px] sm:text-base font-bold text-[#f97316] mb-1 leading-tight uppercase line-clamp-1">
-                  {service.title}
-                </h3>
-                
-                {/* Mobile Description */}
-                <p className="block md:hidden text-neutral-900 leading-relaxed font-semibold text-[10.5px] xs:text-[12px] sm:text-[12.5px] line-clamp-2">
+              {/* Content */}
+              <div className="flex flex-col flex-1 p-4 gap-3">
+                <p className="text-neutral-600 text-[12px] md:text-[12.5px] leading-relaxed font-medium flex-1">
                   {service.description}
                 </p>
-                
-                {/* Desktop Description */}
-                <p className="hidden md:block text-neutral-800 leading-relaxed font-semibold text-[12px] lg:text-[12.5px] line-clamp-2">
-                  {service.fullDescription || service.description}
-                </p>
-              </div>
-
-              {/* 12% Button wrapper */}
-              <div className="h-[12%] w-full flex items-center shrink-0">
                 <a 
                   href={WHATSAPP_URL} 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full h-full bg-[#f97316] hover:bg-[#ea580c] text-white rounded-full font-bold text-center text-[10px] xs:text-[11.5px] tracking-wider uppercase flex items-center justify-center gap-1.5 sm:gap-2 transition-all duration-300 hover:shadow-[0_4px_15px_rgba(249,115,22,0.3)] border-none whitespace-nowrap group/btn"
+                  className="w-full py-2.5 bg-[#f97316] hover:bg-[#ea580c] text-white rounded-full font-bold text-center text-[10.5px] tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-[0_4px_15px_rgba(249,115,22,0.4)] group/btn"
                 >
                   <span>SAIBA MAIS</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-white group-hover/btn:translate-x-1 transition-transform shrink-0" />
+                  <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform shrink-0" />
                 </a>
               </div>
             </motion.div>
