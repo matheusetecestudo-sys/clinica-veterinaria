@@ -450,7 +450,8 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.07, duration: 0.6, ease: "easeOut" }}
-              className="print1-card"
+              whileHover={{ y: -8, scale: 1.025, boxShadow: "0 20px 40px rgba(249, 115, 22, 0.16)" }}
+              className="print1-card group cursor-pointer"
               id={`service-card-${index}`}
             >
               {/* Image – inside the card padding, rounded */}
@@ -458,7 +459,7 @@ const Services = () => {
                 <OptimizedImage 
                   src={service.image} 
                   alt={service.title} 
-                  className="w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-700 ease-out"
+                  className="w-full h-full object-cover scale-105 group-hover:scale-112 transition-transform duration-700 ease-out"
                   containerClassName="w-full h-full"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
@@ -476,7 +477,7 @@ const Services = () => {
                   className="w-full py-2.5 bg-[#f97316] hover:bg-[#ea580c] text-white rounded-full font-bold text-center text-[10.5px] tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-[0_4px_15px_rgba(249,115,22,0.4)] group/btn mt-auto"
                 >
                   <span>SAIBA MAIS</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform shrink-0" />
+                  <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1.5 transition-transform shrink-0" />
                 </a>
               </div>
             </motion.div>
@@ -592,13 +593,14 @@ const Gallery = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.3 }}
-                className="print1-card text-center animate-fade-in"
+                whileHover={{ y: -6, scale: 1.015 }}
+                className="print1-card text-center animate-fade-in group cursor-pointer"
               >
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-4 relative bg-neutral-100">
                   <OptimizedImage 
                     src={cases[activeSlide].image} 
                     alt={cases[activeSlide].title} 
-                    className={`w-full h-full object-cover scale-105 ${cases[activeSlide].objectPosition || "object-center"}`}
+                    className={`w-full h-full object-cover scale-105 group-hover:scale-112 transition-transform duration-700 ${cases[activeSlide].objectPosition || "object-center"}`}
                     containerClassName="w-full h-full"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
@@ -672,13 +674,14 @@ const Gallery = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="print1-card h-full"
+              whileHover={{ y: -8, scale: 1.025, boxShadow: "0 20px 40px rgba(249, 115, 22, 0.16)" }}
+              className="print1-card h-full group cursor-pointer"
             >
               <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-4 relative bg-neutral-100">
                 <OptimizedImage 
                   src={cs.image} 
                   alt={cs.title} 
-                  className={`scale-105 md:scale-100 md:group-hover:scale-105 transition-transform duration-700 ${cs.objectPosition || "object-center"}`}
+                  className={`scale-105 group-hover:scale-112 transition-transform duration-700 ${cs.objectPosition || "object-center"}`}
                   containerClassName="w-full h-full"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
@@ -762,17 +765,22 @@ const Standards = () => {
         {/* Full-width cards with orange border exactly like services */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {items.map((item, i) => (
-            <div 
+            <motion.div 
               key={i} 
-              className="print1-card min-h-[220px] flex flex-col items-center justify-between text-center relative overflow-hidden group"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+              whileHover={{ y: -8, scale: 1.025, boxShadow: "0 20px 40px rgba(249, 115, 22, 0.16)" }}
+              className="print1-card min-h-[220px] flex flex-col items-center justify-between text-center relative overflow-hidden group cursor-pointer"
             >
               {/* Light Watermark Number */}
-              <div className="absolute top-6 right-8 font-serif font-bold text-4xl text-[#f97316]/10 md:text-neutral-100/50 md:group-hover:text-[#f97316]/10 transition-colors duration-300 select-none">
+              <div className="absolute top-6 right-8 font-serif font-bold text-4xl text-[#f97316]/10 group-hover:text-[#f97316]/25 group-hover:scale-110 transition-all duration-300 select-none">
                 {item.num}
               </div>
 
               {/* Icon Container */}
-              <div className="w-12 h-12 bg-[#f97316]/10 md:bg-white rounded-full flex items-center justify-center shadow-sm shrink-0 text-[#f97316] scale-110 md:scale-100 md:group-hover:scale-110 md:group-hover:bg-[#f97316]/10 transition-all duration-300 mb-4 mx-auto">
+              <div className="w-12 h-12 bg-[#f97316]/10 rounded-full flex items-center justify-center shadow-sm shrink-0 text-[#f97316] scale-110 group-hover:scale-120 group-hover:bg-[#f97316]/20 transition-all duration-300 mb-4 mx-auto">
                 {item.icon}
               </div>
 
@@ -784,7 +792,7 @@ const Standards = () => {
                   {item.desc}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </motion.div>
@@ -945,6 +953,7 @@ const Authority = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.3 }}
+                whileHover={{ y: -8, scale: 1.015, boxShadow: "0 20px 40px rgba(249, 115, 22, 0.14)" }}
                 className="print1-card min-h-[480px] flex flex-col justify-between cursor-pointer group text-center"
               >
                 <div className="flex flex-col h-full justify-between">
@@ -1020,14 +1029,15 @@ const Authority = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
-              className="print1-card h-full"
+              whileHover={{ y: -8, scale: 1.025, boxShadow: "0 20px 40px rgba(249, 115, 22, 0.16)" }}
+              className="print1-card h-full group cursor-pointer"
             >
               <div className="flex flex-col h-full justify-between">
                 <div className="aspect-[4/5] rounded-[1.5rem] overflow-hidden relative bg-gradient-to-b from-neutral-50 via-neutral-100 to-neutral-200/50 flex items-end justify-center shadow-inner mb-4">
                   <OptimizedImage 
                     src={dr.image} 
                     alt={dr.name} 
-                    className="filter contrast-[1.03] object-cover object-center w-full h-full group-hover:scale-102 transition-transform duration-700 ease-out"
+                    className="filter contrast-[1.03] object-cover object-center w-full h-full group-hover:scale-108 transition-transform duration-700 ease-out"
                     sizes="(max-width: 1024px) 100vw, 33vw"
                   />
                   <div className="absolute top-5 left-5 bg-emerald-500 text-white px-3 py-1.5 rounded-full text-[9px] font-bold tracking-widest uppercase shadow-md">
@@ -1125,7 +1135,8 @@ const Testimonials = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.3 }}
-                className="bg-neutral-900 p-4 xs:p-5 rounded-[2rem] border-2 border-[#f97316] flex flex-col justify-between min-h-[250px] shadow-[0_25px_50px_rgba(249,115,22,0.04)] relative"
+                whileHover={{ y: -6, scale: 1.015, boxShadow: "0 20px 40px rgba(249, 115, 22, 0.16)" }}
+                className="bg-neutral-900 p-4 xs:p-5 rounded-[2rem] border-2 border-[#f97316] flex flex-col justify-between min-h-[250px] shadow-[0_25px_50px_rgba(249,115,22,0.04)] relative cursor-pointer"
               >
                 <div>
                   <div className="flex gap-1 mb-4 text-[#f97316] justify-center">
@@ -1197,7 +1208,8 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-neutral-900/60 backdrop-blur-sm p-6 lg:p-7 rounded-[2rem] border-2 border-[#f97316] flex flex-col justify-between hover:scale-102 transition-all duration-300 shadow-[0_8px_24px_rgba(249,115,22,0.08)]"
+              whileHover={{ y: -8, scale: 1.025, boxShadow: "0 20px 40px rgba(249, 115, 22, 0.16)", borderColor: "#f97316" }}
+              className="bg-neutral-900/60 backdrop-blur-sm p-6 lg:p-7 rounded-[2rem] border-2 border-[#f97316]/70 flex flex-col justify-between transition-all duration-300 shadow-[0_8px_24px_rgba(249,115,22,0.08)] cursor-pointer group"
             >
               <div>
                 <div className="flex gap-1 mb-4 text-[#f97316] justify-center">
@@ -1368,7 +1380,11 @@ const Contact = () => {
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
           {/* Location Box Left */}
-          <div className="lg:col-span-5 print1-card flex flex-col justify-between">
+          <motion.div 
+            whileHover={{ y: -8, scale: 1.015, boxShadow: "0 20px 40px rgba(249, 115, 22, 0.14)" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="lg:col-span-5 print1-card flex flex-col justify-between cursor-pointer group"
+          >
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 25 }}
@@ -1385,7 +1401,7 @@ const Contact = () => {
               
               <div className="space-y-4 font-sans">
                 <div className="flex gap-4">
-                  <div className="w-11 h-11 bg-[#f97316]/10 rounded-2xl flex items-center justify-center text-[#f97316] shrink-0">
+                  <div className="w-11 h-11 bg-[#f97316]/10 rounded-2xl flex items-center justify-center text-[#f97316] shrink-0 group-hover:scale-110 group-hover:bg-[#f97316]/20 transition-all duration-300">
                     <MapPin className="w-5 h-5 animate-pulse" />
                   </div>
                   <div>
@@ -1394,7 +1410,7 @@ const Contact = () => {
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <div className="w-11 h-11 bg-[#f97316]/10 rounded-2xl flex items-center justify-center text-[#f97316] shrink-0">
+                  <div className="w-11 h-11 bg-[#f97316]/10 rounded-2xl flex items-center justify-center text-[#f97316] shrink-0 group-hover:scale-110 group-hover:bg-[#f97316]/20 transition-all duration-300">
                     <Clock className="w-5 h-5" />
                   </div>
                   <div>
@@ -1451,7 +1467,7 @@ const Contact = () => {
                 <ArrowRight className="w-5 h-5 shrink-0" />
               </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Map Right */}
           <div className="lg:col-span-7 h-[400px] lg:h-auto rounded-[2rem] overflow-hidden shadow-lg border-[6px] border-white z-0 min-h-[350px]">
